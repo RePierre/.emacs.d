@@ -7,6 +7,22 @@
    #+BEGIN_SRC emacs-lisp
      (load-theme 'wombat)
    #+END_SRC
+** Hide the toolbar
+   #+BEGIN_SRC emacs-lisp
+     (tool-bar-mode -1)
+   #+END_SRC
+** Change ~yes or no~ prompts to ~y or n~
+   #+BEGIN_SRC emacs-lisp
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+** Bind ~F5~ key to ~revert-buffer~
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "<f5>") 'revert-buffer)
+   #+END_SRC
+** Enable line numbers globally
+   #+BEGIN_SRC emacs-lisp
+     (global-linum-mode t)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
