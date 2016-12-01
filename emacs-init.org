@@ -55,5 +55,24 @@
     (use-package helm
       :bind (("M-x" . helm-M-x)))
   #+END_SRC
+* Install ~auto-complete~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'auto-complete)
+      (package-install 'auto-complete))
 
+    (use-package auto-complete
+      :config (progn
+                (ac-config-default)
+                (ac-set-trigger-key "TAB")
+                (ac-set-trigger-key "<tab>")))
+  #+END_SRC
+* Install ~flycheck~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'flycheck)
+      (package-install 'flycheck))
+
+    (use-package flycheck
+      :ensure t
+      :init (global-flycheck-mode))
+  #+END_SRC
 
