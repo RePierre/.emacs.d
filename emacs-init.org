@@ -23,6 +23,11 @@
    #+BEGIN_SRC emacs-lisp
      (global-linum-mode t)
    #+END_SRC
+** Wrap long lines
+   Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
+   #+BEGIN_SRC emacs-lisp
+     (global-visual-line-mode t)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
