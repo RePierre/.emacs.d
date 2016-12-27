@@ -75,4 +75,19 @@
       :ensure t
       :init (global-flycheck-mode))
   #+END_SRC
+* Install ~ace-window~
+  From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'ace-window)
+      (package-install 'ace-window))
 
+    (use-package ace-window
+      :ensure t
+      :init
+      (progn
+        (global-set-key (kbd "C-x o") 'other-frame)
+        (global-set-key [remap other-window] 'ace-window)
+        (custom-set-faces
+         '(aw-leading-char-face
+           ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+  #+END_SRC
