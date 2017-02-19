@@ -6,6 +6,10 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
+(unless (package-installed-p 'org)
+  (package-refresh-contents)
+  (package-install 'org))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
