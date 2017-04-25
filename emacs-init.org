@@ -90,3 +90,19 @@
          '(aw-leading-char-face
            ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
   #+END_SRC
+* Install ~elpy~
+  Requires the installation of ~elpy, jedi, rope~:
+  #+BEGIN_SRC sh
+     sudo pip install elpy jedi rope
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'elpy)
+      (package-install 'elpy))
+
+    (use-package elpy
+      :ensure t
+      :init
+      (progn
+        (elpy-enable)))
+  #+END_SRC
