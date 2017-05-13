@@ -106,3 +106,8 @@
       (progn
         (elpy-enable)))
   #+END_SRC
+* Configure ~jedi~ to use ~python3~
+  As specified on [[http://stackoverflow.com/a/17139416/844006][stackoverflow]].
+  #+BEGIN_SRC emacs-lisp
+    (setq python-shell-interpreter "python3")
+  #+END_SRC
