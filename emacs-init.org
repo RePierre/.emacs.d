@@ -19,9 +19,17 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<f5>") 'revert-buffer)
    #+END_SRC
-** Enable line numbers globally
+** Enable line numbers for various modes
    #+BEGIN_SRC emacs-lisp
-     (global-linum-mode t)
+     ;; python-mode
+     (add-hook 'python-mode-hook
+               (lambda ()
+                 (linum-mode)))
+
+     ;; emacs-lisp mode
+     (add-hook 'emacs-lisp-mode-hook
+               (lambda ()
+                 (linum-mode)))
    #+END_SRC
 ** Wrap long lines
    Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
