@@ -36,6 +36,11 @@
    #+BEGIN_SRC emacs-lisp
      (global-visual-line-mode t)
    #+END_SRC
+** Enable ~ido~
+   #+BEGIN_SRC emacs-lisp
+     (require 'ido)
+     (ido-mode t)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
