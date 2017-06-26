@@ -66,7 +66,15 @@
     (unless (package-installed-p 'helm)
       (package-install 'helm))
     (use-package helm
-      :bind (("M-x" . helm-M-x)))
+      :bind (("M-x" . helm-M-x))
+      :init (progn
+              ;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
+              (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+                    helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+                    helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+                    helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+                    helm-ff-file-name-history-use-recentf t)
+              (helm-mode 1)))
   #+END_SRC
 * Install ~auto-complete~
   #+BEGIN_SRC emacs-lisp
