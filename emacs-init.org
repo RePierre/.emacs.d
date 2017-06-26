@@ -150,3 +150,13 @@
      (use-package gh-md
        :ensure t)
    #+END_SRC
+* Install ~AUCTeX~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'auctex)
+      (package-install 'auctex))
+
+    ;; As described in https://github.com/jwiegley/use-package/issues/379
+    (use-package tex-mode
+      :defer t
+      :ensure auctex)
+  #+END_SRC
