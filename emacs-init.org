@@ -36,6 +36,32 @@
    #+BEGIN_SRC emacs-lisp
      (global-visual-line-mode t)
    #+END_SRC
+** Use ~ibuffer~ for buffer list
+   As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansy.
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-x C-b") 'ibuffer)
+     (setq ibuffer-saved-filter-groups
+           (quote (("default"
+                    ("dired" (mode . dired-mode))
+                    ("org" (name . "^.*org$"))
+                    ("web" (or (mode . web-mode)
+                               (mode . js2-mode)))
+                    ("shell" (or (mode . eshell-mode)
+                                 (mode . shell-mode)))
+                    ("programming" (or (mode . python-mode)
+                                       (mode . lisp-mode)
+                                       (mode . js2-mode)))
+                    ("magit" (name . "\*magit"))
+                    ("emacs" (or (name . "^\\*scratch\\*$")
+                                 (name . "^\\*Messages\\*$")))))))
+     (add-hook 'ibuffer-mode-hook
+               (lambda ()
+                 (ibuffer-auto-mode 1)
+                 (ibuffer-switch-to-saved-filter-groups "default")))
+
+     ;; Don't show filter groups if there are no buffers in that group
+     (setq ibuffer-show-empty-filter-groups nil)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
