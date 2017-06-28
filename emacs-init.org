@@ -87,7 +87,8 @@
     (unless (package-installed-p 'helm)
       (package-install 'helm))
     (use-package helm
-      :bind (("M-x" . helm-M-x))
+      :bind (("M-x" . helm-M-x)
+             ("C-x C-f" . helm-find-files))
       :init (progn
               ;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
               (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
