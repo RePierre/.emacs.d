@@ -196,16 +196,3 @@
               (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
               (setq reftex-plug-into-AUCTeX t)))
   #+END_SRC
-* Update packages
-  As specified in [[https://emacs.stackexchange.com/a/4052/14110][this StackOverflow answer]].
-  #+BEGIN_SRC emacs-lisp
-    (defun endless-upgrade ()
-      "Upgrade all packages, no questions asked."
-      (interactive)
-      (save-window-excursion
-        (list-packages)
-        (package-menu-mark-upgrades)
-        (package-menu-execute 'no-query)))
-
-    (endless-upgrade)
-  #+END_SRC
