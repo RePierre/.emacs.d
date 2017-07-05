@@ -196,3 +196,12 @@
               (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
               (setq reftex-plug-into-AUCTeX t)))
   #+END_SRC
+* Install ~RealGUD~
+  [[https://github.com/realgud/realgud/][GitHub repository]].
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'realgud)
+      (package-install 'realgud))
+
+    (use-package realgud
+      :ensure t)
+  #+END_SRC
