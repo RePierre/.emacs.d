@@ -208,3 +208,29 @@
     (use-package realgud
       :ensure t)
   #+END_SRC
+* Install ~org-ref~
+  As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'org-ref)
+      (package-install 'org-ref))
+
+    (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
+    ;; see org-ref for use of these variables
+    (setq org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
+          org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+          org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
+
+    (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
+          bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
+          bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes")
+
+    (setq org-latex-pdf-process
+          '("pdflatex -interaction nonstopmode -output-directory %o %f"
+            "bibtex %b"
+            "pdflatex -interaction nonstopmode -output-directory %o %f"
+            "pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+    (require 'org-ref)
+
+
+  #+END_SRC
