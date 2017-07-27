@@ -51,6 +51,7 @@
                     ("programming" (or (mode . python-mode)
                                        (mode . lisp-mode)
                                        (mode . js2-mode)))
+                    ("doc-view" (mode . doc-view-mode))
                     ("magit" (name . "\*magit"))
                     ("emacs" (or (name . "^\\*scratch\\*$")
                                  (name . "^\\*Messages\\*$")))))))
