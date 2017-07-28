@@ -244,3 +244,11 @@
       :ensure t
       :init (global-undo-tree-mode))
   #+END_SRC
+* Install ~graphviz-dot-mode~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'graphviz-dot-mode)
+      (package-install 'graphviz-dot-mode))
+
+    (use-package graphviz-dot-mode
+      :ensure t)
+  #+END_SRC
