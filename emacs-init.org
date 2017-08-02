@@ -252,3 +252,12 @@
     (use-package graphviz-dot-mode
       :ensure t)
   #+END_SRC
+* Install ~beginend~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'beginend)
+      (package-install 'beginend))
+
+    (use-package beginend
+      :ensure t
+      :init (beginend-global-mode))
+  #+END_SRC
