@@ -68,6 +68,11 @@
    #+BEGIN_SRC emacs-lisp
      (delete-selection-mode 1)
    #+END_SRC
+** Save contents of clipboard before killing text
+   From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clipboard/cpsbbmb/][Reddit comment]]:
+   #+BEGIN_SRC emacs-lisp
+     (setq save-interprogram-paste-before-kill t)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
