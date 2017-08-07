@@ -63,6 +63,11 @@
      ;; Don't show filter groups if there are no buffers in that group
      (setq ibuffer-show-empty-filter-groups nil)
    #+END_SRC
+** Replace highlighted text
+   From [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Replacing-highlighted-text.html][Emacs manual]]:
+   #+BEGIN_SRC emacs-lisp
+     (delete-selection-mode 1)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
