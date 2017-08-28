@@ -271,3 +271,12 @@
       :ensure t
       :init (beginend-global-mode))
   #+END_SRC
+* Install ~csharp-mode~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'csharp-mode)
+      (package-install 'csharp-mode))
+
+    (use-package csharp-mode
+      :ensure t
+      :init (electric-pair-local-mode 1))
+  #+END_SRC
