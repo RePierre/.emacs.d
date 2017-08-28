@@ -73,6 +73,19 @@
    #+BEGIN_SRC emacs-lisp
      (setq save-interprogram-paste-before-kill t)
    #+END_SRC
+** Open GTD view
+   As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+
+     (defun gtd()
+       (interactive)
+       (progn
+         (find-file "~/Dropbox/gtd/gtd.org")
+         (org-agenda-list)))
+
+     (global-set-key (kbd "C-c g") 'gtd)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
