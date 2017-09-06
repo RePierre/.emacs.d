@@ -128,26 +128,69 @@
               (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
               (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)))
   #+END_SRC
-* Install ~auto-complete~
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'auto-complete)
-      (package-install 'auto-complete))
+* Python development
+  Follows some of the steps from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Real Python blog]].
+** Install ~auto-complete~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'auto-complete)
+       (package-install 'auto-complete))
 
-    (use-package auto-complete
-      :config (progn
-                (ac-config-default)
-                (ac-set-trigger-key "TAB")
-                (ac-set-trigger-key "<tab>")))
-  #+END_SRC
-* Install ~flycheck~
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'flycheck)
-      (package-install 'flycheck))
+     (use-package auto-complete
+       :config (progn
+                 (ac-config-default)
+                 (ac-set-trigger-key "TAB")
+                 (ac-set-trigger-key "<tab>")))
+   #+END_SRC
+** Install ~elpy~
+   Requires the installation of ~elpy, jedi, rope~:
+   #+BEGIN_SRC sh
+      sudo pip install elpy jedi rope
+   #+END_SRC
 
-    (use-package flycheck
-      :ensure t
-      :init (global-flycheck-mode))
-  #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'elpy)
+       (package-install 'elpy))
+
+     (use-package elpy
+       :ensure t
+       :init
+       (progn
+         (elpy-enable)))
+   #+END_SRC
+** Install ~flycheck~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'flycheck)
+       (package-install 'flycheck))
+
+     (use-package flycheck
+       :ensure t
+       :init (when (require 'flycheck nil t)
+               (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+               (add-hook 'elpy-mode-hook 'flycheck-mode)))
+   #+END_SRC
+** Install ~py-autopep8~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'py-autopep8)
+       (package-install 'py-autopep8))
+
+     (use-package py-autopep8
+       :ensure t
+       :init (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+   #+END_SRC
+** Configure ~jedi~ to use ~python3~
+   As specified on [[http://stackoverflow.com/a/17139416/844006][stackoverflow]].
+   #+BEGIN_SRC emacs-lisp
+     (setq python-shell-interpreter "python3")
+   #+END_SRC
+** Install ~RealGUD~
+   [[https://github.com/realgud/realgud/][GitHub repository]].
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'realgud)
+       (package-install 'realgud))
+
+     (use-package realgud
+       :ensure t)
+   #+END_SRC
 * Install ~ace-window~
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
   #+BEGIN_SRC emacs-lisp
@@ -162,27 +205,6 @@
         (custom-set-faces
          '(aw-leading-char-face
            ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
-  #+END_SRC
-* Install ~elpy~
-  Requires the installation of ~elpy, jedi, rope~:
-  #+BEGIN_SRC sh
-     sudo pip install elpy jedi rope
-  #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'elpy)
-      (package-install 'elpy))
-
-    (use-package elpy
-      :ensure t
-      :init
-      (progn
-        (elpy-enable)))
-  #+END_SRC
-* Configure ~jedi~ to use ~python3~
-  As specified on [[http://stackoverflow.com/a/17139416/844006][stackoverflow]].
-  #+BEGIN_SRC emacs-lisp
-    (setq python-shell-interpreter "python3")
   #+END_SRC
 * Markdown related packages
 ** Install ~markdown-mode~
@@ -225,15 +247,6 @@
               (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
               (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
               (setq reftex-plug-into-AUCTeX t)))
-  #+END_SRC
-* Install ~RealGUD~
-  [[https://github.com/realgud/realgud/][GitHub repository]].
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'realgud)
-      (package-install 'realgud))
-
-    (use-package realgud
-      :ensure t)
   #+END_SRC
 * Install ~org-ref~
   As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
