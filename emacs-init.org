@@ -3,9 +3,12 @@
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-message t)
    #+END_SRC
-** Load *wombat* theme
+** Load *zenburn* theme
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'wombat)
+     (unless (package-installed-p 'zenburn-theme)
+       (package-install  'zenburn-theme))
+
+     (load-theme 'zenburn t)
    #+END_SRC
 ** Hide the toolbar
    #+BEGIN_SRC emacs-lisp
