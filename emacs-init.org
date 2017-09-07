@@ -151,11 +151,8 @@
      (unless (package-installed-p 'elpy)
        (package-install 'elpy))
 
-     (use-package elpy
-       :ensure t
-       :init
-       (progn
-         (elpy-enable)))
+     (elpy-enable)
+     (elpy-use-ipython)
    #+END_SRC
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
@@ -184,11 +181,6 @@
                ;; - W690 - Fix various deprecated code (via lib2to3).
                ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el 
                (setq py-autopep8-options '("--ignore=E501,W293,W391,W690"))))
-   #+END_SRC
-** Configure ~jedi~ to use ~python3~
-   As specified on [[http://stackoverflow.com/a/17139416/844006][stackoverflow]].
-   #+BEGIN_SRC emacs-lisp
-     (setq python-shell-interpreter "python3")
    #+END_SRC
 ** Install ~RealGUD~
    [[https://github.com/realgud/realgud/][GitHub repository]].
