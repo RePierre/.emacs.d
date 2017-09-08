@@ -152,7 +152,9 @@
        (package-install 'elpy))
 
      (elpy-enable)
-     (elpy-use-ipython)
+
+     (unless (eq system-type 'cygwin)
+       (elpy-use-ipython))
    #+END_SRC
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
