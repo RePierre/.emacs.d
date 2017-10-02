@@ -89,6 +89,10 @@
 
      (global-set-key (kbd "C-c g") 'gtd)
    #+END_SRC
+** Remove scratch message
+   #+BEGIN_SRC emacs-lisp
+     (setq initial-scratch-message "")
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
