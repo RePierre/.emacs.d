@@ -93,6 +93,10 @@
    #+BEGIN_SRC emacs-lisp
      (setq initial-scratch-message "")
    #+END_SRC
+** Set ~dired-dwim-target~
+   #+BEGIN_SRC emacs-lisp
+     (setq dired-dwim-target t)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
