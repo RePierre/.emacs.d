@@ -93,6 +93,13 @@
    #+BEGIN_SRC emacs-lisp
      (setq initial-scratch-message "")
    #+END_SRC
+** Run shell commands interactively when under Cygwin shell
+   As found on [[https://emacs.stackexchange.com/a/10974/14110][StackExchange]]:
+   #+BEGIN_SRC emacs-lisp
+     (when (eq system-type 'cygwin)
+       (setq shell-file-name "bash")
+       (setq shell-command-switch "-ic"))
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
