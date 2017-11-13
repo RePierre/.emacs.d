@@ -124,6 +124,15 @@
     (use-package magit
       :bind (("C-x g" . magit-status)))
   #+END_SRC
+* Install ~magit-gh-pulls~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'magit-gh-pulls)
+      (package-install 'magit-gh-pulls))
+
+    (use-package magit-gh-pulls
+      :ensure t
+      :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+  #+END_SRC
 * Install ~helm~
   #+BEGIN_SRC emacs-lisp
     (unless (package-installed-p 'helm)
