@@ -182,6 +182,16 @@
 	     ("C-x c SPC" . helm-all-mark-rings)
 	     ("C-x C-f" . helm-find-files)))
   #+END_SRC
+* Install ~smart-mode-line~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'smart-mode-line)
+      (package-install 'smart-mode-line))
+
+    (use-package smart-mode-line
+      :ensure t
+      :init
+      (sml/setup))
+  #+END_SRC
 * Python development
   Follows some of the steps from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Real Python blog]].
 ** Install ~auto-complete~
