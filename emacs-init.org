@@ -105,6 +105,10 @@
    #+BEGIN_SRC emacs-lisp
      (setq dired-dwim-target t)
    #+END_SRC
+** End sentences with single space
+   #+BEGIN_SRC emacs-lisp
+     (setq sentence-end-double-space nil)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
