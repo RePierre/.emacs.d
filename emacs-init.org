@@ -142,20 +142,45 @@
   #+BEGIN_SRC emacs-lisp
     (unless (package-installed-p 'helm)
       (package-install 'helm))
+
+    ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
+    ;; other various sources
     (use-package helm
-      :bind (("M-x" . helm-M-x)
-             ("C-x C-f" . helm-find-files))
-      :init (progn
-              ;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
-              (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-                    helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-                    helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-                    helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-                    helm-ff-file-name-history-use-recentf t)
-              (helm-mode 1)
-              ;; Persistent action configuration from https://techblog.recochoku.jp/1403
-              (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-              (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)))
+      :diminish helm-mode
+      :init
+      (progn
+	(require 'helm-config)
+	(setq helm-candidate-number-limit 100)
+	;; From https://gist.github.com/antifuchs/9238468
+	(setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+	      helm-input-idle-delay 0.01  ; this actually updates things
+					    ; reeeelatively quickly.
+	      helm-yas-display-key-on-candidate t
+	      helm-quick-update t
+	      helm-M-x-requires-pattern nil
+	      helm-ff-skip-boring-files t)
+	;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
+	(setq helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
+	      helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
+	      helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+	      helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
+	(helm-mode)
+	(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+	(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
+      :bind (("C-c h" . helm-mini)
+	     ("C-h a" . helm-apropos)
+	     ;; Play with ibuffer for now; maybe get back to this later
+	     ;; ("C-x C-b" . helm-buffers-list)
+	     ("C-x b" . helm-buffers-list)
+	     ("M-y" . helm-show-kill-ring)
+	     ("M-x" . helm-M-x)
+	     ("C-x c o" . helm-occur)
+	     ;; Need to install package; will do in another commit
+	     ;; ("C-x c s" . helm-swoop)
+	     ("C-x c y" . helm-yas-complete)
+	     ("C-x c Y" . helm-yas-create-snippet-on-region)
+	     ("C-x c SPC" . helm-all-mark-rings)
+	     ("C-x C-f" . helm-find-files)))
   #+END_SRC
 * Python development
   Follows some of the steps from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Real Python blog]].
