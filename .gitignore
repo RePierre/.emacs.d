@@ -14,3 +14,10 @@ elpa
 emacs-init.el
 /*~
 /ac-comphist.dat
+
+# Various
+/tramp
+/eshell/*
+/tutorial/*
+/url
+/var
