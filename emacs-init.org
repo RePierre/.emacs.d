@@ -40,7 +40,7 @@
      (global-visual-line-mode t)
    #+END_SRC
 ** Use ~ibuffer~ for buffer list
-   As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansy.
+   As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-x C-b") 'ibuffer)
      (setq ibuffer-saved-filter-groups
@@ -58,7 +58,8 @@
 		    ("doc-view" (mode . doc-view-mode))
 		    ("magit" (name . "\*magit"))
 		    ("emacs" (or (name . "^\\*scratch\\*$")
-				 (name . "^\\*Messages\\*$")))))))
+				 (name . "^\\*Messages\\*$")))
+		    ("helm" (mode . helm-major-mode))))))
      (add-hook 'ibuffer-mode-hook
 	       (lambda ()
 		 (ibuffer-auto-mode 1)
