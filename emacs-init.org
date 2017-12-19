@@ -102,10 +102,16 @@
        (setq shell-file-name "bash")
        (setq shell-command-switch "-ic"))
    #+END_SRC
-** Set ~dired-dwim-target~
-   #+BEGIN_SRC emacs-lisp
-     (setq dired-dwim-target t)
-   #+END_SRC
+** ~dired~ tweaks
+*** Set ~dired-dwim-target~
+    #+BEGIN_SRC emacs-lisp
+      (setq dired-dwim-target t)
+    #+END_SRC
+*** Human readable file sizes
+    From [[http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/][Pragmatic Emacs]].
+    #+BEGIN_SRC emacs-lisp
+      (setq dired-listing-switches "-alh")
+    #+END_SRC
 ** End sentences with single space
    #+BEGIN_SRC emacs-lisp
      (setq sentence-end-double-space nil)
