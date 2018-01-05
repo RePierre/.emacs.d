@@ -450,3 +450,11 @@
 	    "sh" "emacs-lisp" "lisp" "lua"))
     (setq org-src-fontify-natively t)
   #+END_SRC
+* Install ~pdf-tools~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'pdf-tools)
+      (package-install 'pdf-tools))
+
+    (use-package pdf-tools
+      :ensure t)
+  #+END_SRC
