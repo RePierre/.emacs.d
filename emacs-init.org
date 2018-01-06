@@ -451,10 +451,18 @@
     (setq org-src-fontify-natively t)
   #+END_SRC
 * Install ~pdf-tools~
+  ~use-package~ example configuring ~pdf-tools~ found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
   #+BEGIN_SRC emacs-lisp
     (unless (package-installed-p 'pdf-tools)
       (package-install 'pdf-tools))
+    (unless (package-installed-p 'org-pdfview)
+      (package-install 'org-pdfview))
 
     (use-package pdf-tools
-      :ensure t)
+        :ensure t
+        :config
+        (pdf-tools-install)
+        (setq-default pdf-view-display-size 'fit-page)
+        (use-package org-pdfview
+          :ensure t))
   #+END_SRC
