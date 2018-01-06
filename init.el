@@ -7,13 +7,11 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-
+(package-refresh-contents)
 (unless (package-installed-p 'org)
-  (package-refresh-contents)
   (package-install 'org))
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/emacs-init.org"))
