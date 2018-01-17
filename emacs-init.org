@@ -87,19 +87,11 @@
     #+END_SRC
 *** Setup ~org-capture-templates~
     #+BEGIN_SRC emacs-lisp
-      (setq org-capture-templates '(("t" "Todo [inbox]" entry
-				     (file+headline "~/Dropbox/gtd/inbox.org" "Tasks")
-				     "* TODO %i%?")
-				    ("j" "Journal Entry" entry
-				     (file+datetree "~/Dropbox/org/journal.org")
-				     "* %?"
-				     :empty-lines 1)
-				    ("b" "Blog article idea" entry
-				     (file+headline "~/Dropbox/org/blogging.org" "Blog articles")
-				     "* IDEA %? \n %U")
-				    ("T" "Tickler" entry
-				     (file+headline "~/Dropbox/gtd/tickler.org" "Tickler")
-				     "* %i%? \n %U")))
+      (setq org-capture-templates
+	    '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/gtd/inbox.org" "Tasks") "* TODO %i%?")
+	      ("j" "Journal Entry" entry (file+datetree "~/Dropbox/org/journal.org") "* %?" :empty-lines 1)
+	      ("b" "Blog article idea" entry (file+headline "~/Dropbox/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
+	      ("T" "Tickler" entry (file+headline "~/Dropbox/gtd/tickler.org" "Tickler") "* %i%? \n %U")))
     #+END_SRC
 *** Setup ~org-refile-targets~
     #+BEGIN_SRC emacs-lisp
