@@ -474,3 +474,22 @@
     (use-package csv-mode
       :ensure t)
   #+END_SRC
+* Install ~projectile~
+  #+BEGIN_SRC emacs-lisp
+    (unless (package-installed-p 'projectile)
+      (package-install 'projectile))
+
+    (unless (package-installed-p 'helm-projectile)
+      (package-install 'helm-projectile))
+
+    (use-package projectile
+      :ensure t
+      :bind-keymap
+      ("C-c p" . projectile-command-map)
+      :config
+      (progn
+	(setq projectile-completion-system 'helm)
+	(use-package helm-projectile
+	  :ensure t
+	  :config (helm-projectile-on))))
+  #+END_SRC
