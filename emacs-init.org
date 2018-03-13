@@ -160,6 +160,14 @@
        :ensure t
        :bind ("C-=" . er/expand-region))
    #+END_SRC
+** Install ~org-bullets~
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-bullets
+       :ensure t
+       :config
+       (setq org-bullets-bullet-list '("∙"))
+       (add-hook 'org-mode-hook 'org-bullets-mode))
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
