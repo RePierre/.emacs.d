@@ -3,13 +3,6 @@
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-message t)
    #+END_SRC
-** Load *gotham* theme
-   #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'gotham-theme)
-       (package-install  'gotham-theme))
-
-     (load-theme 'gotham t)
-   #+END_SRC
 ** Hide the toolbar
    #+BEGIN_SRC emacs-lisp
      (tool-bar-mode -1)
@@ -175,6 +168,19 @@
 ** Replace scroll bar with ~nyan-mode~
    #+BEGIN_SRC emacs-lisp~
      (use-package 'nyan-mode
+       :ensure t)
+   #+END_SRC
+* Themes
+** Load *gotham* theme
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'gotham-theme)
+       (package-install  'gotham-theme))
+
+     (load-theme 'gotham t)
+   #+END_SRC
+** Install *sanityinc-tomorrow-night* theme
+   #+BEGIN_SRC emacs-lisp
+     (use-package color-theme-sanityinc-tomorrow
        :ensure t)
    #+END_SRC
 * Load ~org-babel~ languages
