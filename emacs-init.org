@@ -320,6 +320,10 @@
        :config
        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
    #+END_SRC
+** Expand parentheses
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'prog-mode-hook 'electric-pair-mode)
+   #+END_SRC
 * Install ~ace-window~
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
   #+BEGIN_SRC emacs-lisp
