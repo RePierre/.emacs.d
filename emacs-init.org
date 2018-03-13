@@ -570,3 +570,10 @@
 		 ("a" . sx-ask)
 		 ("s" . sx-search)))
   #+END_SRC
+* Install ~neotree~
+  #+BEGIN_SRC emacs-lisp
+    (use-package neotree
+      :ensure t
+      :config
+      (global-set-key (kbd "C-c t") 'neotree-toggle))
+  #+END_SRC
