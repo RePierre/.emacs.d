@@ -545,3 +545,9 @@
 	  :ensure t
 	  :config (helm-projectile-on))))
   #+END_SRC
+* Install ~slack~
+  #+BEGIN_SRC emacs-lisp
+    (use-package slack
+      :ensure t
+      :commands (slack-start))
+  #+END_SRC
