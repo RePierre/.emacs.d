@@ -313,6 +313,13 @@
        :config
        (add-hook 'prog-mode-hook 'smartparens-mode))
    #+END_SRC
+** Install ~rainbow-delimiters~ for improved readability
+   #+BEGIN_SRC emacs-lisp
+     (use-package rainbow-delimiters
+       :ensure t
+       :config
+       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+   #+END_SRC
 * Install ~ace-window~
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
   #+BEGIN_SRC emacs-lisp
