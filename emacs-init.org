@@ -143,6 +143,10 @@
            display-time-24hr-format t)
      (display-time-mode 1)
    #+END_SRC
+** Turn off the error bell
+   #+BEGIN_SRC emacs-lisp
+     (setq ring-bell-function 'ignore)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
