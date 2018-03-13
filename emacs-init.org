@@ -151,6 +151,15 @@
    #+BEGIN_SRC emacs-lisp
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
    #+END_SRC
+** Expand region around the cursor semantically
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'expand-region)
+       (package-install 'expand-region))
+
+     (use-package expand-region
+       :ensure t
+       :bind ("C-=" . er/expand-region))
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
