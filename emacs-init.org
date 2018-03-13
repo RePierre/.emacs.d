@@ -173,22 +173,28 @@
              (latex . t))))
 
   #+END_SRC
-* Install ~magit~
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'magit)
-      (package-install 'magit))
-    (use-package magit
-      :bind (("C-x g" . magit-status)))
-  #+END_SRC
-* Install ~magit-gh-pulls~
-  #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'magit-gh-pulls)
-      (package-install 'magit-gh-pulls))
+* Git integration
+** Install ~magit~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'magit)
+       (package-install 'magit))
+     (use-package magit
+       :bind (("C-x g" . magit-status)))
+   #+END_SRC
+** Install ~magit-gh-pulls~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'magit-gh-pulls)
+       (package-install 'magit-gh-pulls))
 
-    (use-package magit-gh-pulls
-      :ensure t
-      :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
-  #+END_SRC
+     (use-package magit-gh-pulls
+       :ensure t
+       :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+   #+END_SRC
+** Install ~git-timemachine~
+   #+BEGIN_SRC emacs-lisp
+     (use-package git-timemachine
+       :ensure t)
+   #+END_SRC
 * Install ~helm~
   #+BEGIN_SRC emacs-lisp
     (unless (package-installed-p 'helm)
