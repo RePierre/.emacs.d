@@ -147,6 +147,10 @@
    #+BEGIN_SRC emacs-lisp
      (setq ring-bell-function 'ignore)
    #+END_SRC
+** Delete trailing whitespace on save
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+   #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
