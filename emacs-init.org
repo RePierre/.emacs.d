@@ -14,6 +14,10 @@
    #+BEGIN_SRC emacs-lisp
      (tool-bar-mode -1)
    #+END_SRC
+** Hide the scroll bar
+   #+BEGIN_SRC emacs-lisp
+     (scroll-bar-mode -1)
+   #+END_SRC
 ** Change ~yes or no~ prompts to ~y or n~
    #+BEGIN_SRC emacs-lisp
      (fset 'yes-or-no-p 'y-or-n-p)
