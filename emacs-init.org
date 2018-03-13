@@ -293,7 +293,7 @@
                ;; - W293 - Remove trailing whitespace on blank line.
                ;; - W391 - Remove trailing blank lines.
                ;; - W690 - Fix various deprecated code (via lib2to3).
-               ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el 
+               ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el
                (setq py-autopep8-options '("--ignore=E501,W293,W391,W690"))))
    #+END_SRC
 ** Install ~RealGUD~
@@ -304,6 +304,14 @@
 
      (use-package realgud
        :ensure t)
+   #+END_SRC
+** Install ~smartparens~
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :ensure t
+       :diminish smartparens-mode
+       :config
+       (add-hook 'prog-mode-hook 'smartparens-mode))
    #+END_SRC
 * Install ~ace-window~
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
