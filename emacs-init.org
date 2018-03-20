@@ -285,18 +285,25 @@
       :init
       (sml/setup))
   #+END_SRC
+* Install ~company~
+  From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
+  #+BEGIN_SRC emacs-lisp
+    (use-package company
+      :defer 1
+      :config
+      (global-company-mode)
+      (setq-default
+       company-idle-delay .2
+       company-minimum-prefix-length 1
+       company-require-match nil
+       company-tooltip-align-annotations t))
+  #+END_SRC
 * Python development
   Follows some of the steps from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Real Python blog]].
-** Install ~auto-complete~
+** Install ~company-jedi~
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'auto-complete)
-       (package-install 'auto-complete))
-
-     (use-package auto-complete
-       :config (progn
-                 (ac-config-default)
-                 (ac-set-trigger-key "TAB")
-                 (ac-set-trigger-key "<tab>")))
+     (use-package company-jedi
+       :ensure t)
    #+END_SRC
 ** Install ~elpy~
    Requires the installation of ~elpy, jedi, rope~:
