@@ -165,11 +165,6 @@
        (setq org-bullets-bullet-list '("∙"))
        (add-hook 'org-mode-hook 'org-bullets-mode))
    #+END_SRC
-** Replace scroll bar with ~nyan-mode~
-   #+BEGIN_SRC emacs-lisp
-     (use-package nyan-mode
-       :ensure t)
-   #+END_SRC
 * Themes
 ** Install *sanityinc-tomorrow-night* theme
    #+BEGIN_SRC emacs-lisp
@@ -277,13 +272,15 @@
   #+END_SRC
 * Install ~smart-mode-line~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'smart-mode-line)
-      (package-install 'smart-mode-line))
-
     (use-package smart-mode-line
       :ensure t
       :init
-      (sml/setup))
+      (sml/setup)
+      :config
+      (use-package nyan-mode
+	:ensure t
+	:config
+	(nyan-mode 1)))
   #+END_SRC
 * Install ~company~
   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
