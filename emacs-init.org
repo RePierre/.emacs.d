@@ -53,7 +53,7 @@
                                        (mode . csharp-mode)
                                        (mode . js2-mode)))
                     ("doc-view" (mode . doc-view-mode))
-                    ("magit" (name . "\*magit"))
+                    ("magit" (name . "^.*magit:.*"))
                     ("latex" (mode . latex-mode))
                     ("emacs" (or (name . "^\\*scratch\\*$")
                                  (name . "^\\*Messages\\*$")))
