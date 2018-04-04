@@ -21,3 +21,8 @@ emacs-init.el
 /tutorial/*
 /url
 /var
+/.python-environments/*
+/.sx/*
+.org-id-locations
+projectile-bookmarks.eld
+bookmarks
