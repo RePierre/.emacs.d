@@ -498,13 +498,12 @@
       :init (beginend-global-mode))
   #+END_SRC
 * Install ~csharp-mode~
+  For some reason I get the following error when running Emacs under Ubuntu Bash for Windows: ~Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode~. As a workaround disable ~electric-pair-mode~ when ~display-graphic-p~ returns ~nil~.
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'csharp-mode)
-      (package-install 'csharp-mode))
-
     (use-package csharp-mode
       :ensure t
-      :init (electric-pair-local-mode 1))
+      :init (when (display-graphic-p)
+		(electric-pair-local-mode 1)))
   #+END_SRC
 * ~org2blog~ setup
   As seen on [[https://vxlabs.com/2014/05/25/emacs-24-with-prelude-org2blog-and-wordpress/][Publish to WordPress with Emacs 24 and org2blog]]. Also [[https://github.com/org2blog/org2blog][GitHub repo]] of the project.
