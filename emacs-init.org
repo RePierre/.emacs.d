@@ -297,10 +297,22 @@
   #+END_SRC
 * Python development
   Follows some of the steps from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Real Python blog]].
-** Install ~company-jedi~
+** Install ~jedi~
+   Need to use ~package-install~ in order to call ~jedi:install-server~ once after installation.
    #+BEGIN_SRC emacs-lisp
-     (use-package company-jedi
-       :ensure t)
+     (unless (package-installed-p 'jedi)
+       (progn
+	 (package-install 'jedi)
+	 (jedi:install-server)))
+
+     (use-package jedi
+       :init
+       (progn
+	 (add-hook 'python-mode-hook 'jedi:setup)
+	 (setq jedi:complete-on-dot t))
+       :config
+       (use-package company-jedi
+	   :ensure t))
    #+END_SRC
 ** Install ~elpy~
    Requires the installation of ~elpy, jedi, rope~:
