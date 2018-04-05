@@ -178,10 +178,6 @@
        :ensure t
        :config
        (load-theme 'gotham t))
-     ;; (unless (package-installed-p 'gotham-theme)
-     ;;   (package-install  'gotham-theme))
-
-     ;; (load-theme 'gotham t)
    #+END_SRC
 ** Use ~clarity~ theme when running in console
    #+BEGIN_SRC emacs-lisp
