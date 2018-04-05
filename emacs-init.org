@@ -555,11 +555,11 @@
   #+END_SRC
 * Install ~csv-mode~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'csv-mode)
-      (package-install 'csv-mode))
-
     (use-package csv-mode
-      :ensure t)
+      :ensure t
+      :init
+      (add-hook 'csv-mode-hook (lambda()
+				 (linum-mode))))
   #+END_SRC
 * Install ~projectile~
   #+BEGIN_SRC emacs-lisp
