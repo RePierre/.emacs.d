@@ -58,7 +58,8 @@
 				 (mode . bibtex-mode)))
 		    ("emacs" (or (name . "^\\*scratch\\*$")
 				 (name . "^\\*Messages\\*$")))
-		    ("helm" (mode . helm-major-mode))))))
+		    ("helm" (mode . helm-major-mode))
+		    ("powershell" (mode . powershell-mode))))))
      (add-hook 'ibuffer-mode-hook
 	       (lambda ()
 		 (ibuffer-auto-mode 1)
@@ -613,4 +614,9 @@
       (global-set-key (kbd "C-c t") 'neotree-toggle)
       (setq neo-smart-open t)
       (setq neo-theme 'arrow))
+  #+END_SRC
+* Install ~powershell~
+  #+BEGIN_SRC emacs-lisp
+    (use-package powershell
+      :ensure t)
   #+END_SRC
