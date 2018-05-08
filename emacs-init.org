@@ -152,9 +152,6 @@
    #+END_SRC
 ** Expand region around the cursor semantically
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'expand-region)
-       (package-install 'expand-region))
-
      (use-package expand-region
        :ensure t
        :bind ("C-=" . er/expand-region))
@@ -204,16 +201,12 @@
 * Git integration
 ** Install ~magit~
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'magit)
-       (package-install 'magit))
      (use-package magit
+       :ensure t
        :bind (("C-x g" . magit-status)))
    #+END_SRC
 ** Install ~magit-gh-pulls~
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'magit-gh-pulls)
-       (package-install 'magit-gh-pulls))
-
      (use-package magit-gh-pulls
        :ensure t
        :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
@@ -233,12 +226,10 @@
    #+END_SRC
 * Install ~helm~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'helm)
-      (package-install 'helm))
-
     ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
     ;; other various sources
     (use-package helm
+      :ensure t
       :diminish helm-mode
       :init
       (progn
@@ -291,6 +282,7 @@
   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
   #+BEGIN_SRC emacs-lisp
     (use-package company
+      :ensure t
       :defer 1
       :config
       (global-company-mode)
@@ -326,45 +318,36 @@
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'elpy)
-       (package-install 'elpy))
-
-     (elpy-enable)
+     (use-package elpy
+       :ensure t
+       :config
+       (elpy-enable))
    #+END_SRC
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'flycheck)
-       (package-install 'flycheck))
-
      (use-package flycheck
        :ensure t
        :init (when (require 'flycheck nil t)
-               (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-               (add-hook 'elpy-mode-hook 'flycheck-mode)))
+	       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+	       (add-hook 'elpy-mode-hook 'flycheck-mode)))
    #+END_SRC
 ** Install ~py-autopep8~
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'py-autopep8)
-       (package-install 'py-autopep8))
-
      (use-package py-autopep8
        :ensure t
        :init (progn
-               (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-               ;; Ignore warnings
-               ;; - E501 - Try to make lines fit within --max-line-length characters.
-               ;; - W293 - Remove trailing whitespace on blank line.
-               ;; - W391 - Remove trailing blank lines.
-               ;; - W690 - Fix various deprecated code (via lib2to3).
-               ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el
-               (setq py-autopep8-options '("--ignore=E501,W293,W391,W690"))))
+	       (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+	       ;; Ignore warnings
+	       ;; - E501 - Try to make lines fit within --max-line-length characters.
+	       ;; - W293 - Remove trailing whitespace on blank line.
+	       ;; - W391 - Remove trailing blank lines.
+	       ;; - W690 - Fix various deprecated code (via lib2to3).
+	       ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el
+	       (setq py-autopep8-options '("--ignore=E501,W293,W391,W690"))))
    #+END_SRC
 ** Install ~RealGUD~
    [[https://github.com/realgud/realgud/][GitHub repository]].
    #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'realgud)
-       (package-install 'realgud))
-
      (use-package realgud
        :ensure t)
    #+END_SRC
@@ -390,17 +373,14 @@
 * Install ~ace-window~
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'ace-window)
-      (package-install 'ace-window))
-
     (use-package ace-window
       :ensure t
       :init
       (progn
-        (global-set-key (kbd "C-x o") 'ace-window)
-        (custom-set-faces
-         '(aw-leading-char-face
-           ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+	(global-set-key (kbd "C-x o") 'ace-window)
+	(custom-set-faces
+	 '(aw-leading-char-face
+	   ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
   #+END_SRC
 * Markdown related packages
 ** Install ~markdown-mode~
@@ -421,22 +401,19 @@
    #+END_SRC
 * Install ~AUCTeX~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'auctex)
-      (package-install 'auctex))
-
     ;; As described in https://github.com/jwiegley/use-package/issues/379
     (use-package tex-mode
       :defer t
       :ensure auctex
       :init (progn
-              (setq TeX-auto-save t)
-              (setq TeX-parse-self t)
-              (setq-default TeX-master nil)
-              (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-              (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-              (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-              (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-              (setq reftex-plug-into-AUCTeX t)))
+	      (setq TeX-auto-save t)
+	      (setq TeX-parse-self t)
+	      (setq-default TeX-master nil)
+	      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+	      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+	      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+	      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+	      (setq reftex-plug-into-AUCTeX t)))
   #+END_SRC
 * Install ~org-ref~
   As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
@@ -478,26 +455,17 @@
   #+END_SRC
 * Install ~undo-tree~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'undo-tree)
-      (package-install 'undo-tree))
-
     (use-package undo-tree
       :ensure t
       :init (global-undo-tree-mode))
   #+END_SRC
 * Install ~graphviz-dot-mode~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'graphviz-dot-mode)
-      (package-install 'graphviz-dot-mode))
-
     (use-package graphviz-dot-mode
       :ensure t)
   #+END_SRC
 * Install ~beginend~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'beginend)
-      (package-install 'beginend))
-
     (use-package beginend
       :ensure t
       :init (beginend-global-mode))
@@ -545,18 +513,13 @@
 * Install ~pdf-tools~
   ~use-package~ example configuring ~pdf-tools~ found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'pdf-tools)
-      (package-install 'pdf-tools))
-    (unless (package-installed-p 'org-pdfview)
-      (package-install 'org-pdfview))
-
     (use-package pdf-tools
-        :ensure t
-        :config
-        (pdf-tools-install)
-        (setq-default pdf-view-display-size 'fit-page)
-        (use-package org-pdfview
-          :ensure t))
+	:ensure t
+	:config
+	(pdf-tools-install)
+	(setq-default pdf-view-display-size 'fit-page)
+	(use-package org-pdfview
+	  :ensure t))
   #+END_SRC
 * Install ~csv-mode~
   #+BEGIN_SRC emacs-lisp
@@ -568,12 +531,6 @@
   #+END_SRC
 * Install ~projectile~
   #+BEGIN_SRC emacs-lisp
-    (unless (package-installed-p 'projectile)
-      (package-install 'projectile))
-
-    (unless (package-installed-p 'helm-projectile)
-      (package-install 'helm-projectile))
-
     (use-package projectile
       :ensure t
       :bind-keymap
