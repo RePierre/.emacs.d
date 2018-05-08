@@ -1,3 +1,8 @@
+* Custom functions
+  #+BEGIN_SRC emacs-lisp
+    (defun display-line-numbers()
+      (linum-mode))
+  #+END_SRC
 * Basic customization
 ** Hide the startup message
    #+BEGIN_SRC emacs-lisp
@@ -22,14 +27,10 @@
 ** Enable line numbers for various modes
    #+BEGIN_SRC emacs-lisp
      ;; python-mode
-     (add-hook 'python-mode-hook
-               (lambda ()
-                 (linum-mode)))
+     (add-hook 'python-mode-hook 'display-line-numbers)
 
      ;; emacs-lisp mode
-     (add-hook 'emacs-lisp-mode-hook
-               (lambda ()
-                 (linum-mode)))
+     (add-hook 'emacs-lisp-mode-hook 'display-line-numbers)
    #+END_SRC
 ** Wrap long lines
    Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
@@ -526,8 +527,7 @@
     (use-package csv-mode
       :ensure t
       :init
-      (add-hook 'csv-mode-hook (lambda()
-				 (linum-mode))))
+      (add-hook 'csv-mode-hook 'display-line-numbers))
   #+END_SRC
 * Install ~projectile~
   #+BEGIN_SRC emacs-lisp
