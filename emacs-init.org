@@ -165,6 +165,10 @@
        (setq org-bullets-bullet-list '("∙"))
        (add-hook 'org-mode-hook 'org-bullets-mode))
    #+END_SRC
+** Unbind <C-z>
+   #+BEGIN_SRC emacs-lisp
+     (global-unset-key (kbd "C-z"))
+   #+END_SRC
 * Themes
 ** Install *sanityinc-tomorrow-night* theme
    #+BEGIN_SRC emacs-lisp
