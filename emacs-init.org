@@ -98,7 +98,8 @@
       (setq org-refile-targets '(("~/Dropbox/gtd/gtd.org" :maxlevel . 3)
 				 ("~/Dropbox/gtd/some-day.org" :level . 1)
 				 ("~/Dropbox/gtd/tickler.org" :maxlevel . 2)
-				 ("~/Dropbox/org/blogging.org" :level . 1)))
+				 ("~/Dropbox/org/blogging.org" :level . 1)
+				 ("~/Dropbox/bibliography/reading-list.org" :maxlevel  . 2)))
     #+END_SRC
    As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
    #+BEGIN_SRC emacs-lisp
