@@ -171,15 +171,17 @@
      (global-unset-key (kbd "C-z"))
    #+END_SRC
 * Themes
-** Install *sanityinc-tomorrow-night* theme
+** Load *sanityinc-tomorrow-night* theme
    #+BEGIN_SRC emacs-lisp
      (use-package color-theme-sanityinc-tomorrow
-       :disabled
-       :ensure t)
+       :ensure t
+       :config
+       (load-theme 'sanityinc-tomorrow-night t))
    #+END_SRC
-** Load *gotham* theme
+** Install *gotham* theme
    #+BEGIN_SRC emacs-lisp
      (use-package gotham-theme
+       :disabled
        :ensure t
        :config
        (load-theme 'gotham t))
@@ -291,7 +293,9 @@
     (use-package smart-mode-line
       :ensure t
       :init
-      (sml/setup)
+      (progn
+	(setq sml/no-confirm-load-theme t)
+	(sml/setup))
       :config
       (use-package nyan-mode
 	:ensure t
