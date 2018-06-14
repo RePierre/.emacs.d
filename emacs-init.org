@@ -198,12 +198,12 @@
     (org-babel-do-load-languages
      (quote org-babel-load-languages)
      (quote ((emacs-lisp . t)
-             (dot . t)
-             (python . t)
-             (gnuplot . t)
-             (sh . t)
-             (org . t)
-             (latex . t))))
+	     (dot . t)
+	     (python . t)
+	     (gnuplot . t)
+	     (shell . t)
+	     (org . t)
+	     (latex . t))))
 
   #+END_SRC
 * Git integration
