@@ -170,6 +170,19 @@
    #+BEGIN_SRC emacs-lisp
      (global-unset-key (kbd "C-z"))
    #+END_SRC
+* Agenda
+  #+BEGIN_SRC emacs-lisp
+    (setq org-agenda-files
+	  (quote ("~/Dropbox/gtd/inbox.org"
+		  "~/Dropbox/gtd/gtd.org"
+		  "~/Dropbox/gtd/some-day.org"
+		  "~/Dropbox/gtd/tickler.org"
+		  "~/Dropbox/bibliography/reading-list.org"
+		  "~/Dropbox/org/blogging.org")))
+    ;; (setq org-agenda-repeating-timestamp-show-all nil)
+    (setq org-agenda-skip-deadline-if-done t)
+    (setq org-agenda-skip-scheduled-if-done t)
+  #+END_SRC
 * Themes
 ** Load *sanityinc-tomorrow-night* theme
    #+BEGIN_SRC emacs-lisp
