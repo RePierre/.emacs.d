@@ -202,7 +202,7 @@
    #+END_SRC
 ** Load ~wombat~ theme
    #+BEGIN_SRC emacs-lisp
-     (load-theme 'wombat)
+     (load-theme 'wombat t)
    #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
