@@ -337,6 +337,8 @@
        (add-hook 'python-mode-hook (lambda()
 				     (add-to-list 'company-backends 'company-jedi))))
    #+END_SRC
+**** Remarks
+     Need to call ~jedi:install-server~ once after installation.
 ** Install ~elpy~
    Requires the installation of ~elpy, jedi, rope~:
    #+BEGIN_SRC sh
