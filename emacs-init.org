@@ -1,3 +1,11 @@
+* Load custom libraries
+  #+BEGIN_SRC emacs-lisp
+    (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+  #+END_SRC
+** Load publication comparison workflow functions
+   #+BEGIN_SRC emacs-lisp
+     (require 'compare-publications)
+   #+END_SRC
 * Custom functions
   #+BEGIN_SRC emacs-lisp
     (defun display-line-numbers()
