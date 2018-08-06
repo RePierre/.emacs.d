@@ -32,6 +32,12 @@
       (linum-mode))
   #+END_SRC
 * Basic customization
+** Move generated UI code to a separate file
+   #+BEGIN_SRC emacs-lisp
+     (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (when (file-exists-p custom-file)
+       (load custom-file t))
+   #+END_SRC
 ** Hide the startup message
    #+BEGIN_SRC emacs-lisp
      (setq inhibit-startup-message t)
