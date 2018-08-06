@@ -204,16 +204,6 @@
    #+BEGIN_SRC emacs-lisp
      (global-unset-key (kbd "C-z"))
    #+END_SRC
-** Install ~delight~
-   #+BEGIN_SRC emacs-lisp
-     (use-package delight
-       :ensure t)
-   #+END_SRC
-** Install ~diminish~
-   #+BEGIN_SRC emacs-lisp
-     (use-package diminish
-       :ensure t)
-   #+END_SRC
 * Agenda
   #+BEGIN_SRC emacs-lisp
     (setq org-agenda-files
