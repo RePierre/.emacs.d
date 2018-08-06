@@ -6,8 +6,6 @@
 
 (package-initialize)
 (package-refresh-contents)
-(unless (package-installed-p 'org)
-  (package-install 'org))
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
