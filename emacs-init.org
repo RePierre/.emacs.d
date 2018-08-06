@@ -1,3 +1,23 @@
+* Initialization
+  Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][this config]].
+** Initialize/update package sources
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'package-archives
+		  '("melpa" . "https://melpa.org/packages/"))
+     (add-to-list 'package-archives
+		  '("org" . "http://orgmode.org/elpa/") t)
+   #+END_SRC
+** Install ~use-package~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'use-package)
+       (package-refresh-contents)
+       (package-install 'use-package))
+   #+END_SRC
+** Install ~use-package-ensure-system-package~
+   #+BEGIN_SRC emacs-lisp
+     (use-package use-package-ensure-system-package
+       :ensure t)
+   #+END_SRC
 * Load custom libraries
   #+BEGIN_SRC emacs-lisp
     (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
