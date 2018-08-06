@@ -621,3 +621,13 @@
     (use-package powershell
       :ensure t)
   #+END_SRC
+* Install ~ein~
+** Install [[https://github.com/tkf/emacs-ipython-notebook#requirements][prerequisites]]
+   #+BEGIN_SRC shell
+     sudo apt-get install ipython ipython3 jupyter
+   #+END_SRC
+** Install ~ein~ package
+   #+BEGIN_SRC emacs-lisp
+     (use-package ein
+       :ensure t)
+   #+END_SRC
