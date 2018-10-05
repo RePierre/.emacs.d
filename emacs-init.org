@@ -600,6 +600,8 @@
       :ensure t
       :bind-keymap
       ("C-c p" . projectile-command-map)
+      :init
+      (add-hook 'magit-mode-hook 'projectile-mode)
       :config
       (progn
 	(setq projectile-completion-system 'helm)
