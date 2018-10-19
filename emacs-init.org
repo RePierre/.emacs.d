@@ -398,14 +398,15 @@
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
-       :ensure t)
+       :ensure t
+       :init (add-hook 'lsp-mode-hook 'flycheck-mode))
    #+END_SRC
 ** Install ~py-autopep8~
    #+BEGIN_SRC emacs-lisp
      (use-package py-autopep8
        :ensure t
        :init (progn
-	       (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+	       (add-hook 'lsp-mode-hook 'py-autopep8-enable-on-save)
 	       ;; Ignore warnings
 	       ;; - E501 - Try to make lines fit within --max-line-length characters.
 	       ;; - W293 - Remove trailing whitespace on blank line.
