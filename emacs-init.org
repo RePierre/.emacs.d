@@ -218,26 +218,14 @@
     (setq org-agenda-skip-scheduled-if-done t)
   #+END_SRC
 * Themes
-** Install *sanityinc-tomorrow-night* theme
-   #+BEGIN_SRC emacs-lisp
-     (use-package color-theme-sanityinc-tomorrow
-       :disabled
-       :ensure t
-       :config
-       (load-theme 'sanityinc-tomorrow-night t))
-   #+END_SRC
-** Install *gotham* theme
-   #+BEGIN_SRC emacs-lisp
-     (use-package gotham-theme
-       :disabled
-       :ensure t
-       :config
-       (load-theme 'gotham t))
-   #+END_SRC
-** Load ~wombat~ theme
-   #+BEGIN_SRC emacs-lisp
-     (load-theme 'wombat t)
-   #+END_SRC
+  Use ~sanityinc-tomorrow-night~ when not running from console; otherwise fallback to ~wombat~.
+  #+BEGIN_SRC emacs-lisp
+    (cond ((display-graphic-p)
+	   (use-package color-theme-sanityinc-tomorrow
+	     :ensure t
+	     :config (load-theme 'sanityinc-tomorrow-night t)))
+	  (t (load-theme 'wombat t)))
+  #+END_SRC
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
