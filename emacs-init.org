@@ -629,3 +629,14 @@
      (use-package ein
        :ensure t)
    #+END_SRC
+* Install ~ledger-mode~
+** Prerequisites
+   Requires ~ledger~ to be installed:
+   #+BEGIN_SRC shell
+     sudo apt-get install ledger
+   #+END_SRC
+** Setup ~ledger-mode~
+   #+BEGIN_SRC emacs-lisp
+     (use-package ledger-mode
+       :ensure t)
+   #+END_SRC
