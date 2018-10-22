@@ -350,7 +350,7 @@
        company-tooltip-align-annotations t))
   #+END_SRC
 * Python development
-  Follows some of the steps from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Real Python blog]].
+  ~lsp~ setup is from [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][Configuring Emacs, lsp-mode and the python language server]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
 ** Install ~lsp~
    #+BEGIN_SRC emacs-lisp
      (use-package lsp-mode
