@@ -638,5 +638,7 @@
 ** Setup ~ledger-mode~
    #+BEGIN_SRC emacs-lisp
      (use-package ledger-mode
-       :ensure t)
+       :ensure t
+       :config (progn
+		 (setq ledger-reconcile-default-commodity "RON")))
    #+END_SRC
