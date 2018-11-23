@@ -244,23 +244,27 @@
    #+BEGIN_SRC emacs-lisp
      (use-package magit
        :ensure t
+       :defer t
        :bind (("C-x g" . magit-status)))
    #+END_SRC
 ** Install ~magit-gh-pulls~
    #+BEGIN_SRC emacs-lisp
      (use-package magit-gh-pulls
        :ensure t
+       :defer t
        :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
    #+END_SRC
 ** Install ~git-timemachine~
    #+BEGIN_SRC emacs-lisp
      (use-package git-timemachine
-       :ensure t)
+       :ensure t
+       :defer t)
    #+END_SRC
 ** Install ~git-gutter~
    #+BEGIN_SRC emacs-lisp
      (use-package git-gutter
        :ensure t
+       :defer t
        :config
        (global-git-gutter-mode t)
        :diminish git-gutter-mode)
@@ -360,6 +364,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package lsp-mode
        :ensure t
+       :defer t
        :config
        ;; make sure we have lsp-imenu everywhere we have LSP
        (require 'lsp-imenu)
@@ -391,6 +396,7 @@
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
+       :defer t
        :ensure t
        :init (add-hook 'lsp-mode-hook 'flycheck-mode))
    #+END_SRC
@@ -398,6 +404,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package py-autopep8
        :ensure t
+       :defer t
        :init (progn
 	       (add-hook 'lsp-mode-hook 'py-autopep8-enable-on-save)
 	       ;; Ignore warnings
@@ -412,12 +419,14 @@
    [[https://github.com/realgud/realgud/][GitHub repository]].
    #+BEGIN_SRC emacs-lisp
      (use-package realgud
+       :defer t
        :ensure t)
    #+END_SRC
 ** Install ~smartparens~
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
        :ensure t
+       :defer t
        :diminish smartparens-mode
        :config
        (add-hook 'prog-mode-hook 'smartparens-mode))
@@ -426,6 +435,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-delimiters
        :ensure t
+       :defer t
        :config
        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
    #+END_SRC
@@ -451,6 +461,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
        :ensure t
+       :defer t
        :commands (markdown-mode gfm-mode)
        :mode (("README\\.md\\'" . gfm-mode)
 	      ("\\.md\\'" . markdown-mode)
@@ -460,7 +471,8 @@
 ** Install ~gh-md~
    #+BEGIN_SRC emacs-lisp
      (use-package gh-md
-       :ensure t)
+       :ensure t
+       :defer t)
    #+END_SRC
 * Install ~AUCTeX~
   #+BEGIN_SRC emacs-lisp
@@ -529,7 +541,8 @@
 * Install ~graphviz-dot-mode~
   #+BEGIN_SRC emacs-lisp
     (use-package graphviz-dot-mode
-      :ensure t)
+      :ensure t
+      :defer t)
   #+END_SRC
 * Install ~beginend~
   #+BEGIN_SRC emacs-lisp
@@ -542,6 +555,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package csharp-mode
       :ensure t
+      :defer t
       :init (when (display-graphic-p)
 		(electric-pair-local-mode 1)))
   #+END_SRC
@@ -581,17 +595,19 @@
   ~use-package~ example configuring ~pdf-tools~ found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
   #+BEGIN_SRC emacs-lisp
     (use-package pdf-tools
-	:ensure t
-	:config
-	(pdf-tools-install)
-	(setq-default pdf-view-display-size 'fit-page)
-	(use-package org-pdfview
-	  :ensure t))
+      :ensure t
+      :defer t
+      :config
+      (pdf-tools-install)
+      (setq-default pdf-view-display-size 'fit-page)
+      (use-package org-pdfview
+	:ensure t))
   #+END_SRC
 * Install ~csv-mode~
   #+BEGIN_SRC emacs-lisp
     (use-package csv-mode
       :ensure t
+      :defer t
       :init
       (add-hook 'csv-mode-hook 'display-line-numbers))
   #+END_SRC
@@ -599,6 +615,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
       :ensure t
+      :defer t
       :bind-keymap
       ("C-c p" . projectile-command-map)
       :init
@@ -614,6 +631,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package neotree
       :ensure t
+      :defer t
       :config
       (global-set-key (kbd "C-c t") 'neotree-toggle)
       (setq neo-smart-open t)
@@ -622,7 +640,8 @@
 * Install ~powershell~
   #+BEGIN_SRC emacs-lisp
     (use-package powershell
-      :ensure t)
+      :ensure t
+      :defer t)
   #+END_SRC
 * Install ~ein~
 ** Install [[https://github.com/tkf/emacs-ipython-notebook#requirements][prerequisites]]
@@ -632,7 +651,8 @@
 ** Install ~ein~ package
    #+BEGIN_SRC emacs-lisp
      (use-package ein
-       :ensure t)
+       :ensure t
+       :defer t)
    #+END_SRC
 * Install ~ledger-mode~
 ** Prerequisites
