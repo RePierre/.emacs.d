@@ -336,10 +336,11 @@
 	(sml/setup))
       :config
       (progn
-	(use-package nyan-mode
-	  :ensure t
-	  :config
-	  (nyan-mode 1))))
+	(when (display-graphic-p)
+	  (use-package nyan-mode
+	    :ensure t
+	    :config
+	    (nyan-mode 1)))))
   #+END_SRC
 * Install ~company~
   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
