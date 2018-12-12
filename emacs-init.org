@@ -663,5 +663,6 @@
      (use-package ledger-mode
        :ensure t
        :config (progn
-		 (setq ledger-reconcile-default-commodity "RON")))
+		 (setq ledger-reconcile-default-commodity "RON")
+		 (setq ledger-schedule-file "~/Dropbox/org/financial/ledger-schedule.ledger")))
    #+END_SRC
