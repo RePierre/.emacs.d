@@ -358,6 +358,14 @@
   #+END_SRC
 * Python development
   ~lsp~ setup is from [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][Configuring Emacs, lsp-mode and the python language server]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
+** Install ~pyvenv~
+   #+BEGIN_SRC emacs-lisp
+     (use-package pyvenv
+       :defer t
+       :ensure t
+       :config (progn
+		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
+   #+END_SRC
 ** Install ~lsp~
    #+BEGIN_SRC emacs-lisp
      (use-package lsp-mode
