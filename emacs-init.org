@@ -369,7 +369,7 @@
    #+END_SRC
 ** Install ~lsp~
    #+BEGIN_SRC emacs-lisp
-     (unless (equalp system-type 'cygwin )
+     (unless (eq system-type 'cygwin )
        (use-package lsp-mode
 	 :ensure t
 	 :defer t
@@ -403,7 +403,7 @@
    #+END_SRC
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
-     (unless (equalp system-type 'cygwin )
+     (unless (eq system-type 'cygwin )
        (use-package flycheck
 	 :defer t
 	 :ensure t
@@ -623,7 +623,7 @@
   #+END_SRC
 * Install ~projectile~
   #+BEGIN_SRC emacs-lisp
-    (unless (equalp system-type 'cygwin)
+    (unless (eq system-type 'cygwin)
       (use-package projectile
 	:ensure t
 	:defer t
