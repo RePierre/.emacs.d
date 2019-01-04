@@ -95,7 +95,8 @@
 				 (name . "^\\*Messages\\*$")))
 		    ("helm" (mode . helm-major-mode))
 		    ("powershell" (mode . powershell-mode))
-		    ("ledger" (mode . ledger-mode))))))
+		    ("ledger" (mode . ledger-mode))
+		    ("pdf" (mode . pdf-view-mode))))))
      (add-hook 'ibuffer-mode-hook
 	       (lambda ()
 		 (ibuffer-auto-mode 1)
