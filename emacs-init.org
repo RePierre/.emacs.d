@@ -680,3 +680,10 @@
 		 (setq ledger-reconcile-default-commodity "RON")
 		 (setq ledger-schedule-file "~/Dropbox/org/financial/ledger-schedule.ledger")))
    #+END_SRC
+* Install ~which-key~
+  #+BEGIN_SRC emacs-lisp
+    (use-package which-key
+      :ensure t
+      :config
+      (which-key-mode))
+  #+END_SRC
