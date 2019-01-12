@@ -687,3 +687,43 @@
       :config
       (which-key-mode))
   #+END_SRC
+* Read Web feeds using ~elfeed~
+  Based on [[https://cestlaz.github.io/posts/using-emacs-29-elfeed/][blog post of Mike Zamansky]].
+  #+BEGIN_SRC emacs-lisp
+    (setq elfeed-db-directory "~/Dropbox/elfeed-db")
+
+    (defun elfeed-mark-all-as-read ()
+      (interactive)
+      (mark-whole-buffer)
+      (elfeed-search-untag-all-unread))
+
+    (defun elfeed-load-db-and-open ()
+      "Wrapper to load the elfeed database from disk before opening."
+      (interactive)
+      (elfeed-db-load)
+      (elfeed)
+      (elfeed-search-update--force))
+
+    (defun elfeed-save-db-and-bury ()
+      "Wrapper to save the elfeed database to disk before burying buffer."
+      (interactive)
+      (elfeed-db-save)
+      (quit-window))
+
+    (use-package elfeed
+      :ensure t
+      :bind (:map elfeed-search-mode-map
+		  ("q" . elfeed-save-db-and-bury)
+		  ("A" . elfeed-mark-all-as-read)))
+
+    (use-package elfeed-goodies
+      :ensure t
+      :config
+      (elfeed-goodies/setup))
+
+    (use-package elfeed-org
+      :ensure t
+      :config
+      (elfeed-org)
+      (setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")))
+  #+END_SRC
