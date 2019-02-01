@@ -727,3 +727,8 @@
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")))
   #+END_SRC
+* Install ~try~ package
+  #+BEGIN_SRC emacs-lisp
+  (use-package try
+    :ensure t)
+  #+END_SRC
