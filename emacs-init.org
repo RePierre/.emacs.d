@@ -406,9 +406,8 @@
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
        (use-package flycheck
-	 :defer t
 	 :ensure t
-	 :init (add-hook 'lsp-mode-hook 'flycheck-mode)))
+	 :init (global-flycheck-mode)))
    #+END_SRC
 ** Install ~py-autopep8~
    #+BEGIN_SRC emacs-lisp
