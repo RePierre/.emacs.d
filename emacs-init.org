@@ -364,36 +364,22 @@
 ** Install ~lsp~
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
-       (use-package lsp-mode
-	 :ensure t
-	 :defer t
-	 :config
-	 ;; make sure we have lsp-imenu everywhere we have LSP
-	 (require 'lsp-imenu)
-	 (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-	 ;; get lsp-python-enable defined
-	 ;; NB: use either projectile-project-root or ffip-get-project-root-directory
-	 ;;     or any other function that can be used to find the root directory of a project
-	 (lsp-define-stdio-client lsp-python "python"
-				  #'projectile-project-root
-				  '("pyls"))
+       (progn
+	 (use-package lsp-mode
+	   :commands lsp
+	   :ensure t)
 
-	 ;; make sure this is activated when python-mode is activated
-	 ;; lsp-python-enable is created by macro above
-	 (add-hook 'python-mode-hook
-		   (lambda ()
-		     (lsp-python-enable)))
-
-	 ;; lsp extras
 	 (use-package lsp-ui
 	   :ensure t
+	   :commands lsp-ui-mode
 	   :config
 	   (setq lsp-ui-sideline-ignore-duplicate t)
 	   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 	 (use-package company-lsp
-	   :config
-	   (push 'company-lsp company-backends))))
+	   :commands company-lsp)
+
+	 (add-hook 'python-mode-hook #'lsp)))
    #+END_SRC
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
