@@ -249,13 +249,6 @@
        :defer t
        :bind (("C-x g" . magit-status)))
    #+END_SRC
-** Install ~magit-gh-pulls~
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit-gh-pulls
-       :ensure t
-       :defer t
-       :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
-   #+END_SRC
 ** Install ~git-timemachine~
    #+BEGIN_SRC emacs-lisp
      (use-package git-timemachine
