@@ -359,6 +359,36 @@
        company-require-match nil
        company-tooltip-align-annotations t))
   #+END_SRC
+** Install ~company-auctex~
+   #+begin_src emacs-lisp
+     (use-package company-auctex
+       :commands (company-auctex
+		  company-auctext-labels
+		  company-auctest-bibs
+		  company-auctex-macros
+		  company-auctext-symbols
+		  company-auctext-environments)
+       :hook
+       (tex-mode . (lambda ()
+		     (setq-local company-backends '((company-auctex-labels
+						     company-auctex-bibs
+						     company-auctex-macros
+						     company-auctex-environments
+						     company-auctex-symbols
+						     company-capf))))))
+   #+end_src
+** Install ~company-math~
+   #+begin_src emacs-lisp
+     (use-package company-math
+       :preface
+       (autoload 'company-math-symbols-latex "company-math")
+       (autoload 'company-latex-commands "company-math")
+       :hook
+       (TeX-mode . (lambda ()
+		     (setq-local company-backends '((company-math-symbols-latex
+						     company-latex-commands
+						     company-capf))))))
+   #+end_src
 * Python development
   ~lsp~ setup is from [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][Configuring Emacs, lsp-mode and the python language server]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
 ** Install ~pyvenv~
