@@ -426,19 +426,21 @@
 ** Install ~elpy~
    #+begin_src emacs-lisp
      (unless (eq system-type 'cygwin )
-       (use-package elpy
-	 :ensure t
-	 :diminish elpy-mode "[E]"
-	 :commands (elpy-mode)
-	 :config (progn
-		   (defun switch-to-jedi-backend ()
-		     (interactive)
-		     (setq elpy-rpc-backend "jedi"))
-		   (defun switch-to-rope-backend ()
-		     (interactive)
-		     (setq elpy-rpc-backend "rope"))
-		   (setq elpy-rpc-backend "jedi")
-		   (elpy-enable))))
+       (progn
+	 (use-package elpy
+	   :ensure t
+	   :diminish elpy-mode "[E]"
+	   :commands (elpy-mode)
+	   :config (progn
+		     (defun switch-to-jedi-backend ()
+		       (interactive)
+		       (setq elpy-rpc-backend "jedi"))
+		     (defun switch-to-rope-backend ()
+		       (interactive)
+		       (setq elpy-rpc-backend "rope"))
+		     (setq elpy-rpc-backend "jedi")
+		     (elpy-enable)))
+	 (add-hook 'python-mode-hook #'elpy-mode)))
    #+end_src
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
