@@ -456,22 +456,6 @@
 	 :ensure t
 	 :commands (py-yapf-buffer py-yapf-enable-on-save)))
    #+end_src
-** Install ~py-autopep8~
-   #+BEGIN_SRC emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (use-package py-autopep8
-	 :ensure t
-	 :defer t
-	 :init (progn
-		 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-		 ;; Ignore warnings
-		 ;; - E501 - Try to make lines fit within --max-line-length characters.
-		 ;; - W293 - Remove trailing whitespace on blank line.
-		 ;; - W391 - Remove trailing blank lines.
-		 ;; - W690 - Fix various deprecated code (via lib2to3).
-		 ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el
-		 (setq py-autopep8-options '("--ignore=E501,W293,W391,W690")))))
-   #+END_SRC
 ** Install ~RealGUD~
    [[https://github.com/realgud/realgud/][GitHub repository]].
    #+BEGIN_SRC emacs-lisp
