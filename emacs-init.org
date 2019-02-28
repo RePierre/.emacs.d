@@ -404,10 +404,12 @@
      (unless (eq system-type 'cygwin )
        (progn
 	 (use-package lsp-mode
+	   :disabled
 	   :commands lsp
 	   :ensure t)
 
 	 (use-package lsp-ui
+	   :disabled
 	   :ensure t
 	   :commands lsp-ui-mode
 	   :config
@@ -415,10 +417,29 @@
 	   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 	 (use-package company-lsp
+	   :disabled
 	   :commands company-lsp)
 
-	 (add-hook 'python-mode-hook #'lsp)))
+	 ;; (add-hook 'python-mode-hook #'lsp)
+	 ))
    #+END_SRC
+** Install ~elpy~
+   #+begin_src emacs-lisp
+     (unless (eq system-type 'cygwin )
+       (use-package elpy
+	 :ensure t
+	 :diminish elpy-mode "[E]"
+	 :commands (elpy-mode)
+	 :config (progn
+		   (defun switch-to-jedi-backend ()
+		     (interactive)
+		     (setq elpy-rpc-backend "jedi"))
+		   (defun switch-to-rope-backend ()
+		     (interactive)
+		     (setq elpy-rpc-backend "rope"))
+		   (setq elpy-rpc-backend "jedi")
+		   (elpy-enable))))
+   #+end_src
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
@@ -426,27 +447,36 @@
 	 :ensure t
 	 :init (global-flycheck-mode)))
    #+END_SRC
+** Install ~py-yapf~
+   #+begin_src emacs-lisp
+     (unless (eq system-type 'cygwin )
+       (use-package py-yapf
+	 :ensure t
+	 :commands (py-yapf-buffer py-yapf-enable-on-save)))
+   #+end_src
 ** Install ~py-autopep8~
    #+BEGIN_SRC emacs-lisp
-     (use-package py-autopep8
-       :ensure t
-       :defer t
-       :init (progn
-	       (add-hook 'lsp-mode-hook 'py-autopep8-enable-on-save)
-	       ;; Ignore warnings
-	       ;; - E501 - Try to make lines fit within --max-line-length characters.
-	       ;; - W293 - Remove trailing whitespace on blank line.
-	       ;; - W391 - Remove trailing blank lines.
-	       ;; - W690 - Fix various deprecated code (via lib2to3).
-	       ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el
-	       (setq py-autopep8-options '("--ignore=E501,W293,W391,W690"))))
+     (unless (eq system-type 'cygwin )
+       (use-package py-autopep8
+	 :ensure t
+	 :defer t
+	 :init (progn
+		 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+		 ;; Ignore warnings
+		 ;; - E501 - Try to make lines fit within --max-line-length characters.
+		 ;; - W293 - Remove trailing whitespace on blank line.
+		 ;; - W391 - Remove trailing blank lines.
+		 ;; - W690 - Fix various deprecated code (via lib2to3).
+		 ;; https://github.com/kpurdon/.emacs.d/blob/master/development/_python.el
+		 (setq py-autopep8-options '("--ignore=E501,W293,W391,W690")))))
    #+END_SRC
 ** Install ~RealGUD~
    [[https://github.com/realgud/realgud/][GitHub repository]].
    #+BEGIN_SRC emacs-lisp
-     (use-package realgud
-       :defer t
-       :ensure t)
+     (unless (eq system-type 'cygwin )
+       (use-package realgud
+	 :defer t
+	 :ensure t))
    #+END_SRC
 ** Install ~smartparens~
    #+BEGIN_SRC emacs-lisp
