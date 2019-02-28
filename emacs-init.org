@@ -11,6 +11,11 @@
    #+BEGIN_SRC emacs-lisp
      (package-refresh-contents)
    #+END_SRC
+** Install ~delight~
+   #+BEGIN_SRC emacs-lisp
+     (unless (package-installed-p 'delight)
+       (package-install 'delight))
+   #+END_SRC
 ** Install ~use-package~
    #+BEGIN_SRC emacs-lisp
      (unless (package-installed-p 'use-package)
