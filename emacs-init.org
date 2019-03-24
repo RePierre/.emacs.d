@@ -236,6 +236,11 @@
 	     :config (load-theme 'sanityinc-tomorrow-night t)))
 	  (t (load-theme 'wombat t)))
   #+END_SRC
+* Org mode
+  #+begin_src emacs-lisp
+    (use-package org
+      :ensure org-plus-contrib)
+  #+end_src
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
