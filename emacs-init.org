@@ -236,6 +236,16 @@
 	     :config (load-theme 'sanityinc-tomorrow-night t)))
 	  (t (load-theme 'wombat t)))
   #+END_SRC
+** Use ~circadian~ to switch between dark and light themes
+   #+begin_src emacs-lisp
+     (use-package circadian
+       :ensure t
+       :when (display-graphic-p)
+       :config
+       (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
+				("19:30" . sanityinc-tomorrow-night)))
+       (circadian-setup))
+   #+end_src
 * Org mode
   #+begin_src emacs-lisp
     (use-package org
