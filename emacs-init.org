@@ -227,6 +227,22 @@
     (setq org-agenda-skip-deadline-if-done t)
     (setq org-agenda-skip-scheduled-if-done t)
   #+END_SRC
+* Install ~smart-mode-line~
+  For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
+  #+BEGIN_SRC emacs-lisp
+    (use-package smart-mode-line
+      :ensure t
+      :init
+      (setq sml/no-confirm-load-theme t)
+      (setq sml/theme 'respectful)
+      (sml/setup)
+      :config
+      (use-package nyan-mode
+	:ensure t
+	:when (display-graphic-p)
+	:config
+	(nyan-mode 1)))
+  #+END_SRC
 * Themes
   Use ~sanityinc-tomorrow-night~ when not running from console; otherwise fallback to ~wombat~.
   #+BEGIN_SRC emacs-lisp
@@ -244,6 +260,9 @@
        :config
        (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
 				("19:30" . sanityinc-tomorrow-night)))
+       (add-hook 'circadian-after-load-theme-hook
+		 #'(lambda (theme)
+		     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
 * Org mode
@@ -338,27 +357,6 @@
        ("M-I" . helm-swoop-back-to-last-point)
        ("C-c M-i" . helm-multi-swoop)
        ("C-c M-I" . helm-multi-swoop-all)))
-  #+END_SRC
-* Install ~smart-mode-line~
-  #+BEGIN_SRC emacs-lisp
-    (use-package smart-mode-line
-      :ensure t
-      :init
-      (progn
-	(setq sml/no-confirm-load-theme t)
-	(when (display-graphic-p)
-	  (use-package smart-mode-line-powerline-theme
-	    :ensure t
-	    :config
-	    (setq sml/theme 'powerline)))
-	(sml/setup))
-      :config
-      (progn
-	(when (display-graphic-p)
-	  (use-package nyan-mode
-	    :ensure t
-	    :config
-	    (nyan-mode 1)))))
   #+END_SRC
 * Install ~company~
   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
