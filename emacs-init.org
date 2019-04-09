@@ -126,24 +126,24 @@
 ** Open GTD view
 *** Setup ~org-capture~
     #+BEGIN_SRC emacs-lisp
-      (setq org-default-notes-file "~/Dropbox/org/notes.org")
+      (setq org-default-notes-file "~/org/notes.org")
       (global-set-key (kbd "C-c c") 'org-capture)
     #+END_SRC
 *** Setup ~org-capture-templates~
     #+BEGIN_SRC emacs-lisp
       (setq org-capture-templates
-	    '(("t" "Todo [inbox]" entry (file+headline "~/Dropbox/gtd/inbox.org" "Tasks") "* TODO %i%?")
-	      ("j" "Journal Entry" entry (file+olp+datetree "~/Dropbox/org/journal.org") "* %?" :empty-lines 1)
-	      ("b" "Blog article idea" entry (file+headline "~/Dropbox/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
-	      ("T" "Tickler" entry (file+headline "~/Dropbox/gtd/tickler.org" "Tickler") "* %i%? \n %U")))
+	    '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Tasks") "* TODO %i%?")
+	      ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?" :empty-lines 1)
+	      ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
+	      ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")))
     #+END_SRC
 *** Setup ~org-refile-targets~
     #+BEGIN_SRC emacs-lisp
-      (setq org-refile-targets '(("~/Dropbox/gtd/gtd.org" :maxlevel . 3)
-				 ("~/Dropbox/gtd/some-day.org" :level . 1)
-				 ("~/Dropbox/gtd/tickler.org" :maxlevel . 2)
-				 ("~/Dropbox/org/blogging.org" :level . 1)
-				 ("~/Dropbox/bibliography/reading-list.org" :maxlevel  . 2)))
+      (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
+				 ("~/org/gtd/some-day.org" :level . 1)
+				 ("~/org/gtd/tickler.org" :maxlevel . 2)
+				 ("~/org/org/blogging.org" :level . 1)
+				 ("~/org/bibliography/reading-list.org" :maxlevel  . 2)))
     #+END_SRC
    As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
    #+BEGIN_SRC emacs-lisp
@@ -152,7 +152,7 @@
      (defun gtd()
        (interactive)
        (progn
-         (find-file "~/Dropbox/gtd/gtd.org")
+         (find-file "~/org/gtd/gtd.org")
          (org-agenda-list)))
 
      (global-set-key (kbd "C-c g") 'gtd)
@@ -217,12 +217,12 @@
 * Agenda
   #+BEGIN_SRC emacs-lisp
     (setq org-agenda-files
-	  (quote ("~/Dropbox/gtd/inbox.org"
-		  "~/Dropbox/gtd/gtd.org"
-		  "~/Dropbox/gtd/some-day.org"
-		  "~/Dropbox/gtd/tickler.org"
-		  "~/Dropbox/bibliography/reading-list.org"
-		  "~/Dropbox/org/blogging.org")))
+	  (quote ("~/org/gtd/inbox.org"
+		  "~/org/gtd/gtd.org"
+		  "~/org/gtd/some-day.org"
+		  "~/org/gtd/tickler.org"
+		  "~/org/bibliography/reading-list.org"
+		  "~/org/blogging.org")))
     ;; (setq org-agenda-repeating-timestamp-show-all nil)
     (setq org-agenda-skip-deadline-if-done t)
     (setq org-agenda-skip-scheduled-if-done t)
@@ -555,15 +555,15 @@
     (unless (package-installed-p 'org-ref)
       (package-install 'org-ref))
 
-    (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
+    (setq reftex-default-bibliography '("~/org/bibliography/references.bib"))
     ;; see org-ref for use of these variables
-    (setq org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
-          org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-          org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
+    (setq org-ref-bibliography-notes "~/org/bibliography/notes.org"
+          org-ref-default-bibliography '("~/org/bibliography/references.bib")
+          org-ref-pdf-directory "~/org/bibliography/bibtex-pdfs/")
 
-    (setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-          bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
-          bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes")
+    (setq bibtex-completion-bibliography "~/org/bibliography/references.bib"
+          bibtex-completion-library-path "~/org/bibliography/bibtex-pdfs"
+          bibtex-completion-notes-path "~/org/bibliography/helm-bibtex-notes")
 
     (setq org-latex-pdf-process
           '("pdflatex -interaction nonstopmode -output-directory %o %f"
@@ -723,7 +723,7 @@
        :ensure t
        :config (progn
 		 (setq ledger-reconcile-default-commodity "RON")
-		 (setq ledger-schedule-file "~/Dropbox/org/financial/ledger-schedule.ledger")))
+		 (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")))
    #+END_SRC
 * Install ~which-key~
   #+BEGIN_SRC emacs-lisp
@@ -735,7 +735,7 @@
 * Read Web feeds using ~elfeed~
   Based on [[https://cestlaz.github.io/posts/using-emacs-29-elfeed/][blog post of Mike Zamansky]].
   #+BEGIN_SRC emacs-lisp
-    (setq elfeed-db-directory "~/Dropbox/elfeed-db")
+    (setq elfeed-db-directory "~/org/elfeed/elfeed-db")
 
     (defun elfeed-mark-all-as-read ()
       (interactive)
@@ -770,7 +770,7 @@
       :ensure t
       :config
       (elfeed-org)
-      (setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")))
+      (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
   #+END_SRC
 * Install ~try~ package
   #+BEGIN_SRC emacs-lisp
