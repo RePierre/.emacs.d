@@ -426,23 +426,27 @@
        (progn
 	 (use-package lsp-mode
 	   :disabled
-	   :commands lsp
 	   :ensure t)
 
 	 (use-package lsp-ui
 	   :disabled
 	   :ensure t
-	   :commands lsp-ui-mode
 	   :config
-	   (setq lsp-ui-sideline-ignore-duplicate t)
-	   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+	   (setq lsp-ui-doc-max-height 20
+		 lsp-ui-doc-max-width 50
+		 lsp-ui-sideline-ignore-duplicate t
+		 lsp-ui-peek-always-show t))
 
 	 (use-package company-lsp
 	   :disabled
-	   :commands company-lsp)
+	   :ensure t
+	   :commands (company-lsp))
 
-	 ;; (add-hook 'python-mode-hook #'lsp)
-	 ))
+	 (use-package lsp-python-ms
+	   :disabled
+	   :ensure t
+	   :config
+	   (add-hook 'python-mode-hook #'lsp))))
    #+END_SRC
 ** Install ~elpy~
    #+begin_src emacs-lisp
