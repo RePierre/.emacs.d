@@ -498,6 +498,20 @@
    #+BEGIN_SRC emacs-lisp
      (add-hook 'prog-mode-hook 'electric-pair-mode)
    #+END_SRC
+** Install ~company-jedi~
+   #+begin_src emacs-lisp
+     (unless (eq system-type 'cygwin)
+       (use-package company-jedi
+	 :ensure t
+	 :defer t
+	 :init
+	 (with-eval-after-load 'company
+	   (add-hook 'python-mode-hook
+		     (lambda ()
+		       (setq-local company-backends
+				   (append '(company-jedi) company-backends)))))))
+
+   #+end_src
 * Install ~ace-window~
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
   #+BEGIN_SRC emacs-lisp
