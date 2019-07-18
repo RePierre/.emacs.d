@@ -372,6 +372,14 @@
        company-require-match nil
        company-tooltip-align-annotations t))
   #+END_SRC
+** Install ~company-quickhelp~
+   #+begin_src emacs-lisp
+     (use-package company-quickhelp
+       :ensure t
+       :defer t
+       :init (with-eval-after-load 'company
+	       (company-quickhelp-mode)))
+   #+end_src
 ** Install ~company-auctex~
    #+begin_src emacs-lisp
      (use-package company-auctex
