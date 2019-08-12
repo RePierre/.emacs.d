@@ -790,7 +790,8 @@
     (use-package elfeed-goodies
       :ensure t
       :config
-      (elfeed-goodies/setup))
+      (elfeed-goodies/setup)
+      (setq elfeed-goodies/entry-pane-position :bottom))
 
     (use-package elfeed-org
       :ensure t
