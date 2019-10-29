@@ -816,7 +816,8 @@
 * Install ~eldoc~
   #+begin_src emacs-lisp
     (use-package eldoc
-      :ensure nil
+      :ensure t
+      :defer t
       :hook ((emacs-lisp-mode . eldoc-mode)
 	     (eval-expression-minibuffer-setup . eldoc-mode)
 	     (lisp-mode-interactive-mode . eldoc-mode)
