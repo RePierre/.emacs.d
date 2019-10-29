@@ -752,6 +752,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package ledger-mode
        :ensure t
+       :defer t
        :config (progn
 		 (setq ledger-reconcile-default-commodity "RON")
 		 (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")))
