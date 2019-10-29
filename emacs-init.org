@@ -476,13 +476,15 @@
      (unless (eq system-type 'cygwin )
        (use-package flycheck
 	 :ensure t
+	 :defer t
 	 :init (global-flycheck-mode)))
    #+END_SRC
 ** Install ~py-yapf~
    #+begin_src emacs-lisp
-     (unless (eq system-type 'cygwin )
+   (unless (eq system-type 'cygwin )
        (use-package py-yapf
 	 :ensure t
+	 :defer t
 	 :commands (py-yapf-buffer py-yapf-enable-on-save)))
    #+end_src
 ** Install ~RealGUD~
