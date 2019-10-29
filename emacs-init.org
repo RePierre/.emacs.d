@@ -634,6 +634,7 @@
     (when (version<= "25.3" emacs-version)
       (use-package beginend
 	:ensure t
+	:defer t
 	:init (beginend-global-mode)))
   #+END_SRC
 * Install ~csharp-mode~
