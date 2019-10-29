@@ -272,7 +272,10 @@
 * Org mode
   #+begin_src emacs-lisp
     (use-package org
-      :ensure org-plus-contrib)
+      :ensure org-plus-contrib
+      :config (progn
+		(require 'ox-extra)
+		(ox-extras-activate '(ignore-headlines))))
   #+end_src
 * Load ~org-babel~ languages
   #+BEGIN_SRC emacs-lisp
