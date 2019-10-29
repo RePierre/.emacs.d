@@ -458,7 +458,7 @@
        (progn
 	 (use-package elpy
 	   :ensure t
-	   :diminish elpy-mode "[E]"
+	   :defer t
 	   :commands (elpy-mode)
 	   :config (progn
 		     (defun switch-to-jedi-backend ()
