@@ -391,6 +391,7 @@
 		  company-auctex-macros
 		  company-auctext-symbols
 		  company-auctext-environments)
+       :defer t
        :hook
        (tex-mode . (lambda ()
 		     (setq-local company-backends '((company-auctex-labels
