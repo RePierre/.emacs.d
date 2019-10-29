@@ -829,6 +829,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package org-re-reveal
       :ensure t
+      :defer t
       :config
       (progn
 	(setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
