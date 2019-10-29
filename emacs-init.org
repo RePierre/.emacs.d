@@ -408,6 +408,7 @@
 ** Install ~company-math~
    #+begin_src emacs-lisp
      (use-package company-math
+       :defer t
        :preface
        (autoload 'company-math-symbols-latex "company-math")
        (autoload 'company-latex-commands "company-math")
