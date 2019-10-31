@@ -1,255 +1,10 @@
-* Initialization
-  Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][this config]].
-** Initialize/update package sources
-   #+BEGIN_SRC emacs-lisp
-     (add-to-list 'package-archives
-		  '("melpa" . "https://melpa.org/packages/"))
-     (add-to-list 'package-archives
-		  '("org" . "http://orgmode.org/elpa/") t)
-   #+END_SRC
-** Refresh package contents
-   #+BEGIN_SRC emacs-lisp
-     (package-refresh-contents)
-   #+END_SRC
-** Install ~use-package~
-   #+BEGIN_SRC emacs-lisp
-     (unless (package-installed-p 'use-package)
-       (package-install 'use-package))
-   #+END_SRC
-** Install ~use-package-ensure-system-package~
-   #+BEGIN_SRC emacs-lisp
-     (use-package use-package-ensure-system-package
-       :ensure t)
-   #+END_SRC
-* Load custom libraries
-  #+BEGIN_SRC emacs-lisp
-    (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-  #+END_SRC
-** Load publication comparison workflow functions
-   #+BEGIN_SRC emacs-lisp
-     (require 'compare-publications)
-   #+END_SRC
-* Custom functions
-  #+BEGIN_SRC emacs-lisp
-    (defun display-line-numbers()
-      (linum-mode))
-  #+END_SRC
-* Basic customization
-** Move generated UI code to a separate file
-   #+BEGIN_SRC emacs-lisp
-     (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (file-exists-p custom-file)
-       (load custom-file t))
-   #+END_SRC
-** Hide the startup message
-   #+BEGIN_SRC emacs-lisp
-     (setq inhibit-startup-message t)
-   #+END_SRC
-** Hide the toolbar
-   #+BEGIN_SRC emacs-lisp
-     (tool-bar-mode -1)
-   #+END_SRC
-** Hide the scroll bar
-   #+BEGIN_SRC emacs-lisp
-     (scroll-bar-mode -1)
-   #+END_SRC
-** Change ~yes or no~ prompts to ~y or n~
-   #+BEGIN_SRC emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
-** Bind ~F5~ key to ~revert-buffer~
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "<f5>") 'revert-buffer)
-   #+END_SRC
-** Enable line numbers for various modes
-   #+BEGIN_SRC emacs-lisp
-     ;; python-mode
-     (add-hook 'python-mode-hook 'display-line-numbers)
-
-     ;; emacs-lisp mode
-     (add-hook 'emacs-lisp-mode-hook 'display-line-numbers)
-   #+END_SRC
-** Wrap long lines
-   Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
-   #+BEGIN_SRC emacs-lisp
-     (global-visual-line-mode t)
-   #+END_SRC
-** Use ~ibuffer~ for buffer list
-   As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-x C-b") 'ibuffer)
-     (setq ibuffer-saved-filter-groups
-	   (quote (("default"
-		    ("dired" (mode . dired-mode))
-		    ("org" (name . "^.*org$"))
-		    ("web" (or (mode . web-mode)
-			       (mode . js2-mode)))
-		    ("shell" (or (mode . eshell-mode)
-				 (mode . shell-mode)))
-		    ("programming" (or (mode . python-mode)
-				       (mode . lisp-mode)
-				       (mode . csharp-mode)
-				       (mode . js2-mode)))
-		    ("doc-view" (mode . doc-view-mode))
-		    ("magit" (name . "^magit[:-].*"))
-		    ("latex" (or (mode . latex-mode)
-				 (mode . bibtex-mode)))
-		    ("emacs" (or (name . "^\\*scratch\\*$")
-				 (name . "^\\*Messages\\*$")))
-		    ("helm" (mode . helm-major-mode))
-		    ("powershell" (mode . powershell-mode))
-		    ("ledger" (mode . ledger-mode))
-		    ("pdf" (mode . pdf-view-mode))))))
-     (add-hook 'ibuffer-mode-hook
-	       (lambda ()
-		 (ibuffer-auto-mode 1)
-		 (ibuffer-switch-to-saved-filter-groups "default")))
-
-     ;; Don't show filter groups if there are no buffers in that group
-     (setq ibuffer-show-empty-filter-groups nil)
-   #+END_SRC
-** Replace highlighted text
-   From [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Replacing-highlighted-text.html][Emacs manual]]:
-   #+BEGIN_SRC emacs-lisp
-     (delete-selection-mode 1)
-   #+END_SRC
-** Save contents of clipboard before killing text
-   From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clipboard/cpsbbmb/][Reddit comment]]:
-   #+BEGIN_SRC emacs-lisp
-     (setq save-interprogram-paste-before-kill t)
-   #+END_SRC
-** Open GTD view
-*** Setup ~org-capture~
-    #+BEGIN_SRC emacs-lisp
-      (setq org-default-notes-file "~/org/notes.org")
-      (global-set-key (kbd "C-c c") 'org-capture)
-    #+END_SRC
-*** Setup ~org-capture-templates~
-    #+BEGIN_SRC emacs-lisp
-      (setq org-capture-templates
-	    '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Tasks") "* TODO %i%?")
-	      ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?" :empty-lines 1)
-	      ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
-	      ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")))
-    #+END_SRC
-*** Setup ~org-refile-targets~
-    #+BEGIN_SRC emacs-lisp
-      (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
-				 ("~/org/gtd/some-day.org" :level . 1)
-				 ("~/org/gtd/tickler.org" :maxlevel . 2)
-				 ("~/org/org/blogging.org" :level . 1)
-				 ("~/org/bibliography/reading-list.org" :maxlevel  . 2)))
-    #+END_SRC
-   As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'org-agenda-mode-hook 'hl-line-mode)
-
-     (defun gtd()
-       (interactive)
-       (progn
-         (find-file "~/org/gtd/gtd.org")
-         (org-agenda-list)))
-
-     (global-set-key (kbd "C-c g") 'gtd)
-   #+END_SRC
-** Remove scratch message
-   #+BEGIN_SRC emacs-lisp
-     (setq initial-scratch-message "")
-   #+END_SRC
-** Run shell commands interactively when under Cygwin shell
-   As found on [[https://emacs.stackexchange.com/a/10974/14110][StackExchange]]:
-   #+BEGIN_SRC emacs-lisp
-     (when (eq system-type 'cygwin)
-       (setq shell-file-name "bash")
-       (setq shell-command-switch "-ic"))
-   #+END_SRC
-** ~dired~ tweaks
-*** Set ~dired-dwim-target~
-    #+BEGIN_SRC emacs-lisp
-      (setq dired-dwim-target t)
-    #+END_SRC
-*** Human readable file sizes
-    From [[http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/][Pragmatic Emacs]].
-    #+BEGIN_SRC emacs-lisp
-      (setq dired-listing-switches "-alh")
-    #+END_SRC
-** End sentences with single space
-   #+BEGIN_SRC emacs-lisp
-     (setq sentence-end-double-space nil)
-   #+END_SRC
-** Display date and time in mode line
-   #+BEGIN_SRC emacs-lisp
-     (setq display-time-day-and-date t
-           display-time-24hr-format t)
-     (display-time-mode 1)
-   #+END_SRC
-** Turn off the error bell
-   #+BEGIN_SRC emacs-lisp
-     (setq ring-bell-function 'ignore)
-   #+END_SRC
-** Delete trailing whitespace on save
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'before-save-hook 'delete-trailing-whitespace)
-   #+END_SRC
-** Expand region around the cursor semantically
-   #+BEGIN_SRC emacs-lisp
-     (use-package expand-region
-       :ensure t
-       :bind ("C-=" . er/expand-region))
-   #+END_SRC
-** Install ~org-bullets~
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-bullets
-       :ensure t
-       :config
-       (setq org-bullets-bullet-list '("∙"))
-       (add-hook 'org-mode-hook 'org-bullets-mode))
-   #+END_SRC
-** Unbind <C-z>
-   #+BEGIN_SRC emacs-lisp
-     (global-unset-key (kbd "C-z"))
-   #+END_SRC
-** Change start day of the week
-   #+begin_src emacs-lisp
-     (setq calendar-week-start-day 1)
-   #+end_src
-* Agenda
-  #+BEGIN_SRC emacs-lisp
-    (setq org-agenda-files
-	  (quote ("~/org/gtd/inbox.org"
-		  "~/org/gtd/gtd.org"
-		  "~/org/gtd/some-day.org"
-		  "~/org/gtd/tickler.org"
-		  "~/org/bibliography/reading-list.org"
-		  "~/org/blogging.org")))
-    ;; (setq org-agenda-repeating-timestamp-show-all nil)
-    (setq org-agenda-skip-deadline-if-done t)
-    (setq org-agenda-skip-scheduled-if-done t)
-  #+END_SRC
-* Install ~smart-mode-line~
-  For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
-  #+BEGIN_SRC emacs-lisp
-    (use-package smart-mode-line
-      :ensure t
-      :init
-      (setq sml/no-confirm-load-theme t)
-      (setq sml/theme 'respectful)
-      (sml/setup)
-      :config
-      (use-package nyan-mode
-	:ensure t
-	:when (display-graphic-p)
-	:config
-	(nyan-mode 1)))
-  #+END_SRC
 * Themes
   Use ~sanityinc-tomorrow-night~ when not running from console; otherwise fallback to ~wombat~.
   #+BEGIN_SRC emacs-lisp
-    (cond ((display-graphic-p)
-	   (use-package color-theme-sanityinc-tomorrow
-	     :ensure t
-	     :config (load-theme 'sanityinc-tomorrow-night t)))
-	  (t (load-theme 'wombat t)))
+    (use-package color-theme-sanityinc-tomorrow
+      :ensure t
+      :when (display-graphic-p)
+      :config (load-theme 'sanityinc-tomorrow-night t))
   #+END_SRC
 ** Use ~circadian~ to switch between dark and light themes
    #+begin_src emacs-lisp
@@ -264,124 +19,26 @@
 		     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
-* Org mode
-  #+begin_src emacs-lisp
-    (use-package org
-      :ensure org-plus-contrib
-      :config (progn
-		(require 'ox-extra)
-		(ox-extras-activate '(ignore-headlines))))
-  #+end_src
-* Load ~org-babel~ languages
+* Install ~AUCTeX~
   #+BEGIN_SRC emacs-lisp
-    (org-babel-do-load-languages
-     (quote org-babel-load-languages)
-     (quote ((emacs-lisp . t)
-	     (dot . t)
-	     (python . t)
-	     (gnuplot . t)
-	     (shell . t)
-	     (org . t)
-	     (latex . t))))
-
+    ;; As described in https://github.com/jwiegley/use-package/issues/379
+    ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
+    (use-package tex-mode
+      :defer t
+      :ensure auctex
+      :init (progn
+	      (setq TeX-auto-save t)
+	      (setq TeX-parse-self t)
+	      (setq-default TeX-master nil)
+	      (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+		    TeX-source-correlate-start-server t)
+	      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+	      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+	      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+	      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+	      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+	      (setq reftex-plug-into-AUCTeX t)))
   #+END_SRC
-* Git integration
-** Install ~magit~
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :ensure t
-       :defer t
-       :bind (("C-x g" . magit-status)))
-   #+END_SRC
-** Install ~git-timemachine~
-   #+BEGIN_SRC emacs-lisp
-     (use-package git-timemachine
-       :ensure t
-       :defer t)
-   #+END_SRC
-** Install ~git-gutter~
-   #+BEGIN_SRC emacs-lisp
-     (use-package git-gutter
-       :ensure t
-       :defer t
-       :config
-       (global-git-gutter-mode t)
-       :diminish git-gutter-mode)
-   #+END_SRC
-* Install ~helm~
-  #+BEGIN_SRC emacs-lisp
-    ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
-    ;; other various sources
-    (use-package helm
-      :ensure t
-      :diminish helm-mode
-      :init
-      (progn
-	(require 'helm-config)
-	(setq helm-candidate-number-limit 100)
-	;; From https://gist.github.com/antifuchs/9238468
-	(setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
-	      helm-input-idle-delay 0.01  ; this actually updates things
-					    ; reeeelatively quickly.
-	      helm-yas-display-key-on-candidate t
-	      helm-quick-update t
-	      helm-M-x-requires-pattern nil
-	      helm-ff-skip-boring-files t)
-	;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
-	(setq helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
-	      helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
-	      helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-	      helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
-	(helm-mode)
-	(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-	(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
-      :bind (("C-c h" . helm-mini)
-	     ("C-h a" . helm-apropos)
-	     ("C-x b" . helm-buffers-list)
-	     ("M-y" . helm-show-kill-ring)
-	     ("M-x" . helm-M-x)
-	     ("C-x c o" . helm-occur)
-	     ("C-x c y" . helm-yas-complete)
-	     ("C-x c Y" . helm-yas-create-snippet-on-region)
-	     ("C-x c SPC" . helm-all-mark-rings)
-	     ("C-x C-f" . helm-find-files)))
-  #+END_SRC
-* Install ~helm-swoop~
-  Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha Chua]].
-  #+BEGIN_SRC emacs-lisp
-    (use-package helm-swoop
-      :ensure t
-      :bind
-      (("C-S-s" . helm-swoop)
-       ("M-i" .  helm-swoop)
-       ("M-s s" . helm-swoop)
-       ("M-s M-s" . helm-swoop)
-       ("M-I" . helm-swoop-back-to-last-point)
-       ("C-c M-i" . helm-multi-swoop)
-       ("C-c M-I" . helm-multi-swoop-all)))
-  #+END_SRC
-* Install ~company~
-  From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
-  #+BEGIN_SRC emacs-lisp
-    (use-package company
-      :ensure t
-      :defer 1
-      :config
-      (global-company-mode)
-      (setq-default
-       company-idle-delay .2
-       company-minimum-prefix-length 1
-       company-require-match nil
-       company-tooltip-align-annotations t))
-  #+END_SRC
-** Install ~company-quickhelp~
-   #+begin_src emacs-lisp
-     (use-package company-quickhelp
-       :ensure t
-       :defer t
-       :init (with-eval-after-load 'company
-	       (company-quickhelp-mode)))
-   #+end_src
 ** Install ~company-auctex~
    #+begin_src emacs-lisp
      (use-package company-auctex
@@ -414,179 +71,10 @@
 						     company-latex-commands
 						     company-capf))))))
    #+end_src
-* Python development
-  ~lsp~ setup is from [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][Configuring Emacs, lsp-mode and the python language server]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
-** Install ~pyvenv~
-   #+BEGIN_SRC emacs-lisp
-     (use-package pyvenv
-       :defer t
-       :ensure t
-       :config (progn
-		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
-   #+END_SRC
-** Install ~lsp~
-   #+BEGIN_SRC emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (progn
-	 (use-package lsp-mode
-	   :disabled
-	   :ensure t)
-
-	 (use-package lsp-ui
-	   :disabled
-	   :ensure t
-	   :config
-	   (setq lsp-ui-doc-max-height 20
-		 lsp-ui-doc-max-width 50
-		 lsp-ui-sideline-ignore-duplicate t
-		 lsp-ui-peek-always-show t))
-
-	 (use-package company-lsp
-	   :disabled
-	   :ensure t
-	   :commands (company-lsp))
-
-	 (use-package lsp-python-ms
-	   :disabled
-	   :ensure t
-	   :config
-	   (add-hook 'python-mode-hook #'lsp))))
-   #+END_SRC
-** Install ~elpy~
-   #+begin_src emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (progn
-	 (use-package elpy
-	   :ensure t
-	   :defer t
-	   :commands (elpy-mode)
-	   :config (progn
-		     (defun switch-to-jedi-backend ()
-		       (interactive)
-		       (setq elpy-rpc-backend "jedi"))
-		     (defun switch-to-rope-backend ()
-		       (interactive)
-		       (setq elpy-rpc-backend "rope"))
-		     (setq elpy-rpc-backend "jedi")
-		     (elpy-enable)))
-	 (add-hook 'python-mode-hook #'elpy-mode)))
-   #+end_src
-** Install ~flycheck~
-   #+BEGIN_SRC emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (use-package flycheck
-	 :ensure t
-	 :defer t
-	 :init (global-flycheck-mode)))
-   #+END_SRC
-** Install ~py-yapf~
-   #+begin_src emacs-lisp
-   (unless (eq system-type 'cygwin )
-       (use-package py-yapf
-	 :ensure t
-	 :defer t
-	 :commands (py-yapf-buffer py-yapf-enable-on-save)))
-   #+end_src
-** Install ~RealGUD~
-   [[https://github.com/realgud/realgud/][GitHub repository]].
-   #+BEGIN_SRC emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (use-package realgud
-	 :defer t
-	 :ensure t))
-   #+END_SRC
-** Install ~smartparens~
-   #+BEGIN_SRC emacs-lisp
-     (use-package smartparens
-       :ensure t
-       :defer t
-       :diminish smartparens-mode
-       :config
-       (add-hook 'prog-mode-hook 'smartparens-mode))
-   #+END_SRC
-** Install ~rainbow-delimiters~ for improved readability
-   #+BEGIN_SRC emacs-lisp
-     (use-package rainbow-delimiters
-       :ensure t
-       :defer t
-       :config
-       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-   #+END_SRC
-** Expand parentheses
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'prog-mode-hook 'electric-pair-mode)
-   #+END_SRC
-** Install ~company-jedi~
-   #+begin_src emacs-lisp
-     (unless (eq system-type 'cygwin)
-       (use-package company-jedi
-	 :ensure t
-	 :defer t
-	 :init
-	 (with-eval-after-load 'company
-	   (add-hook 'python-mode-hook
-		     (lambda ()
-		       (setq-local company-backends
-				   (append '(company-jedi) company-backends)))))))
-
-   #+end_src
-* Install ~ace-window~
-  From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
-  #+BEGIN_SRC emacs-lisp
-    (use-package ace-window
-      :ensure t
-      :defer t
-      :init
-      (progn
-	(global-set-key (kbd "C-x o") 'ace-window)
-	(custom-set-faces
-	 '(aw-leading-char-face
-	   ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
-  #+END_SRC
-* Markdown related packages
-** Install ~markdown-mode~
-   As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
-   #+BEGIN_SRC emacs-lisp
-     (use-package markdown-mode
-       :ensure t
-       :defer t
-       :commands (markdown-mode gfm-mode)
-       :mode (("README\\.md\\'" . gfm-mode)
-	      ("\\.md\\'" . markdown-mode)
-	      ("\\.markdown\\'" . markdown-mode))
-       :init (setq markdown-command "multimarkdown"))
-   #+END_SRC
-** Install ~gh-md~
-   #+BEGIN_SRC emacs-lisp
-     (use-package gh-md
-       :ensure t
-       :defer t)
-   #+END_SRC
-* Install ~AUCTeX~
-  #+BEGIN_SRC emacs-lisp
-    ;; As described in https://github.com/jwiegley/use-package/issues/379
-    ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
-    (use-package tex-mode
-      :defer t
-      :ensure auctex
-      :init (progn
-	      (setq TeX-auto-save t)
-	      (setq TeX-parse-self t)
-	      (setq-default TeX-master nil)
-	      (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-		    TeX-source-correlate-start-server t)
-	      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-	      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-	      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-	      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-	      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-	      (setq reftex-plug-into-AUCTeX t)))
-  #+END_SRC
 * Install ~org-ref~
   As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
   #+BEGIN_SRC emacs-lisp
     (use-package org-ref
-      :defer t
       :ensure t
       :init(progn
 	     (defun my/org-ref-open-pdf-at-point ()
@@ -615,13 +103,6 @@
 		     "pdflatex -interaction nonstopmode -output-directory %o %f"
 		     "pdflatex -interaction nonstopmode -output-directory %o %f"))
 	     (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)))
-  #+END_SRC
-* Install ~undo-tree~
-  #+BEGIN_SRC emacs-lisp
-    (use-package undo-tree
-      :ensure t
-      :defer t
-      :init (global-undo-tree-mode))
   #+END_SRC
 * Install ~graphviz-dot-mode~
   #+BEGIN_SRC emacs-lisp
@@ -690,31 +171,6 @@
       (use-package org-pdfview
 	:ensure t))
   #+END_SRC
-* Install ~csv-mode~
-  #+BEGIN_SRC emacs-lisp
-    (use-package csv-mode
-      :ensure t
-      :defer t
-      :init
-      (add-hook 'csv-mode-hook 'display-line-numbers))
-  #+END_SRC
-* Install ~projectile~
-  #+BEGIN_SRC emacs-lisp
-    (unless (eq system-type 'cygwin)
-      (use-package projectile
-	:ensure t
-	:defer t
-	:bind-keymap
-	("C-c p" . projectile-command-map)
-	:init
-	(add-hook 'magit-mode-hook 'projectile-mode)
-	:config
-	(progn
-	  (setq projectile-completion-system 'helm)
-	  (use-package helm-projectile
-	    :ensure t
-	    :config (helm-projectile-on)))))
-  #+END_SRC
 * Install ~neotree~
   #+BEGIN_SRC emacs-lisp
     (use-package neotree
@@ -731,17 +187,6 @@
       :ensure t
       :defer t)
   #+END_SRC
-* Install ~ein~
-** Install [[https://github.com/tkf/emacs-ipython-notebook#requirements][prerequisites]]
-   #+BEGIN_SRC shell
-     sudo apt-get install ipython ipython3 jupyter
-   #+END_SRC
-** Install ~ein~ package
-   #+BEGIN_SRC emacs-lisp
-     (use-package ein
-       :ensure t
-       :defer t)
-   #+END_SRC
 * Install ~ledger-mode~
 ** Prerequisites
    Requires ~ledger~ to be installed:
@@ -757,13 +202,6 @@
 		 (setq ledger-reconcile-default-commodity "RON")
 		 (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")))
    #+END_SRC
-* Install ~which-key~
-  #+BEGIN_SRC emacs-lisp
-    (use-package which-key
-      :ensure t
-      :config
-      (which-key-mode))
-  #+END_SRC
 * Read Web feeds using ~elfeed~
   Based on [[https://cestlaz.github.io/posts/using-emacs-29-elfeed/][blog post of Mike Zamansky]].
   #+BEGIN_SRC emacs-lisp
@@ -808,23 +246,6 @@
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
   #+END_SRC
-* Install ~try~ package
-  #+BEGIN_SRC emacs-lisp
-  (use-package try
-    :ensure t)
-  #+END_SRC
-* Install ~eldoc~
-  #+begin_src emacs-lisp
-    (use-package eldoc
-      :ensure t
-      :defer t
-      :hook ((emacs-lisp-mode . eldoc-mode)
-	     (eval-expression-minibuffer-setup . eldoc-mode)
-	     (lisp-mode-interactive-mode . eldoc-mode)
-	     (python-mode . eldoc-mode)
-	     (eshell-mode . eldoc-mode)
-	     (org-mode . eldoc-mode)))
-  #+end_src
 * Install ~org-re-reveal~
   #+BEGIN_SRC emacs-lisp
     (use-package org-re-reveal

@@ -1,0 +1,127 @@
+* Python development
+  ~lsp~ setup is from [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][Configuring Emacs, lsp-mode and the python language server]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
+** Install ~pyvenv~
+   #+BEGIN_SRC emacs-lisp
+     (use-package pyvenv
+       :defer t
+       :ensure t
+       :config (progn
+		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
+   #+END_SRC
+** Install ~lsp~
+   #+BEGIN_SRC emacs-lisp
+     (unless (eq system-type 'cygwin )
+       (progn
+	 (use-package lsp-mode
+	   :disabled
+	   :ensure t)
+
+	 (use-package lsp-ui
+	   :disabled
+	   :ensure t
+	   :config
+	   (setq lsp-ui-doc-max-height 20
+		 lsp-ui-doc-max-width 50
+		 lsp-ui-sideline-ignore-duplicate t
+		 lsp-ui-peek-always-show t))
+
+	 (use-package company-lsp
+	   :disabled
+	   :ensure t
+	   :commands (company-lsp))
+
+	 (use-package lsp-python-ms
+	   :disabled
+	   :ensure t
+	   :config
+	   (add-hook 'python-mode-hook #'lsp))))
+   #+END_SRC
+** Install ~elpy~
+   #+begin_src emacs-lisp
+     (unless (eq system-type 'cygwin )
+       (progn
+	 (use-package elpy
+	   :ensure t
+	   :defer t
+	   :commands (elpy-mode)
+	   :config (progn
+		     (defun switch-to-jedi-backend ()
+		       (interactive)
+		       (setq elpy-rpc-backend "jedi"))
+		     (defun switch-to-rope-backend ()
+		       (interactive)
+		       (setq elpy-rpc-backend "rope"))
+		     (setq elpy-rpc-backend "jedi")
+		     (elpy-enable)))
+	 (add-hook 'python-mode-hook #'elpy-mode)))
+   #+end_src
+** Install ~flycheck~
+   #+BEGIN_SRC emacs-lisp
+     (unless (eq system-type 'cygwin )
+       (use-package flycheck
+	 :ensure t
+	 :defer t
+	 :init (global-flycheck-mode)))
+   #+END_SRC
+** Install ~py-yapf~
+   #+begin_src emacs-lisp
+   (unless (eq system-type 'cygwin )
+       (use-package py-yapf
+	 :ensure t
+	 :defer t
+	 :commands (py-yapf-buffer py-yapf-enable-on-save)))
+   #+end_src
+** Install ~RealGUD~
+   [[https://github.com/realgud/realgud/][GitHub repository]].
+   #+BEGIN_SRC emacs-lisp
+     (unless (eq system-type 'cygwin )
+       (use-package realgud
+	 :defer t
+	 :ensure t))
+   #+END_SRC
+** Install ~smartparens~
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :ensure t
+       :defer t
+       :diminish smartparens-mode
+       :config
+       (add-hook 'prog-mode-hook 'smartparens-mode))
+   #+END_SRC
+** Install ~rainbow-delimiters~ for improved readability
+   #+BEGIN_SRC emacs-lisp
+     (use-package rainbow-delimiters
+       :ensure t
+       :defer t
+       :config
+       (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+   #+END_SRC
+** Expand parentheses
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'prog-mode-hook 'electric-pair-mode)
+   #+END_SRC
+** Install ~company-jedi~
+   #+begin_src emacs-lisp
+     (unless (eq system-type 'cygwin)
+       (use-package company-jedi
+	 :ensure t
+	 :defer t
+	 :init
+	 (with-eval-after-load 'company
+	   (add-hook 'python-mode-hook
+		     (lambda ()
+		       (setq-local company-backends
+				   (append '(company-jedi) company-backends)))))))
+
+   #+end_src
+* Install ~ein~
+** Install [[https://github.com/tkf/emacs-ipython-notebook#requirements][prerequisites]]
+   #+BEGIN_SRC shell
+     sudo apt-get install ipython ipython3 jupyter
+   #+END_SRC
+** Install ~ein~ package
+   #+BEGIN_SRC emacs-lisp
+     (use-package ein
+       :ensure t
+       :defer t)
+   #+END_SRC
