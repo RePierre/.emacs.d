@@ -53,7 +53,8 @@
 		       (setq elpy-rpc-backend "rope"))
 		     (setq elpy-rpc-backend "jedi")
 		     (elpy-enable)))
-	 (add-hook 'python-mode-hook #'elpy-mode)))
+	 (add-hook 'python-mode-hook #'elpy-mode)
+	 (add-hook 'python-mode-hook 'py-yapf-enable-on-save)))
    #+end_src
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
