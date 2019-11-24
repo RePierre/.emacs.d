@@ -87,3 +87,18 @@
 	      (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
 	      (require 'org-ref)))
    #+end_src
+** Automatically export to pdf
+   #+begin_src emacs-lisp
+     (defun export-to-pdf-async()
+       (when (equal major-mode 'org-mode)
+	 (org-latex-export-to-pdf t)))
+
+     (defun toggle-export-to-pdf-async ()
+       (interactive)
+       (if (memq 'export-to-pdf-async after-save-hook)
+	   (progn
+	     (remove-hook 'after-save-hook 'export-to-pdf-async t)
+	     (message "Disabled automatic export to pdf for current buffer."))
+	 (add-hook 'after-save-hook 'export-to-pdf-async t t)
+	 (message "Enabled automatic export to pdf for current buffer.")))
+   #+end_src
