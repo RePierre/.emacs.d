@@ -89,9 +89,20 @@
    #+end_src
 ** Automatically export to pdf
    #+begin_src emacs-lisp
+     (defun is-beamer-presentation()
+       (save-excursion
+	 (goto-char (point-min))
+	 (search-forward-regexp "#\\+latex_class:[[:blank:]]+beamer")))
+
      (defun export-to-pdf-async()
        (when (equal major-mode 'org-mode)
-	 (org-latex-export-to-pdf t)))
+	 (if (is-beamer-presentation)
+	     (progn
+	       (message "Current buffer is beamer presentation. Automatic export will use org-beamer-export-to-pdf.")
+	       (org-beamer-export-to-pdf t))
+	   (progn
+	     (message "Automatic export will use org-latex-export-to-pdf.")
+	     (org-latex-export-to-pdf t)))))
 
      (defun toggle-export-to-pdf-async ()
        (interactive)
