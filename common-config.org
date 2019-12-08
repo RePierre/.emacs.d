@@ -359,15 +359,18 @@
 	     (org-mode . eldoc-mode)))
   #+end_src
 * Install ~projectile~
+  When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
       :ensure t
       :defer t
-      :when (not (eq system-type 'cygwin))
       :bind-keymap
       ("C-c p" . projectile-command-map)
       :init
-      (add-hook 'magit-mode-hook 'projectile-mode)
+      (progn
+	(add-hook 'magit-mode-hook 'projectile-mode)
+	(when (eq system-type 'cygwin)
+	    (setq projectile-indexing-method 'native)))
       :config
       (progn
 	(setq projectile-completion-system 'helm)
