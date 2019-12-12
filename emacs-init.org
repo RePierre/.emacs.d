@@ -199,21 +199,18 @@
 
     (use-package elfeed
       :ensure t
-      :defer t
       :bind (:map elfeed-search-mode-map
 		  ("q" . elfeed-save-db-and-bury)
 		  ("A" . elfeed-mark-all-as-read)))
 
     (use-package elfeed-goodies
       :ensure t
-      :defer t
       :config
       (elfeed-goodies/setup)
       (setq elfeed-goodies/entry-pane-position :bottom))
 
     (use-package elfeed-org
       :ensure t
-      :defer t
       :config
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
