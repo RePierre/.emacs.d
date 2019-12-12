@@ -168,6 +168,11 @@
        :config (progn
 		 (setq ledger-reconcile-default-commodity "RON")
 		 (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")))
+
+     (use-package flycheck-ledger
+       :ensure t
+       :defer t
+       :hook (ledger-mode . flycheck-mode))
    #+END_SRC
 * Read Web feeds using ~elfeed~
   Based on [[https://cestlaz.github.io/posts/using-emacs-29-elfeed/][blog post of Mike Zamansky]].
