@@ -397,3 +397,11 @@
        :ensure t
        :defer t)
    #+END_SRC
+* Install =auto-package-update=
+  #+begin_src emacs-lisp
+    (use-package auto-package-update
+      :ensure t
+      :config
+      (setq auto-package-update-prompt-before-update t)
+      (auto-package-update-maybe))
+  #+end_src
