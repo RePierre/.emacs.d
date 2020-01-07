@@ -10,7 +10,10 @@
 	   '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Tasks") "* TODO %i%?")
 	     ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?" :empty-lines 1)
 	     ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
-	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")))
+	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
+	     ("w" "Work related templates")
+	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/work/performance-review.org") "* %?")
+	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/work/technical-remarks.org" "Technical Feedback") "* %?")))
    #+END_SRC
 ** Setup ~org-refile-targets~
    #+BEGIN_SRC emacs-lisp
