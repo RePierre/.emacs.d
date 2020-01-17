@@ -1,55 +1,3 @@
-* Open GTD view
-** Setup ~org-capture~
-   #+BEGIN_SRC emacs-lisp
-     (setq org-default-notes-file "~/org/notes.org")
-     (global-set-key (kbd "C-c c") 'org-capture)
-   #+END_SRC
-** Setup ~org-capture-templates~
-   #+BEGIN_SRC emacs-lisp
-     (setq org-capture-templates
-	   '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Tasks") "* TODO %i%?")
-	     ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?")
-	     ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
-	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
-	     ("w" "Work related items")
-	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/work/performance-review.org") "* %?")
-	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/work/technical-remarks.org" "Technical Feedback") "* %?")
-	     ("wt" "Todo item" entry (file+headline "~/org/gtd/gtd.org" "Work") "* TODO %? %(org-set-tags \"WORK\")")
-	     ("wr" "Retrospective remark" entry (file+headline "~/org/work/web-agenda/cemetery-web-agenda.org" "Upcomming retrospective") "* %? \n %U")))
-   #+END_SRC
-** Setup ~org-refile-targets~
-   #+BEGIN_SRC emacs-lisp
-     (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
-				("~/org/gtd/some-day.org" :level . 1)
-				("~/org/gtd/tickler.org" :maxlevel . 2)
-				("~/org/blogging.org" :level . 1)
-				("~/org/bibliography/reading-list.org" :maxlevel  . 2)))
-   #+END_SRC
-  As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'org-agenda-mode-hook 'hl-line-mode)
-
-    (defun gtd()
-      (interactive)
-      (progn
-        (find-file "~/org/gtd/gtd.org")
-        (org-agenda-list)))
-
-    (global-set-key (kbd "C-c g") 'gtd)
-  #+END_SRC
-* Agenda
-  #+BEGIN_SRC emacs-lisp
-    (setq org-agenda-files
-	  (quote ("~/org/gtd/inbox.org"
-		  "~/org/gtd/gtd.org"
-		  "~/org/gtd/some-day.org"
-		  "~/org/gtd/tickler.org"
-		  "~/org/bibliography/reading-list.org"
-		  "~/org/blogging.org")))
-    ;; (setq org-agenda-repeating-timestamp-show-all nil)
-    (setq org-agenda-skip-deadline-if-done t)
-    (setq org-agenda-skip-scheduled-if-done t)
-  #+END_SRC
 * Org mode
   #+begin_src emacs-lisp
     (use-package org
@@ -92,6 +40,11 @@
 	      (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
 	      (require 'org-ref)))
    #+end_src
+** Setup =org-cliplink=
+   #+begin_src emacs-lisp
+     (use-package org-cliplink
+       :ensure t)
+   #+end_src
 ** Automatically export to pdf
    #+begin_src emacs-lisp
      (defun is-beamer-presentation()
@@ -118,3 +71,72 @@
 	 (add-hook 'after-save-hook 'export-to-pdf-async t t)
 	 (message "Enabled automatic export to pdf for current buffer.")))
    #+end_src
+** Automatically export to html
+   #+begin_src emacs-lisp
+     (defun rp/export-to-html-async()
+       (when (equal major-mode 'org-mode)
+	 (org-html-export-to-html t)))
+
+     (defun rp/toggle-export-to-html-async()
+       (interactive)
+       (if (memq 'rp/export-to-html-async after-save-hook)
+	   (progn
+	     (remove-hook 'after-save-hook 'rp/export-to-html-async t)
+	     (message "Disabled automatic export to HTML for current buffer."))
+	 (progn
+	   (add-hook 'after-save-hook 'rp/export-to-html-async t t)
+	   (message "Enabled automatic export to HTML for current buffer."))))
+   #+end_src
+* Open GTD view
+** Setup ~org-capture~
+   #+BEGIN_SRC emacs-lisp
+     (setq org-default-notes-file "~/org/notes.org")
+     (global-set-key (kbd "C-c c") 'org-capture)
+   #+END_SRC
+** Setup ~org-capture-templates~
+   #+BEGIN_SRC emacs-lisp
+     (setq org-capture-templates
+	   '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Tasks") "* TODO %i%?")
+	     ("k" "Org-cliplink capture [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Tasks") "* TODO %(org-cliplink-capture)")
+	     ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?")
+	     ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
+	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
+	     ("w" "Work related items")
+	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/work/performance-review.org") "* %?")
+	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/work/technical-remarks.org" "Technical Feedback") "* %?")
+	     ("wt" "Todo item" entry (file+headline "~/org/gtd/gtd.org" "Work") "* TODO %? %(org-set-tags \"WORK\")")
+	     ("wr" "Retrospective remark" entry (file+headline "~/org/work/web-agenda/cemetery-web-agenda.org" "Upcomming retrospective") "* %? \n %U")))
+   #+END_SRC
+** Setup ~org-refile-targets~
+   #+BEGIN_SRC emacs-lisp
+     (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
+				("~/org/gtd/some-day.org" :level . 1)
+				("~/org/gtd/tickler.org" :maxlevel . 2)
+				("~/org/blogging.org" :level . 1)
+				("~/org/bibliography/reading-list.org" :maxlevel  . 2)))
+   #+END_SRC
+  As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+
+    (defun gtd()
+      (interactive)
+      (progn
+        (find-file "~/org/gtd/gtd.org")
+        (org-agenda-list)))
+
+    (global-set-key (kbd "C-c g") 'gtd)
+  #+END_SRC
+* Agenda
+  #+BEGIN_SRC emacs-lisp
+    (setq org-agenda-files
+	  (quote ("~/org/gtd/inbox.org"
+		  "~/org/gtd/gtd.org"
+		  "~/org/gtd/some-day.org"
+		  "~/org/gtd/tickler.org"
+		  "~/org/bibliography/reading-list.org"
+		  "~/org/blogging.org")))
+    ;; (setq org-agenda-repeating-timestamp-show-all nil)
+    (setq org-agenda-skip-deadline-if-done t)
+    (setq org-agenda-skip-scheduled-if-done t)
+  #+END_SRC
