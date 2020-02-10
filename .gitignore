@@ -7,11 +7,10 @@
 # Ignore auto-save-list folder
 auto-save-list
 
-# Ignore elpa folder
-elpa
-
 # Ignore individual files
 emacs-init.el
+common-config.el
+org-config.el
 /*~
 /ac-comphist.dat
 
@@ -25,4 +24,3 @@ emacs-init.el
 /.sx/*
 .org-id-locations
 projectile-bookmarks.eld
-bookmarks
