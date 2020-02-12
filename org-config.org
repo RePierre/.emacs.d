@@ -102,10 +102,11 @@
 	     ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
 	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
 	     ("w" "Work related items")
-	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/work/performance-review.org") "* %?")
-	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/work/technical-remarks.org" "Technical Feedback") "* %?")
-	     ("wt" "Todo item" entry (file+headline "~/org/gtd/gtd.org" "Work") "* TODO %? %(org-set-tags \"WORK\")")
-	     ("wr" "Retrospective remark" entry (file+headline "~/org/work/web-agenda/cemetery-web-agenda.org" "Upcomming retrospective") "* %? \n %U")))
+	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/gtd/work.org") "* %?")
+	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/gtd/work.org" "Technical feedback") "* %?")
+	     ("wt" "Todo item" entry (file+headline "~/org/gtd/work.org" "Work") "* TODO %? %(org-set-tags \"WORK\")")
+	     ("wm" "Meeting" entry (file+headline "~/org/gtd/work.org" "Outlook") "* APPT %? %(org-set-tags \"WORK\")")
+	     ("wr" "Retrospective remark" entry (file+headline "~/org/gtd/work.org" "Upcomming retrospective") "* TODO %? \n %U")))
    #+END_SRC
 ** Setup ~org-refile-targets~
    #+BEGIN_SRC emacs-lisp
@@ -113,6 +114,7 @@
 				("~/org/gtd/some-day.org" :level . 1)
 				("~/org/gtd/tickler.org" :maxlevel . 2)
 				("~/org/blogging.org" :level . 1)
+				("~/org/gtd/work.org" :level . 1)
 				("~/org/bibliography/reading-list.org" :maxlevel  . 2)))
    #+END_SRC
   As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
@@ -132,6 +134,8 @@
     (setq org-agenda-files
 	  (quote ("~/org/gtd/inbox.org"
 		  "~/org/gtd/gtd.org"
+		  "~/org/gtd/clock-report.org"
+		  "~/org/gtd/work.org"
 		  "~/org/gtd/some-day.org"
 		  "~/org/gtd/tickler.org"
 		  "~/org/bibliography/reading-list.org"
