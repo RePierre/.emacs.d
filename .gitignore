@@ -8,11 +8,25 @@
 auto-save-list
 
 # Ignore individual files
-emacs-init.el
-common-config.el
-org-config.el
+/emacs-init.el
+/common-config.el
+/org-config.el
+/python-config.el
 /*~
 /ac-comphist.dat
+/network-security.data
+
+# Status file for auto-package-update
+/.last-package-update-day
+
+# Customizations file
+/custom.el
+
+# Forge database file
+/forge-database.sqlite
+
+# Projectile cache
+/projectile.cache
 
 # Various
 /tramp
@@ -24,3 +38,6 @@ org-config.el
 /.sx/*
 .org-id-locations
 projectile-bookmarks.eld
+/elpa/archives/*
+/request/*
+/transient/*
