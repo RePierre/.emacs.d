@@ -124,8 +124,9 @@
     (defun gtd()
       (interactive)
       (progn
-        (find-file "~/org/gtd/gtd.org")
-        (org-agenda-list)))
+	(find-file "~/org/gtd/clock-report.org")
+	(find-file "~/org/gtd/gtd.org")
+	(org-agenda-list)))
 
     (global-set-key (kbd "C-c g") 'gtd)
   #+END_SRC
@@ -134,7 +135,6 @@
     (setq org-agenda-files
 	  (quote ("~/org/gtd/inbox.org"
 		  "~/org/gtd/gtd.org"
-		  "~/org/gtd/clock-report.org"
 		  "~/org/gtd/work.org"
 		  "~/org/gtd/some-day.org"
 		  "~/org/gtd/tickler.org"
