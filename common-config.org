@@ -337,6 +337,17 @@
        :defer t
        :bind (("C-x g" . magit-status)))
    #+END_SRC
+** Install =forge=
+   #+begin_src emacs-lisp
+     (use-package forge
+       :ensure t
+       :defer t
+       :after magit)
+   #+end_src
+   For some reason, =forge= is unable to generate the token when running under Cygwin. To avoid this issue, just create a =Personal Access Token= in GitHub settings page and store it in the =~/.authinfo= file like this:
+   #+begin_example
+   machine api.github.com login <username>^forge password <personal token>
+   #+end_example
 ** Install ~git-timemachine~
    #+BEGIN_SRC emacs-lisp
      (use-package git-timemachine
