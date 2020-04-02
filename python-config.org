@@ -115,14 +115,3 @@
 				   (append '(company-jedi) company-backends)))))))
 
    #+end_src
-* Install ~ein~
-** Install [[https://github.com/tkf/emacs-ipython-notebook#requirements][prerequisites]]
-   #+BEGIN_SRC shell
-     sudo apt-get install ipython ipython3 jupyter
-   #+END_SRC
-** Install ~ein~ package
-   #+BEGIN_SRC emacs-lisp
-     (use-package ein
-       :ensure t
-       :defer t)
-   #+END_SRC
