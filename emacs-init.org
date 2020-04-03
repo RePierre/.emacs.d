@@ -231,3 +231,16 @@
       (setq auto-package-update-prompt-before-update t)
       (auto-package-update-maybe))
   #+end_src
+* Install =atomic-chrome= to edit text areas in Emacs
+  [[https://github.com/alpha22jp/atomic-chrome][Atomic chrome]] allows editing text from a text area within browser using Emacs. Since I use Firefox I [[https://github.com/GhostText/GhostText][GhostText extension]] needs to be installed in Firefox in order for this to work.
+  #+begin_src emacs-lisp
+    (use-package atomic-chrome
+      :ensure t
+      :when (display-graphic-p)
+      :config
+      (progn
+	(setq atomic-chrome-buffer-open-style 'frame
+	    atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
+						 ("reddit\\.com" . markdown-mode)))
+	(atomic-chrome-start-server)))
+  #+end_src
