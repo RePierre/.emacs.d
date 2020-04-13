@@ -5,7 +5,10 @@
       :ensure org-plus-contrib
       :config (progn
 		(require 'ox-extra)
-		(ox-extras-activate '(ignore-headlines))))
+		(ox-extras-activate '(ignore-headlines))
+
+		(require 'org-habit)
+		(add-to-list 'org-modules 'org-habit)))
   #+end_src
 ** Setup =org-ref=
    As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
