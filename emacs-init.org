@@ -131,6 +131,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package pdf-tools
       :ensure t
+      :when (display-graphic-p)
       :config
       (pdf-tools-install)
       (setq-default pdf-view-display-size 'fit-page)
