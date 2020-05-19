@@ -113,7 +113,8 @@
 	     ("wr" "Retrospective remark" entry (file+headline "~/org/gtd/work.org" "Upcomming retrospective") "* TODO %? \n %U")
 	     ("i" "Interruptions")
 	     ("iw" "Work-related interruption" entry (file+headline "~/org/gtd/work.org" "Interruptions") "* %?" :clock-in t)
-	     ("it" "Teaching-related interruption" entry (file+headline "~/org/teaching/2020/tap.org" "Orice Alte Chestiuni") "* %?" :clock-in t)))
+	     ("it" "Teaching-related interruption" entry (file+headline "~/org/teaching/2020/tap.org" "Orice Alte Chestiuni") "* %?" :clock-in t)
+	     ("ii" "Iaşi AI related interruption" entry (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni") "* %?" :clock-in t)))
    #+END_SRC
 ** Setup ~org-refile-targets~
    #+BEGIN_SRC emacs-lisp
