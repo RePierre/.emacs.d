@@ -187,12 +187,6 @@
    #+begin_src emacs-lisp
      (setq confirm-kill-emacs 'y-or-n-p)
    #+end_src
-** Use =Firefox= as the default browser when running in Cygwin
-   #+begin_src emacs-lisp
-     (when (eq system-type 'cygwin)
-       (setq browse-url-browser-function (lambda (URL &rest ARGS)
-					   (shell-command (concat "cygstart firefox " URL)))))
-   #+end_src
 * Install ~smart-mode-line~
   For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
   #+BEGIN_SRC emacs-lisp

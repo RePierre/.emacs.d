@@ -245,3 +245,29 @@
 						 ("reddit\\.com" . markdown-mode)))
 	(atomic-chrome-start-server)))
   #+end_src
+* Set the default browser
+** Use =Firefox= as the default browser when running in Cygwin
+   #+begin_src emacs-lisp
+     (when (eq system-type 'cygwin)
+       (setq browse-url-browser-function (lambda (URL &rest ARGS)
+					   (shell-command (concat "cygstart firefox " URL)))))
+   #+end_src
+** Also use =Firefox= as the default browser when running in =Windows Subsystem for Linux=
+   In =WSL= the variable =system-type= is set to =gnu/linux= which is the same value for =Ubuntu= so this cannot be used to check if running in =WSL=. Luckily this [[https://emacs.stackexchange.com/a/55295/14110][StackExchange answer]] provides the solution: check for variable =operating-system-release=.
+   In =WSL1= its value ends in =-Microsoft= and in =WSL2= it ends in =-microsoft-standard=.
+   #+begin_src emacs-lisp
+     (defun rp/browse-url-firefox(url &rest args)
+       "Browse URL using Firefox from Windows when running under WSL.
+     This function calls `shell-command' to pass URL to the Firefox browser located at `/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe'.
+     "
+       (progn
+	 (message "Browsing URL [%s] using external Firefox." url)
+	 (shell-command
+	  (concat "/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe "
+		  url))))
+
+     (when (string-match "-[Mm]icrosoft" operating-system-release)
+       (progn
+	 (message "Running under WSL. The browse-url-browser-function will be overwritten.")
+	 (setq browse-url-browser-function 'rp/browse-url-firefox)))
+   #+end_src
