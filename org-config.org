@@ -56,17 +56,20 @@
 	 (goto-char (point-min))
 	 (search-forward-regexp "#\\+latex_class:[[:blank:]]+beamer")))
 
+     (defun beamer-export-to-pdf()
+       (when (and (equal major-mode 'org-mode)
+		  (is-beamer-presentation))
+	 (progn
+	       (message "Current buffer is beamer presentation. Automatic export will use org-beamer-export-to-pdf.")
+	       (org-beamer-export-to-pdf t))))
+
      (defun export-to-pdf-async()
        (when (equal major-mode 'org-mode)
-	 (if (is-beamer-presentation)
-	     (progn
-	       (message "Current buffer is beamer presentation. Automatic export will use org-beamer-export-to-pdf.")
-	       (org-beamer-export-to-pdf t))
-	   (progn
-	     (message "Automatic export will use org-latex-export-to-pdf.")
-	     (org-latex-export-to-pdf t)))))
+	 (progn
+	   (message "Automatic export will use org-latex-export-to-pdf.")
+	   (org-latex-export-to-pdf t))))
 
-     (defun toggle-export-to-pdf-async ()
+     (defun rp/toggle-export-to-pdf-async ()
        (interactive)
        (if (memq 'export-to-pdf-async after-save-hook)
 	   (progn
@@ -74,6 +77,7 @@
 	     (message "Disabled automatic export to pdf for current buffer."))
 	 (add-hook 'after-save-hook 'export-to-pdf-async t t)
 	 (message "Enabled automatic export to pdf for current buffer.")))
+
    #+end_src
 ** Automatically export to html
    #+begin_src emacs-lisp
