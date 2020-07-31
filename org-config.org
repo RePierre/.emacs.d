@@ -109,6 +109,9 @@
 	     ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?")
 	     ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
 	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
+	     ("p" "PhD related items")
+	     ("pt" "Todo item" entry (file+headline "~/org/phd/phd.org" "PhD General") "* TODO %?")
+	     ("pm" "Meeting" entry (file+headline "~/org/phd/phd.org" "Calendar") "* APPT %?")
 	     ("w" "Work related items")
 	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/gtd/work.org") "* %?")
 	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/gtd/work.org" "Technical feedback") "* %?")
@@ -116,9 +119,9 @@
 	     ("wm" "Meeting" entry (file+headline "~/org/gtd/work.org" "Outlook") "* APPT %? %(org-set-tags \"WORK\")")
 	     ("wr" "Retrospective remark" entry (file+headline "~/org/gtd/work.org" "Upcomming retrospective") "* TODO %? \n %U")
 	     ("i" "Interruptions")
-	     ("iw" "Work-related interruption" entry (file+headline "~/org/gtd/work.org" "Interruptions") "* %?" :clock-in t)
-	     ("it" "Teaching-related interruption" entry (file+headline "~/org/teaching/2020/tap.org" "Orice Alte Chestiuni") "* %?" :clock-in t)
-	     ("ii" "Iaşi AI related interruption" entry (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni") "* %?" :clock-in t)
+	     ("iw" "Work-related interruption" entry (file+headline "~/org/gtd/work.org" "Interruptions") "* %? \n" :clock-in t)
+	     ("it" "Teaching-related interruption" entry (file+headline "~/org/teaching/2020/tap.org" "Orice Alte Chestiuni") "* %? \n" :clock-in t)
+	     ("ii" "Iaşi AI related interruption" entry (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni") "* %? \n" :clock-in t)
 	     ("ip" "PhD related interruption" entry (file+headline "~/org/phd/phd.org" "Întreruperi") "* %? \n" :clock-in t)))
    #+END_SRC
 ** Setup ~org-refile-targets~
