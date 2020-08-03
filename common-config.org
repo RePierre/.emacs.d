@@ -428,3 +428,8 @@
        :ensure t
        :bind (("C-c wg" . writegood-mode)))
    #+end_src
+* Change the location of default bookmarks files
+  #+begin_src emacs-lisp
+    (setq bookmark-default-file "~/org/bookmarks"
+	  eww-bookmarks-directory "~/org/")
+  #+end_src
