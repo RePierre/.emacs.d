@@ -8,6 +8,7 @@
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/common-config.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/python-config.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/js-config.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/org-config.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/emacs-init.org"))
 
