@@ -49,3 +49,4 @@ emacsql-sqlite.exe
 
 # Ignore elpy binaries
 **/elpy/__pycache__/*
+/elpy
