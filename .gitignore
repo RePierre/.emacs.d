@@ -12,6 +12,7 @@ auto-save-list
 /common-config.el
 /org-config.el
 /python-config.el
+/js-config.el
 /*~
 /ac-comphist.dat
 /network-security.data
