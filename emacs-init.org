@@ -228,6 +228,7 @@
   #+begin_src emacs-lisp
     (use-package auto-package-update
       :ensure t
+      :disabled
       :config
       (setq auto-package-update-prompt-before-update t)
       (auto-package-update-maybe))
