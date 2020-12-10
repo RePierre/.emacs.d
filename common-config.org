@@ -335,6 +335,14 @@
        :init (with-eval-after-load 'company
 	       (company-quickhelp-mode)))
    #+end_src
+* Install =yasnippet=
+  #+begin_src emacs-lisp
+    (use-package yasnippet
+      :ensure t
+      :config
+      (progn
+	(yas-global-mode 1)))
+  #+end_src
 * Git integration
 ** Install ~magit~
    #+BEGIN_SRC emacs-lisp
