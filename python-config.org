@@ -59,6 +59,7 @@
        :ensure t
        :after lsp)
    #+END_SRC
+
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
