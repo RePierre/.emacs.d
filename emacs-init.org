@@ -5,6 +5,9 @@
       :ensure t
       :when (display-graphic-p)
       :config (load-theme 'sanityinc-tomorrow-night t))
+
+    (when (not (display-graphic-p))
+      (load-theme 'wombat))
   #+END_SRC
 ** Use ~circadian~ to switch between dark and light themes
    #+begin_src emacs-lisp

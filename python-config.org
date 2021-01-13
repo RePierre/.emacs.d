@@ -1,5 +1,5 @@
 * Python development
-  ~lsp~ setup is from [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][Configuring Emacs, lsp-mode and the python language server]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
+  ~lsp~ setup is from [[https://emacs-lsp.github.io/lsp-mode/page/installation/#use-package][LSP-mode page]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
 ** Install ~pyvenv~
    #+BEGIN_SRC emacs-lisp
      (use-package pyvenv
@@ -8,54 +8,58 @@
        :config (progn
 		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
    #+END_SRC
+** Install ~py-yapf~
+   #+begin_src emacs-lisp
+     (use-package py-yapf
+       :ensure t
+       :defer t
+       :commands (py-yapf-buffer py-yapf-enable-on-save))
+   #+end_src
 ** Install ~lsp~
    #+BEGIN_SRC emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (progn
-	 (use-package lsp-mode
-	   :disabled
-	   :ensure t)
+     (defun rp/setup-lsp-mode()
+       (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+       (lsp-headerline-breadcrumb-mode))
 
-	 (use-package lsp-ui
-	   :disabled
-	   :ensure t
-	   :config
-	   (setq lsp-ui-doc-max-height 20
-		 lsp-ui-doc-max-width 50
-		 lsp-ui-sideline-ignore-duplicate t
-		 lsp-ui-peek-always-show t))
+     (use-package lsp-mode
+       :ensure t
+       :commands (lsp lsp-deferred)
+       :hook ((python-mode . lsp)
+	      (lsp-mode . rp/setup-lsp-mode))
+       :init (setq lsp-keymap-prefix "C-c l")
+       :config (lsp-enable-which-key-integration t))
 
-	 (use-package company-lsp
-	   :disabled
-	   :ensure t
-	   :commands (company-lsp))
+     (use-package lsp-ui
+       :ensure t
+       :config
+       (setq lsp-ui-doc-max-height 20
+	     lsp-ui-doc-max-width 50
+	     lsp-ui-sideline-ignore-duplicate t
+	     lsp-ui-peek-always-show t)
+       :commands lsp-ui-mode)
 
-	 (use-package lsp-python-ms
-	   :disabled
-	   :ensure t
-	   :config
-	   (add-hook 'python-mode-hook #'lsp))))
+     (use-package helm-lsp
+       :ensure t
+       :commands helm-lsp-workspace-symbol)
+
+     (use-package company-lsp
+       :disabled
+       :ensure t
+       :commands (company-lsp))
+
+     (use-package lsp-python-ms
+       :ensure t
+       :init (setq lsp-python-ms-auto-install-server t)
+       :hook (python-mode . (lambda ()
+			      (py-yapf-enable-on-save)
+			      (require 'lsp-python-ms)
+			      (lsp))))  ; or lsp-deferred
+
+     (use-package lsp-treemacs
+       :ensure t
+       :after lsp)
    #+END_SRC
-** Install ~elpy~
-   #+begin_src emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (progn
-	 (use-package elpy
-	   :ensure t
-	   :defer t
-	   :commands (elpy-mode)
-	   :config (progn
-		     (defun switch-to-jedi-backend ()
-		       (interactive)
-		       (setq elpy-rpc-backend "jedi"))
-		     (defun switch-to-rope-backend ()
-		       (interactive)
-		       (setq elpy-rpc-backend "rope"))
-		     (setq elpy-rpc-backend "jedi")
-		     (elpy-enable)))
-	 (add-hook 'python-mode-hook #'elpy-mode)
-	 (add-hook 'python-mode-hook 'py-yapf-enable-on-save)))
-   #+end_src
+
 ** Install ~flycheck~
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
@@ -64,14 +68,6 @@
 	 :defer t
 	 :init (global-flycheck-mode)))
    #+END_SRC
-** Install ~py-yapf~
-   #+begin_src emacs-lisp
-   (unless (eq system-type 'cygwin )
-       (use-package py-yapf
-	 :ensure t
-	 :defer t
-	 :commands (py-yapf-buffer py-yapf-enable-on-save)))
-   #+end_src
 ** Install ~RealGUD~
    [[https://github.com/realgud/realgud/][GitHub repository]].
    #+BEGIN_SRC emacs-lisp
@@ -101,17 +97,3 @@
    #+BEGIN_SRC emacs-lisp
      (add-hook 'prog-mode-hook 'electric-pair-mode)
    #+END_SRC
-** Install ~company-jedi~
-   #+begin_src emacs-lisp
-     (unless (eq system-type 'cygwin)
-       (use-package company-jedi
-	 :ensure t
-	 :defer t
-	 :init
-	 (with-eval-after-load 'company
-	   (add-hook 'python-mode-hook
-		     (lambda ()
-		       (setq-local company-backends
-				   (append '(company-jedi) company-backends)))))))
-
-   #+end_src
