@@ -120,7 +120,7 @@
 	     ("wr" "Retrospective remark" entry (file+headline "~/org/gtd/work.org" "Upcomming retrospective") "* TODO %? \n %U")
 	     ("i" "Interruptions")
 	     ("iw" "Work-related interruption" entry (file+headline "~/org/gtd/work.org" "Interruptions") "* %? \n" :clock-in t)
-	     ("it" "Teaching-related interruption" entry (file+headline "~/org/teaching/2020/tap.org" "Orice Alte Chestiuni") "* %? \n" :clock-in t)
+	     ("it" "Teaching-related interruption" entry (file+headline "~/org/teaching/2021/tap.org" "Orice Alte Chestiuni") "* %? \n" :clock-in t)
 	     ("ii" "Iaşi AI related interruption" entry (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni") "* %? \n" :clock-in t)
 	     ("ip" "PhD related interruption" entry (file+headline "~/org/phd/phd.org" "Întreruperi") "* %? \n" :clock-in t)))
    #+END_SRC
@@ -132,7 +132,7 @@
 				("~/org/blogging.org" :level . 1)
 				("~/org/gtd/work.org" :level . 1)
 				("~/org/bibliography/reading-list.org" :maxlevel  . 2)
-				("~/org/teaching/2020/tap.org" :level . 1)
+				("~/org/teaching/2021/tap.org" :level . 1)
 				("~/org/rise-tv/rise-tv.org" :level . 1)
 				("~/org/phd/phd.org" :level . 2)
 				("~/org/iasi.ai/iasi-ai.org" :level . 1)))
