@@ -160,7 +160,7 @@
 		      "~/org/gtd/tickler.org"
 		      "~/org/bibliography/reading-list.org"
 		      "~/org/blogging.org"
-		      "~/org/teaching/2020/tap.org"
+		      "~/org/teaching/2021/tap.org"
 		      "~/org/phd/phd.org"
 		      "~/org/rise-tv/rise-tv.org"
 		      "~/org/iasi.ai/iasi-ai.org")))
