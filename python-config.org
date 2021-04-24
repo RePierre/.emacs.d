@@ -1,6 +1,6 @@
 * Python development
-  ~lsp~ setup is from [[https://emacs-lsp.github.io/lsp-mode/page/installation/#use-package][LSP-mode page]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
-** Install ~pyvenv~
+  =lsp= setup is from [[https://emacs-lsp.github.io/lsp-mode/page/installation/#use-package][LSP-mode page]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
+** Install =pyvenv=
    #+BEGIN_SRC emacs-lisp
      (use-package pyvenv
        :defer t
@@ -8,45 +8,15 @@
        :config (progn
 		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
    #+END_SRC
-** Install ~py-yapf~
+** Install =py-yapf=
    #+begin_src emacs-lisp
      (use-package py-yapf
        :ensure t
        :defer t
        :commands (py-yapf-buffer py-yapf-enable-on-save))
    #+end_src
-** Install ~lsp~
+** Install =lsp-python-ms=
    #+BEGIN_SRC emacs-lisp
-     (defun rp/setup-lsp-mode()
-       (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-       (lsp-headerline-breadcrumb-mode))
-
-     (use-package lsp-mode
-       :ensure t
-       :commands (lsp lsp-deferred)
-       :hook ((python-mode . lsp)
-	      (lsp-mode . rp/setup-lsp-mode))
-       :init (setq lsp-keymap-prefix "C-c l")
-       :config (lsp-enable-which-key-integration t))
-
-     (use-package lsp-ui
-       :ensure t
-       :config
-       (setq lsp-ui-doc-max-height 20
-	     lsp-ui-doc-max-width 50
-	     lsp-ui-sideline-ignore-duplicate t
-	     lsp-ui-peek-always-show t)
-       :commands lsp-ui-mode)
-
-     (use-package helm-lsp
-       :ensure t
-       :commands helm-lsp-workspace-symbol)
-
-     (use-package company-lsp
-       :disabled
-       :ensure t
-       :commands (company-lsp))
-
      (use-package lsp-python-ms
        :ensure t
        :init (setq lsp-python-ms-auto-install-server t)
@@ -60,7 +30,7 @@
        :after lsp)
    #+END_SRC
 
-** Install ~flycheck~
+** Install =flycheck=
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
        (use-package flycheck
@@ -68,7 +38,7 @@
 	 :defer t
 	 :init (global-flycheck-mode)))
    #+END_SRC
-** Install ~RealGUD~
+** Install =RealGUD=
    [[https://github.com/realgud/realgud/][GitHub repository]].
    #+BEGIN_SRC emacs-lisp
      (unless (eq system-type 'cygwin )
@@ -76,7 +46,7 @@
 	 :defer t
 	 :ensure t))
    #+END_SRC
-** Install ~smartparens~
+** Install =smartparens=
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
        :ensure t
@@ -85,7 +55,7 @@
        :config
        (add-hook 'prog-mode-hook 'smartparens-mode))
    #+END_SRC
-** Install ~rainbow-delimiters~ for improved readability
+** Install =rainbow-delimiters= for improved readability
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-delimiters
        :ensure t

@@ -16,12 +16,12 @@
    #+BEGIN_SRC emacs-lisp
      (package-refresh-contents)
    #+END_SRC
-** Install ~use-package~
+** Install =use-package=
    #+BEGIN_SRC emacs-lisp
      (unless (package-installed-p 'use-package)
        (package-install 'use-package))
    #+END_SRC
-** Install ~use-package-ensure-system-package~
+** Install =use-package-ensure-system-package=
    #+BEGIN_SRC emacs-lisp
      (use-package use-package-ensure-system-package
        :ensure t)
@@ -56,11 +56,11 @@
    #+BEGIN_SRC emacs-lisp
      (scroll-bar-mode -1)
    #+END_SRC
-** Change ~yes or no~ prompts to ~y or n~
+** Change =yes or no= prompts to =y or n=
    #+BEGIN_SRC emacs-lisp
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
-** Bind ~F5~ key to ~revert-buffer~
+** Bind =F5= key to =revert-buffer=
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<f5>") 'revert-buffer)
    #+END_SRC
@@ -77,7 +77,7 @@
    #+BEGIN_SRC emacs-lisp
      (global-visual-line-mode t)
    #+END_SRC
-** Use ~ibuffer~ for buffer list
+** Use =ibuffer= for buffer list
    As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -132,8 +132,8 @@
        (setq shell-file-name "bash")
        (setq shell-command-switch "-ic"))
    #+END_SRC
-** ~dired~ tweaks
-*** Set ~dired-dwim-target~
+** =dired= tweaks
+*** Set =dired-dwim-target=
     #+BEGIN_SRC emacs-lisp
       (setq dired-dwim-target t)
     #+END_SRC
@@ -166,7 +166,7 @@
        :ensure t
        :bind ("C-=" . er/expand-region))
    #+END_SRC
-** Install ~org-bullets~
+** Install =org-bullets=
    #+BEGIN_SRC emacs-lisp
      (use-package org-bullets
        :ensure t
@@ -192,7 +192,7 @@
    #+begin_src emacs-lisp
      (setq company-show-numbers t)
    #+end_src
-* Install ~smart-mode-line~
+* Install =smart-mode-line=
   For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
   #+BEGIN_SRC emacs-lisp
     (use-package smart-mode-line
@@ -208,7 +208,7 @@
 	:config
 	(nyan-mode 1)))
   #+END_SRC
-* Load ~org-babel~ languages
+* Load =org-babel= languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
      (quote org-babel-load-languages)
@@ -221,7 +221,7 @@
 	     (latex . t))))
 
   #+END_SRC
-* Install ~helm~
+* Install =helm=
   #+BEGIN_SRC emacs-lisp
     ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
     ;; other various sources
@@ -259,7 +259,7 @@
 	     ("C-x c SPC" . helm-all-mark-rings)
 	     ("C-x C-f" . helm-find-files)))
   #+END_SRC
-* Install ~helm-swoop~
+* Install =helm-swoop=
   Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha Chua]].
   #+BEGIN_SRC emacs-lisp
     (use-package helm-swoop
@@ -273,7 +273,12 @@
        ("C-c M-i" . helm-multi-swoop)
        ("C-c M-I" . helm-multi-swoop-all)))
   #+END_SRC
-* Install ~ace-window~
+* Install =helm-xref=
+  #+begin_src emacs-lisp
+    (use-package helm-xref
+      :ensure t)
+  #+end_src
+* Install =ace-window=
   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
   #+BEGIN_SRC emacs-lisp
     (use-package ace-window
@@ -286,14 +291,14 @@
 	 '(aw-leading-char-face
 	   ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
   #+END_SRC
-* Install ~undo-tree~
+* Install =undo-tree=
   #+BEGIN_SRC emacs-lisp
     (use-package undo-tree
       :ensure t
       :defer t
       :init (global-undo-tree-mode))
   #+END_SRC
-* Install ~csv-mode~
+* Install =csv-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package csv-mode
       :ensure t
@@ -302,19 +307,19 @@
       (add-hook 'csv-mode-hook 'display-line-numbers))
   #+END_SRC
 
-* Install ~which-key~
+* Install =which-key=
   #+BEGIN_SRC emacs-lisp
     (use-package which-key
       :ensure t
       :config
       (which-key-mode))
   #+END_SRC
-* Install ~try~ package
+* Install =try= package
   #+BEGIN_SRC emacs-lisp
   (use-package try
     :ensure t)
   #+END_SRC
-* Install ~company~
+* Install =company=
   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
   #+BEGIN_SRC emacs-lisp
     (use-package company
@@ -327,7 +332,7 @@
        company-require-match nil
        company-tooltip-align-annotations t))
   #+END_SRC
-** Install ~company-quickhelp~
+** Install =company-quickhelp=
    #+begin_src emacs-lisp
      (use-package company-quickhelp
        :ensure t
@@ -344,7 +349,7 @@
 	(yas-global-mode 1)))
   #+end_src
 * Git integration
-** Install ~magit~
+** Install =magit=
    #+BEGIN_SRC emacs-lisp
      (use-package magit
        :ensure t
@@ -362,13 +367,13 @@
    #+begin_example
    machine api.github.com login <username>^forge password <personal token>
    #+end_example
-** Install ~git-timemachine~
+** Install =git-timemachine=
    #+BEGIN_SRC emacs-lisp
      (use-package git-timemachine
        :ensure t
        :defer t)
    #+END_SRC
-** Install ~git-gutter~
+** Install =git-gutter=
    #+BEGIN_SRC emacs-lisp
      (use-package git-gutter
        :ensure t
@@ -377,7 +382,7 @@
        (global-git-gutter-mode t)
        :diminish git-gutter-mode)
    #+END_SRC
-* Install ~eldoc~
+* Install =eldoc=
   #+begin_src emacs-lisp
     (use-package eldoc
       :ensure t
@@ -389,7 +394,7 @@
 	     (eshell-mode . eldoc-mode)
 	     (org-mode . eldoc-mode)))
   #+end_src
-* Install ~projectile~
+* Install =projectile=
   When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
@@ -409,8 +414,40 @@
 	  :ensure t
 	  :config (helm-projectile-on))))
   #+END_SRC
+* Install =lsp=
+  #+begin_src emacs-lisp
+    (defun rp/setup-lsp-mode()
+      (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+      (lsp-headerline-breadcrumb-mode))
+
+    (use-package lsp-mode
+      :ensure t
+      :commands (lsp lsp-deferred)
+      :hook ((prog-mode . lsp)
+	     (lsp-mode . rp/setup-lsp-mode))
+      :init (setq lsp-keymap-prefix "C-c l")
+      :config (lsp-enable-which-key-integration t))
+
+    (use-package lsp-ui
+      :ensure t
+      :config
+      (setq lsp-ui-doc-max-height 20
+	    lsp-ui-doc-max-width 50
+	    lsp-ui-sideline-ignore-duplicate t
+	    lsp-ui-peek-always-show t)
+      :commands lsp-ui-mode)
+
+    (use-package helm-lsp
+      :ensure t
+      :commands helm-lsp-workspace-symbol)
+
+    (use-package company-lsp
+      :disabled
+      :ensure t
+      :commands (company-lsp))
+  #+end_src
 * Markdown related packages
-** Install ~markdown-mode~
+** Install =markdown-mode=
    As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
@@ -422,7 +459,7 @@
 	      ("\\.markdown\\'" . markdown-mode))
        :init (setq markdown-command "multimarkdown"))
    #+END_SRC
-** Install ~gh-md~
+** Install =gh-md=
    #+BEGIN_SRC emacs-lisp
      (use-package gh-md
        :ensure t

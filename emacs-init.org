@@ -1,5 +1,5 @@
 * Themes
-  Use ~sanityinc-tomorrow-night~ when not running from console; otherwise fallback to ~wombat~.
+  Use =sanityinc-tomorrow-night= when not running from console; otherwise fallback to =wombat=.
   #+BEGIN_SRC emacs-lisp
     (use-package color-theme-sanityinc-tomorrow
       :ensure t
@@ -9,7 +9,7 @@
     (when (not (display-graphic-p))
       (load-theme 'wombat))
   #+END_SRC
-** Use ~circadian~ to switch between dark and light themes
+** Use =circadian= to switch between dark and light themes
    #+begin_src emacs-lisp
      (use-package circadian
        :ensure t
@@ -22,7 +22,7 @@
 		     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
-* Install ~AUCTeX~
+* Install =AUCTeX=
   #+BEGIN_SRC emacs-lisp
     ;; As described in https://github.com/jwiegley/use-package/issues/379
     ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
@@ -42,7 +42,7 @@
 	      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 	      (setq reftex-plug-into-AUCTeX t)))
   #+END_SRC
-** Install ~company-auctex~
+** Install =company-auctex=
    #+begin_src emacs-lisp
      (use-package company-auctex
        :commands (company-auctex
@@ -61,7 +61,7 @@
 						     company-auctex-symbols
 						     company-capf))))))
    #+end_src
-** Install ~company-math~
+** Install =company-math=
    #+begin_src emacs-lisp
      (use-package company-math
        :defer t
@@ -74,13 +74,13 @@
 						     company-latex-commands
 						     company-capf))))))
    #+end_src
-* Install ~graphviz-dot-mode~
+* Install =graphviz-dot-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package graphviz-dot-mode
       :ensure t
       :defer t)
   #+END_SRC
-* Install ~beginend~
+* Install =beginend=
   #+BEGIN_SRC emacs-lisp
     (when (version<= "25.3" emacs-version)
       (use-package beginend
@@ -88,8 +88,8 @@
 	:defer t
 	:init (beginend-global-mode)))
   #+END_SRC
-* Install ~csharp-mode~
-  For some reason I get the following error when running Emacs under Ubuntu Bash for Windows: ~Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode~. As a workaround disable ~electric-pair-mode~ when ~display-graphic-p~ returns ~nil~.
+* Install =csharp-mode=
+  For some reason I get the following error when running Emacs under Ubuntu Bash for Windows: =Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode=. As a workaround disable =electric-pair-mode= when =display-graphic-p= returns =nil=.
   #+BEGIN_SRC emacs-lisp
     (use-package csharp-mode
       :ensure t
@@ -97,7 +97,7 @@
       :init (when (display-graphic-p)
 		(electric-pair-local-mode 1)))
   #+END_SRC
-* ~org2blog~ setup
+* =org2blog= setup
   As seen on [[https://vxlabs.com/2014/05/25/emacs-24-with-prelude-org2blog-and-wordpress/][Publish to WordPress with Emacs 24 and org2blog]]. Also [[https://github.com/org2blog/org2blog][GitHub repo]] of the project.
   #+BEGIN_SRC emacs-lisp
     ;; (mapc #'(lambda (package)
@@ -129,8 +129,8 @@
     ;; 	"sh" "emacs-lisp" "lisp" "lua"))
     ;; (setq org-src-fontify-natively t)
   #+END_SRC
-* Install ~pdf-tools~
-  ~use-package~ example configuring ~pdf-tools~ found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
+* Install =pdf-tools=
+  =use-package= example configuring =pdf-tools= found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
   #+BEGIN_SRC emacs-lisp
     (use-package pdf-tools
       :ensure t
@@ -141,7 +141,7 @@
       (use-package org-pdfview
 	:ensure t))
   #+END_SRC
-* Install ~neotree~
+* Install =neotree=
   #+BEGIN_SRC emacs-lisp
     (use-package neotree
       :ensure t
@@ -151,19 +151,19 @@
       (setq neo-smart-open t)
       (setq neo-theme 'arrow))
   #+END_SRC
-* Install ~powershell~
+* Install =powershell=
   #+BEGIN_SRC emacs-lisp
     (use-package powershell
       :ensure t
       :defer t)
   #+END_SRC
-* Install ~ledger-mode~
+* Install =ledger-mode=
 ** Prerequisites
-   Requires ~ledger~ to be installed:
+   Requires =ledger= to be installed:
    #+BEGIN_SRC shell
      sudo apt-get install ledger
    #+END_SRC
-** Setup ~ledger-mode~
+** Setup =ledger-mode=
    #+BEGIN_SRC emacs-lisp
      (use-package ledger-mode
        :ensure t
@@ -177,7 +177,7 @@
        :defer t
        :hook (ledger-mode . flycheck-mode))
    #+END_SRC
-* Read Web feeds using ~elfeed~
+* Read Web feeds using =elfeed=
   Based on [[https://cestlaz.github.io/posts/using-emacs-29-elfeed/][blog post of Mike Zamansky]].
   #+BEGIN_SRC emacs-lisp
     (setq elfeed-db-directory "~/org/elfeed/elfeed-db")
@@ -218,7 +218,7 @@
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
   #+END_SRC
-* Install ~org-re-reveal~
+* Install =org-re-reveal=
   #+BEGIN_SRC emacs-lisp
     (use-package org-re-reveal
       :ensure t

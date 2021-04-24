@@ -96,12 +96,12 @@
 	   (message "Enabled automatic export to HTML for current buffer."))))
    #+end_src
 * Open GTD view
-** Setup ~org-capture~
+** Setup =org-capture=
    #+BEGIN_SRC emacs-lisp
      (setq org-default-notes-file "~/org/notes.org")
      (global-set-key (kbd "C-c c") 'org-capture)
    #+END_SRC
-** Setup ~org-capture-templates~
+** Setup =org-capture-templates=
    #+BEGIN_SRC emacs-lisp
      (setq org-capture-templates
 	   '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Inbox") "* TODO %i%?")
@@ -124,7 +124,7 @@
 	     ("ii" "Iaşi AI related interruption" entry (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni") "* %? \n" :clock-in t)
 	     ("ip" "PhD related interruption" entry (file+headline "~/org/phd/phd.org" "Întreruperi") "* %? \n" :clock-in t)))
    #+END_SRC
-** Setup ~org-refile-targets~
+** Setup =org-refile-targets=
    #+BEGIN_SRC emacs-lisp
      (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
 				("~/org/gtd/some-day.org" :level . 1)
