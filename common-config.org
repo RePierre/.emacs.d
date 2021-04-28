@@ -450,6 +450,12 @@
       :ensure t
       :commands (company-lsp))
   #+end_src
+* Install =dap-mode=
+  #+begin_src emacs-lisp
+    (use-package dap-mode
+      :after lsp-mode
+      :config (dap-auto-configure-mode))
+  #+end_src
 * Markdown related packages
 ** Install =markdown-mode=
    As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
