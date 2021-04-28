@@ -417,8 +417,12 @@
 * Install =lsp=
   #+begin_src emacs-lisp
     (defun rp/setup-lsp-mode()
-      (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-      (lsp-headerline-breadcrumb-mode))
+      (progn
+	(setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+	(lsp-headerline-breadcrumb-mode)
+	(setq-mode-local prog-mode
+			 create-lockfiles nil)
+	(message "Variable create-lockfiles is set to nil in prog-mode.")))
 
     (use-package lsp-mode
       :ensure t
