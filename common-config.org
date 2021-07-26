@@ -347,7 +347,9 @@
       :ensure t
       :config
       (progn
+	(use-package yasnippet-snippets :ensure t)
 	(yas-global-mode 1)))
+
   #+end_src
 * Git integration
 ** Install =magit=
