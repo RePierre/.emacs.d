@@ -97,6 +97,12 @@
       :init (when (display-graphic-p)
 		(electric-pair-local-mode 1)))
   #+END_SRC
+* Install =php-mode=
+  #+begin_src emacs-lisp
+    (use-package php-mode
+      :ensure t
+      :defer t)
+  #+end_src
 * =org2blog= setup
   As seen on [[https://vxlabs.com/2014/05/25/emacs-24-with-prelude-org2blog-and-wordpress/][Publish to WordPress with Emacs 24 and org2blog]]. Also [[https://github.com/org2blog/org2blog][GitHub repo]] of the project.
   #+BEGIN_SRC emacs-lisp
