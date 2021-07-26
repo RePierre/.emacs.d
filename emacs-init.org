@@ -141,16 +141,6 @@
       (use-package org-pdfview
 	:ensure t))
   #+END_SRC
-* Install =neotree=
-  #+BEGIN_SRC emacs-lisp
-    (use-package neotree
-      :ensure t
-      :defer t
-      :config
-      (global-set-key (kbd "C-c t") 'neotree-toggle)
-      (setq neo-smart-open t)
-      (setq neo-theme 'arrow))
-  #+END_SRC
 * Install =powershell=
   #+BEGIN_SRC emacs-lisp
     (use-package powershell
