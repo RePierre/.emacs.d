@@ -497,3 +497,8 @@
     (setq bookmark-default-file "~/org/bookmarks"
 	  eww-bookmarks-directory "~/org/")
   #+end_src
+* Install =yaml-mode=
+  #+begin_src emacs-lisp
+    (use-package yaml-mode
+      :ensure t)
+  #+end_src
