@@ -13,6 +13,7 @@ auto-save-list
 /org-config.el
 /python-config.el
 /js-config.el
+/java-config.el
 /*~
 /ac-comphist.dat
 /network-security.data
@@ -50,3 +51,13 @@ emacsql-sqlite.exe
 # Ignore elpy binaries
 **/elpy/__pycache__/*
 /elpy
+
+# Ignore directories created by packages
+/.cache/
+/.dap-breakpoints
+/.lsp-session-v1
+/eclipse.jdt.ls/
+/lsp-cache/
+/recentf
+/session.*
+/workspace/
