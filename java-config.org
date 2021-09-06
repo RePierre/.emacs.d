@@ -1,7 +1,21 @@
 * Java development
   The setup for java is adapted from the official [[https://emacs-lsp.github.io/lsp-java/][lsp-java documentation]].
 ** Install =lsp-java=
+   The setup for =lsp-java= is adapted from the [[https://gitlab.com/skybert/my-little-friends/blob/master/emacs/.emacs#L897][configuration]] of Torstein Krause Johansen.
    #+begin_src emacs-lisp
      (use-package lsp-java
+       :init
+       (setq lsp-java-vmargs
+	     (list
+	      "-noverify"
+	      "-Xmx3G"
+	      "-XX:+UseG1GC"
+	      "-XX:+UseStringDeduplication")
+
+	     ;; Don't organise imports on save
+	     lsp-java-save-action-organize-imports nil
+
+	     ;; Fetch less results from the Eclipse server
+	     lsp-java-completion-max-results 20)
        :config (add-hook 'java-mode-hook 'lsp))
    #+end_src
