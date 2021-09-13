@@ -153,18 +153,18 @@
 * Agenda
   #+BEGIN_SRC emacs-lisp
     (setq org-agenda-files
-	  (quote ("~/org/gtd/inbox.org"
-		  "~/org/gtd/gtd.org"
-		  "~/org/gtd/work.org"
-		  "~/org/gtd/some-day.org"
-		  "~/org/gtd/tickler.org"
-		  "~/org/gtd/events.org"
-		  "~/org/bibliography/reading-list.org"
-		  "~/org/blogging.org"
-		  "~/org/teaching/2021/tap.org"
-		  "~/org/phd/phd.org"
-		  "~/org/rise-tv/rise-tv.org"
-		  "~/org/iasi.ai/iasi-ai.org")))
+	  (list "~/org/gtd/inbox.org"
+		"~/org/gtd/gtd.org"
+		"~/org/gtd/work.org"
+		"~/org/gtd/some-day.org"
+		"~/org/gtd/tickler.org"
+		"~/org/gtd/events.org"
+		"~/org/bibliography/reading-list.org"
+		"~/org/blogging.org"
+		"~/org/phd/phd.org"
+		"~/org/rise-tv/rise-tv.org"
+		"~/org/iasi.ai/iasi-ai.org"
+		(concat "~/org/teaching/tap/" (format-time-string "%Y") "/tap.org")))
     ;; (setq org-agenda-repeating-timestamp-show-all nil)
     (setq org-agenda-skip-deadline-if-done t)
     (setq org-agenda-skip-scheduled-if-done t)
