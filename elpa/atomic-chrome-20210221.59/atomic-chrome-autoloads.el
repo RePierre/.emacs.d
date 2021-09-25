@@ -10,14 +10,10 @@
 ;;; Generated autoloads from atomic-chrome.el
 
 (autoload 'atomic-chrome-start-server "atomic-chrome" "\
-Start websocket server for atomic-chrome.  Fails silently if a server is already running.
-
-\(fn)" t nil)
+Start websocket server for atomic-chrome.  Fails silently if a server is already running." t nil)
 
 (autoload 'atomic-chrome-stop-server "atomic-chrome" "\
-Stop websocket server for atomic-chrome.
-
-\(fn)" t nil)
+Stop websocket server for atomic-chrome." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "atomic-chrome" '("atomic-chrome-" "global-atomic-chrome-edit-mode")))
 

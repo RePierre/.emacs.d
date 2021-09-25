@@ -10,14 +10,10 @@
 ;;; Generated autoloads from py-yapf.el
 
 (autoload 'py-yapf-buffer "py-yapf" "\
-Uses the \"yapf\" tool to reformat the current buffer.
-
-\(fn)" t nil)
+Uses the \"yapf\" tool to reformat the current buffer." t nil)
 
 (autoload 'py-yapf-enable-on-save "py-yapf" "\
-Pre-save hooked to be used before running py-yapf.
-
-\(fn)" t nil)
+Pre-save hooked to be used before running py-yapf." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "py-yapf" '("py-yapf-")))
 

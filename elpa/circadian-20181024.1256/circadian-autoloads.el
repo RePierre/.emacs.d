@@ -10,9 +10,7 @@
 ;;; Generated autoloads from circadian.el
 
 (autoload 'circadian-setup "circadian" "\
-Setup circadian based on `circadian-themes'.
-
-\(fn)" nil nil)
+Setup circadian based on `circadian-themes'." nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "circadian" '("circadian-")))
 

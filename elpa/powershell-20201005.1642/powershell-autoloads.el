@@ -40,7 +40,7 @@ See the help for `shell' for more details.  (Type
 
 \(fn &optional BUFFER PROMPT-STRING)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "powershell" '("powershell-" "explicit-powershell.exe-args")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "powershell" '("explicit-powershell.exe-args" "powershell-")))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 (define-package "writeroom-mode" "20201229.2242" "Minor mode for distraction-free writing"
   '((emacs "25.1")
     (visual-fill-column "2.2"))
-  :commit "b648b340172ce4e44307375697e190bc723203e0" :authors
+  :commit "7f4ec92404a85b72f8c25635fe80e49f9ef3d065" :authors
   '(("Joost Kremers" . "joostkremers@fastmail.fm"))
   :maintainer
   '("Joost Kremers" . "joostkremers@fastmail.fm")

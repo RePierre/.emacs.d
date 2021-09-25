@@ -29,17 +29,13 @@ the required text to the current buffer.
 (autoload 'org-cliplink "org-cliplink" "\
 Takes a URL from the clipboard and inserts an org-mode link
 with the title of a page found by the URL into the current
-buffer
-
-\(fn)" t nil)
+buffer" t nil)
 
 (autoload 'org-cliplink-capture "org-cliplink" "\
 org-cliplink version for org-capture templates.
 Makes synchronous request. Returns the link instead of inserting
 it to the current buffer. Doesn't support Basic Auth. Doesn't
-support cURL transport.
-
-\(fn)" t nil)
+support cURL transport." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-cliplink" '("org-cliplink-")))
 

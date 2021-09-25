@@ -19,9 +19,7 @@ EXPORT writes a file.
 \(fn BEGIN END &optional EXPORT)" t nil)
 
 (autoload 'gh-md-render-buffer "gh-md" "\
-Render the markdown content from BUFFER.
-
-\(fn)" t nil)
+Render the markdown content from BUFFER." t nil)
 
 (autoload 'gh-md-export-region "gh-md" "\
 Export to a file the markdown content from region BEGIN to END.
@@ -29,9 +27,7 @@ Export to a file the markdown content from region BEGIN to END.
 \(fn BEGIN END)" t nil)
 
 (autoload 'gh-md-export-buffer "gh-md" "\
-Export to a file the markdown content from BUFFER.
-
-\(fn)" t nil)
+Export to a file the markdown content from BUFFER." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gh-md" '("gh-md-")))
 

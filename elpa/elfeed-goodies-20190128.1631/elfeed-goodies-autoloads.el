@@ -15,9 +15,7 @@ Setup Elfeed with extras:
 
 * Adaptive header bar and entries.
 * Header bar using powerline.
-* Split pane view via popwin.
-
-\(fn)" t nil)
+* Split pane view via popwin." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-goodies" '("elfeed-goodies/powerline-default-separator")))
 
@@ -28,9 +26,7 @@ Setup Elfeed with extras:
 ;;; Generated autoloads from elfeed-goodies-logging.el
 
 (autoload 'elfeed-goodies/toggle-logs "elfeed-goodies-logging" "\
-Toggle the display of Elfeed logs in a popup window.
-
-\(fn)" t nil)
+Toggle the display of Elfeed logs in a popup window." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-goodies-logging" '("elfeed-goodies/log-window-")))
 
@@ -48,7 +44,7 @@ Toggle the display of Elfeed logs in a popup window.
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from elfeed-goodies-search-mode.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-goodies-search-mode" '("elfeed-goodies/" "search-header/" "-pad-string-to" "-elfeed/")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-goodies-search-mode" '("-elfeed/" "-pad-string-to" "elfeed-goodies/" "search-header/")))
 
 ;;;***
 

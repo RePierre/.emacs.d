@@ -49,27 +49,21 @@ Variables specific to this mode:
 \(fn)" t nil)
 
 (autoload 'graphviz-dot-preview "graphviz-dot-mode" "\
-Compile the graph and preview it in an other buffer.
-
-\(fn)" t nil)
+Compile the graph and preview it in an other buffer." t nil)
 
 (autoload 'graphviz-turn-on-live-preview "graphviz-dot-mode" "\
 Turn on live preview.
-This will update the preview on every save.
-
-\(fn)" t nil)
+This will update the preview on every save." t nil)
 
 (autoload 'graphviz-turn-off-live-preview "graphviz-dot-mode" "\
 Turn off live preview.
-Saving the file will no longer also update the preview.
-
-\(fn)" t nil)
+Saving the file will no longer also update the preview." t nil)
 
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 
 (add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "graphviz-dot-mode" '("graphviz-" "dot-menu")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "graphviz-dot-mode" '("dot-menu" "graphviz-")))
 
 ;;;***
 
