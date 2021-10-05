@@ -96,6 +96,9 @@
 	   (message "Enabled automatic export to HTML for current buffer."))))
    #+end_src
 * Open GTD view
+  :PROPERTIES:
+  :header-args:emacs-lisp: :results none
+  :END:
 ** Setup =org-capture=
    #+BEGIN_SRC emacs-lisp
      (setq org-default-notes-file "~/org/notes.org")
@@ -111,12 +114,12 @@
 	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
 	     ("p" "PhD related items")
 	     ("pt" "Todo item" entry (file+headline "~/org/phd/phd.org" "PhD General") "* TODO %?")
-	     ("pm" "Meeting" entry (file+headline "~/org/phd/phd.org" "Calendar") "* %? %^{Slot}T")
+	     ("pm" "Meeting" entry (file+headline "~/org/phd/phd.org" "Calendar") "* %? \n  %^{Slot}T")
 	     ("w" "Work related items")
 	     ("wa" "Work achievement" entry (file+olp+datetree "~/org/gtd/work.org") "* %?")
 	     ("wf" "Technical feedback for a colleague" entry (file+olp+datetree "~/org/gtd/work.org" "Technical feedback") "* %?")
 	     ("wt" "Todo item" entry (file+headline "~/org/gtd/work.org" "Work") "* TODO %? %(org-set-tags \"WORK\")")
-	     ("wm" "Meeting" entry (file+headline "~/org/gtd/work.org" "Outlook") "* %? %^{Slot}T  %(org-set-tags \"WORK\")")
+	     ("wm" "Meeting" entry (file+headline "~/org/gtd/work.org" "Outlook") "* %? %(org-set-tags \"WORK\") \n  %^{Slot}T")
 	     ("wr" "Retrospective remark" entry (file+headline "~/org/gtd/work.org" "Upcomming retrospective") "* TODO %? \n %U")
 	     ("i" "Interruptions")
 	     ("iw" "Work-related interruption" entry (file+headline "~/org/gtd/work.org" "Interruptions") "* %? \n" :clock-in t)
