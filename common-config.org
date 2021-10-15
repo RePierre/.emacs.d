@@ -124,13 +124,6 @@
    #+BEGIN_SRC emacs-lisp
      (setq initial-scratch-message "")
    #+END_SRC
-** Run shell commands interactively when under Cygwin shell
-   As found on [[https://emacs.stackexchange.com/a/10974/14110][StackExchange]]:
-   #+BEGIN_SRC emacs-lisp
-     (when (eq system-type 'cygwin)
-       (setq shell-file-name "bash")
-       (setq shell-command-switch "-ic"))
-   #+END_SRC
 ** =dired= tweaks
 *** Set =dired-dwim-target=
     #+BEGIN_SRC emacs-lisp
@@ -305,7 +298,6 @@
       :init
       (add-hook 'csv-mode-hook 'display-line-numbers))
   #+END_SRC
-
 * Install =which-key=
   #+BEGIN_SRC emacs-lisp
     (use-package which-key
