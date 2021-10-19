@@ -203,6 +203,11 @@
 	 (message "Running under WSL. The browse-url-browser-function will be overwritten.")
 	 (setq browse-url-browser-function 'rp/browse-url-firefox)))
    #+end_src
+** Change the location of default bookmarks files
+   #+begin_src emacs-lisp
+     (setq bookmark-default-file "~/org/bookmarks"
+	   eww-bookmarks-directory "~/org/")
+   #+end_src
 * Themes
 ** Apply theme
    Use =sanityinc-tomorrow-night= when not running from console; otherwise fallback to =wombat=.
@@ -228,22 +233,6 @@
 		     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
-* Install =smart-mode-line=
-  For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
-  #+BEGIN_SRC emacs-lisp
-    (use-package smart-mode-line
-      :ensure t
-      :init
-      (setq sml/no-confirm-load-theme t)
-      (setq sml/theme 'respectful)
-      (sml/setup)
-      :config
-      (use-package nyan-mode
-	:ensure t
-	:when (display-graphic-p)
-	:config
-	(nyan-mode 1)))
-  #+END_SRC
 * Load =org-babel= languages
   #+BEGIN_SRC emacs-lisp
     (org-babel-do-load-languages
@@ -257,134 +246,134 @@
 	     (latex . t))))
 
   #+END_SRC
-* Install =helm=
-  #+BEGIN_SRC emacs-lisp
-    ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
-    ;; other various sources
-    (use-package helm
-      :ensure t
-      :diminish helm-mode
-      :init
-      (progn
-	(require 'helm-config)
-	(setq helm-candidate-number-limit 100)
-	;; From https://gist.github.com/antifuchs/9238468
-	(setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
-	      helm-input-idle-delay 0.01  ; this actually updates things
-					    ; reeeelatively quickly.
-	      helm-yas-display-key-on-candidate t
-	      helm-quick-update t
-	      helm-M-x-requires-pattern nil
-	      helm-ff-skip-boring-files t)
-	;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
-	(setq helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
-	      helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
-	      helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-	      helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
-	(helm-mode)
-	(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-	(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
-      :bind (("C-c h" . helm-mini)
-	     ("C-h a" . helm-apropos)
-	     ("C-x b" . helm-buffers-list)
-	     ("M-y" . helm-show-kill-ring)
-	     ("M-x" . helm-M-x)
-	     ("C-x c o" . helm-occur)
-	     ("C-x c y" . helm-yas-complete)
-	     ("C-x c Y" . helm-yas-create-snippet-on-region)
-	     ("C-x c SPC" . helm-all-mark-rings)
-	     ("C-x C-f" . helm-find-files)))
-  #+END_SRC
-* Install =helm-swoop=
-  Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha Chua]].
-  #+BEGIN_SRC emacs-lisp
-    (use-package helm-swoop
-      :ensure t
-      :bind
-      (("C-S-s" . helm-swoop)
-       ("M-i" .  helm-swoop)
-       ("M-s s" . helm-swoop)
-       ("M-s M-s" . helm-swoop)
-       ("M-I" . helm-swoop-back-to-last-point)
-       ("C-c M-i" . helm-multi-swoop)
-       ("C-c M-I" . helm-multi-swoop-all)))
-  #+END_SRC
-* Install =helm-xref=
-  #+begin_src emacs-lisp
-    (use-package helm-xref
-      :ensure t)
-  #+end_src
-* Install =ace-window=
-  From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
-  #+BEGIN_SRC emacs-lisp
-    (use-package ace-window
-      :ensure t
-      :defer t
-      :init
-      (progn
-	(global-set-key (kbd "C-x o") 'ace-window)
-	(custom-set-faces
-	 '(aw-leading-char-face
-	   ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
-  #+END_SRC
-* Install =undo-tree=
-  #+BEGIN_SRC emacs-lisp
-    (use-package undo-tree
-      :ensure t
-      :defer t
-      :init (global-undo-tree-mode))
-  #+END_SRC
-* Install =csv-mode=
-  #+BEGIN_SRC emacs-lisp
-    (use-package csv-mode
-      :ensure t
-      :defer t
-      :init
-      (add-hook 'csv-mode-hook 'display-line-numbers))
-  #+END_SRC
-* Install =which-key=
-  #+BEGIN_SRC emacs-lisp
-    (use-package which-key
-      :ensure t
-      :config
-      (which-key-mode))
-  #+END_SRC
-* Install =try= package
-  #+BEGIN_SRC emacs-lisp
-  (use-package try
-    :ensure t)
-  #+END_SRC
-* Install =company=
-  From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
-  #+BEGIN_SRC emacs-lisp
-    (use-package company
-      :ensure t
-      :config
-      (global-company-mode)
-      (setq-default
-       company-idle-delay .2
-       company-minimum-prefix-length 1
-       company-require-match nil
-       company-tooltip-align-annotations t))
-  #+END_SRC
-** Install =company-quickhelp=
-   #+begin_src emacs-lisp
-     (use-package company-quickhelp
+* Convenience packages
+** Install =smart-mode-line=
+   For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
+   #+BEGIN_SRC emacs-lisp
+     (use-package smart-mode-line
+       :ensure t
+       :init
+       (setq sml/no-confirm-load-theme t)
+       (setq sml/theme 'respectful)
+       (sml/setup)
+       :config
+       (use-package nyan-mode
+	 :ensure t
+	 :when (display-graphic-p)
+	 :config
+	 (nyan-mode 1)))
+   #+END_SRC
+** Install =ace-window=
+   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
+   #+BEGIN_SRC emacs-lisp
+     (use-package ace-window
        :ensure t
        :defer t
-       :init (with-eval-after-load 'company
-	       (company-quickhelp-mode)))
+       :init
+       (progn
+	 (global-set-key (kbd "C-x o") 'ace-window)
+	 (custom-set-faces
+	  '(aw-leading-char-face
+	    ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+   #+END_SRC
+** Install =undo-tree=
+   #+BEGIN_SRC emacs-lisp
+     (use-package undo-tree
+       :ensure t
+       :defer t
+       :init (global-undo-tree-mode))
+   #+END_SRC
+** Install =which-key=
+   #+BEGIN_SRC emacs-lisp
+     (use-package which-key
+       :ensure t
+       :config
+       (which-key-mode))
+   #+END_SRC
+** Install =try= package
+   #+BEGIN_SRC emacs-lisp
+   (use-package try
+     :ensure t)
+   #+END_SRC
+** Install =beginend=
+   #+BEGIN_SRC emacs-lisp
+     (when (version<= "25.3" emacs-version)
+       (use-package beginend
+	 :ensure t
+	 :defer t
+	 :init (beginend-global-mode)))
+   #+END_SRC
+** Install =atomic-chrome= to edit text areas in Emacs
+   [[https://github.com/alpha22jp/atomic-chrome][Atomic chrome]] allows editing text from a text area within browser using Emacs. Since I use Firefox I [[https://github.com/GhostText/GhostText][GhostText extension]] needs to be installed in Firefox in order for this to work.
+   #+begin_src emacs-lisp
+     (use-package atomic-chrome
+       :ensure t
+       :when (display-graphic-p)
+       :config
+       (progn
+	 (setq atomic-chrome-buffer-open-style 'frame
+	     atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
+						  ("reddit\\.com" . markdown-mode)))
+	 (atomic-chrome-start-server)))
    #+end_src
-* Install =yasnippet=
-  #+begin_src emacs-lisp
-    (use-package yasnippet
-      :ensure t
-      :config
-      (progn
-	(use-package yasnippet-snippets :ensure t)
-	(yas-global-mode 1)))
-
-  #+end_src
+* Helm
+** Install =helm=
+   #+BEGIN_SRC emacs-lisp
+     ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
+     ;; other various sources
+     (use-package helm
+       :ensure t
+       :diminish helm-mode
+       :init
+       (progn
+	 (require 'helm-config)
+	 (setq helm-candidate-number-limit 100)
+	 ;; From https://gist.github.com/antifuchs/9238468
+	 (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+	       helm-input-idle-delay 0.01  ; this actually updates things
+					     ; reeeelatively quickly.
+	       helm-yas-display-key-on-candidate t
+	       helm-quick-update t
+	       helm-M-x-requires-pattern nil
+	       helm-ff-skip-boring-files t)
+	 ;; Configuration from https://gist.github.com/m3adi3c/66be1c484d2443ff835b0c795d121ee4#org3ac3590
+	 (setq helm-split-window-in-side-p t ; open helm buffer inside current window, not occupy whole other window
+	       helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
+	       helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+	       helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
+	 (helm-mode)
+	 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+	 (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
+       :bind (("C-c h" . helm-mini)
+	      ("C-h a" . helm-apropos)
+	      ("C-x b" . helm-buffers-list)
+	      ("M-y" . helm-show-kill-ring)
+	      ("M-x" . helm-M-x)
+	      ("C-x c o" . helm-occur)
+	      ("C-x c y" . helm-yas-complete)
+	      ("C-x c Y" . helm-yas-create-snippet-on-region)
+	      ("C-x c SPC" . helm-all-mark-rings)
+	      ("C-x C-f" . helm-find-files)))
+   #+END_SRC
+** Install =helm-swoop=
+   Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha Chua]].
+   #+BEGIN_SRC emacs-lisp
+     (use-package helm-swoop
+       :ensure t
+       :bind
+       (("C-S-s" . helm-swoop)
+	("M-i" .  helm-swoop)
+	("M-s s" . helm-swoop)
+	("M-s M-s" . helm-swoop)
+	("M-I" . helm-swoop-back-to-last-point)
+	("C-c M-i" . helm-multi-swoop)
+	("C-c M-I" . helm-multi-swoop-all)))
+   #+END_SRC
+** Install =helm-xref=
+   #+begin_src emacs-lisp
+     (use-package helm-xref
+       :ensure t)
+   #+end_src
 * Git integration
 ** Install =magit=
    #+BEGIN_SRC emacs-lisp
@@ -404,12 +393,6 @@
    #+begin_example
    machine api.github.com login <username>^forge password <personal token>
    #+end_example
-** Install =git-timemachine=
-   #+BEGIN_SRC emacs-lisp
-     (use-package git-timemachine
-       :ensure t
-       :defer t)
-   #+END_SRC
 ** Install =git-gutter=
    #+BEGIN_SRC emacs-lisp
      (use-package git-gutter
@@ -419,17 +402,45 @@
        (global-git-gutter-mode t)
        :diminish git-gutter-mode)
    #+END_SRC
-* Install =eldoc=
-  #+begin_src emacs-lisp
-    (use-package eldoc
+* Completion configuration
+** Install =company=
+   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+       :ensure t
+       :config
+       (global-company-mode)
+       (setq-default
+	company-idle-delay .2
+	company-minimum-prefix-length 1
+	company-require-match nil
+	company-tooltip-align-annotations t))
+   #+END_SRC
+** Install =company-quickhelp=
+   #+begin_src emacs-lisp
+     (use-package company-quickhelp
+       :ensure t
+       :defer t
+       :init (with-eval-after-load 'company
+	       (company-quickhelp-mode)))
+   #+end_src
+* Install =csv-mode=
+  #+BEGIN_SRC emacs-lisp
+    (use-package csv-mode
       :ensure t
       :defer t
-      :hook ((emacs-lisp-mode . eldoc-mode)
-	     (eval-expression-minibuffer-setup . eldoc-mode)
-	     (lisp-mode-interactive-mode . eldoc-mode)
-	     (python-mode . eldoc-mode)
-	     (eshell-mode . eldoc-mode)
-	     (org-mode . eldoc-mode)))
+      :init
+      (add-hook 'csv-mode-hook 'display-line-numbers))
+  #+END_SRC
+* Install =yasnippet=
+  #+begin_src emacs-lisp
+    (use-package yasnippet
+      :ensure t
+      :config
+      (progn
+	(use-package yasnippet-snippets :ensure t)
+	(yas-global-mode 1)))
+
   #+end_src
 * Install =projectile=
   When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
@@ -451,49 +462,90 @@
 	  :ensure t
 	  :config (helm-projectile-on))))
   #+END_SRC
-* Install =lsp=
+* Install =eldoc=
   #+begin_src emacs-lisp
-    (defun rp/setup-lsp-mode()
-      (progn
-	(setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-	(lsp-headerline-breadcrumb-mode)
-	(setq-mode-local prog-mode
-			 create-lockfiles nil
-			 make-backup-files nil)
-	(message "Variables create-lockfiles and make-backup-files are set to nil in prog-mode.")))
-
-    (use-package lsp-mode
+    (use-package eldoc
       :ensure t
-      :commands (lsp lsp-deferred)
-      :hook ((prog-mode . lsp)
-	     (lsp-mode . rp/setup-lsp-mode))
-      :init (setq lsp-keymap-prefix "C-c l")
-      :config (lsp-enable-which-key-integration t))
-
-    (use-package lsp-ui
-      :ensure t
-      :config
-      (setq lsp-ui-doc-max-height 20
-	    lsp-ui-doc-max-width 50
-	    lsp-ui-sideline-ignore-duplicate t
-	    lsp-ui-peek-always-show t)
-      :commands lsp-ui-mode)
-
-    (use-package helm-lsp
-      :ensure t
-      :commands helm-lsp-workspace-symbol)
-
-    (use-package company-lsp
-      :disabled
-      :ensure t
-      :commands (company-lsp))
+      :defer t
+      :hook ((emacs-lisp-mode . eldoc-mode)
+	     (eval-expression-minibuffer-setup . eldoc-mode)
+	     (lisp-mode-interactive-mode . eldoc-mode)
+	     (python-mode . eldoc-mode)
+	     (eshell-mode . eldoc-mode)
+	     (org-mode . eldoc-mode)))
   #+end_src
-* Install =dap-mode=
-  #+begin_src emacs-lisp
-    (use-package dap-mode
-      :after lsp-mode
-      :config (dap-auto-configure-mode))
-  #+end_src
+* Programming-related packages
+** Install =lsp=
+   #+begin_src emacs-lisp
+     (defun rp/setup-lsp-mode()
+       (progn
+	 (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+	 (lsp-headerline-breadcrumb-mode)
+	 (setq-mode-local prog-mode
+			  create-lockfiles nil
+			  make-backup-files nil)
+	 (message "Variables create-lockfiles and make-backup-files are set to nil in prog-mode.")))
+
+     (use-package lsp-mode
+       :ensure t
+       :commands (lsp lsp-deferred)
+       :hook ((prog-mode . lsp)
+	      (lsp-mode . rp/setup-lsp-mode))
+       :init (setq lsp-keymap-prefix "C-c l")
+       :config (lsp-enable-which-key-integration t))
+
+     (use-package lsp-ui
+       :ensure t
+       :config
+       (setq lsp-ui-doc-max-height 20
+	     lsp-ui-doc-max-width 50
+	     lsp-ui-sideline-ignore-duplicate t
+	     lsp-ui-peek-always-show t)
+       :commands lsp-ui-mode)
+
+     (use-package helm-lsp
+       :ensure t
+       :commands helm-lsp-workspace-symbol)
+
+     (use-package company-lsp
+       :disabled
+       :ensure t
+       :commands (company-lsp))
+   #+end_src
+** Install =dap-mode=
+   #+begin_src emacs-lisp
+     (use-package dap-mode
+       :after lsp-mode
+       :config (dap-auto-configure-mode))
+   #+end_src
+** Install =yaml-mode=
+   #+begin_src emacs-lisp
+     (use-package yaml-mode
+       :ensure t)
+   #+end_src
+** Install =csharp-mode=
+   For some reason I get the following error when running Emacs under Ubuntu Bash for Windows: =Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode=. As a workaround disable =electric-pair-mode= when =display-graphic-p= returns =nil=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package csharp-mode
+       :ensure t
+       :defer t
+       :init (when (display-graphic-p)
+		 (electric-pair-local-mode 1)))
+   #+END_SRC
+** Install =php-mode=
+   #+begin_src emacs-lisp
+     (use-package php-mode
+       :ensure t
+       :defer t)
+   #+end_src
+** Install modes for working with =Docker=
+   #+begin_src emacs-lisp
+     (use-package dockerfile-mode
+       :ensure t)
+
+     (use-package docker-compose-mode
+       :ensure t)
+   #+end_src
 * Markdown related packages
 ** Install =markdown-mode=
    As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
@@ -526,136 +578,72 @@
        :ensure t
        :bind (("C-c wg" . writegood-mode)))
    #+end_src
-* Change the location of default bookmarks files
-  #+begin_src emacs-lisp
-    (setq bookmark-default-file "~/org/bookmarks"
-	  eww-bookmarks-directory "~/org/")
-  #+end_src
-* Install =yaml-mode=
-  #+begin_src emacs-lisp
-    (use-package yaml-mode
-      :ensure t)
-  #+end_src
-* Install modes for working with =Docker=
-  #+begin_src emacs-lisp
-    (use-package dockerfile-mode
-      :ensure t)
-
-    (use-package docker-compose-mode
-      :ensure t)
-  #+end_src
-* Install =AUCTeX=
-  #+BEGIN_SRC emacs-lisp
-    ;; As described in https://github.com/jwiegley/use-package/issues/379
-    ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
-    (use-package tex-mode
-      :defer t
-      :ensure auctex
-      :init (progn
-	      (setq TeX-auto-save t)
-	      (setq TeX-parse-self t)
-	      (setq-default TeX-master nil)
-	      (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-		    TeX-source-correlate-start-server t)
-	      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-	      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-	      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-	      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-	      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-	      (setq reftex-plug-into-AUCTeX t)))
-  #+END_SRC
-** Install =company-auctex=
-   #+begin_src emacs-lisp
-     (use-package company-auctex
-       :commands (company-auctex
-		  company-auctext-labels
-		  company-auctest-bibs
-		  company-auctex-macros
-		  company-auctext-symbols
-		  company-auctext-environments)
+** Install =AUCTeX=
+   #+BEGIN_SRC emacs-lisp
+     ;; As described in https://github.com/jwiegley/use-package/issues/379
+     ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
+     (use-package tex-mode
        :defer t
-       :hook
-       (tex-mode . (lambda ()
-		     (setq-local company-backends '((company-auctex-labels
-						     company-auctex-bibs
-						     company-auctex-macros
-						     company-auctex-environments
-						     company-auctex-symbols
-						     company-capf))))))
-   #+end_src
-** Install =company-math=
-   #+begin_src emacs-lisp
-     (use-package company-math
+       :ensure auctex
+       :init (progn
+	       (setq TeX-auto-save t)
+	       (setq TeX-parse-self t)
+	       (setq-default TeX-master nil)
+	       (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+		     TeX-source-correlate-start-server t)
+	       (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+	       (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+	       (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+	       (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+	       (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+	       (setq reftex-plug-into-AUCTeX t)))
+   #+END_SRC
+*** Install =company-auctex=
+    #+begin_src emacs-lisp
+      (use-package company-auctex
+	:commands (company-auctex
+		   company-auctext-labels
+		   company-auctest-bibs
+		   company-auctex-macros
+		   company-auctext-symbols
+		   company-auctext-environments)
+	:defer t
+	:hook
+	(tex-mode . (lambda ()
+		      (setq-local company-backends '((company-auctex-labels
+						      company-auctex-bibs
+						      company-auctex-macros
+						      company-auctex-environments
+						      company-auctex-symbols
+						      company-capf))))))
+    #+end_src
+*** Install =company-math=
+    #+begin_src emacs-lisp
+      (use-package company-math
+	:defer t
+	:preface
+	(autoload 'company-math-symbols-latex "company-math")
+	(autoload 'company-latex-commands "company-math")
+	:hook
+	(TeX-mode . (lambda ()
+		      (setq-local company-backends '((company-math-symbols-latex
+						      company-latex-commands
+						      company-capf))))))
+    #+end_src
+** Install =org-re-reveal=
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-re-reveal
+       :ensure t
        :defer t
-       :preface
-       (autoload 'company-math-symbols-latex "company-math")
-       (autoload 'company-latex-commands "company-math")
-       :hook
-       (TeX-mode . (lambda ()
-		     (setq-local company-backends '((company-math-symbols-latex
-						     company-latex-commands
-						     company-capf))))))
-   #+end_src
+       :config
+       (progn
+	 (setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
+   #+END_SRC
 * Install =graphviz-dot-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package graphviz-dot-mode
       :ensure t
       :defer t)
-  #+END_SRC
-* Install =beginend=
-  #+BEGIN_SRC emacs-lisp
-    (when (version<= "25.3" emacs-version)
-      (use-package beginend
-	:ensure t
-	:defer t
-	:init (beginend-global-mode)))
-  #+END_SRC
-* Install =csharp-mode=
-  For some reason I get the following error when running Emacs under Ubuntu Bash for Windows: =Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode=. As a workaround disable =electric-pair-mode= when =display-graphic-p= returns =nil=.
-  #+BEGIN_SRC emacs-lisp
-    (use-package csharp-mode
-      :ensure t
-      :defer t
-      :init (when (display-graphic-p)
-		(electric-pair-local-mode 1)))
-  #+END_SRC
-* Install =php-mode=
-  #+begin_src emacs-lisp
-    (use-package php-mode
-      :ensure t
-      :defer t)
-  #+end_src
-* =org2blog= setup
-  As seen on [[https://vxlabs.com/2014/05/25/emacs-24-with-prelude-org2blog-and-wordpress/][Publish to WordPress with Emacs 24 and org2blog]]. Also [[https://github.com/org2blog/org2blog][GitHub repo]] of the project.
-  #+BEGIN_SRC emacs-lisp
-    ;; (mapc #'(lambda (package)
-    ;; 	  (unless (package-installed-p package)
-    ;; 	    (package-install package)))
-    ;;       '(xml-rpc metaweblog org2blog))
-
-    ;; (setq org-list-allow-alphabetical t)
-    ;; (require 'org2blog-autoloads)
-    ;; (require 'auth-source)
-
-    ;; (let (credentials)
-    ;;   ;; only required if your auth file is not already in the list of auth-sources
-    ;;   ;; (add-to-list 'auth-sources "~/.authinfo")
-    ;;   (setq credentials (auth-source-user-and-password "repierre"))
-    ;;   (setq org2blog/wp-blog-alist
-    ;; 	`(("repierre"
-    ;; 	   :url "https://repierre.wordpress.com/xmlrpc.php"
-    ;; 	   :username ,(car credentials)
-    ;; 	   :password ,(cadr credentials)))))
-
-    ;; (setq org2blog/wp-use-sourcecode-shortcode 't)
-    ;; (setq org2blog/wp-sourcecode-default-params nil)
-    ;; (setq org2blog/wp-sourcecode-langs
-    ;;       '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
-    ;; 	"erlang" "fsharp" "diff" "groovy" "javascript" "java" "javafx" "matlab"
-    ;; 	"objc" "perl" "php" "text" "powershell" "python" "ruby" "scala" "sql"
-    ;; 	"vb" "xml"
-    ;; 	"sh" "emacs-lisp" "lisp" "lua"))
-    ;; (setq org-src-fontify-natively t)
   #+END_SRC
 * Install =pdf-tools=
   =use-package= example configuring =pdf-tools= found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
@@ -665,9 +653,7 @@
       :when (display-graphic-p)
       :config
       (pdf-tools-install)
-      (setq-default pdf-view-display-size 'fit-page)
-      (use-package org-pdfview
-	:ensure t))
+      (setq-default pdf-view-display-size 'fit-page))
   #+END_SRC
 * Install =ledger-mode=
 ** Prerequisites
@@ -730,25 +716,3 @@
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
   #+END_SRC
-* Install =org-re-reveal=
-  #+BEGIN_SRC emacs-lisp
-    (use-package org-re-reveal
-      :ensure t
-      :defer t
-      :config
-      (progn
-	(setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
-  #+END_SRC
-* Install =atomic-chrome= to edit text areas in Emacs
-  [[https://github.com/alpha22jp/atomic-chrome][Atomic chrome]] allows editing text from a text area within browser using Emacs. Since I use Firefox I [[https://github.com/GhostText/GhostText][GhostText extension]] needs to be installed in Firefox in order for this to work.
-  #+begin_src emacs-lisp
-    (use-package atomic-chrome
-      :ensure t
-      :when (display-graphic-p)
-      :config
-      (progn
-	(setq atomic-chrome-buffer-open-style 'frame
-	    atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
-						 ("reddit\\.com" . markdown-mode)))
-	(atomic-chrome-start-server)))
-  #+end_src
