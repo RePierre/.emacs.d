@@ -2,7 +2,7 @@
 * Org mode
   #+begin_src emacs-lisp
     (use-package org
-      :ensure org-plus-contrib
+      :ensure org-contrib
       :config (progn
 		(require 'ox-extra)
 		(ox-extras-activate '(ignore-headlines))

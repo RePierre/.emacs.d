@@ -8,7 +8,9 @@
 ** Initialize/update package sources
    #+BEGIN_SRC emacs-lisp
      (add-to-list 'package-archives
-		  '("melpa" . "https://melpa.org/packages/"))
+		  '("melpa" . "https://melpa.org/packages/") t)
+     (add-to-list 'package-archives
+		  '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
    #+END_SRC
 ** Refresh package contents
    #+BEGIN_SRC emacs-lisp
