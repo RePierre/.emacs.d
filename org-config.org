@@ -13,36 +13,54 @@
 ** Setup =org-ref=
    As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
    #+begin_src emacs-lisp
+     (use-package helm-bibtex
+       :ensure t
+       :init
+       (setq bibtex-completion-bibliography '("~/org/bibliography/references.bib")
+	     bibtex-completion-library-path '("~/org/bibliography/bibtex-pdfs")
+	     bibtex-completion-notes-path "~/org/bibliography/helm-bibtex-notes"
+	     bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+
+	     bibtex-completion-additional-search-fields '(keywords)
+	     bibtex-completion-display-formats
+	     '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+	       (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+	       (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+	       (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+	       (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+	     bibtex-completion-pdf-open-function
+	     (lambda (fpath)
+	       (call-process "open" nil 0 nil fpath))))
+
      (use-package org-ref
        :ensure t
-       :init(progn
-	      (defun my/org-ref-open-pdf-at-point ()
-		"Open the pdf for bibtex key under point if it exists."
-		(interactive)
-		(let* ((results (org-ref-get-bibtex-key-and-file))
-		       (key (car results))
-		       (pdf-file (car (bibtex-completion-find-pdf key))))
-		  (if (file-exists-p pdf-file)
-		      (org-open-file pdf-file)
-		    (message "No PDF found for %s" key))))
+       :init
+       (require 'bibtex)
+       (setq bibtex-autokey-year-length 4
+	     bibtex-autokey-name-year-separator "-"
+	     bibtex-autokey-year-title-separator "-"
+	     bibtex-autokey-titleword-separator "-"
+	     bibtex-autokey-titlewords 2
+	     bibtex-autokey-titlewords-stretch 1
+	     bibtex-autokey-titleword-length 5)
+       (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
+       (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+       (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
+       (require 'org-ref-helm)
+       (require 'org-ref-arxiv)
+       (require 'org-ref-scopus)
+       (require 'org-ref-wos))
 
-	      (setq reftex-default-bibliography '("~/org/bibliography/references.bib"))
-	      ;; see org-ref for use of these variables
-	      (setq org-ref-bibliography-notes "~/org/bibliography/notes.org"
-		    org-ref-default-bibliography '("~/org/bibliography/references.bib")
-		    org-ref-pdf-directory "~/org/bibliography/bibtex-pdfs/")
 
-	      (setq bibtex-completion-bibliography "~/org/bibliography/references.bib"
-		    bibtex-completion-library-path "~/org/bibliography/bibtex-pdfs"
-		    bibtex-completion-notes-path "~/org/bibliography/helm-bibtex-notes")
+     (use-package org-ref-helm
+       :ensure nil
+       :load-path (lambda()(expand-file-name "elpa/org-ref" user-emacs-directory))
+       :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+		   org-ref-insert-cite-function 'org-ref-cite-insert-helm
+		   org-ref-insert-label-function 'org-ref-insert-label-link
+		   org-ref-insert-ref-function 'org-ref-insert-ref-link
+		   org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
 
-	      (setq org-latex-pdf-process
-		    '("pdflatex -interaction nonstopmode -output-directory %o %f"
-		      "bibtex %b"
-		      "pdflatex -interaction nonstopmode -output-directory %o %f"
-		      "pdflatex -interaction nonstopmode -output-directory %o %f"))
-	      (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
-	      (require 'org-ref)))
    #+end_src
 ** Setup =org-cliplink=
    #+begin_src emacs-lisp
