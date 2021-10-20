@@ -517,6 +517,7 @@
 ** Install =dap-mode=
    #+begin_src emacs-lisp
      (use-package dap-mode
+       :ensure t
        :after lsp-mode
        :config (dap-auto-configure-mode))
    #+end_src
