@@ -125,8 +125,8 @@
 ** Setup =org-capture-templates=
    #+BEGIN_SRC emacs-lisp
      (setq org-capture-templates
-	   '(("t" "Todo [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Inbox") "* TODO %i%?")
-	     ("k" "Org-cliplink capture [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Inbox") "* TODO %(org-cliplink-capture)")
+	   '(("n" "Note [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Inbox") "* %i%? \n  %U")
+	     ("k" "Org-cliplink capture [inbox]" entry (file+headline "~/org/gtd/inbox.org" "Inbox") "* %(org-cliplink-capture)")
 	     ("j" "Journal Entry" entry (file+olp+datetree "~/org/journal.org") "* %?")
 	     ("b" "Blog article idea" entry (file+headline "~/org/blogging.org" "Blog articles") "* IDEA %? \n %U")
 	     ("T" "Tickler" entry (file+headline "~/org/gtd/tickler.org" "Tickler") "* %i%? \n %U")
