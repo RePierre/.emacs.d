@@ -228,11 +228,16 @@
        :ensure t
        :when (display-graphic-p)
        :config
-       (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
-				("19:30" . sanityinc-tomorrow-night)))
+       (if (and
+            (bound-and-true-p calendar-latitude)
+            (bound-and-true-p calendar-longitude))
+         (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
+                                  (:sunset . sanityinc-tomorrow-night)))
+         (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
+                                  ("19:30" . sanityinc-tomorrow-night))))
        (add-hook 'circadian-after-load-theme-hook
-		 #'(lambda (theme)
-		     (sml/apply-theme 'respectful)))
+                 #'(lambda (theme)
+                     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
 * Load =org-babel= languages
