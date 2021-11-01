@@ -4,7 +4,6 @@
     (use-package org
       :ensure org-contrib
       :config (progn
-                (add-hook 'org-mode-hook 'org-indent-mode)
                 (require 'ox-extra)
                 (ox-extras-activate '(ignore-headlines))
 
