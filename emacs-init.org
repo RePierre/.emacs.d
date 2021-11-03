@@ -229,15 +229,19 @@
        :when (display-graphic-p)
        :config
        (if (and
-            (bound-and-true-p calendar-latitude)
-            (bound-and-true-p calendar-longitude))
-         (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
-                                  (:sunset . sanityinc-tomorrow-night)))
-         (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
-                                  ("19:30" . sanityinc-tomorrow-night))))
+	    (bound-and-true-p calendar-latitude)
+	    (bound-and-true-p calendar-longitude))
+	   (progn
+	     (message "Latitude and longitude are set; themes will change according to sunset and sunrise.")
+	     (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
+				      (:sunset . sanityinc-tomorrow-night))))
+	 (progn
+	   (message "Latitude and longitude not set; themes will change at 8:00 and 19:30.")
+	   (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
+				    ("19:30" . sanityinc-tomorrow-night)))))
        (add-hook 'circadian-after-load-theme-hook
-                 #'(lambda (theme)
-                     (sml/apply-theme 'respectful)))
+		 #'(lambda (theme)
+		     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
 * Load =org-babel= languages
