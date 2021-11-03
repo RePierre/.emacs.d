@@ -1,3 +1,4 @@
+#+property: header-args    :results silent
 * Python development
   =lsp= setup is from [[https://emacs-lsp.github.io/lsp-mode/page/installation/#use-package][LSP-mode page]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
 ** Install =pyvenv=
@@ -124,19 +125,10 @@
 	 :defer t
 	 :init (global-flycheck-mode)))
    #+END_SRC
-** Install =RealGUD=
-   [[https://github.com/realgud/realgud/][GitHub repository]].
-   #+BEGIN_SRC emacs-lisp
-     (unless (eq system-type 'cygwin )
-       (use-package realgud
-	 :defer t
-	 :ensure t))
-   #+END_SRC
 ** Install =smartparens=
    #+BEGIN_SRC emacs-lisp
      (use-package smartparens
        :ensure t
-       :defer t
        :diminish smartparens-mode
        :config
        (add-hook 'prog-mode-hook 'smartparens-mode))
@@ -145,7 +137,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-delimiters
        :ensure t
-       :defer t
        :config
        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
    #+END_SRC
