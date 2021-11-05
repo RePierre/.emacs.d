@@ -1,4 +1,4 @@
-
+#+property: header-args :results silent
 * Org mode
   :PROPERTIES:
   :header-args:emacs-lisp: :results none
@@ -211,4 +211,18 @@
 
     (setq org-columns-default-format
 	  "%38ITEM(Details) %TAGS(Context) %7TODO(To Do) %5Effort(Time){:} %6CLOCKSUM{Total}")
+  #+end_src
+* Install =org-roam=
+  #+begin_src emacs-lisp
+    (use-package org-roam
+      :ensure t
+      :init
+      (setq org-roam-v2-ack t)
+      :custom
+      (org-roam-directory "~/org/roam")
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+	     ("C-c n f" . org-roam-node-find)
+	     ("C-c n i" . org-roam-node-insert))
+      :config
+      (org-roam-setup))
   #+end_src
