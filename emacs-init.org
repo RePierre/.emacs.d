@@ -180,7 +180,8 @@
    #+end_src
 ** Ask for confirmation before exiting Emacs
    #+begin_src emacs-lisp
-     (setq confirm-kill-emacs 'y-or-n-p)
+     (unless (daemonp)
+       (setq confirm-kill-emacs 'y-or-n-p))
    #+end_src
 ** Show numbers in =company= suggestions
    To select a specific suggestion use =M+<num>=.
