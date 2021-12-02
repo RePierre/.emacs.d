@@ -61,3 +61,6 @@ emacsql-sqlite.exe
 /recentf
 /session.*
 /workspace/
+
+# Ignore org-roam database file
+/org-roam.db
