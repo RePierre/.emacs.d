@@ -285,38 +285,38 @@ This is mostly for multicites and natbib."
      (list :version 2 :references (cl-loop for key in (split-string path ",") collect
 					   (list :key (string-trim key)))))
     (3 (let ((citation-references (split-string path ";"))
-  (these-results '(:version 3)))
-    ;; if the first ref doesn't match a key, it must be a global prefix
-    ;; this pops the referenc off.
-    (when (null (string-match org-ref-citation-key-re (cl-first citation-references)))
-      (setq these-results (append these-results (list :prefix (cl-first citation-references)))
-	    citation-references (cdr citation-references)))
+	     (these-results '(:version 3)))
+	 ;; if the first ref doesn't match a key, it must be a global prefix
+	 ;; this pops the referenc off.
+	 (when (null (string-match org-ref-citation-key-re (cl-first citation-references)))
+	   (setq these-results (append these-results (list :prefix (cl-first citation-references)))
+		 citation-references (cdr citation-references)))
 
-    ;; if the last ref doesn't match a key, then it is a global suffix
-    ;; we remove the last one if this is true after getting the suffix.
-    (when (null (string-match org-ref-citation-key-re (car (last citation-references))))
-      (setq these-results (append these-results (list :suffix (car (last citation-references))))
-	    citation-references (butlast citation-references)))
+	 ;; if the last ref doesn't match a key, then it is a global suffix
+	 ;; we remove the last one if this is true after getting the suffix.
+	 (when (null (string-match org-ref-citation-key-re (car (last citation-references))))
+	   (setq these-results (append these-results (list :suffix (car (last citation-references))))
+		 citation-references (butlast citation-references)))
 
-    (setq these-results
-	  (append these-results
-		  (list
-		   :references
-		   (cl-loop for s in citation-references collect
-			    (if (null (string-match org-ref-citation-key-re s))
-				(error "No label found")
-			      (let* ((key (match-string-no-properties 1 s))
-				     (key-start (match-beginning 0))
-				     (key-end (match-end 0))
-				     (prefix (let ((p (substring s 0 key-start)))
-					       (if (string= "" (string-trim p))
-						   nil
-						 p)))
-				     (suffix (let ((s (substring s key-end)))
-					       (if (string= "" (string-trim s))
-						   nil
-						 s))))
-				(list :key key :prefix prefix :suffix suffix)))))))))))
+	 (setq these-results
+	       (append these-results
+		       (list
+			:references
+			(cl-loop for s in citation-references collect
+				 (if (null (string-match org-ref-citation-key-re s))
+				     (error "No matching key found in %s" s)
+				   (let* ((key (match-string-no-properties 1 s))
+					  (key-start (match-beginning 0))
+					  (key-end (match-end 0))
+					  (prefix (let ((p (substring s 0 key-start)))
+						    (if (string= "" (string-trim p))
+							nil
+						      p)))
+					  (suffix (let ((s (substring s key-end)))
+						    (if (string= "" (string-trim s))
+							nil
+						      s))))
+				     (list :key key :prefix prefix :suffix suffix)))))))))))
 
 
 (defun org-ref-interpret-cite-data (data)
@@ -370,29 +370,47 @@ fast, but also up to date."
   (unless bibtex-completion-display-formats-internal
     (bibtex-completion-init))
 
-  (let ((files (org-ref-find-bibliography)))
-    (if (seq-every-p 'identity (cl-loop for file in files
-					collect (assoc file bibtex-completion-cache)))
+  (let* ((files (org-ref-find-bibliography)))
+    (if (seq-every-p 'identity
+		     (cl-loop for file in files
+			      collect (assoc file bibtex-completion-cache)))
 	;; We have a cache for each file
+	;; bibtex-completion-cache contains (filename md5hash entries)
 	(cl-loop for entry in 
 		 (cl-loop
 		  for file in files
 		  append (cddr (assoc file bibtex-completion-cache)))
 		 collect (cdr (assoc "=key=" (cdr entry))))
-      ;; you need to get a cache
+      ;; you need to get a cache because one or more of the files was not in the cache.
       (let ((bibtex-completion-bibliography files))
 	(cl-loop for entry in (bibtex-completion-candidates)
 		 collect
 		 (cdr (assoc "=key=" (cdr entry))))))))
 
 
+(defvar-local org-ref-valid-keys-hashes nil)
+(defvar-local org-ref-valid-keys-cache  nil)
+
+(defun org-ref-valid-keys-cached ()
+  "Update `org-ref-valid-keys-cache` only when files changed."
+
+  (let ((local-hashes (cons bibtex-completion-bibliography
+                            (mapcar 'cadr bibtex-completion-cache))))
+    (when (not (equal local-hashes org-ref-valid-keys-hashes))
+      (setq-local org-ref-valid-keys-hashes local-hashes)
+      (setq-local org-ref-valid-keys-cache (make-hash-table :test 'equal))
+      (cl-loop for entry in (org-ref-valid-keys)
+               do
+               (puthash entry t org-ref-valid-keys-cache))))
+  org-ref-valid-keys-cache)
+
 (defun org-ref-cite-activate (start end path _bracketp)
   "Activation function for a cite link.
 START and END are the bounds of the link.
 PATH has the citations in it."
-  (let* ((valid-keys (org-ref-valid-keys)) 
-	 valid-key
-	 substrings)
+  (let* ((valid-keys (org-ref-valid-keys-cached))
+	     valid-key
+	     substrings)
     (goto-char start)
     (pcase (org-ref-cite-version path)
       (2
@@ -402,82 +420,84 @@ PATH has the citations in it."
 	 (remove-text-properties start end '(invisible nil)))
        (setq substrings (split-string path ","))
        (cl-loop for key in substrings
-		do
-		;; get to the substring
-		(search-forward key end)
-		(put-text-property (match-beginning 0)
-				   (match-end 0)
-				   'keymap
-				   org-ref-cite-keymap)
-		(put-text-property (match-beginning 0)
-				   (match-end 0)
-				   'cite-key
-				   key)
-		(unless (member (string-trim key) valid-keys)
-		  (put-text-property (match-beginning 0)
-				     (match-end 0)
-				     'face 'org-ref-bad-cite-key-face)
-		  (put-text-property (match-beginning 0)
-				     (match-end 0)
-				     'help-echo "Key not found"))))
+		        do
+		        ;; get to the substring
+		        (search-forward key end)
+		        (put-text-property (match-beginning 0)
+				                   (match-end 0)
+				                   'keymap
+				                   org-ref-cite-keymap)
+		        (put-text-property (match-beginning 0)
+				                   (match-end 0)
+				                   'cite-key
+				                   key)
+		        (unless (gethash (string-trim key) valid-keys nil)
+		          (put-text-property (match-beginning 0)
+				                     (match-end 0)
+				                     'face 'org-ref-bad-cite-key-face)
+		          (put-text-property (match-beginning 0)
+				                     (match-end 0)
+				                     'help-echo "Key not found"))
+                ))
       (3
        (setq substrings (split-string path ";"))
        (cl-loop for i from 0 for s in substrings
-		do
-		;; get to the substring
-		(search-forward s end)
-		(put-text-property (match-beginning 0)
-				   (match-end 0)
-				   'keymap
-				   org-ref-cite-keymap)
-		(let* (key-begin
-		       key-end
-		       key)
+		        do
+		        ;; get to the substring
+		        (search-forward s end)
+		        (put-text-property (match-beginning 0)
+				                   (match-end 0)
+				                   'keymap
+				                   org-ref-cite-keymap)
+		        (let* (key-begin
+		               key-end
+		               key)
 
-		  ;; Look for a key. common pre/post notes do not have keys in them.
-		  (save-match-data
-		    (when (string-match org-ref-citation-key-re s)
-		      (setq key (match-string-no-properties 1 s)
-			    valid-key (member key valid-keys))))
+		          ;; Look for a key. common pre/post notes do not have keys in them.
+		          (save-match-data
+		            (when (string-match org-ref-citation-key-re s)
+		              (setq key (match-string-no-properties 1 s)
+			                valid-key (gethash key valid-keys nil)
+                            )))
 
-		  ;; these are global prefix/suffixes
-		  (when (and (or (= i 0)
-				 (= i (- (length substrings) 1)))
-			     (null key))
-		    (put-text-property (match-beginning 0) (match-end 0)
-				       'face 'org-ref-cite-global-prefix/suffix-face)
-		    (put-text-property (match-beginning 0) (match-end 0)
-				       'help-echo "Global prefix/suffix"))
+		          ;; these are global prefix/suffixes
+		          (when (and (or (= i 0)
+				                 (= i (- (length substrings) 1)))
+			                 (null key))
+		            (put-text-property (match-beginning 0) (match-end 0)
+				                       'face 'org-ref-cite-global-prefix/suffix-face)
+		            (put-text-property (match-beginning 0) (match-end 0)
+				                       'help-echo "Global prefix/suffix"))
 
-		  ;; we have a key. we have to re-search to get its position
-		  (when key
-		    (save-excursion
-		      (save-match-data
-			(search-backward (concat "&" key))
-			(setq key-begin (match-beginning 0)
-			      key-end (match-end 0))))
-		    ;; mark the &
-		    (put-text-property key-begin (+ 1 key-begin) 
-				       'face 'org-ref-cite-&-face)
-		    ;; store key on the whole thing
-		    (put-text-property (match-beginning 0)
-				       (match-end 0)
-				       'cite-key
-				       key)
+		          ;; we have a key. we have to re-search to get its position
+		          (when key
+		            (save-excursion
+		              (save-match-data
+			            (search-backward (concat "&" key))
+			            (setq key-begin (match-beginning 0)
+			                  key-end (match-end 0))))
+		            ;; mark the &
+		            (put-text-property key-begin (+ 1 key-begin)
+				                       'face 'org-ref-cite-&-face)
+		            ;; store key on the whole thing
+		            (put-text-property (match-beginning 0)
+				                       (match-end 0)
+				                       'cite-key
+				                       key)
 
-		    ;; fontify any prefix /suffix text
-		    (put-text-property (match-beginning 0) key-begin
-				       'face 'org-ref-cite-local-prefix/suffix-face)
+		            ;; fontify any prefix /suffix text
+		            (put-text-property (match-beginning 0) key-begin
+				                       'face 'org-ref-cite-local-prefix/suffix-face)
 
-		    (put-text-property key-end (match-end 0)
-				       'face 'org-ref-cite-local-prefix/suffix-face)
+		            (put-text-property key-end (match-end 0)
+				                       'face 'org-ref-cite-local-prefix/suffix-face)
 
-		    ;; bad key activation
-		    (unless valid-key
-		      (put-text-property key-begin key-end
-					 'face 'font-lock-warning-face)
-		      (put-text-property key-begin key-end
-					 'help-echo "Key not found")))))))))
+		            ;; bad key activation
+		            (unless valid-key
+		              (put-text-property key-begin key-end
+					                     'face 'font-lock-warning-face)
+		              (put-text-property key-begin key-end
+					                     'help-echo "Key not found")))))))))
 
 
 ;; * Following citation links

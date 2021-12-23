@@ -8,8 +8,8 @@
 ;; Maintainer: Neil Okamoto <neil.okamoto+melpa@gmail.com>
 ;;             Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/emacsorphanage/git-gutter
-;; Package-Version: 20211002.2345
-;; Package-Commit: c1e51865eb26739052035177846f53476c8605da
+;; Package-Version: 20211222.913
+;; Package-Commit: 9174c74cd607e297d7f14c0595d4c20ebb53847d
 ;; Version: 0.91
 ;; Package-Requires: ((emacs "24.4"))
 
@@ -610,7 +610,7 @@ Argument TEST is the case before BODY execution."
             (make-local-variable 'git-gutter:diffinfos)
             ;;(setq-local git-gutter:start-revision nil)
             (add-hook 'kill-buffer-hook 'git-gutter:kill-buffer-hook nil t)
-            (add-hook 'pre-command-hook 'git-gutter:pre-command-hook)
+            (add-hook 'pre-command-hook 'git-gutter:pre-command-hook t)
             (add-hook 'post-command-hook 'git-gutter:post-command-hook nil t)
             (dolist (hook git-gutter:update-hooks)
               (add-hook hook 'git-gutter nil t))
@@ -624,7 +624,7 @@ Argument TEST is the case before BODY execution."
           (message "Here is not %s work tree" (git-gutter:show-backends)))
         (git-gutter-mode -1))
     (remove-hook 'kill-buffer-hook 'git-gutter:kill-buffer-hook t)
-    (remove-hook 'pre-command-hook 'git-gutter:pre-command-hook)
+    (remove-hook 'pre-command-hook 'git-gutter:pre-command-hook t)
     (remove-hook 'post-command-hook 'git-gutter:post-command-hook t)
     (dolist (hook git-gutter:update-hooks)
       (remove-hook hook 'git-gutter t))
