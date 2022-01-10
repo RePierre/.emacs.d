@@ -47,43 +47,29 @@
 ;;;### (autoloads nil "ob-core" "ob-core.el" "6ed35c309cede94731f23c7d075ec53d")
 ;;; Generated autoloads from ob-core.el
 
-(autoload 'org-babel-execute-safely-maybe "ob-core" "\
+(autoload 'org-babel-execute-safely-maybe "ob-core" nil nil nil)
 
-
-\(fn)" nil nil)
-
-(autoload 'org-babel-execute-maybe "ob-core" "\
-
-
-\(fn)" t nil)
+(autoload 'org-babel-execute-maybe "ob-core" nil t nil)
 
 (autoload 'org-babel-view-src-block-info "ob-core" "\
 Display information on the current source block.
 This includes header arguments, language and name, and is largely
-a window into the `org-babel-get-src-block-info' function.
-
-\(fn)" t nil)
+a window into the `org-babel-get-src-block-info' function." t nil)
 
 (autoload 'org-babel-expand-src-block-maybe "ob-core" "\
 Conditionally expand a source block.
 Detect if this is context for an org-babel src-block and if so
-then run `org-babel-expand-src-block'.
-
-\(fn)" t nil)
+then run `org-babel-expand-src-block'." t nil)
 
 (autoload 'org-babel-load-in-session-maybe "ob-core" "\
 Conditionally load a source block in a session.
 Detect if this is context for an org-babel src-block and if so
-then run `org-babel-load-in-session'.
-
-\(fn)" t nil)
+then run `org-babel-load-in-session'." t nil)
 
 (autoload 'org-babel-pop-to-session-maybe "ob-core" "\
 Conditionally pop to a session.
 Detect if this is context for an org-babel src-block and if so
-then run `org-babel-switch-to-session'.
-
-\(fn)" t nil)
+then run `org-babel-switch-to-session'." t nil)
 
 (autoload 'org-babel-execute-src-block "ob-core" "\
 Execute the current source code block.
@@ -111,9 +97,7 @@ arguments and pop open the results in a preview buffer.
 \(fn &optional ARG INFO PARAMS)" t nil)
 
 (autoload 'org-babel-check-src-block "ob-core" "\
-Check for misspelled header arguments in the current code block.
-
-\(fn)" t nil)
+Check for misspelled header arguments in the current code block." t nil)
 
 (autoload 'org-babel-insert-header-arg "ob-core" "\
 Insert a header argument selecting from lists of common args and values.
@@ -240,14 +224,10 @@ CONTEXT specifies the context of evaluation.  It can be `:eval',
 \(fn &optional INFO CONTEXT)" t nil)
 
 (autoload 'org-babel-hide-result-toggle-maybe "ob-core" "\
-Toggle visibility of result at point.
-
-\(fn)" t nil)
+Toggle visibility of result at point." t nil)
 
 (autoload 'org-babel-goto-src-block-head "ob-core" "\
-Go to the beginning of the current code block.
-
-\(fn)" t nil)
+Go to the beginning of the current code block." t nil)
 
 (autoload 'org-babel-goto-named-src-block "ob-core" "\
 Go to a named source-code block.
@@ -272,9 +252,7 @@ With optional prefix argument ARG, jump backward ARG many source blocks.
 \(fn &optional ARG)" t nil)
 
 (autoload 'org-babel-mark-block "ob-core" "\
-Mark current source block.
-
-\(fn)" t nil)
+Mark current source block." t nil)
 
 ;;;***
 
@@ -410,9 +388,7 @@ Mark current source block.
 (autoload 'org-babel-lob-execute-maybe "ob-lob" "\
 Execute a Library of Babel source block, if appropriate.
 Detect if this is context for a Library Of Babel source block and
-if so then run the appropriate source block from the Library.
-
-\(fn)" t nil)
+if so then run the appropriate source block from the Library." t nil)
 
 (autoload 'org-babel-lob-get-info "ob-lob" "\
 Return internal representation for Library of Babel function call.
@@ -612,14 +588,10 @@ is non-nil, move backward.
 
 (autoload 'org-previous-link "ol" "\
 Move backward to the previous link.
-If the link is in hidden text, expose it.
-
-\(fn)" t nil)
+If the link is in hidden text, expose it." t nil)
 
 (autoload 'org-toggle-link-display "ol" "\
-Toggle the literal or descriptive display of links.
-
-\(fn)" t nil)
+Toggle the literal or descriptive display of links." t nil)
 
 (autoload 'org-store-link "ol" "\
 Store a link to the current location.
@@ -698,15 +670,11 @@ Insert the last link stored in `org-stored-links'.
 
 (autoload 'org-insert-link-global "ol" "\
 Insert a link like Org mode does.
-This command can be called in any mode to insert a link in Org syntax.
-
-\(fn)" t nil)
+This command can be called in any mode to insert a link in Org syntax." t nil)
 
 (autoload 'org-update-radio-target-regexp "ol" "\
 Find all radio targets in this file and update the regular expression.
-Also refresh fontification if needed.
-
-\(fn)" t nil)
+Also refresh fontification if needed." t nil)
 
 ;;;***
 
@@ -716,9 +684,7 @@ Also refresh fontification if needed.
 (autoload 'org-bbdb-anniversaries "ol-bbdb" "\
 Extract anniversaries from BBDB for display in the agenda.
 When called programmatically, this function expects the `date'
-variable to be globally bound.
-
-\(fn)" nil nil)
+variable to be globally bound." nil nil)
 
 ;;;***
 
@@ -775,9 +741,7 @@ variable to be globally bound.
 ;;; Generated autoloads from ol-irc.el
 
 (autoload 'org-irc-store-link "ol-irc" "\
-Dispatch to the appropriate function to store a link to an IRC session.
-
-\(fn)" nil nil)
+Dispatch to the appropriate function to store a link to an IRC session." nil nil)
 
 ;;;***
 
@@ -1224,9 +1188,7 @@ The archive sibling is a sibling of the heading with the heading name
 `org-archive-sibling-heading' and an `org-archive-tag' tag.  If this
 sibling does not exist, it will be created at the end of the subtree.
 
-Archiving time is retained in the ARCHIVE_TIME node property.
-
-\(fn)" t nil)
+Archiving time is retained in the ARCHIVE_TIME node property." t nil)
 
 (autoload 'org-toggle-archive-tag "org-archive" "\
 Toggle the archive tag for the current headline.
@@ -1237,15 +1199,11 @@ the children that do not contain any open TODO items.
 
 (autoload 'org-archive-subtree-default "org-archive" "\
 Archive the current subtree with the default command.
-This command is set with the variable `org-archive-default-command'.
-
-\(fn)" t nil)
+This command is set with the variable `org-archive-default-command'." t nil)
 
 (autoload 'org-archive-subtree-default-with-confirmation "org-archive" "\
 Archive the current subtree with the default command.
-This command is set with the variable `org-archive-default-command'.
-
-\(fn)" t nil)
+This command is set with the variable `org-archive-default-command'." t nil)
 
 ;;;***
 
@@ -1254,9 +1212,7 @@ This command is set with the variable `org-archive-default-command'.
 
 (autoload 'org-attach "org-attach" "\
 The dispatcher for attachment commands.
-Shows a list of commands and prompts for another key to execute a command.
-
-\(fn)" t nil)
+Shows a list of commands and prompts for another key to execute a command." t nil)
 
 (autoload 'org-attach-dired-to-subtree "org-attach" "\
 Attach FILES marked or current file in dired to subtree in other window.
@@ -1369,10 +1325,7 @@ the default behavior.
 
 \(fn &optional SELECT START-TIME)" t nil)
 
-(autoload 'org-clock-toggle-auto-clockout "org-clock" "\
-
-
-\(fn)" t nil)
+(autoload 'org-clock-toggle-auto-clockout "org-clock" nil t nil)
 
 (autoload 'org-clock-in-last "org-clock" "\
 Clock in the last closed clocked item.
@@ -1396,9 +1349,7 @@ to, overriding the existing value of `org-clock-out-switch-to-state'.
 \(fn &optional SWITCH-TO-STATE FAIL-QUIETLY AT-TIME)" t nil)
 
 (autoload 'org-clock-cancel "org-clock" "\
-Cancel the running clock by removing the start timestamp.
-
-\(fn)" t nil)
+Cancel the running clock by removing the start timestamp." t nil)
 
 (autoload 'org-clock-goto "org-clock" "\
 Go to the currently clocked-in entry, or to the most recently clocked one.
@@ -1448,9 +1399,7 @@ If NOREMOVE is nil, remove this function from the
 (autoload 'org-clock-out-if-current "org-clock" "\
 Clock out if the current entry contains the running clock.
 This is used to stop the clock after a TODO entry is marked DONE,
-and is only done if the variable `org-clock-out-when-done' is not nil.
-
-\(fn)" nil nil)
+and is only done if the variable `org-clock-out-when-done' is not nil." nil nil)
 
 (autoload 'org-clock-get-clocktable "org-clock" "\
 Get a formatted clocktable with parameters according to PROPS.
@@ -1497,9 +1446,7 @@ Write the standard clocktable.
 
 (autoload 'org-clock-update-time-maybe "org-clock" "\
 If this is a CLOCK line, update it and return t.
-Otherwise, return nil.
-
-\(fn)" t nil)
+Otherwise, return nil." t nil)
 
 ;;;***
 
@@ -1507,14 +1454,9 @@ Otherwise, return nil.
 ;;; Generated autoloads from org-colview.el
 
 (autoload 'org-columns-remove-overlays "org-colview" "\
-Remove all currently active column overlays.
+Remove all currently active column overlays." t nil)
 
-\(fn)" t nil)
-
-(autoload 'org-columns-get-format-and-top-level "org-colview" "\
-
-
-\(fn)" nil nil)
+(autoload 'org-columns-get-format-and-top-level "org-colview" nil nil nil)
 
 (autoload 'org-columns "org-colview" "\
 Turn on column view on an Org mode file.
@@ -1590,16 +1532,12 @@ PARAMS is a property list of parameters:
 \(fn PARAMS)" nil nil)
 
 (autoload 'org-columns-insert-dblock "org-colview" "\
-Create a dynamic block capturing a column view table.
-
-\(fn)" t nil)
+Create a dynamic block capturing a column view table." t nil)
 
 (eval-after-load 'org '(progn (org-dynamic-block-define "columnview" #'org-columns-insert-dblock)))
 
 (autoload 'org-agenda-columns "org-colview" "\
-Turn on or update column view in the agenda.
-
-\(fn)" t nil)
+Turn on or update column view in the agenda." t nil)
 
 ;;;***
 
@@ -1607,9 +1545,7 @@ Turn on or update column view in the agenda.
 ;;; Generated autoloads from org-compat.el
 
 (autoload 'org-check-version "org-compat" "\
-Try very hard to provide sensible version strings.
-
-\(fn)" nil t)
+Try very hard to provide sensible version strings." nil t)
 
 ;;;***
 
@@ -1681,9 +1617,7 @@ will be built under the headline at point.
 ;;; Generated autoloads from org-duration.el
 
 (autoload 'org-duration-set-regexps "org-duration" "\
-Set duration related regexps.
-
-\(fn)" t nil)
+Set duration related regexps." t nil)
 
 (autoload 'org-duration-p "org-duration" "\
 Non-nil when string S is a time duration.
@@ -1735,9 +1669,7 @@ with \"H:MM:SS\" format, return `h:mm:ss'.  Otherwise, return
 ;;; Generated autoloads from org-element.el
 
 (autoload 'org-element-update-syntax "org-element" "\
-Update parser internals.
-
-\(fn)" t nil)
+Update parser internals." t nil)
 
 (autoload 'org-element-interpret-data "org-element" "\
 Interpret DATA as Org syntax.
@@ -1776,9 +1708,7 @@ the first row of a table, returned element will be the table
 instead of the first row.
 
 When point is at the end of the buffer, return the innermost
-element ending there.
-
-\(fn)" nil nil)
+element ending there." nil nil)
 
 (autoload 'org-element-context "org-element" "\
 Return smallest element or object around point.
@@ -1821,9 +1751,7 @@ Providing it allows for quicker computation.
 ;;; Generated autoloads from org-feed.el
 
 (autoload 'org-feed-update-all "org-feed" "\
-Get inbox items from all feeds in `org-feed-alist'.
-
-\(fn)" t nil)
+Get inbox items from all feeds in `org-feed-alist'." t nil)
 
 (autoload 'org-feed-update "org-feed" "\
 Get inbox items from FEED.
@@ -1918,9 +1846,7 @@ With optional argument FORCE, force the creation of a new ID.
 
 (autoload 'org-id-copy "org-id" "\
 Copy the ID of the entry at point to the kill ring.
-Create an ID if necessary.
-
-\(fn)" t nil)
+Create an ID if necessary." t nil)
 
 (autoload 'org-id-get "org-id" "\
 Get the ID property of the entry at point-or-marker POM.
@@ -1944,9 +1870,7 @@ If necessary, the ID is created.
 (autoload 'org-id-get-with-outline-drilling "org-id" "\
 Use an outline-cycling interface to retrieve the ID of an entry.
 This only finds entries in the current buffer, using `org-goto-location'.
-It returns the ID of the entry.  If necessary, the ID is created.
-
-\(fn)" nil nil)
+It returns the ID of the entry.  If necessary, the ID is created." nil nil)
 
 (autoload 'org-id-goto "org-id" "\
 Switch to the buffer containing the entry with id ID.
@@ -1996,9 +1920,7 @@ Query the id database for the file in which ID is located.
 Store a link to the current entry, using its ID.
 
 If before first heading store first title-keyword as description
-or filename if no title.
-
-\(fn)" t nil)
+or filename if no title." t nil)
 
 ;;;***
 
@@ -2007,6 +1929,11 @@ or filename if no title.
 
 (autoload 'org-indent-mode "org-indent" "\
 When active, indent text according to outline structure.
+
+If called interactively, enable Org-Indent mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp, also
+enable the mode if ARG is omitted or nil, and toggle it if ARG is
+`toggle'; disable the mode otherwise.
 
 Internally this works by adding `line-prefix' and `wrap-prefix'
 properties, after each buffer modification, on the modified zone.
@@ -2031,9 +1958,7 @@ during idle time.
 ;;; Generated autoloads from org-keys.el
 
 (autoload 'org-babel-describe-bindings "org-keys" "\
-Describe all keybindings behind `org-babel-key-prefix'.
-
-\(fn)" t nil)
+Describe all keybindings behind `org-babel-key-prefix'." t nil)
 
 ;;;***
 
@@ -2058,6 +1983,11 @@ ARG can also be a list of checker names, as symbols, to run.
 
 (autoload 'org-list-checkbox-radio-mode "org-list" "\
 When turned on, use list checkboxes as radio buttons.
+
+If called interactively, enable Org-List-Checkbox-Radio mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called from
+Lisp, also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -2086,16 +2016,12 @@ Load FILE with optional arguments NOERROR and MUSTSUFFIX.
 (autoload 'org-mobile-push "org-mobile" "\
 Push the current state of Org affairs to the target directory.
 This will create the index file, copy all agenda files there, and also
-create all custom agenda views, for upload to the mobile phone.
-
-\(fn)" t nil)
+create all custom agenda views, for upload to the mobile phone." t nil)
 
 (autoload 'org-mobile-pull "org-mobile" "\
 Pull the contents of `org-mobile-capture-file' and integrate them.
 Apply all flagged actions, flag entries to be flagged and then call an
-agenda view showing the flagged items.
-
-\(fn)" t nil)
+agenda view showing the flagged items." t nil)
 
 ;;;***
 
@@ -2117,6 +2043,11 @@ NUMBERING is a list of numbers.
 
 (autoload 'org-num-mode "org-num" "\
 Dynamic numbering of headlines in an Org buffer.
+
+If called interactively, enable Org-Num mode if ARG is positive, and
+disable it if ARG is zero or negative.  If called from Lisp, also
+enable the mode if ARG is omitted or nil, and toggle it if ARG is
+`toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -2152,9 +2083,7 @@ line directly before or after the table.
 ;;; Generated autoloads from org-refile.el
 
 (autoload 'org-refile-copy "org-refile" "\
-Like `org-refile', but preserve the refiled subtree.
-
-\(fn)" t nil)
+Like `org-refile', but preserve the refiled subtree." t nil)
 
 (autoload 'org-refile-reverse "org-refile" "\
 Refile while temporarily toggling `org-reverse-note-order'.
@@ -2229,14 +2158,17 @@ prefix argument (`C-u C-u C-u C-c C-w').
 (autoload 'org-table-header-line-mode "org-table" "\
 Display the first row of the table at point in the header line.
 
+If called interactively, enable Org-Table-Header-Line mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called from
+Lisp, also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
 \(fn &optional ARG)" t nil)
 
 (autoload 'org-table-create-with-table\.el "org-table" "\
 Use the table.el package to insert a new table.
 If there is already a table at point, convert between Org tables
-and table.el tables.
-
-\(fn)" t nil)
+and table.el tables." t nil)
 
 (autoload 'org-table-create-or-convert-from-region "org-table" "\
 Convert region to table, or create an empty table.
@@ -2315,26 +2247,18 @@ a table.
 
 (autoload 'org-table-next-field "org-table" "\
 Go to the next field in the current table, creating new lines as needed.
-Before doing so, re-align the table if necessary.
-
-\(fn)" t nil)
+Before doing so, re-align the table if necessary." t nil)
 
 (autoload 'org-table-previous-field "org-table" "\
 Go to the previous field in the table.
-Before doing so, re-align the table if necessary.
-
-\(fn)" t nil)
+Before doing so, re-align the table if necessary." t nil)
 
 (autoload 'org-table-next-row "org-table" "\
 Go to the next row (same column) in the current table.
-Before doing so, re-align the table if necessary.
-
-\(fn)" t nil)
+Before doing so, re-align the table if necessary." t nil)
 
 (autoload 'org-table-blank-field "org-table" "\
-Blank the current table field or active region.
-
-\(fn)" t nil)
+Blank the current table field or active region." t nil)
 
 (autoload 'org-table-field-info "org-table" "\
 Show info about the current field, and highlight any reference at point.
@@ -2351,48 +2275,32 @@ However, when FORCE is non-nil, create new columns if necessary.
 \(fn N &optional ON-DELIM FORCE)" t nil)
 
 (autoload 'org-table-insert-column "org-table" "\
-Insert a new column into the table.
-
-\(fn)" t nil)
+Insert a new column into the table." t nil)
 
 (autoload 'org-table-move-cell-up "org-table" "\
 Move a single cell up in a table.
-Swap with anything in target cell.
-
-\(fn)" t nil)
+Swap with anything in target cell." t nil)
 
 (autoload 'org-table-move-cell-down "org-table" "\
 Move a single cell down in a table.
-Swap with anything in target cell.
-
-\(fn)" t nil)
+Swap with anything in target cell." t nil)
 
 (autoload 'org-table-move-cell-left "org-table" "\
 Move a single cell left in a table.
-Swap with anything in target cell.
-
-\(fn)" t nil)
+Swap with anything in target cell." t nil)
 
 (autoload 'org-table-move-cell-right "org-table" "\
 Move a single cell right in a table.
-Swap with anything in target cell.
-
-\(fn)" t nil)
+Swap with anything in target cell." t nil)
 
 (autoload 'org-table-delete-column "org-table" "\
-Delete a column from the table.
-
-\(fn)" t nil)
+Delete a column from the table." t nil)
 
 (autoload 'org-table-move-column-right "org-table" "\
-Move column to the right.
-
-\(fn)" t nil)
+Move column to the right." t nil)
 
 (autoload 'org-table-move-column-left "org-table" "\
-Move column to the left.
-
-\(fn)" t nil)
+Move column to the left." t nil)
 
 (autoload 'org-table-move-column "org-table" "\
 Move the current column to the right.  With arg LEFT, move to the left.
@@ -2400,14 +2308,10 @@ Move the current column to the right.  With arg LEFT, move to the left.
 \(fn &optional LEFT)" t nil)
 
 (autoload 'org-table-move-row-down "org-table" "\
-Move table row down.
-
-\(fn)" t nil)
+Move table row down." t nil)
 
 (autoload 'org-table-move-row-up "org-table" "\
-Move table row up.
-
-\(fn)" t nil)
+Move table row up." t nil)
 
 (autoload 'org-table-move-row "org-table" "\
 Move the current table line down.  With arg UP, move it up.
@@ -2432,9 +2336,7 @@ Insert a hline and move to the row below that line.
 \(fn &optional SAME-COLUMN)" t nil)
 
 (autoload 'org-table-kill-row "org-table" "\
-Delete the current row or horizontal line from the table.
-
-\(fn)" t nil)
+Delete the current row or horizontal line from the table." t nil)
 
 (autoload 'org-table-cut-region "org-table" "\
 Copy region in table to the clipboard and blank all relevant fields.
@@ -2478,9 +2380,7 @@ Paste a rectangular region into a table.
 The upper right corner ends up in the current field.  All involved fields
 will be overwritten.  If the rectangle does not fit into the present table,
 the table is enlarged as needed.  The process ignores horizontal separator
-lines.
-
-\(fn)" t nil)
+lines." t nil)
 
 (autoload 'org-table-edit-field "org-table" "\
 Edit table field in a different window.
@@ -2503,9 +2403,7 @@ LOCATION is a buffer position, consider the formulas there.
 
 (autoload 'org-table-maybe-eval-formula "org-table" "\
 Check if the current field starts with \"=\" or \":=\".
-If yes, store the formula and apply it.
-
-\(fn)" nil nil)
+If yes, store the formula and apply it." nil nil)
 
 (autoload 'org-table-rotate-recalc-marks "org-table" "\
 Rotate the recalculation mark in the first column.
@@ -2519,9 +2417,7 @@ of the new mark.
 \(fn &optional NEWCHAR)" t nil)
 
 (autoload 'org-table-maybe-recalculate-line "org-table" "\
-Recompute the current line if marked for it, and if we haven't just done it.
-
-\(fn)" t nil)
+Recompute the current line if marked for it, and if we haven't just done it." t nil)
 
 (autoload 'org-table-eval-formula "org-table" "\
 Replace the table field value at the cursor by the result of a calculation.
@@ -2586,29 +2482,19 @@ with the prefix ARG.
 \(fn &optional ARG)" t nil)
 
 (autoload 'org-table-recalculate-buffer-tables "org-table" "\
-Recalculate all tables in the current buffer.
-
-\(fn)" t nil)
+Recalculate all tables in the current buffer." t nil)
 
 (autoload 'org-table-iterate-buffer-tables "org-table" "\
-Iterate all tables in the buffer, to converge inter-table dependencies.
-
-\(fn)" t nil)
+Iterate all tables in the buffer, to converge inter-table dependencies." t nil)
 
 (autoload 'org-table-edit-formulas "org-table" "\
-Edit the formulas of the current table in a separate buffer.
-
-\(fn)" t nil)
+Edit the formulas of the current table in a separate buffer." t nil)
 
 (autoload 'org-table-toggle-coordinate-overlays "org-table" "\
-Toggle the display of Row/Column numbers in tables.
-
-\(fn)" t nil)
+Toggle the display of Row/Column numbers in tables." t nil)
 
 (autoload 'org-table-toggle-formula-debugger "org-table" "\
-Toggle the formula debugger in tables.
-
-\(fn)" t nil)
+Toggle the formula debugger in tables." t nil)
 
 (autoload 'org-table-toggle-column-width "org-table" "\
 Shrink or expand current column in an Org table.
@@ -2779,17 +2665,18 @@ This function sets up the following dynamically scoped variables:
  `org-table-dlines',
  `org-table-hlines',
  `org-table-local-parameters',
- `org-table-named-field-locations'.
-
-\(fn)" nil nil)
+ `org-table-named-field-locations'." nil nil)
 
 (autoload 'turn-on-orgtbl "org-table" "\
-Unconditionally turn on `orgtbl-mode'.
-
-\(fn)" nil nil)
+Unconditionally turn on `orgtbl-mode'." nil nil)
 
 (autoload 'orgtbl-mode "org-table" "\
 The Org mode table editor as a minor mode for use in other modes.
+
+If called interactively, enable Orgtbl mode if ARG is positive, and
+disable it if ARG is zero or negative.  If called from Lisp, also
+enable the mode if ARG is omitted or nil, and toggle it if ARG is
+`toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -3030,9 +2917,7 @@ With prefix arg STOP, stop it entirely.
 \(fn &optional STOP)" t nil)
 
 (autoload 'org-timer-stop "org-timer" "\
-Stop the relative or countdown timer.
-
-\(fn)" t nil)
+Stop the relative or countdown timer." t nil)
 
 (autoload 'org-timer "org-timer" "\
 Insert a H:MM:SS string from the timer into the buffer.
@@ -3521,14 +3406,10 @@ When ARG is `\\[universal-argument] \\[universal-argument]', display the asynchr
 ;;; Generated autoloads from ox-ascii.el
 
 (autoload 'org-ascii-convert-region-to-ascii "ox-ascii" "\
-Assume region has Org syntax, and convert it to plain ASCII.
-
-\(fn)" t nil)
+Assume region has Org syntax, and convert it to plain ASCII." t nil)
 
 (autoload 'org-ascii-convert-region-to-utf8 "ox-ascii" "\
-Assume region has Org syntax, and convert it to UTF-8.
-
-\(fn)" t nil)
+Assume region has Org syntax, and convert it to UTF-8." t nil)
 
 (autoload 'org-ascii-export-as-ascii "ox-ascii" "\
 Export current buffer to a text buffer.
@@ -3633,6 +3514,11 @@ Return output file name.
 (autoload 'org-beamer-mode "ox-beamer" "\
 Support for editing Beamer oriented Org mode files.
 
+If called interactively, enable Org-Beamer mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp, also
+enable the mode if ARG is omitted or nil, and toggle it if ARG is
+`toggle'; disable the mode otherwise.
+
 \(fn &optional ARG)" t nil)
 
 (autoload 'org-beamer-export-as-latex "ox-beamer" "\
@@ -3734,9 +3620,7 @@ result of this command will be that the BEAMER_env *property* of
 the entry is set.
 
 In addition to this, the command will also set a tag as a visual
-aid, but the tag does not have any semantic meaning.
-
-\(fn)" t nil)
+aid, but the tag does not have any semantic meaning." t nil)
 
 (autoload 'org-beamer-publish-to-latex "ox-beamer" "\
 Publish an Org file to a Beamer presentation (LaTeX).
@@ -3781,9 +3665,7 @@ need into your CSS file.
 
 If you then set `org-html-htmlize-output-type' to `css', calls
 to the function `org-html-htmlize-region-for-paste' will
-produce code that uses these same face definitions.
-
-\(fn)" t nil)
+produce code that uses these same face definitions." t nil)
 
 (autoload 'org-html-export-as-html "ox-html" "\
 Export current buffer to an HTML buffer.
@@ -3821,9 +3703,7 @@ is non-nil.
 Assume the current region has Org syntax, and convert it to HTML.
 This can be used in any buffer.  For example, you can write an
 itemized list in Org syntax in an HTML buffer and use this command
-to convert it.
-
-\(fn)" t nil)
+to convert it." t nil)
 
 (autoload 'org-html-export-to-html "ox-html" "\
 Export current buffer to a HTML file.
@@ -4071,9 +3951,7 @@ is non-nil.
 Assume the current region has Org syntax, and convert it to LaTeX.
 This can be used in any buffer.  For example, you can write an
 itemized list in Org syntax in an LaTeX buffer and use this
-command to convert it.
-
-\(fn)" t nil)
+command to convert it." t nil)
 
 (autoload 'org-latex-export-to-latex "ox-latex" "\
 Export current buffer to a LaTeX file.
@@ -4196,9 +4074,7 @@ non-nil.
 Assume the current region has Org syntax, and convert it to Markdown.
 This can be used in any buffer.  For example, you can write an
 itemized list in Org syntax in a Markdown buffer and use
-this command to convert it.
-
-\(fn)" t nil)
+this command to convert it." t nil)
 
 (autoload 'org-md-export-to-markdown "ox-md" "\
 Export current buffer to a Markdown file.
@@ -4255,9 +4131,7 @@ MathML source to kill ring depending on the value of
 (autoload 'org-odt-export-as-odf-and-open "ox-odt" "\
 Export LaTeX fragment as OpenDocument formula and immediately open it.
 Use `org-odt-export-as-odf' to read LaTeX fragment and OpenDocument
-formula file.
-
-\(fn)" t nil)
+formula file." t nil)
 
 (autoload 'org-odt-export-to-odt "ox-odt" "\
 Export current buffer to a ODT file.
@@ -4500,9 +4374,7 @@ Return output file name.
 Assume the current region has Org syntax, and convert it to Texinfo.
 This can be used in any buffer.  For example, you can write an
 itemized list in Org syntax in an Texinfo buffer and use this
-command to convert it.
-
-\(fn)" t nil)
+command to convert it." t nil)
 
 ;;;***
 

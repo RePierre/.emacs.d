@@ -16,7 +16,7 @@
                   fundamental-mode
                   git-commit-elisp-text-mode))))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-commit" '("global-git-commit-mode" "git-commit-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-commit" '("git-commit-" "global-git-commit-mode")))
 
 ;;;***
 

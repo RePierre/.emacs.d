@@ -16,7 +16,7 @@
 ;;;### (autoloads nil "ob-R" "ob-R.el" (0 0 0 0))
 ;;; Generated autoloads from ob-R.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-R" '("org-babel-" "ob-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-R" '("ob-" "org-babel-")))
 
 ;;;***
 
@@ -122,7 +122,7 @@
 ;;;### (autoloads nil "ob-gnuplot" "ob-gnuplot.el" (0 0 0 0))
 ;;; Generated autoloads from ob-gnuplot.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-gnuplot" '("org-babel-" "*org-babel-gnuplot-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-gnuplot" '("*org-babel-gnuplot-" "org-babel-")))
 
 ;;;***
 
@@ -171,7 +171,7 @@
 ;;;### (autoloads nil "ob-lilypond" "ob-lilypond.el" (0 0 0 0))
 ;;; Generated autoloads from ob-lilypond.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lilypond" '("ob-lilypond-header-args" "org-babel-" "lilypond-mode")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lilypond" '("lilypond-mode" "ob-lilypond-header-args" "org-babel-")))
 
 ;;;***
 
@@ -513,9 +513,7 @@ Load all extensions listed in `org-modules'.
 \(fn &optional FORCE)" nil nil)
 
 (autoload 'org-clock-persistence-insinuate "org" "\
-Set up hooks for clock persistence.
-
-\(fn)" nil nil)
+Set up hooks for clock persistence." nil nil)
 
 (autoload 'org-mode "org" "\
 Outline-based notes management and organizer, alias
@@ -635,9 +633,7 @@ Also follow links and emails as seen by `thing-at-point'.
 This command can be called in any mode to follow an external
 link or a time-stamp that has Org mode syntax.  Its behavior
 is undefined when called on internal links like fuzzy links.
-Raise a user error when there is nothing to follow.
-
-\(fn)" t nil)
+Raise a user error when there is nothing to follow." t nil)
 
 (autoload 'org-offer-links-in-entry "org" "\
 Offer links in the current entry and return the selected link.
@@ -660,9 +656,7 @@ With `\\[universal-argument] \\[universal-argument]' prefix, restrict available 
 (autoload 'org-cycle-agenda-files "org" "\
 Cycle through the files in `org-agenda-files'.
 If the current buffer visits an agenda file, find the next one in the list.
-If the current buffer does not, find the first agenda file.
-
-\(fn)" t nil)
+If the current buffer does not, find the first agenda file." t nil)
 
 (autoload 'org-submit-bug-report "org" "\
 Submit a bug report on Org via mail.
@@ -671,9 +665,7 @@ Don't hesitate to report any problems or inaccurate documentation.
 
 If you don't have setup sending mail from (X)Emacs, please copy the
 output buffer into your mail program, as it gives us important
-information about your Org version and configuration.
-
-\(fn)" t nil)
+information about your Org version and configuration." t nil)
 
 (autoload 'org-reload "org" "\
 Reload all Org Lisp files.
@@ -682,9 +674,7 @@ With prefix arg UNCOMPILED, load the uncompiled versions.
 \(fn &optional UNCOMPILED)" t nil)
 
 (autoload 'org-customize "org" "\
-Call the customize function with org as argument.
-
-\(fn)" t nil)
+Call the customize function with org as argument." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org" '("org-" "turn-on-org-cdlatex")))
 
@@ -925,9 +915,7 @@ subtree.
 
 (autoload 'org-calendar-goto-agenda "org-agenda" "\
 Compute the Org agenda for the calendar date displayed at the cursor.
-This is a command that has to be installed in `calendar-mode-map'.
-
-\(fn)" t nil)
+This is a command that has to be installed in `calendar-mode-map'." t nil)
 
 (autoload 'org-agenda-to-appt "org-agenda" "\
 Activate appointments found in `org-agenda-files'.
@@ -1032,9 +1020,7 @@ of the day at point (if any) or the current HH:MM time.
 \(fn &optional GOTO KEYS)" t nil)
 
 (autoload 'org-capture-import-remember-templates "org-capture" "\
-Set `org-capture-templates' to be similar to `org-remember-templates'.
-
-\(fn)" t nil)
+Set `org-capture-templates' to be similar to `org-remember-templates'." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-capture" '("org-capture-")))
 
@@ -1068,29 +1054,19 @@ Set `org-capture-templates' to be similar to `org-remember-templates'.
 ;;; Generated autoloads from org-crypt.el
 
 (autoload 'org-encrypt-entry "org-crypt" "\
-Encrypt the content of the current headline.
-
-\(fn)" t nil)
+Encrypt the content of the current headline." t nil)
 
 (autoload 'org-decrypt-entry "org-crypt" "\
-Decrypt the content of the current headline.
-
-\(fn)" t nil)
+Decrypt the content of the current headline." t nil)
 
 (autoload 'org-encrypt-entries "org-crypt" "\
-Encrypt all top-level entries in the current buffer.
-
-\(fn)" t nil)
+Encrypt all top-level entries in the current buffer." t nil)
 
 (autoload 'org-decrypt-entries "org-crypt" "\
-Decrypt all entries in the current buffer.
-
-\(fn)" t nil)
+Decrypt all entries in the current buffer." t nil)
 
 (autoload 'org-crypt-use-before-save-magic "org-crypt" "\
-Add a hook to automatically encrypt entries before a file is saved to disk.
-
-\(fn)" nil nil)
+Add a hook to automatically encrypt entries before a file is saved to disk." nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-crypt" '("org-")))
 
@@ -1261,7 +1237,7 @@ Add a hook to automatically encrypt entries before a file is saved to disk.
 ;;;### (autoloads nil "org-pcomplete" "org-pcomplete.el" (0 0 0 0))
 ;;; Generated autoloads from org-pcomplete.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-pcomplete" '("pcomplete/org-mode/" "org-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-pcomplete" '("org-" "pcomplete/org-mode/")))
 
 ;;;***
 
@@ -1323,15 +1299,11 @@ Add a hook to automatically encrypt entries before a file is saved to disk.
 
 (autoload 'org-release "org-version" "\
 The release version of Org.
-Inserted by installing Org mode or when a release is made.
-
-\(fn)" nil nil)
+Inserted by installing Org mode or when a release is made." nil nil)
 
 (autoload 'org-git-version "org-version" "\
 The Git version of Org mode.
-Inserted by installing Org or when a release is made.
-
-\(fn)" nil nil)
+Inserted by installing Org or when a release is made." nil nil)
 
 ;;;***
 

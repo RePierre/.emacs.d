@@ -62,9 +62,7 @@ When GOTO is non-nil, go the note without creating an entry.
 \(fn &optional GOTO)" t nil)
 
 (autoload 'org-roam-dailies-goto-today "org-roam-dailies" "\
-Find the daily-note for today, creating it if necessary.
-
-\(fn)" t nil)
+Find the daily-note for today, creating it if necessary." t nil)
 
 (autoload 'org-roam-dailies-capture-tomorrow "org-roam-dailies" "\
 Create an entry in the daily-note for tomorrow.
@@ -116,9 +114,7 @@ Prefer past dates, unless PREFER-FUTURE is non-nil.
 \(fn &optional PREFER-FUTURE)" t nil)
 
 (autoload 'org-roam-dailies-find-directory "org-roam-dailies" "\
-Find and open `org-roam-dailies-directory'.
-
-\(fn)" t nil)
+Find and open `org-roam-dailies-directory'." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-roam-dailies" '("org-roam-dailies-")))
 
@@ -150,17 +146,20 @@ buffers (that are Org-roam file visiting), keep track of the
 related changes, maintain cache consistency and incrementally
 update the currently active database.
 
+If called interactively, enable Org-Roam-Db-Autosync mode if ARG
+is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
+
 If you need to manually trigger resync of the currently active
 database, see `org-roam-db-sync' command.
 
 \(fn &optional ARG)" t nil)
 
 (autoload 'org-roam-db-autosync-enable "org-roam-db" "\
-Activate `org-roam-db-autosync-mode'.
+Activate `org-roam-db-autosync-mode'." nil nil)
 
-\(fn)" nil nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-roam-db" '("org-roam-d" "emacsql-constraint")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-roam-db" '("emacsql-constraint" "org-roam-d")))
 
 ;;;***
 
@@ -189,9 +188,7 @@ ARG may be any of the following values:
 Migrate all notes from to be compatible with Org-roam v2.
 1. Convert all notes from v1 format to v2.
 2. Rebuild the cache.
-3. Replace all file links with ID links.
-
-\(fn)" t nil)
+3. Replace all file links with ID links." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-roam-migrate" '("org-roam-migrate-")))
 
@@ -248,14 +245,10 @@ The INFO, if provided, is passed to the underlying `org-roam-capture-'.
 
 (autoload 'org-roam-refile "org-roam-node" "\
 Refile node at point to an Org-roam node.
-If region is active, then use it instead of the node at point.
-
-\(fn)" t nil)
+If region is active, then use it instead of the node at point." t nil)
 
 (autoload 'org-roam-extract-subtree "org-roam-node" "\
-Convert current subtree at point to a node, and extract it into a new file.
-
-\(fn)" t nil)
+Convert current subtree at point to a node, and extract it into a new file." t nil)
 
 (autoload 'org-roam-update-org-id-locations "org-roam-node" "\
 Scan Org-roam files to update `org-id' related state.
@@ -314,9 +307,7 @@ Interactively, or when MESSAGE is non-nil, show in the echo area.
 \(fn &optional MESSAGE)" t nil)
 
 (autoload 'org-roam-diagnostics "org-roam-utils" "\
-Collect and print info for `org-roam' issues.
-
-\(fn)" t nil)
+Collect and print info for `org-roam' issues." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-roam-utils" '("org-roam-")))
 

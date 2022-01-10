@@ -10,19 +10,12 @@
 ;;; Generated autoloads from lsp-treemacs.el
 
 (autoload 'lsp-treemacs-symbols "lsp-treemacs" "\
-Show symbols view.
-
-\(fn)" t nil)
+Show symbols view." t nil)
 
 (autoload 'lsp-treemacs-java-deps-list "lsp-treemacs" "\
-Display java dependencies.
+Display java dependencies." t nil)
 
-\(fn)" t nil)
-
-(autoload 'lsp-treemacs-java-deps-follow "lsp-treemacs" "\
-
-
-\(fn)" t nil)
+(autoload 'lsp-treemacs-java-deps-follow "lsp-treemacs" nil t nil)
 
 (defvar lsp-treemacs-sync-mode nil "\
 Non-nil if Lsp-Treemacs-Sync mode is enabled.
@@ -36,6 +29,11 @@ or call the function `lsp-treemacs-sync-mode'.")
 
 (autoload 'lsp-treemacs-sync-mode "lsp-treemacs" "\
 Global minor mode for synchronizing lsp-mode workspace folders and treemacs projects.
+
+If called interactively, enable Lsp-Treemacs-Sync mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -65,10 +63,7 @@ With prefix 2 show both.
 
 \(fn DIRECTION)" t nil)
 
-(autoload 'lsp-treemacs-errors-list "lsp-treemacs" "\
-
-
-\(fn)" t nil)
+(autoload 'lsp-treemacs-errors-list "lsp-treemacs" nil t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-treemacs" '("lsp-treemacs-")))
 
