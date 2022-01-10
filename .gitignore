@@ -64,3 +64,4 @@ emacsql-sqlite.exe
 
 # Ignore org-roam database file
 /org-roam.db
+/.lsp-eslint-choices
