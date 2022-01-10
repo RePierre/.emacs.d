@@ -183,6 +183,7 @@
     (global-set-key (kbd "C-c g") 'gtd)
   #+END_SRC
 * Agenda
+
   #+BEGIN_SRC emacs-lisp
     (setq org-agenda-files
 	  (list "~/org/gtd/inbox.org"
@@ -201,6 +202,25 @@
     (setq org-agenda-skip-deadline-if-done t)
     (setq org-agenda-skip-scheduled-if-done t)
   #+END_SRC
+
+** Define macro for displaying timestamps on workdays
+
+   The following macro will allocate time slots for meetings that are recurring on work days (Monday to Friday).
+
+   Usage example:
+   #+begin_quote
+   * Some meeting
+     <%%(rp/workdays-at "8:30-9:00")>
+   #+end_quote
+
+   #+begin_src emacs-lisp
+     (defmacro rp/workdays-at(time-slot)
+       `(if (memq (calendar-day-of-week date) '(1 2 3 4 5))
+	    (format "%s %s"
+		    (org-format-time-string "%y-%m-%d" (org-today))
+		    ,time-slot)))
+   #+end_src
+
 * Effort estimates
   Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for tasks. Adapted from [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]].
   #+begin_src emacs-lisp
