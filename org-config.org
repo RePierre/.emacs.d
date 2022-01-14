@@ -213,11 +213,14 @@
    #+end_quote
 
    #+begin_src emacs-lisp
-     (defmacro rp/workdays-at(time-slot)
-       `(if (memq (calendar-day-of-week date) '(1 2 3 4 5))
+     (defmacro rp/on-days-at(days time-slot)
+       `(if (memq (calendar-day-of-week date) ,days)
 	    (format "%s %s"
 		    (org-format-time-string "%y-%m-%d" (org-today))
 		    ,time-slot)))
+
+     (defmacro rp/workdays-at(time-slot)
+       `(rp/on-days-at '(1 2 3 4 5) ,time-slot))
    #+end_src
 
 * Effort estimates
