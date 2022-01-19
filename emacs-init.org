@@ -65,14 +65,15 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<f5>") 'revert-buffer)
    #+END_SRC
-** Enable line numbers for various modes
-   #+BEGIN_SRC emacs-lisp
-     ;; python-mode
-     (add-hook 'python-mode-hook 'display-line-numbers)
-
-     ;; emacs-lisp mode
-     (add-hook 'emacs-lisp-mode-hook 'display-line-numbers)
-   #+END_SRC
+** Programming mode(s) tweaks
+*** Enable line numbers
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'prog-mode-hook 'display-line-numbers)
+    #+END_SRC
+*** Highlight current line
+    #+begin_src emacs-lisp
+      (add-hook 'prog-mode-hook 'hl-line-mode)
+    #+end_src
 ** Wrap long lines
    Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
    #+BEGIN_SRC emacs-lisp
