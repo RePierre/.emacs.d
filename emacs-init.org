@@ -1,9 +1,4 @@
 #+property: header-args :results silent
-* Custom functions
-  #+BEGIN_SRC emacs-lisp
-    (defun display-line-numbers()
-      (linum-mode))
-  #+END_SRC
 * Initialization
   Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][this config]] and [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][config of angrybacon]].
 ** Initialize/update package sources
