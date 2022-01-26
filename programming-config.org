@@ -287,3 +287,14 @@
        :after (rjsx-mode)
        :hook (rjsx-mode . prettier-js-mode))
    #+end_src
+* XML
+** Configure =nxml-mode=
+
+   The =nxml-mode= is preinstalled with Emacs; to configure it I copied the [[https://github.com/rememberYou/.emacs.d/blob/master/config.org#xml][configuration from ~rememberYou~]].
+
+   #+begin_src emacs-lisp
+     (use-package nxml-mode
+       :ensure nil
+       :hook (nxml-mode . lsp-deferred)
+       :mode ("\\.\\(xml\\|xsd\\|wsdl\\)\\'"))
+   #+end_src
