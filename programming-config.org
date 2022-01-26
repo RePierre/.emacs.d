@@ -214,11 +214,11 @@
 
 ** Install =web-mode=
 
-   +Stolen from+ Inspired by [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org#php][=web-mode= configuration of ~angrybacon~]].
+   +Stolen from+ Inspired by [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org#php][=web-mode= configuration of ~angrybacon~]] with mode-specification changed.
 
    #+begin_src emacs-lisp
      (use-package web-mode
-       :mode (rx ".php" eos)
+       :mode "\\.php\\'"
        :hook
        (web-mode . sgml-electric-tag-pair-mode)
        :custom
