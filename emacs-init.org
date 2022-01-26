@@ -447,7 +447,7 @@
       :ensure t
       :defer t
       :init
-      (add-hook 'csv-mode-hook 'display-line-numbers))
+      (add-hook 'csv-mode-hook 'display-line-numbers-mode))
   #+END_SRC
 * Install =yasnippet=
   #+begin_src emacs-lisp
