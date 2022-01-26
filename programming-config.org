@@ -298,3 +298,17 @@
        :hook (nxml-mode . lsp-deferred)
        :mode ("\\.\\(xml\\|xsd\\|wsdl\\)\\'"))
    #+end_src
+* YAML
+
+  Github uses =yaml= files for configuring =Github Actions= so from time to time I have to work with =yaml=.
+
+** Install =yaml-mode=
+
+   Once again this snippet was copied from the [[https://github.com/rememberYou/.emacs.d/blob/master/config.org#yaml][configuration of ~rememberYou~]].
+
+   #+begin_src emacs-lisp
+     (use-package yaml-mode
+       :hook (yaml-mode . lsp-deferred)
+       :mode ("\\.\\(yaml\\|yml\\)\\'"))
+   #+end_src
+
