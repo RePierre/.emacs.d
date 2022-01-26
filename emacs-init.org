@@ -65,19 +65,6 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<f5>") 'revert-buffer)
    #+END_SRC
-** Programming mode(s) tweaks
-*** Enable line numbers
-    #+BEGIN_SRC emacs-lisp
-      (add-hook 'prog-mode-hook 'display-line-numbers)
-    #+END_SRC
-*** Highlight current line
-    #+begin_src emacs-lisp
-      (add-hook 'prog-mode-hook 'hl-line-mode)
-    #+end_src
-*** Enable =subword-mode=
-    #+begin_src emacs-lisp
-      (add-hook 'prog-mode-hook 'subword-mode)
-    #+end_src
 ** Wrap long lines
    Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
    #+BEGIN_SRC emacs-lisp
@@ -504,79 +491,6 @@
 	     (eshell-mode . eldoc-mode)
 	     (org-mode . eldoc-mode)))
   #+end_src
-* Programming-related packages
-** Install =lsp=
-   #+begin_src emacs-lisp
-     (defun rp/setup-lsp-mode()
-       (progn
-	 (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-	 (lsp-headerline-breadcrumb-mode)
-	 (setq-mode-local prog-mode
-			  create-lockfiles nil
-			  make-backup-files nil)
-	 (message "Variables create-lockfiles and make-backup-files are set to nil in prog-mode.")))
-
-     (use-package lsp-mode
-       :ensure t
-       :commands (lsp lsp-deferred)
-       :hook ((prog-mode . lsp)
-	      (lsp-mode . rp/setup-lsp-mode))
-       :init (setq lsp-keymap-prefix "C-c l")
-       :config (lsp-enable-which-key-integration t))
-
-     (use-package lsp-ui
-       :ensure t
-       :config
-       (setq lsp-ui-doc-max-height 20
-	     lsp-ui-doc-max-width 50
-	     lsp-ui-sideline-ignore-duplicate t
-	     lsp-ui-peek-always-show t)
-       :commands lsp-ui-mode)
-
-     (use-package helm-lsp
-       :ensure t
-       :commands helm-lsp-workspace-symbol)
-
-     (use-package company-lsp
-       :disabled
-       :ensure t
-       :commands (company-lsp))
-   #+end_src
-** Install =dap-mode=
-   #+begin_src emacs-lisp
-     (use-package dap-mode
-       :ensure t
-       :after lsp-mode
-       :config (dap-auto-configure-mode))
-   #+end_src
-** Install =yaml-mode=
-   #+begin_src emacs-lisp
-     (use-package yaml-mode
-       :ensure t)
-   #+end_src
-** Install =csharp-mode=
-   For some reason I get the following error when running Emacs under Ubuntu Bash for Windows: =Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode=. As a workaround disable =electric-pair-mode= when =display-graphic-p= returns =nil=.
-   #+BEGIN_SRC emacs-lisp
-     (use-package csharp-mode
-       :ensure t
-       :defer t
-       :init (when (display-graphic-p)
-		 (electric-pair-local-mode 1)))
-   #+END_SRC
-** Install =php-mode=
-   #+begin_src emacs-lisp
-     (use-package php-mode
-       :ensure t
-       :defer t)
-   #+end_src
-** Install modes for working with =Docker=
-   #+begin_src emacs-lisp
-     (use-package dockerfile-mode
-       :ensure t)
-
-     (use-package docker-compose-mode
-       :ensure t)
-   #+end_src
 * Markdown related packages
 ** Install =markdown-mode=
    As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
