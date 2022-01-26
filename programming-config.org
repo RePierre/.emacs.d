@@ -312,3 +312,21 @@
        :mode ("\\.\\(yaml\\|yml\\)\\'"))
    #+end_src
 
+* SQL
+
+  For working with =SQL= scripts use the packages from [[https://github.com/rememberYou/.emacs.d/blob/master/config.org#sql][configuration of ~rememberYou~]].
+
+** Install =sql-mode=
+
+   #+begin_src emacs-lisp
+     (use-package sql-mode
+       :ensure t
+       :mode "\\.sql\\'")
+   #+end_src
+
+** Install =sql-indent=
+
+   #+begin_src emacs-lisp
+     (use-package sql-indent
+       :hook (sql-mode . sqlind-minor-mode))
+   #+end_src
