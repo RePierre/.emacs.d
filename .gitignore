@@ -9,12 +9,12 @@ auto-save-list
 
 # Ignore individual files
 /emacs-init.el
-/common-config.el
 /org-config.el
-/python-config.el
-/js-config.el
-/java-config.el
+/programming-config.el
+
+#Ignore backup files
 /*~
+
 /ac-comphist.dat
 /network-security.data
 
