@@ -320,7 +320,7 @@
 
    #+begin_src emacs-lisp
      (use-package sql-mode
-       :ensure t
+       :ensure nil
        :mode "\\.sql\\'")
    #+end_src
 
