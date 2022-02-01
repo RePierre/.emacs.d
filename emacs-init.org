@@ -603,19 +603,30 @@
      sudo apt-get install ledger
    #+END_SRC
 ** Setup =ledger-mode=
-   #+BEGIN_SRC emacs-lisp
-     (use-package ledger-mode
-       :ensure t
-       :defer t
-       :config (progn
-		 (setq ledger-reconcile-default-commodity "RON")
-		 (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")))
+*** Define function to clean buffer when buffer is in =ledger-mode=
+    #+begin_src emacs-lisp
+      (defun rp/clean-ledger-buffer()
+	(when (equal major-mode 'ledger-mode)
+	  (ledger-mode-clean-buffer)))
+    #+end_src
+*** Install and configure =ledger-mode=
+    #+begin_src emacs-lisp
+      (use-package ledger-mode
+	:ensure t
+	:defer t
+	:config (progn
+		  (setq ledger-reconcile-default-commodity "RON")
+		  (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")
+		  (add-hook 'before-save-hook 'rp/clean-ledger-buffer)))
+    #+end_src
+*** Install and configure =flycheck-ledger=
+    #+begin_src emacs-lisp
+      (use-package flycheck-ledger
+	:ensure t
+	:defer t
+	:hook (ledger-mode . flycheck-mode))
+    #+end_src
 
-     (use-package flycheck-ledger
-       :ensure t
-       :defer t
-       :hook (ledger-mode . flycheck-mode))
-   #+END_SRC
 * Read Web feeds using =elfeed=
   Based on [[https://cestlaz.github.io/posts/using-emacs-29-elfeed/][blog post of Mike Zamansky]].
   #+BEGIN_SRC emacs-lisp
