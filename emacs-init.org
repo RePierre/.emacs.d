@@ -211,6 +211,11 @@
    #+begin_src emacs-lisp
      (set-default-coding-systems 'utf-8)
    #+end_src
+** Start Emacs maximized
+   #+begin_src emacs-lisp
+     (add-to-list 'initial-frame-alist
+		  '(fullscreen . maximized))
+   #+end_src
 * Themes
 ** Apply theme
    Use =sanityinc-tomorrow-night= when not running from console; otherwise fallback to =wombat=.
