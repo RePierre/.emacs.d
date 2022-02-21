@@ -208,6 +208,7 @@
    #+begin_src emacs-lisp
      (use-package php-mode
        :ensure t
+       :mode "\\.php\\'"
        :defer t)
    #+end_src
 
@@ -217,7 +218,7 @@
 
    #+begin_src emacs-lisp
      (use-package web-mode
-       :mode "\\.php\\'"
+       ;; :mode "\\.php\\'"
        :disabled t
        :hook
        (web-mode . sgml-electric-tag-pair-mode)
