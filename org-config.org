@@ -133,96 +133,135 @@
      (global-set-key (kbd "C-c c") 'org-capture)
    #+END_SRC
 ** Setup =org-capture-templates=
+
+   Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
+
+   And to avoid duplicating the same code that appends new templates to existing ones, it's better to put that code into a function that can be called multiple times:
    #+BEGIN_SRC emacs-lisp
-     (setq org-capture-templates
-	   '(("n" "Note [inbox]"
-	      entry
-	      (file+headline "~/org/gtd/inbox.org" "Inbox")
-	      "* %i%? \n  %U")
-
-	     ("t" "Task [GTD]"
-	      entry
-	      (file+headline "~/org/gtd/gtd.org" "Tasks")
-	      "* TODO %i%? \n  %U")
-
-	     ("k" "Org-cliplink capture [inbox]"
-	      entry
-	      (file+headline "~/org/gtd/inbox.org" "Inbox")
-	      "* %(org-cliplink-capture)")
-
-	     ("j" "Journal Entry"
-	      entry
-	      (file+olp+datetree "~/org/journal.org")
-	      "* %?")
-
-	     ("b" "Blog article idea"
-	      entry
-	      (file+headline "~/org/blogging.org" "Blog articles")
-	      "* IDEA %? \n %U")
-
-	     ("T" "Tickler"
-	      entry
-	      (file+headline "~/org/gtd/tickler.org" "Tickler")
-	      "* %i%? \n %U")
-
-	     ("p" "PhD related items")
-	     ("pt" "Todo item"
-	      entry
-	      (file+headline "~/org/phd/phd.org" "PhD General")
-	      "* TODO %?")
-
-	     ("pm" "Meeting"
-	      entry
-	      (file+headline "~/org/phd/phd.org" "Calendar")
-	      "* %? \n  %^{Slot}T")
-
-	     ("w" "Work related items")
-	     ("wa" "Work achievement"
-	      entry
-	      (file+olp+datetree "~/org/gtd/work.org")
-	      "* %?")
-
-	     ("wf" "Technical feedback for a colleague"
-	      entry
-	      (file+olp+datetree "~/org/gtd/work.org" "Technical feedback")
-	      "* %?")
-
-	     ("wt" "Todo item"
-	      entry
-	      (file+headline "~/org/gtd/work.org" "Work")
-	      "* TODO %? %(org-set-tags \"WORK\")")
-
-	     ("wm" "Meeting"
-	      entry
-	      (file+headline "~/org/gtd/work.org" "Outlook")
-	      "* %? %(org-set-tags \"WORK\") \n  %^{Slot}T")
-
-	     ("wr" "Retrospective remark"
-	      entry
-	      (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
-	      "* TODO %? \n %U")
-
-	     ("wj" "Journal Entry"
-	      entry
-	      (file+olp+datetree "~/org/gtd/work.org" "Journal")
-	      "* %?")
-
-	     ("i" "Interruptions")
-	     ("iw" "Work-related interruption"
-	      entry
-	      (file+headline "~/org/gtd/work.org" "Interruptions")
-	      "* %? \n" :clock-in t)
-
-	     ("ii" "Iaşi AI related interruption"
-	      entry
-	      (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni")
-	      "* %? \n" :clock-in t)
-
-	     ("ip" "PhD related interruption"
-	      entry
-	      (file+headline "~/org/phd/phd.org" "Întreruperi")
-	      "* %? \n" :clock-in t)))
+     (defun rp/add-org-capture-templates(capture-templates)
+       (setq org-capture-templates
+	     (append org-capture-templates
+		     capture-templates)))
    #+END_SRC
+
+   Now, all that's left to do is split templates into categories and add them using the function above.
+
+*** Uncategorized templates
+
+    Templates that do not have a category, i.e. are accessible via a single key.
+
+    #+begin_src emacs-lisp
+      (rp/add-org-capture-templates
+       '(("n" "Note [inbox]"
+	  entry
+	  (file+headline "~/org/gtd/inbox.org" "Inbox")
+	  "* %i%? \n  %U")
+
+	 ("t" "Task [GTD]"
+	  entry
+	  (file+headline "~/org/gtd/gtd.org" "Tasks")
+	  "* TODO %i%? \n  %U")
+
+	 ("k" "Org-cliplink capture [inbox]"
+	  entry
+	  (file+headline "~/org/gtd/inbox.org" "Inbox")
+	  "* %(org-cliplink-capture)")
+
+	 ("j" "Journal Entry"
+	  entry
+	  (file+olp+datetree "~/org/journal.org")
+	  "* %?")
+
+	 ("b" "Blog article idea"
+	  entry
+	  (file+headline "~/org/blogging.org" "Blog articles")
+	  "* IDEA %? \n %U")
+
+	 ("T" "Tickler"
+	  entry
+	  (file+headline "~/org/gtd/tickler.org" "Tickler")
+	  "* %i%? \n %U")))
+    #+end_src
+
+*** PhD related templates
+
+    Templates related to my PhD activities.
+
+    #+begin_src emacs-lisp
+      (rp/add-org-capture-templates
+       '(("p" "PhD related items")
+	 ("pt" "Todo item"
+	  entry
+	  (file+headline "~/org/phd/phd.org" "PhD General")
+	  "* TODO %?")
+
+	 ("pm" "Meeting"
+	  entry
+	  (file+headline "~/org/phd/phd.org" "Calendar")
+	  "* %? \n  %^{Slot}T")))
+    #+end_src
+
+*** Work related templates
+
+    Templates related to work activities.
+
+    #+begin_src emacs-lisp
+      (rp/add-org-capture-templates
+       '(("w" "Work related items")
+	 ("wa" "Work achievement"
+	  entry
+	  (file+olp+datetree "~/org/gtd/work.org")
+	  "* %?")
+
+	 ("wf" "Technical feedback for a colleague"
+	  entry
+	  (file+olp+datetree "~/org/gtd/work.org" "Technical feedback")
+	  "* %?")
+
+	 ("wt" "Todo item"
+	  entry
+	  (file+headline "~/org/gtd/work.org" "Work")
+	  "* TODO %? %(org-set-tags \"WORK\")")
+
+	 ("wm" "Meeting"
+	  entry
+	  (file+headline "~/org/gtd/work.org" "Outlook")
+	  "* %? %(org-set-tags \"WORK\") \n  %^{Slot}T")
+
+	 ("wr" "Retrospective remark"
+	  entry
+	  (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
+	  "* TODO %? \n %U")
+
+	 ("wj" "Journal Entry"
+	  entry
+	  (file+olp+datetree "~/org/gtd/work.org" "Journal")
+	  "* %?")))
+    #+end_src
+
+*** Templates for interruptions
+
+    Templates to capture interruptions of various sorts.
+
+    #+begin_src emacs-lisp
+      (rp/add-org-capture-templates
+       '(("i" "Interruptions")
+	 ("iw" "Work-related interruption"
+	  entry
+	  (file+headline "~/org/gtd/work.org" "Interruptions")
+	  "* %? \n" :clock-in t)
+
+	 ("ii" "Iaşi AI related interruption"
+	  entry
+	  (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni")
+	  "* %? \n" :clock-in t)
+
+	 ("ip" "PhD related interruption"
+	  entry
+	  (file+headline "~/org/phd/phd.org" "Întreruperi")
+	  "* %? \n" :clock-in t)))
+    #+end_src
+
 ** Setup =org-refile-targets=
    #+BEGIN_SRC emacs-lisp
      (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
