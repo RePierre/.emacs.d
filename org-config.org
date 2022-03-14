@@ -283,9 +283,9 @@
     (defun gtd()
       (interactive)
       (progn
-	(find-file "~/org/gtd/clock-report.org")
-	(find-file "~/org/gtd/gtd.org")
 	(elfeed-load-db-and-open)
+	(find-file "~/org/gtd/gtd.org")
+	(find-file "~/org/bibliography/reading-list.org")
 	(org-agenda-list)))
 
     (global-set-key (kbd "C-c g") 'gtd)
