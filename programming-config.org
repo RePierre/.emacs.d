@@ -265,15 +265,15 @@
        :commands (py-yapf-buffer py-yapf-enable-on-save))
    #+end_src
 ** Install =lsp-python-ms=
-   #+BEGIN_SRC emacs-lisp
-       (use-package lsp-python-ms
-	 :ensure t
-	 :init (setq lsp-python-ms-auto-install-server t)
-	 :hook (python-mode . (lambda ()
-				(py-yapf-enable-on-save)
-				(require 'lsp-python-ms)
-				(lsp))))  ; or lsp-deferred
-   #+END_SRC emacs-lisp
+   #+begin_src emacs-lisp
+     (use-package lsp-python-ms
+       :disabled t
+       :init (setq lsp-python-ms-auto-install-server t)
+       :hook (python-mode . (lambda ()
+			      (py-yapf-enable-on-save)
+			      (require 'lsp-python-ms)
+			      (lsp))))  ; or lsp-deferred
+   #+end_src
 * JavaScript development
 ** Install =rjsx-mode=
    #+begin_src emacs-lisp :results silent
