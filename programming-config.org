@@ -260,7 +260,8 @@
    #+begin_src emacs-lisp
      (use-package py-yapf
        :ensure t
-       :defer t
+       :after (python-mode lsp-mode)
+       :hook (python-mode . py-yapf-enable-on-save)
        :commands (py-yapf-buffer py-yapf-enable-on-save))
    #+end_src
 ** Install =lsp-python-ms=
