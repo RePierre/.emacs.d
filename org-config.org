@@ -210,7 +210,7 @@
        '(("w" "Work related items")
 	 ("wa" "Work achievement"
 	  entry
-	  (file+olp+datetree "~/org/gtd/work.org")
+	  (file+olp+datetree "~/org/gtd/work.org" "Achievements")
 	  "* %?")
 
 	 ("wf" "Technical feedback for a colleague"
