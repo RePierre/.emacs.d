@@ -332,3 +332,10 @@
      (use-package sql-indent
        :hook (sql-mode . sqlind-minor-mode))
    #+end_src
+
+* PowerShell
+
+  #+begin_src emacs-lisp
+    (use-package powershell
+      :ensure t)
+  #+end_src
