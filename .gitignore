@@ -13,7 +13,7 @@ auto-save-list
 /programming-config.el
 
 #Ignore backup files
-/*~
+*~
 
 /ac-comphist.dat
 /network-security.data

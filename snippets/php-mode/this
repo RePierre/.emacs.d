@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: php-this
+# key: this
+# group: common
+# --
+\$this->$0

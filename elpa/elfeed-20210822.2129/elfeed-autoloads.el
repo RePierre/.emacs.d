@@ -10,14 +10,10 @@
 ;;; Generated autoloads from elfeed.el
 
 (autoload 'elfeed-update "elfeed" "\
-Update all the feeds in `elfeed-feeds'.
-
-\(fn)" t nil)
+Update all the feeds in `elfeed-feeds'." t nil)
 
 (autoload 'elfeed "elfeed" "\
-Enter elfeed.
-
-\(fn)" t nil)
+Enter elfeed." t nil)
 
 (autoload 'elfeed-load-opml "elfeed" "\
 Load feeds from an OPML file into `elfeed-feeds'.
@@ -72,9 +68,7 @@ Store a link to an elfeed search or entry buffer.
 When storing a link to an entry, automatically extract all the
 entry metadata.  These can be used in the capture templates as
 %:elfeed-entry-<prop>.  See `elfeed-entry--create' for the list
-of available props.
-
-\(fn)" nil nil)
+of available props." nil nil)
 
 (autoload 'elfeed-link-open "elfeed-link" "\
 Jump to an elfeed entry or search.

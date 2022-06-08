@@ -23,6 +23,11 @@ or call the function `treemacs-icons-dired-mode'.")
 (autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" "\
 Display treemacs icons for each file in a Dired buffer.
 
+If called interactively, enable Treemacs-Icons-Dired mode if ARG
+is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
+
 \(fn &optional ARG)" t nil)
 
 (autoload 'treemacs-icons-dired-enable-once "treemacs-icons-dired" "\
@@ -30,9 +35,7 @@ Enable `treemacs-icons-dired-mode' and remove self from `dired-mode-hook'.
 
 This function is meant to be used as a single-use toggle added to
 `dired-mode-hook' to enable icons for Dired only once, without having to use
-\"with-eval-after-load 'dired\", since Dired tends to be loaded early.
-
-\(fn)" nil nil)
+\"with-eval-after-load 'dired\", since Dired tends to be loaded early." nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons-dired" '("treemacs-icons-dired-")))
 
