@@ -161,6 +161,14 @@
        :after (treemacs magit)
        :ensure t)
    #+end_src
+
+** Install =vterm=
+
+   #+begin_src emacs-lisp
+     (use-package vterm
+       :ensure t)
+   #+end_src
+
 * Programming mode(s) tweaks
 ** Enable line numbers
    #+BEGIN_SRC emacs-lisp
