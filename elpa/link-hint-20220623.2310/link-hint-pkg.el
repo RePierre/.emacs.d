@@ -1,0 +1,2 @@
+;;; Generated package description from link-hint.el  -*- no-byte-compile: t -*-
+(define-package "link-hint" "20220623.2310" "Use avy to open, copy, etc. visible links" '((avy "0.4.0") (emacs "24.4")) :commit "54612293cc4e01df639c41597cb83a633b0f5514" :authors '(("Fox Kiester" . "noct@posteo.net")) :maintainer '("Fox Kiester" . "noct@posteo.net") :keywords '("convenience" "url" "avy" "link" "links" "hyperlink") :url "https://github.com/noctuid/link-hint.el")
