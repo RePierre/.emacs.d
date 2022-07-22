@@ -255,8 +255,11 @@
    #+end_src
 
 * Python development
+
   =lsp= setup is from [[https://emacs-lsp.github.io/lsp-mode/page/installation/#use-package][LSP-mode page]]. Some tricks are adapted from [[https://realpython.com/blog/python/emacs-the-best-python-editor/][Emacs - the best Python editor]].
+
 ** Install =pyvenv=
+
    #+BEGIN_SRC emacs-lisp
      (use-package pyvenv
        :defer t
@@ -264,24 +267,34 @@
        :config (progn
 		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
    #+END_SRC
+
 ** Install =py-yapf=
+
    #+begin_src emacs-lisp
      (use-package py-yapf
        :ensure t
        :after (python-mode lsp-mode)
-       :hook (python-mode . py-yapf-enable-on-save)
        :commands (py-yapf-buffer py-yapf-enable-on-save))
    #+end_src
+
 ** Install =lsp-python-ms=
+
    #+begin_src emacs-lisp
      (use-package lsp-python-ms
        :disabled t
        :init (setq lsp-python-ms-auto-install-server t)
        :hook (python-mode . (lambda ()
-			      (py-yapf-enable-on-save)
 			      (require 'lsp-python-ms)
 			      (lsp))))  ; or lsp-deferred
    #+end_src
+
+** Format python buffers on save
+
+   For some weird reason =py-yapf-enable-on-save= doesn't get attached to =python-mode-hook= when adding a hook through =use-package= so it has to be explicitly set.
+   #+begin_src emacs-lisp
+     (add-hook 'python-mode-hook 'py-yapf-enable-on-save)
+   #+end_src
+
 * JavaScript development
 ** Install =rjsx-mode=
    #+begin_src emacs-lisp :results silent
