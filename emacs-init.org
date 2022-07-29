@@ -688,3 +688,12 @@
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
   #+END_SRC
+
+** Make the =elfeed= entry buffer look nicer using =olivetti=
+
+   #+begin_src emacs-lisp
+     (use-package olivetti
+       :ensure t
+       :config (progn
+		 (add-hook 'elfeed-show-mode-hook 'olivetti-mode t)))
+   #+end_src
