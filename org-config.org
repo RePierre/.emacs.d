@@ -314,7 +314,6 @@
   As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
   #+BEGIN_SRC emacs-lisp
     (add-hook 'org-agenda-mode-hook 'hl-line-mode)
-    (add-hook 'kill-emacs-hook 'elfeed-save-db-and-bury)
 
     (defun gtd()
       (interactive)

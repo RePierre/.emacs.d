@@ -11,6 +11,7 @@ auto-save-list
 /emacs-init.el
 /org-config.el
 /programming-config.el
+/elfeed-config.el
 
 #Ignore backup files
 *~
