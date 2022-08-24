@@ -148,15 +148,6 @@
        :ensure t
        :bind ("C-=" . er/expand-region))
    #+END_SRC
-** Install =org-bullets=
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-bullets
-       :ensure t
-       :when (display-graphic-p)
-       :config
-       (setq org-bullets-bullet-list '("∙"))
-       (add-hook 'org-mode-hook 'org-bullets-mode))
-   #+END_SRC
 ** Unbind <C-z>
    #+BEGIN_SRC emacs-lisp
      (global-unset-key (kbd "C-z"))
@@ -250,19 +241,6 @@
 		     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
-* Load =org-babel= languages
-  #+BEGIN_SRC emacs-lisp
-    (org-babel-do-load-languages
-     (quote org-babel-load-languages)
-     (quote ((emacs-lisp . t)
-	     (dot . t)
-	     (python . t)
-	     (gnuplot . t)
-	     (shell . t)
-	     (org . t)
-	     (latex . t))))
-
-  #+END_SRC
 * Convenience packages
 ** Install =smart-mode-line=
    For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
@@ -591,15 +569,6 @@
 						      company-latex-commands
 						      company-capf))))))
     #+end_src
-** Install =org-re-reveal=
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-re-reveal
-       :ensure t
-       :defer t
-       :config
-       (progn
-	 (setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
-   #+END_SRC
 * Install =graphviz-dot-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package graphviz-dot-mode
