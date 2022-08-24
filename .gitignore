@@ -12,6 +12,7 @@ auto-save-list
 /org-config.el
 /programming-config.el
 /elfeed-config.el
+/after-init.el
 
 #Ignore backup files
 *~
