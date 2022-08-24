@@ -281,7 +281,6 @@
     (defun gtd()
       (interactive)
       (progn
-	(elfeed-load-db-and-open)
 	(find-file "~/org/gtd/gtd.org")
 	(find-file "~/org/bibliography/reading-list.org")
 	(org-agenda-list)))
