@@ -259,7 +259,7 @@
 	 ("wt" "Todo item"
 	  entry
 	  (file+headline "~/org/gtd/work.org" "Work")
-	  "* TODO %? %(org-set-tags \"WORK\")")
+	  "* TODO %?")
 
 	 ("wm" "Meeting"
 	  entry
