@@ -320,7 +320,10 @@
       (progn
 	(find-file "~/org/gtd/gtd.org")
 	(find-file "~/org/bibliography/reading-list.org")
-	(org-agenda-list)))
+	(org-agenda-list)
+	(switch-to-buffer "*Org Agenda*")
+	(delete-other-windows)
+	(org-agenda-redo-all)))
 
     (global-set-key (kbd "C-c g") 'gtd)
   #+END_SRC
