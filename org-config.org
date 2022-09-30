@@ -323,7 +323,7 @@
       (progn
 	(find-file "~/org/gtd/gtd.org")
 	(find-file "~/org/bibliography/reading-list.org")
-	(org-agenda-list)
+	(org-agenda t "r")
 	(switch-to-buffer "*Org Agenda*")
 	(delete-other-windows)
 	(org-agenda-redo-all)))
@@ -369,6 +369,17 @@
 
      (defmacro rp/workdays-at(time-slot)
        `(rp/on-days-at '(1 2 3 4 5) ,time-slot))
+   #+end_src
+
+** Customize agenda view
+
+   #+begin_src emacs-lisp
+     (setq org-agenda-custom-commands
+	   '(("r" "Daily agenda with global todo list"
+	      ((agenda "")
+	       (alltodo ""
+			((org-agenda-skip-function
+			  '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
    #+end_src
 
 * Effort estimates
