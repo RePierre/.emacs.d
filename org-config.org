@@ -18,7 +18,10 @@
 			("READING" . (:foreground "SteelBlue" :weight bold))
 			("WAITING" . (:foreground "IndianRed1" :weight bold))
 			("DONE" . (:foreground "LimeGreen" :weight bold))))
-		(setq org-adapt-indentation t)))
+		(setq org-adapt-indentation t)
+		(setq org-enforce-todo-checkbox-dependencies t)
+		(setq org-enforce-todo-dependencies t)
+		(setq org-blank-before-new-entry (quote ((heading) (plain-list-item))))))
   #+end_src
 ** Setup =org-ref=
    As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
