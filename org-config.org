@@ -203,6 +203,11 @@
 	  (file+headline "~/org/gtd/gtd.org" "Tasks")
 	  "* TODO %i%? \n  %U")
 
+	 ("a" "Appointment"
+	  entry
+	  (file+headline "~/org/gtd/gtd.org" "Calendar")
+	  "* APPT %? \n  %^{Slot}T")
+
 	 ("k" "Org-cliplink capture [inbox]"
 	  entry
 	  (file+headline "~/org/gtd/inbox.org" "Inbox")
