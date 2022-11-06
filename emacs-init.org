@@ -288,7 +288,11 @@
      (use-package undo-tree
        :ensure t
        :defer t
-       :init (global-undo-tree-mode))
+       :init
+       (progn
+	 (setq undo-tree-history-directory-alist
+	       `(("." . ,temporary-file-directory)))
+	 (global-undo-tree-mode)))
    #+END_SRC
 ** Install =which-key=
    #+BEGIN_SRC emacs-lisp
