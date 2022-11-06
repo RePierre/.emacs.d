@@ -202,6 +202,18 @@
    #+begin_src emacs-lisp
      (set-default-coding-systems 'utf-8)
    #+end_src
+** Store all backup and autosave files in the =/tmp= directories
+
+   Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto_save_files_when_quitting_emacs/iv3asi4/][reddit answer]].
+
+   #+begin_src emacs-lisp
+     (setq backup-directory-alist
+	   `((".*" . ,temporary-file-directory)))
+
+     (setq auto-save-file-name-transforms
+	   `((".*" ,temporary-file-directory t)))
+   #+end_src
+
 ** Start Emacs maximized
    #+begin_src emacs-lisp
      (add-to-list 'initial-frame-alist
