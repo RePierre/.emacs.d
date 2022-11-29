@@ -170,10 +170,11 @@
    In =WSL= the variable =system-type= is set to =gnu/linux= which is the same value for =Ubuntu= so this cannot be used to check if running in =WSL=. Luckily this [[https://emacs.stackexchange.com/a/55295/14110][StackExchange answer]] provides the solution: check for variable =operating-system-release=.
    In =WSL1= its value ends in =-Microsoft= and in =WSL2= it ends in =-microsoft-standard=.
    #+begin_src emacs-lisp
-     (defun rp/browse-url-firefox(url &rest args)
+     (defun rp/browse-url-firefox(url)
        "Browse URL using Firefox from Windows when running under WSL.
-     This function calls `shell-command' to pass URL to the Firefox browser located at `/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe'.
-     "
+     This function calls `shell-command' to pass
+     URL to the Firefox browser located at
+     `/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe'."
        (progn
 	 (message "Browsing URL [%s] using external Firefox." url)
 	 (shell-command
