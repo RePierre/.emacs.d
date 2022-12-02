@@ -226,11 +226,9 @@
    #+BEGIN_SRC emacs-lisp
      (use-package color-theme-sanityinc-tomorrow
        :ensure t
-       :when (display-graphic-p)
-       :config (load-theme 'sanityinc-tomorrow-night t))
+       :config (progn
+		 (load-theme 'sanityinc-tomorrow-night t)))
 
-     (when (not (display-graphic-p))
-       (load-theme 'wombat))
    #+END_SRC
 ** Use =circadian= to switch between dark and light themes
    #+begin_src emacs-lisp
@@ -599,7 +597,6 @@
   #+BEGIN_SRC emacs-lisp
     (use-package pdf-tools
       :ensure t
-      :when (display-graphic-p)
       :config
       (pdf-tools-install)
       (setq-default pdf-view-display-size 'fit-page))
