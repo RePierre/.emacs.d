@@ -251,6 +251,17 @@
 
     Templates related to work activities.
 
+**** Utility functions
+
+     #+begin_src emacs-lisp
+       (defun rp/clock-report-template()
+	 "Returns a string that can be used to capture clock report."
+	 (format "     #+BEGIN: clocktable :scope file :maxlevel 4 :block %s\n     #+END:\n"
+		 (format-time-string "%Y-%m-%d")))
+     #+end_src
+
+**** Capture templates
+
     #+begin_src emacs-lisp
       (rp/add-org-capture-templates
        '(("w" "Work related items")
@@ -278,6 +289,13 @@
 	  entry
 	  (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
 	  "* TODO %? \n %U")
+
+	 ("wc" "Clock report"
+	  plain
+	  (file+olp+datetree "~/org/gtd/work.org" "Clock report")
+	  "%(rp/clock-report-template)"
+	  :jump-to-captured t
+	  :immediate-finish t)
 
 	 ("wj" "Journal Entry"
 	  entry
