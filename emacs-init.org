@@ -457,6 +457,18 @@
 
   #+end_src
 * Install =projectile=
+  #+begin_src emacs-lisp
+    (defun rp/try-activate-virtual-environment()
+      "Try to activate the virtual environment.
+    The virtual environment is assumed to be located
+    in directory .venv under projectile root directory."
+      (let* ((project-dir (projectile-project-root))
+	     (venv-dir (concat project-dir ".venv")))
+	(if (file-directory-p venv-dir)
+	    (progn
+	      (message (format "Activating virtual environment from %s." venv-dir))
+	      (pyvenv-activate venv-dir)))))
+  #+end_src
   When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
@@ -468,7 +480,8 @@
       (progn
 	(add-hook 'magit-mode-hook 'projectile-mode)
 	(when (eq system-type 'cygwin)
-	    (setq projectile-indexing-method 'native)))
+	  (setq projectile-indexing-method 'native)))
+      :hook (projectile-mode . rp/try-activate-virtual-environment)
       :config
       (progn
 	(setq projectile-completion-system 'helm)
