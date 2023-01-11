@@ -5,11 +5,7 @@
      (defun rp/setup-lsp-mode()
        (progn
 	 (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-	 (lsp-headerline-breadcrumb-mode)
-	 (setq-mode-local prog-mode
-			  create-lockfiles nil
-			  make-backup-files nil)
-	 (message "Variables create-lockfiles and make-backup-files are set to nil in prog-mode.")))
+	 (lsp-headerline-breadcrumb-mode)))
 
      (use-package lsp-mode
        :ensure t
