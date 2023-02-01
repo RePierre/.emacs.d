@@ -300,7 +300,7 @@
 	 ("wj" "Journal Entry"
 	  entry
 	  (file+olp+datetree "~/org/gtd/work.org" "Journal")
-	  "* %?")))
+	  "* %? \n %U")))
     #+end_src
 
 *** Templates for interruptions
