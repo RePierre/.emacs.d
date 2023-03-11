@@ -354,24 +354,24 @@
     (global-set-key (kbd "C-c g") 'gtd)
   #+END_SRC
 * Agenda
-
-  #+BEGIN_SRC emacs-lisp
-    (setq org-agenda-files
-	  (list "~/org/gtd/inbox.org"
-		"~/org/gtd/gtd.org"
-		"~/org/gtd/work.org"
-		"~/org/gtd/some-day.org"
-		"~/org/gtd/tickler.org"
-		"~/org/gtd/events.org"
-		"~/org/bibliography/reading-list.org"
-		"~/org/blogging.org"
-		"~/org/phd/phd.org"
-		"~/org/iasi.ai/iasi-ai.org")
-	  org-agenda-span 'day)
-    ;; (setq org-agenda-repeating-timestamp-show-all nil)
-    (setq org-agenda-skip-deadline-if-done t)
-    (setq org-agenda-skip-scheduled-if-done t)
-  #+END_SRC
+** Configure agenda
+   #+BEGIN_SRC emacs-lisp
+     (setq org-agenda-files
+	   (list "~/org/gtd/inbox.org"
+		 "~/org/gtd/gtd.org"
+		 "~/org/gtd/work.org"
+		 "~/org/gtd/some-day.org"
+		 "~/org/gtd/tickler.org"
+		 "~/org/gtd/events.org"
+		 "~/org/bibliography/reading-list.org"
+		 "~/org/blogging.org"
+		 "~/org/phd/phd.org"
+		 "~/org/iasi.ai/iasi-ai.org")
+	   org-agenda-span 'day)
+     ;; (setq org-agenda-repeating-timestamp-show-all nil)
+     (setq org-agenda-skip-deadline-if-done t)
+     (setq org-agenda-skip-scheduled-if-done t)
+   #+END_SRC
 
 ** Define macro for displaying timestamps on workdays
 
