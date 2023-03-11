@@ -404,6 +404,26 @@
 			((org-agenda-skip-function
 			  '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
    #+end_src
+** Apply custom colors for specific agenda entries
+
+   Adapted from [[https://emacs.stackexchange.com/questions/23824/defining-different-fonts-color-per-file-in-org-agenda]].
+   #+begin_src emacs-lisp
+     (add-hook 'org-agenda-finalize-hook
+       (lambda ()
+	 (save-excursion
+	   (color-org-header "Zi de naștere:.+" "OrangeRed")
+	   (color-org-header "Aniversări:.+" "DeepPink"))))
+
+     (defun color-org-header (pattern forecolor)
+       "Change the foreground of  org header that matches PATTERN to FORECOLOR."
+       (interactive)
+       (goto-char (point-min))
+       (while (re-search-forward pattern nil t)
+	 (add-text-properties (match-beginning 0) (match-end 0)
+			      `(face (:foreground, forecolor)))))
+
+
+   #+end_src
 
 * Effort estimates
   Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for tasks. Adapted from [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]].
