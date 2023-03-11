@@ -416,7 +416,6 @@
 
      (defun color-org-header (pattern forecolor)
        "Change the foreground of  org header that matches PATTERN to FORECOLOR."
-       (interactive)
        (goto-char (point-min))
        (while (re-search-forward pattern nil t)
 	 (add-text-properties (match-beginning 0) (match-end 0)
