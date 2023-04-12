@@ -158,15 +158,6 @@
        :ensure t)
    #+end_src
 
-** Install =vterm=
-
-   Package =vterm= doesn't work out of the box on =WSL=; as such it will only be used on non-WSL setup.
-   #+begin_src emacs-lisp
-     (unless (string-match "-[Mm]icrosoft" operating-system-release)
-       (use-package vterm
-	 :ensure t))
-   #+end_src
-
 * Programming mode(s) tweaks
 ** Enable line numbers
    #+BEGIN_SRC emacs-lisp
