@@ -1,0 +1,82 @@
+#+title: Configuration of packages for writing
+#+property: header-args :results silent
+
+* Install =writeroom-mode=
+  #+begin_src emacs-lisp
+    (defun on-writeroom-mode-start()
+      (progn
+	(message "Entering writeroom mode.")
+	(company-mode 0)
+	(text-scale-set 2)))
+
+    (defun on-writeroom-mode-end()
+      (progn
+	(message "Exiting writeroom mode.")
+	(company-mode 1)
+	(text-scale-set 0)))
+
+    (use-package writeroom-mode
+      :ensure t
+      :bind (("C-c wr" . writeroom-mode))
+      :init (progn
+	      (add-hook 'writeroom-mode-enable-hook 'on-writeroom-mode-start)
+	      (add-hook 'writeroom-mode-disable-hook 'on-writeroom-mode-end)))
+  #+end_src
+* Install =writegood-mode=
+  #+begin_src emacs-lisp
+    (use-package writegood-mode
+      :ensure t
+      :bind (("C-c wg" . writegood-mode)))
+  #+end_src
+* Install =AUCTeX=
+  #+BEGIN_SRC emacs-lisp
+    ;; As described in https://github.com/jwiegley/use-package/issues/379
+    ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
+    (use-package tex-mode
+      :defer t
+      :ensure auctex
+      :init (progn
+	      (setq TeX-auto-save t)
+	      (setq TeX-parse-self t)
+	      (setq-default TeX-master nil)
+	      (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+		    TeX-source-correlate-start-server t)
+	      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+	      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+	      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+	      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+	      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+	      (setq reftex-plug-into-AUCTeX t)))
+  #+END_SRC
+** Install =company-auctex=
+   #+begin_src emacs-lisp
+     (use-package company-auctex
+       :commands (company-auctex
+		  company-auctext-labels
+		  company-auctest-bibs
+		  company-auctex-macros
+		  company-auctext-symbols
+		  company-auctext-environments)
+       :defer t
+       :hook
+       (tex-mode . (lambda ()
+		     (setq-local company-backends '((company-auctex-labels
+						     company-auctex-bibs
+						     company-auctex-macros
+						     company-auctex-environments
+						     company-auctex-symbols
+						     company-capf))))))
+   #+end_src
+** Install =company-math=
+   #+begin_src emacs-lisp
+     (use-package company-math
+       :defer t
+       :preface
+       (autoload 'company-math-symbols-latex "company-math")
+       (autoload 'company-latex-commands "company-math")
+       :hook
+       (TeX-mode . (lambda ()
+		     (setq-local company-backends '((company-math-symbols-latex
+						     company-latex-commands
+						     company-capf))))))
+   #+end_src
