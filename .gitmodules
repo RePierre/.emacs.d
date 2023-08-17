@@ -1,0 +1,3 @@
+[submodule "org-novelist"]
+	path = submodules/org-novelist
+	url = https://github.com/sympodius/org-novelist
