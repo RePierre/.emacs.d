@@ -346,17 +346,15 @@
   #+BEGIN_SRC emacs-lisp
     (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
-    (defun gtd()
+    (defun rp/gtd()
       (interactive)
       (progn
-	(find-file "~/org/gtd/gtd.org")
-	(find-file "~/org/bibliography/reading-list.org")
 	(org-agenda t "r")
 	(switch-to-buffer "*Org Agenda*")
 	(delete-other-windows)
 	(org-agenda-redo-all)))
 
-    (global-set-key (kbd "C-c g") 'gtd)
+    (global-set-key (kbd "C-c g") 'rp/gtd)
   #+END_SRC
 * Agenda
 ** Configure agenda
