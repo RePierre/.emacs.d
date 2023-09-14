@@ -110,6 +110,25 @@
 	 (message "Enabled automatic export to pdf for current buffer.")))
 
    #+end_src
+
+   It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than the built-in =org-latex-export-to-pdf=; however, it's best to keep them both.
+
+   #+begin_src emacs-lisp
+     (defun org-ref-export-to-pdf()
+       (when (equal major-mode 'org-mode)
+	 (progn
+	   (message "Automatic export will use org-latex-export-to-pdf.")
+	   (org-ref-export-to-pdf))))
+
+     (defun rp/toggle-export-to-pdf-async ()
+       (interactive)
+       (if (memq 'org-ref-export-to-pdf after-save-hook)
+	   (progn
+	     (remove-hook 'after-save-hook 'org-ref-export-to-pdf t)
+	     (message "Disabled automatic export to pdf (via org-ref) for current buffer."))
+	 (add-hook 'after-save-hook 'org-ref-export-to-pdf t t)
+	 (message "Enabled automatic export to pdf (via org-ref) for current buffer.")))
+   #+end_src
 ** Automatically export to html
    #+begin_src emacs-lisp
      (defun rp/export-to-html-async()
