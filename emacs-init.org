@@ -25,7 +25,7 @@
 * Load custom libraries
   #+BEGIN_SRC emacs-lisp
     (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-    (add-to-list 'load-path (expand-file-name "org/lisp" gnus-home-directory))
+    (add-to-list 'load-path (expand-file-name "org/lisp" "~"))
   #+END_SRC
 ** Add =Romanian standard= input method to Emacs
    Emacs comes with two input methods for Romanian: =romanian-alt-prefix= and =romanian-prefix=. However, I'm more accustomed to Romanian standard keyboard layout so I created a =quail= package for it. This will be the default input method.
