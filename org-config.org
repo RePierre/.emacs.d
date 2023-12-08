@@ -238,11 +238,6 @@
 	  (file+headline "~/org/gtd/gtd.org" "Calendar")
 	  "* APPT %? \n  %^{Slot}T")
 
-	 ("f" "Monthly bill [Factură]"
-	  entry
-	  (file+olp+datetree "~/org/gtd/gtd.org" "Facturi")
-	  "* TODO Factura %?\n DEADLINE: %^{Day}t\n %U" :tree-type month)
-
 	 ("k" "Org-cliplink capture [inbox]"
 	  entry
 	  (file+headline "~/org/gtd/inbox.org" "Inbox")
