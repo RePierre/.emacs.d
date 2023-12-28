@@ -394,6 +394,8 @@
 		 "~/org/bibliography/reading-list.org"
 		 "~/org/blogging/blogging.org"
 		 "~/org/phd/phd.org"
+		 "~/org/phd/deloro/deloro.org"
+		 "~/org/phd/edtlr/"
 		 "~/org/iasi.ai/iasi-ai.org")
 	   org-agenda-span 'day)
      ;; (setq org-agenda-repeating-timestamp-show-all nil)
