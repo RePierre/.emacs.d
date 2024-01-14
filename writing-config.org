@@ -71,12 +71,13 @@
   #+begin_src emacs-lisp
     (setq rp/org-novelist-dir
 	  (expand-file-name "submodules/org-novelist/" user-emacs-directory))
-    (use-package org-novelist
+    (when (file-directory-p rp/org-novelist-dir)
+      (use-package org-novelist
       :ensure nil
       :load-path rp/org-novelist-dir
       :custom
 	(org-novelist-language-tag "ro-RO")
 	(org-novelist-author user-full-name)
 	(org-novelist-author-email user-mail-address)
-	(org-novelist-automatic-referencing-p nil))
+	(org-novelist-automatic-referencing-p nil)))
   #+end_src
