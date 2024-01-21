@@ -365,6 +365,9 @@
 				("~/org/gtd/work.org" :maxlevel . 6)
 				("~/org/bibliography/reading-list.org" :maxlevel . 2)
 				("~/org/phd/phd.org" :maxlevel . 4)
+				("~/org/phd/edtlr/edtlr.org" :maxlevel . 4)
+				("~/org/phd/deloro/deloro.org" :maxlevel . 4)
+				("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
 				("~/org/iasi.ai/iasi-ai.org" :level . 1)))
    #+END_SRC
   As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
@@ -396,6 +399,7 @@
 		 "~/org/phd/phd.org"
 		 "~/org/phd/deloro/deloro.org"
 		 "~/org/phd/edtlr/"
+		 "~/org/phd/parlamint/"
 		 "~/org/iasi.ai/iasi-ai.org")
 	   org-agenda-span 'day)
      ;; (setq org-agenda-repeating-timestamp-show-all nil)
