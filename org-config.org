@@ -32,11 +32,28 @@
 		 (setq org-adapt-indentation t)
 		 (setq org-enforce-todo-checkbox-dependencies t)
 		 (setq org-enforce-todo-dependencies t)
-		 ; leave an empty line before a new heading but not before plain list item
+		 ;; leave an empty line before a new heading but not before plain list item
 		 (setq org-blank-before-new-entry (quote ((heading . t)
 							  (plain-list-item . nil))))
+		 ;; C-a, and C-e will move the cursor to the start, and respectively
+		 ;; end of the heading.
+		 (setq org-special-ctrl-a/e t)
+		 (setq org-auto-align-tags t)
 		 (rp/configure-org-goto)))
     #+end_src
+
+*** Enable =org-indent-mode= in all =org= buffers
+
+    #+begin_src emacs-lisp
+      (add-hook 'org-mode-hook 'org-indent-mode)
+    #+end_src
+
+*** Enable =variable-pitch-mode= in all =org= buffers
+
+    #+begin_src emacs-lisp
+      (add-hook 'org-mode-hook 'variable-pitch-mode)
+    #+end_src
+
 ** Setup =org-ref=
    As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
    #+begin_src emacs-lisp
