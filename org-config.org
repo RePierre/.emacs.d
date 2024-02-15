@@ -163,12 +163,14 @@
 ** Setup =org-bullets=
 
    #+begin_src emacs-lisp
+     (defun rp/enable-org-bullets-mode()
+       "Enable 'org-bullets' mode."
+       (org-bullets-mode 1))
+
      (use-package org-bullets
        :ensure t
-       :when (display-graphic-p)
        :config
-       (setq org-bullets-bullet-list '("∙"))
-       (add-hook 'org-mode-hook 'org-bullets-mode))
+       (add-hook 'org-mode-hook 'rp/enable-org-bullets-mode))
    #+end_src
 
 ** Load =org-babel= languages
