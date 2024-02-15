@@ -32,7 +32,9 @@
 		 (setq org-adapt-indentation t)
 		 (setq org-enforce-todo-checkbox-dependencies t)
 		 (setq org-enforce-todo-dependencies t)
-		 (setq org-blank-before-new-entry (quote ((heading) (plain-list-item))))
+		 ; leave an empty line before a new heading but not before plain list item
+		 (setq org-blank-before-new-entry (quote ((heading . t)
+							  (plain-list-item . nil))))
 		 (rp/configure-org-goto)))
     #+end_src
 ** Setup =org-ref=
