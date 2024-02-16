@@ -409,20 +409,21 @@
 ** Configure agenda
    #+BEGIN_SRC emacs-lisp
      (setq org-agenda-files
-	   (list "~/org/gtd/inbox.org"
-		 "~/org/gtd/gtd.org"
-		 "~/org/gtd/work.org"
-		 "~/org/gtd/some-day.org"
-		 "~/org/gtd/tickler.org"
-		 "~/org/gtd/events.org"
-		 "~/org/bibliography/reading-list.org"
-		 "~/org/blogging/blogging.org"
-		 "~/org/phd/phd.org"
-		 "~/org/phd/deloro/deloro.org"
-		 "~/org/phd/edtlr/"
-		 "~/org/phd/parlamint/"
-		 "~/org/iasi.ai/iasi-ai.org")
-	   org-agenda-span 'day)
+           (list "~/org/gtd/inbox.org"
+                 "~/org/gtd/gtd.org"
+                 "~/org/gtd/work.org"
+                 "~/org/gtd/some-day.org"
+                 "~/org/gtd/tickler.org"
+                 "~/org/gtd/events.org"
+                 "~/org/bibliography/reading-list.org"
+                 "~/org/blogging/blogging.org"
+                 "~/org/phd/phd.org"
+                 "~/org/phd/deloro/deloro.org"
+                 "~/org/phd/edtlr/"
+                 "~/org/phd/parlamint/"
+                 "~/org/phd/innovation-labs"
+                 "~/org/iasi.ai/iasi-ai.org")
+           org-agenda-span 'day)
      ;; (setq org-agenda-repeating-timestamp-show-all nil)
      ;; (setq org-agenda-skip-deadline-if-done t)
      ;; (setq org-agenda-skip-scheduled-if-done t)
