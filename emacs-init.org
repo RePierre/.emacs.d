@@ -239,7 +239,6 @@
    #+begin_src emacs-lisp
      (use-package circadian
        :ensure t
-       :when (display-graphic-p)
        :config
        (if (and
 	    (bound-and-true-p calendar-latitude)
@@ -270,7 +269,6 @@
        :config
        (use-package nyan-mode
 	 :ensure t
-	 :when (display-graphic-p)
 	 :config
 	 (nyan-mode 1)))
    #+END_SRC
