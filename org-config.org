@@ -334,7 +334,7 @@
 	 ("wm" "Meeting"
 	  entry
 	  (file+headline "~/org/gtd/work.org" "Outlook")
-	  "* %? %(org-set-tags \"WORK\") \n  %^{Slot}T")
+	  "* %? %(org-set-tags \"work\") \n  %^{Slot}T")
 
 	 ("wr" "Retrospective remark"
 	  entry
