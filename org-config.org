@@ -245,39 +245,39 @@
     #+begin_src emacs-lisp
       (rp/add-org-capture-templates
        '(("n" "Note [inbox]"
-	  entry
-	  (file+headline "~/org/gtd/inbox.org" "Inbox")
-	  "* %i%? \n  %U")
+          entry
+          (file+headline "~/org/gtd/inbox.org" "Inbox")
+          "* PENDING %i%? \n  %U")
 
-	 ("t" "Task [GTD]"
-	  entry
-	  (file+headline "~/org/gtd/gtd.org" "Tasks")
-	  "* TODO %i%? \n  %U")
+         ("t" "Task [GTD]"
+          entry
+          (file+headline "~/org/gtd/gtd.org" "Tasks")
+          "* TODO %i%? \n  %U")
 
-	 ("a" "Appointment"
-	  entry
-	  (file+headline "~/org/gtd/gtd.org" "Calendar")
-	  "* APPT %? \n  %^{Slot}T")
+         ("a" "Appointment"
+          entry
+          (file+headline "~/org/gtd/gtd.org" "Calendar")
+          "* APPT %? \n  %^{Slot}T")
 
-	 ("k" "Org-cliplink capture [inbox]"
-	  entry
-	  (file+headline "~/org/gtd/inbox.org" "Inbox")
-	  "* %(org-cliplink-capture)")
+         ("k" "Org-cliplink capture [inbox]"
+          entry
+          (file+headline "~/org/gtd/inbox.org" "Inbox")
+          "* %(org-cliplink-capture)")
 
-	 ("j" "Journal Entry"
-	  entry
-	  (file+olp+datetree "~/org/journal.org")
-	  "* %?")
+         ("j" "Journal Entry"
+          entry
+          (file+olp+datetree "~/org/journal.org")
+          "* %?")
 
-	 ("b" "Blog article idea"
-	  entry
-	  (file+headline "~/org/blogging/blogging.org" "Blog articles")
-	  "* IDEA %? \n %U")
+         ("b" "Blog article idea"
+          entry
+          (file+headline "~/org/blogging/blogging.org" "Blog articles")
+          "* IDEA %? \n %U")
 
-	 ("T" "Tickler"
-	  entry
-	  (file+headline "~/org/gtd/tickler.org" "Tickler")
-	  "* %i%? \n %U")))
+         ("T" "Tickler"
+          entry
+          (file+headline "~/org/gtd/tickler.org" "Tickler")
+          "* %i%? \n %U")))
     #+end_src
 
 *** PhD related templates
