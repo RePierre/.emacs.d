@@ -306,9 +306,9 @@
 
      #+begin_src emacs-lisp
        (defun rp/clock-report-template()
-	 "Returns a string that can be used to capture clock report."
-	 (format "     #+BEGIN: clocktable :scope file :maxlevel 4 :block %s\n     #+END:\n"
-		 (format-time-string "%Y-%m-%d")))
+         "Returns a string that can be used to capture clock report."
+         (format "#+BEGIN: clocktable :scope file :maxlevel 4 :block %s\n#+END:\n"
+                 (format-time-string "%Y-%m-%d")))
      #+end_src
 
 **** Capture templates
