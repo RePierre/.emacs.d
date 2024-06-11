@@ -175,25 +175,6 @@
    #+BEGIN_SRC emacs-lisp
      (add-hook 'prog-mode-hook 'electric-pair-mode)
    #+END_SRC
-* C# development
-** Install =csharp-mode=
-
-   For some reason I get the following error when running Emacs under Ubuntu Bash for Windows:
-
-   #+begin_quote
-   Error (use-package): csharp-mode/:init: Symbol's function definition is void: electric-pair-local-mode.
-   #+end_quote
-
-    As a workaround disable =electric-pair-mode= when =display-graphic-p= returns =nil=.
-
-   #+begin_src emacs-lisp
-     (use-package csharp-mode
-       :ensure t
-       :defer t
-       :init (when (display-graphic-p)
-		 (electric-pair-local-mode 1)))
-   #+end_src
-
 * PHP Development
 
   According to the [[https://github.com/emacs-php/php-mode#avoid-html-template-compatibility][documentation]] =php-mode= behaves weird when working with scripts that contain HTML code and suggests using [[https://github.com/fxbois/web-mode][=web-mode=]] for such cases.
