@@ -166,11 +166,6 @@
      (unless (daemonp)
        (setq confirm-kill-emacs 'y-or-n-p))
    #+end_src
-** Show numbers in =company= suggestions
-   To select a specific suggestion use =M+<num>=.
-   #+begin_src emacs-lisp
-     (setq company-show-numbers t)
-   #+end_src
 ** Use =Firefox= as the default browser when running in =Windows Subsystem for Linux=
    #+begin_src emacs-lisp
      (defun rp/browse-url-firefox(url &rest ARGS)
@@ -423,10 +418,11 @@
        :config
        (global-company-mode)
        (setq-default
-	company-idle-delay .2
-	company-minimum-prefix-length 1
-	company-require-match nil
-	company-tooltip-align-annotations t))
+        company-idle-delay .2
+        company-minimum-prefix-length 1
+        company-require-match nil
+        company-tooltip-align-annotations t
+        company-show-quick-access t))
    #+END_SRC
 ** Install =company-quickhelp=
    #+begin_src emacs-lisp
