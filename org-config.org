@@ -295,7 +295,12 @@ Templates related to my PhD activities.
      ("pm" "Meeting"
       entry
       (file+headline "~/org/phd/phd.org" "Calendar")
-      "* %? \n  %^{Slot}T")))
+      "* %? \n  %^{Slot}T")
+
+     ("pi" "Interruption"
+        entry
+        (file+headline "~/org/phd/phd.org" "Întreruperi")
+        "* %? \n" :clock-in t)))
 #+end_src
 
 *** Work related templates
@@ -348,33 +353,15 @@ Templates related to work activities.
       :jump-to-captured t
       :immediate-finish t)
 
-     ("wj" "Journal Entry"
-      entry
-      (file+olp+datetree "~/org/gtd/work.org" "Journal")
-      "* %? \n %U")))
-#+end_src
-
-*** Templates for interruptions
-
-Templates to capture interruptions of various sorts.
-
-#+begin_src emacs-lisp
-  (rp/add-org-capture-templates
-   '(("i" "Interruptions")
-     ("iw" "Work-related interruption"
+     ("wi" "Interruption"
       entry
       (file+headline "~/org/gtd/work.org" "Interruptions")
       "* %? \n" :clock-in t)
 
-     ("ii" "Iaşi AI related interruption"
+     ("wj" "Journal Entry"
       entry
-      (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni")
-      "* %? \n" :clock-in t)
-
-     ("ip" "PhD related interruption"
-      entry
-      (file+headline "~/org/phd/phd.org" "Întreruperi")
-      "* %? \n" :clock-in t)))
+      (file+olp+datetree "~/org/gtd/work.org" "Journal")
+      "* %? \n %U")))
 #+end_src
 
 ** Setup =org-refile-targets=
