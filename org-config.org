@@ -5,535 +5,535 @@
   :END:
 ** Define setup functions
 *** Configure =org-goto= to pick a headline via completion
-    Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how to jump directly to an org-headline? - Emacs Stack Exchange]].
-    #+begin_src emacs-lisp
-      (defun rp/configure-org-goto()
-	"Configure 'org-goto' function to pick a headline via completion."
-	(progn
-	  (setq org-goto-interface 'outline-path-completion)
-	  (setq org-outline-path-complete-in-steps nil)))
-    #+end_src
+Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how to jump directly to an org-headline? - Emacs Stack Exchange]].
+#+begin_src emacs-lisp
+  (defun rp/configure-org-goto()
+    "Configure 'org-goto' function to pick a headline via completion."
+    (progn
+      (setq org-goto-interface 'outline-path-completion)
+      (setq org-outline-path-complete-in-steps nil)))
+#+end_src
 ** Configure =org-mode=
-   #+begin_src emacs-lisp
-     (use-package org
-       :ensure org-contrib
-       :config (progn
-		 (require 'ox-extra)
-		 (ox-extras-activate '(ignore-headlines))
+#+begin_src emacs-lisp
+  (use-package org
+    :ensure org-contrib
+    :config (progn
+              (require 'ox-extra)
+              (ox-extras-activate '(ignore-headlines))
 
-		 (require 'org-habit)
-		 (add-to-list 'org-modules 'org-habit)
-		 (setq org-todo-keyword-faces
-		       '(("TODO" . (:foreground "GoldenRod" :weight bold))
-			 ("STARTED" . (:foreground "SteelBlue" :weight bold))
-			 ("READING" . (:foreground "SteelBlue" :weight bold))
-			 ("WAITING" . (:foreground "IndianRed1" :weight bold))
-			 ("DONE" . (:foreground "LimeGreen" :weight bold))))
-		 (setq org-adapt-indentation t)
-		 (setq org-enforce-todo-checkbox-dependencies t)
-		 (setq org-enforce-todo-dependencies t)
-		 ;; leave an empty line before a new heading but not before plain list item
-		 (setq org-blank-before-new-entry (quote ((heading . t)
-							  (plain-list-item . nil))))
-		 ;; C-a, and C-e will move the cursor to the start, and respectively
-		 ;; end of the heading.
-		 (setq org-special-ctrl-a/e t)
-		 (setq org-auto-align-tags t)
-		 (rp/configure-org-goto)))
-    #+end_src
+              (require 'org-habit)
+              (add-to-list 'org-modules 'org-habit)
+              (setq org-todo-keyword-faces
+                    '(("TODO" . (:foreground "GoldenRod" :weight bold))
+                      ("STARTED" . (:foreground "SteelBlue" :weight bold))
+                      ("READING" . (:foreground "SteelBlue" :weight bold))
+                      ("WAITING" . (:foreground "IndianRed1" :weight bold))
+                      ("DONE" . (:foreground "LimeGreen" :weight bold))))
+              (setq org-adapt-indentation t)
+              (setq org-enforce-todo-checkbox-dependencies t)
+              (setq org-enforce-todo-dependencies t)
+              ;; leave an empty line before a new heading but not before plain list item
+              (setq org-blank-before-new-entry (quote ((heading . t)
+                                                       (plain-list-item . nil))))
+              ;; C-a, and C-e will move the cursor to the start, and respectively
+              ;; end of the heading.
+              (setq org-special-ctrl-a/e t)
+              (setq org-auto-align-tags t)
+              (rp/configure-org-goto)))
+#+end_src
 
 *** Enable =org-indent-mode= in all =org= buffers
 
-    #+begin_src emacs-lisp
-      (add-hook 'org-mode-hook 'org-indent-mode)
-    #+end_src
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'org-indent-mode)
+#+end_src
 
 *** Enable =variable-pitch-mode= in all =org= buffers
 
-    #+begin_src emacs-lisp
-      (add-hook 'org-mode-hook 'variable-pitch-mode)
-    #+end_src
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'variable-pitch-mode)
+#+end_src
 
 ** Setup =org-ref=
-   As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
-   #+begin_src emacs-lisp
-     (use-package helm-bibtex
-       :ensure t
-       :init
-       (setq bibtex-completion-bibliography '("~/org/bibliography/references.bib")
-	     bibtex-completion-library-path '("~/org/bibliography/bibtex-pdfs")
-	     bibtex-completion-notes-path "~/org/bibliography/helm-bibtex-notes"
-	     bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
+#+begin_src emacs-lisp
+  (use-package helm-bibtex
+    :ensure t
+    :init
+    (setq bibtex-completion-bibliography '("~/org/bibliography/references.bib")
+          bibtex-completion-library-path '("~/org/bibliography/bibtex-pdfs")
+          bibtex-completion-notes-path "~/org/bibliography/helm-bibtex-notes"
+          bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
 
-	     bibtex-completion-additional-search-fields '(keywords)
-	     bibtex-completion-display-formats
-	     '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
-	       (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
-	       (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-	       (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-	       (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
-	     bibtex-completion-pdf-open-function
-	     (lambda (fpath)
-	       (call-process "open" nil 0 nil fpath))))
+          bibtex-completion-additional-search-fields '(keywords)
+          bibtex-completion-display-formats
+          '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+            (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+            (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+            (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+            (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+          bibtex-completion-pdf-open-function
+          (lambda (fpath)
+            (call-process "open" nil 0 nil fpath))))
 
-     (use-package org-ref
-       :ensure t
-       :init
-       (require 'bibtex)
-       (setq bibtex-autokey-year-length 4
-	     bibtex-autokey-name-year-separator "-"
-	     bibtex-autokey-year-title-separator "-"
-	     bibtex-autokey-titleword-separator "-"
-	     bibtex-autokey-titlewords 2
-	     bibtex-autokey-titlewords-stretch 1
-	     bibtex-autokey-titleword-length 5)
-       (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
-       (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
-       (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
-       (require 'org-ref-helm)
-       (require 'org-ref-arxiv)
-       (require 'org-ref-scopus)
-       (require 'org-ref-wos))
+  (use-package org-ref
+    :ensure t
+    :init
+    (require 'bibtex)
+    (setq bibtex-autokey-year-length 4
+          bibtex-autokey-name-year-separator "-"
+          bibtex-autokey-year-title-separator "-"
+          bibtex-autokey-titleword-separator "-"
+          bibtex-autokey-titlewords 2
+          bibtex-autokey-titlewords-stretch 1
+          bibtex-autokey-titleword-length 5)
+    (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
+    (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
+    (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
+    (require 'org-ref-helm)
+    (require 'org-ref-arxiv)
+    (require 'org-ref-scopus)
+    (require 'org-ref-wos))
 
 
-     (use-package org-ref-helm
-       :ensure nil
-       :load-path (lambda()(expand-file-name "elpa/org-ref" user-emacs-directory))
-       :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
-		   org-ref-insert-cite-function 'org-ref-cite-insert-helm
-		   org-ref-insert-label-function 'org-ref-insert-label-link
-		   org-ref-insert-ref-function 'org-ref-insert-ref-link
-		   org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
+  (use-package org-ref-helm
+    :ensure nil
+    :load-path (lambda()(expand-file-name "elpa/org-ref" user-emacs-directory))
+    :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+                org-ref-insert-cite-function 'org-ref-cite-insert-helm
+                org-ref-insert-label-function 'org-ref-insert-label-link
+                org-ref-insert-ref-function 'org-ref-insert-ref-link
+                org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
 
-   #+end_src
+#+end_src
 ** Setup =org-cliplink=
-   #+begin_src emacs-lisp
-     (use-package org-cliplink
-       :ensure t)
-   #+end_src
+#+begin_src emacs-lisp
+  (use-package org-cliplink
+    :ensure t)
+#+end_src
 ** Automatically export to pdf
-   #+begin_src emacs-lisp
-     (defun is-beamer-presentation()
-       (save-excursion
-	 (goto-char (point-min))
-	 (search-forward-regexp "#\\+latex_class:[[:blank:]]+beamer")))
+#+begin_src emacs-lisp
+  (defun is-beamer-presentation()
+    (save-excursion
+      (goto-char (point-min))
+      (search-forward-regexp "#\\+latex_class:[[:blank:]]+beamer")))
 
-     (defun beamer-export-to-pdf()
-       (when (and (equal major-mode 'org-mode)
-		  (is-beamer-presentation))
-	 (progn
-	       (message "Current buffer is beamer presentation. Automatic export will use org-beamer-export-to-pdf.")
-	       (org-beamer-export-to-pdf t))))
+  (defun beamer-export-to-pdf()
+    (when (and (equal major-mode 'org-mode)
+               (is-beamer-presentation))
+      (progn
+        (message "Current buffer is beamer presentation. Automatic export will use org-beamer-export-to-pdf.")
+        (org-beamer-export-to-pdf t))))
 
-     (defun export-to-pdf-async()
-       (when (equal major-mode 'org-mode)
-	 (progn
-	   (message "Automatic export will use org-latex-export-to-pdf.")
-	   (org-latex-export-to-pdf t))))
+  (defun export-to-pdf-async()
+    (when (equal major-mode 'org-mode)
+      (progn
+        (message "Automatic export will use org-latex-export-to-pdf.")
+        (org-latex-export-to-pdf t))))
 
-     (defun rp/toggle-export-to-pdf-async ()
-       (interactive)
-       (if (memq 'export-to-pdf-async after-save-hook)
-	   (progn
-	     (remove-hook 'after-save-hook 'export-to-pdf-async t)
-	     (message "Disabled automatic export to pdf for current buffer."))
-	 (add-hook 'after-save-hook 'export-to-pdf-async t t)
-	 (message "Enabled automatic export to pdf for current buffer.")))
+  (defun rp/toggle-export-to-pdf-async ()
+    (interactive)
+    (if (memq 'export-to-pdf-async after-save-hook)
+        (progn
+          (remove-hook 'after-save-hook 'export-to-pdf-async t)
+          (message "Disabled automatic export to pdf for current buffer."))
+      (add-hook 'after-save-hook 'export-to-pdf-async t t)
+      (message "Enabled automatic export to pdf for current buffer.")))
 
-   #+end_src
+#+end_src
 
-   It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than the built-in =org-latex-export-to-pdf=; however, it's best to keep them both.
+It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than the built-in =org-latex-export-to-pdf=; however, it's best to keep them both.
 
-   #+begin_src emacs-lisp
-     (defun rp/org-ref-export-to-pdf()
-       (when (equal major-mode 'org-mode)
-	 (progn
-	   (message "Automatic export will use org-ref-export-to-pdf.")
-	   (org-ref-export-to-pdf))))
+#+begin_src emacs-lisp
+  (defun rp/org-ref-export-to-pdf()
+    (when (equal major-mode 'org-mode)
+      (progn
+        (message "Automatic export will use org-ref-export-to-pdf.")
+        (org-ref-export-to-pdf))))
 
-     (defun rp/toggle-org-ref-export-to-pdf-async ()
-       (interactive)
-       (if (memq 'rp/org-ref-export-to-pdf after-save-hook)
-	   (progn
-	     (remove-hook 'after-save-hook 'rp/org-ref-export-to-pdf t)
-	     (message "Disabled automatic export to pdf (via org-ref) for current buffer."))
-	 (add-hook 'after-save-hook 'rp/org-ref-export-to-pdf t t)
-	 (message "Enabled automatic export to pdf (via org-ref) for current buffer.")))
-   #+end_src
+  (defun rp/toggle-org-ref-export-to-pdf-async ()
+    (interactive)
+    (if (memq 'rp/org-ref-export-to-pdf after-save-hook)
+        (progn
+          (remove-hook 'after-save-hook 'rp/org-ref-export-to-pdf t)
+          (message "Disabled automatic export to pdf (via org-ref) for current buffer."))
+      (add-hook 'after-save-hook 'rp/org-ref-export-to-pdf t t)
+      (message "Enabled automatic export to pdf (via org-ref) for current buffer.")))
+#+end_src
 ** Automatically export to html
-   #+begin_src emacs-lisp
-     (defun rp/export-to-html-async()
-       (when (equal major-mode 'org-mode)
-	 (org-html-export-to-html t)))
+#+begin_src emacs-lisp
+  (defun rp/export-to-html-async()
+    (when (equal major-mode 'org-mode)
+      (org-html-export-to-html t)))
 
-     (defun rp/toggle-export-to-html-async()
-       (interactive)
-       (if (memq 'rp/export-to-html-async after-save-hook)
-	   (progn
-	     (remove-hook 'after-save-hook 'rp/export-to-html-async t)
-	     (message "Disabled automatic export to HTML for current buffer."))
-	 (progn
-	   (add-hook 'after-save-hook 'rp/export-to-html-async t t)
-	   (message "Enabled automatic export to HTML for current buffer."))))
-   #+end_src
+  (defun rp/toggle-export-to-html-async()
+    (interactive)
+    (if (memq 'rp/export-to-html-async after-save-hook)
+        (progn
+          (remove-hook 'after-save-hook 'rp/export-to-html-async t)
+          (message "Disabled automatic export to HTML for current buffer."))
+      (progn
+        (add-hook 'after-save-hook 'rp/export-to-html-async t t)
+        (message "Enabled automatic export to HTML for current buffer."))))
+#+end_src
 
 ** Setup =org-bullets=
 
-   #+begin_src emacs-lisp
-     (defun rp/enable-org-bullets-mode()
-       "Enable 'org-bullets' mode."
-       (org-bullets-mode 1))
+#+begin_src emacs-lisp
+  (defun rp/enable-org-bullets-mode()
+    "Enable 'org-bullets' mode."
+    (org-bullets-mode 1))
 
-     (use-package org-bullets
-       :ensure t
-       :config
-       (add-hook 'org-mode-hook 'rp/enable-org-bullets-mode))
-   #+end_src
+  (use-package org-bullets
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook 'rp/enable-org-bullets-mode))
+#+end_src
 
 ** Load =org-babel= languages
 
-   #+begin_src emacs-lisp
-     (org-babel-do-load-languages
-      (quote org-babel-load-languages)
-      (quote ((emacs-lisp . t)
-	      (dot . t)
-	      (python . t)
-	      (gnuplot . t)
-	      (shell . t)
-	      (org . t)
-	      (latex . t))))
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages
+   (quote org-babel-load-languages)
+   (quote ((emacs-lisp . t)
+           (dot . t)
+           (python . t)
+           (gnuplot . t)
+           (shell . t)
+           (org . t)
+           (latex . t))))
 
-   #+end_src
+#+end_src
 
 ** Install =org-re-reveal=
 
-   #+begin_src emacs-lisp
-     (use-package org-re-reveal
-       :ensure t
-       :defer t
-       :config
-       (progn
-	 (setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
-   #+end_src
+#+begin_src emacs-lisp
+  (use-package org-re-reveal
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
+#+end_src
 * Open GTD view
-  :PROPERTIES:
-  :header-args:emacs-lisp: :results none
-  :END:
+:PROPERTIES:
+:header-args:emacs-lisp: :results none
+:END:
 ** Setup =org-capture=
-   #+BEGIN_SRC emacs-lisp
-     (setq org-default-notes-file "~/org/notes.org")
-     (global-set-key (kbd "C-c c") 'org-capture)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-default-notes-file "~/org/notes.org")
+  (global-set-key (kbd "C-c c") 'org-capture)
+#+END_SRC
 ** Setup =org-capture-templates=
 
-   Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
+Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
 
-   And to avoid duplicating the same code that appends new templates to existing ones, it's better to put that code into a function that can be called multiple times:
-   #+BEGIN_SRC emacs-lisp
-     (defun rp/add-org-capture-templates(capture-templates)
-       (setq org-capture-templates
-	     (append org-capture-templates
-		     capture-templates)))
-   #+END_SRC
+And to avoid duplicating the same code that appends new templates to existing ones, it's better to put that code into a function that can be called multiple times:
+#+BEGIN_SRC emacs-lisp
+  (defun rp/add-org-capture-templates(capture-templates)
+    (setq org-capture-templates
+          (append org-capture-templates
+                  capture-templates)))
+#+END_SRC
 
-   Now, all that's left to do is split templates into categories and add them using the function above.
+Now, all that's left to do is split templates into categories and add them using the function above.
 
 *** Uncategorized templates
 
-    Templates that do not have a category, i.e. are accessible via a single key.
+Templates that do not have a category, i.e. are accessible via a single key.
 
-    #+begin_src emacs-lisp
-      (rp/add-org-capture-templates
-       '(("n" "Note [inbox]"
-          entry
-          (file+headline "~/org/gtd/inbox.org" "Inbox")
-          "* PENDING %i%? \n  %U")
+#+begin_src emacs-lisp
+  (rp/add-org-capture-templates
+   '(("n" "Note [inbox]"
+      entry
+      (file+headline "~/org/gtd/inbox.org" "Inbox")
+      "* PENDING %i%? \n  %U")
 
-         ("t" "Task [GTD]"
-          entry
-          (file+headline "~/org/gtd/gtd.org" "Tasks")
-          "* TODO %i%? \n  %U")
+     ("t" "Task [GTD]"
+      entry
+      (file+headline "~/org/gtd/gtd.org" "Tasks")
+      "* TODO %i%? \n  %U")
 
-         ("a" "Appointment"
-          entry
-          (file+headline "~/org/gtd/gtd.org" "Calendar")
-          "* APPT %? \n  %^{Slot}T")
+     ("a" "Appointment"
+      entry
+      (file+headline "~/org/gtd/gtd.org" "Calendar")
+      "* APPT %? \n  %^{Slot}T")
 
-         ("k" "Org-cliplink capture [inbox]"
-          entry
-          (file+headline "~/org/gtd/inbox.org" "Inbox")
-          "* %(org-cliplink-capture)")
+     ("k" "Org-cliplink capture [inbox]"
+      entry
+      (file+headline "~/org/gtd/inbox.org" "Inbox")
+      "* %(org-cliplink-capture)")
 
-         ("j" "Journal Entry"
-          entry
-          (file+olp+datetree "~/org/journal.org")
-          "* %?")
+     ("j" "Journal Entry"
+      entry
+      (file+olp+datetree "~/org/journal.org")
+      "* %?")
 
-         ("b" "Blog article idea"
-          entry
-          (file+headline "~/org/blogging/blogging.org" "Blog articles")
-          "* IDEA %? \n %U")
+     ("b" "Blog article idea"
+      entry
+      (file+headline "~/org/blogging/blogging.org" "Blog articles")
+      "* IDEA %? \n %U")
 
-         ("T" "Tickler"
-          entry
-          (file+headline "~/org/gtd/tickler.org" "Tickler")
-          "* %i%? \n %U")))
-    #+end_src
+     ("T" "Tickler"
+      entry
+      (file+headline "~/org/gtd/tickler.org" "Tickler")
+      "* %i%? \n %U")))
+#+end_src
 
 *** PhD related templates
 
-    Templates related to my PhD activities.
+Templates related to my PhD activities.
 
-    #+begin_src emacs-lisp
-      (rp/add-org-capture-templates
-       '(("p" "PhD related items")
-	 ("pt" "Todo item"
-	  entry
-	  (file+headline "~/org/phd/phd.org" "PhD General")
-	  "* TODO %?")
+#+begin_src emacs-lisp
+  (rp/add-org-capture-templates
+   '(("p" "PhD related items")
+     ("pt" "Todo item"
+      entry
+      (file+headline "~/org/phd/phd.org" "PhD General")
+      "* TODO %?")
 
-	 ("pm" "Meeting"
-	  entry
-	  (file+headline "~/org/phd/phd.org" "Calendar")
-	  "* %? \n  %^{Slot}T")))
-    #+end_src
+     ("pm" "Meeting"
+      entry
+      (file+headline "~/org/phd/phd.org" "Calendar")
+      "* %? \n  %^{Slot}T")))
+#+end_src
 
 *** Work related templates
 
-    Templates related to work activities.
+Templates related to work activities.
 
 **** Utility functions
 
-     #+begin_src emacs-lisp
-       (defun rp/clock-report-template()
-         "Returns a string that can be used to capture clock report."
-         (format "#+BEGIN: clocktable :scope file :maxlevel 4 :block %s\n#+END:\n"
-                 (format-time-string "%Y-%m-%d")))
-     #+end_src
+#+begin_src emacs-lisp
+  (defun rp/clock-report-template()
+    "Returns a string that can be used to capture clock report."
+    (format "#+BEGIN: clocktable :scope file :maxlevel 4 :block %s\n#+END:\n"
+            (format-time-string "%Y-%m-%d")))
+#+end_src
 
 **** Capture templates
 
-    #+begin_src emacs-lisp
-      (rp/add-org-capture-templates
-       '(("w" "Work related items")
-	 ("wa" "Work achievement"
-	  entry
-	  (file+olp+datetree "~/org/gtd/work.org" "Achievements")
-	  "* %?")
+#+begin_src emacs-lisp
+  (rp/add-org-capture-templates
+   '(("w" "Work related items")
+     ("wa" "Work achievement"
+      entry
+      (file+olp+datetree "~/org/gtd/work.org" "Achievements")
+      "* %?")
 
-	 ("wf" "Technical feedback for a colleague"
-	  entry
-	  (file+olp+datetree "~/org/gtd/work.org" "Technical feedback")
-	  "* %?")
+     ("wf" "Technical feedback for a colleague"
+      entry
+      (file+olp+datetree "~/org/gtd/work.org" "Technical feedback")
+      "* %?")
 
-	 ("wt" "Todo item"
-	  entry
-	  (file+headline "~/org/gtd/work.org" "Work")
-	  "* TODO %?")
+     ("wt" "Todo item"
+      entry
+      (file+headline "~/org/gtd/work.org" "Work")
+      "* TODO %?")
 
-	 ("wm" "Meeting"
-	  entry
-	  (file+headline "~/org/gtd/work.org" "Outlook")
-	  "* %? %(org-set-tags \"work\") \n  %^{Slot}T")
+     ("wm" "Meeting"
+      entry
+      (file+headline "~/org/gtd/work.org" "Outlook")
+      "* %? %(org-set-tags \"work\") \n  %^{Slot}T")
 
-	 ("wr" "Retrospective remark"
-	  entry
-	  (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
-	  "* TODO %? \n %U")
+     ("wr" "Retrospective remark"
+      entry
+      (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
+      "* TODO %? \n %U")
 
-	 ("wc" "Clock report"
-	  plain
-	  (file+olp+datetree "~/org/gtd/work.org" "Clock report")
-	  "%(rp/clock-report-template)"
-	  :jump-to-captured t
-	  :immediate-finish t)
+     ("wc" "Clock report"
+      plain
+      (file+olp+datetree "~/org/gtd/work.org" "Clock report")
+      "%(rp/clock-report-template)"
+      :jump-to-captured t
+      :immediate-finish t)
 
-	 ("wj" "Journal Entry"
-	  entry
-	  (file+olp+datetree "~/org/gtd/work.org" "Journal")
-	  "* %? \n %U")))
-    #+end_src
+     ("wj" "Journal Entry"
+      entry
+      (file+olp+datetree "~/org/gtd/work.org" "Journal")
+      "* %? \n %U")))
+#+end_src
 
 *** Templates for interruptions
 
-    Templates to capture interruptions of various sorts.
+Templates to capture interruptions of various sorts.
 
-    #+begin_src emacs-lisp
-      (rp/add-org-capture-templates
-       '(("i" "Interruptions")
-	 ("iw" "Work-related interruption"
-	  entry
-	  (file+headline "~/org/gtd/work.org" "Interruptions")
-	  "* %? \n" :clock-in t)
+#+begin_src emacs-lisp
+  (rp/add-org-capture-templates
+   '(("i" "Interruptions")
+     ("iw" "Work-related interruption"
+      entry
+      (file+headline "~/org/gtd/work.org" "Interruptions")
+      "* %? \n" :clock-in t)
 
-	 ("ii" "Iaşi AI related interruption"
-	  entry
-	  (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni")
-	  "* %? \n" :clock-in t)
+     ("ii" "Iaşi AI related interruption"
+      entry
+      (file+headline "~/org/iasi.ai/iasi-ai.org" "Orice Alte Chestiuni")
+      "* %? \n" :clock-in t)
 
-	 ("ip" "PhD related interruption"
-	  entry
-	  (file+headline "~/org/phd/phd.org" "Întreruperi")
-	  "* %? \n" :clock-in t)))
-    #+end_src
+     ("ip" "PhD related interruption"
+      entry
+      (file+headline "~/org/phd/phd.org" "Întreruperi")
+      "* %? \n" :clock-in t)))
+#+end_src
 
 ** Setup =org-refile-targets=
-   #+BEGIN_SRC emacs-lisp
-     (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
-				("~/org/gtd/some-day.org" :level . 1)
-				("~/org/gtd/tickler.org" :maxlevel . 2)
-				("~/org/blogging/blogging.org" :level . 1)
-				("~/org/gtd/work.org" :maxlevel . 6)
-				("~/org/bibliography/reading-list.org" :maxlevel . 2)
-				("~/org/phd/phd.org" :maxlevel . 4)
-				("~/org/phd/edtlr/edtlr.org" :maxlevel . 4)
-				("~/org/phd/deloro/deloro.org" :maxlevel . 4)
-				("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
-				("~/org/iasi.ai/iasi-ai.org" :level . 1)))
-   #+END_SRC
-  As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
+                             ("~/org/gtd/some-day.org" :level . 1)
+                             ("~/org/gtd/tickler.org" :maxlevel . 2)
+                             ("~/org/blogging/blogging.org" :level . 1)
+                             ("~/org/gtd/work.org" :maxlevel . 6)
+                             ("~/org/bibliography/reading-list.org" :maxlevel . 2)
+                             ("~/org/phd/phd.org" :maxlevel . 4)
+                             ("~/org/phd/edtlr/edtlr.org" :maxlevel . 4)
+                             ("~/org/phd/deloro/deloro.org" :maxlevel . 4)
+                             ("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
+                             ("~/org/iasi.ai/iasi-ai.org" :level . 1)))
+#+END_SRC
+As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
-    (defun rp/gtd()
-      (interactive)
-      (progn
-	(org-agenda t "r")
-	(switch-to-buffer "*Org Agenda*")
-	(delete-other-windows)
-	(org-agenda-redo-all)))
+  (defun rp/gtd()
+    (interactive)
+    (progn
+      (org-agenda t "r")
+      (switch-to-buffer "*Org Agenda*")
+      (delete-other-windows)
+      (org-agenda-redo-all)))
 
-    (global-set-key (kbd "C-c g") 'rp/gtd)
-  #+END_SRC
+  (global-set-key (kbd "C-c g") 'rp/gtd)
+#+END_SRC
 * Agenda
 ** Configure agenda
-   #+BEGIN_SRC emacs-lisp
-     (setq org-agenda-files
-           (list "~/org/gtd/inbox.org"
-                 "~/org/gtd/gtd.org"
-                 "~/org/gtd/work.org"
-                 "~/org/gtd/some-day.org"
-                 "~/org/gtd/tickler.org"
-                 "~/org/gtd/events.org"
-                 "~/org/bibliography/reading-list.org"
-                 "~/org/blogging/blogging.org"
-                 "~/org/phd/phd.org"
-                 "~/org/phd/deloro/deloro.org"
-                 "~/org/phd/edtlr/"
-                 "~/org/phd/parlamint/"
-                 "~/org/phd/innovation-labs"
-                 "~/org/iasi.ai/iasi-ai.org")
-           org-agenda-span 'day)
-     ;; (setq org-agenda-repeating-timestamp-show-all nil)
-     ;; (setq org-agenda-skip-deadline-if-done t)
-     ;; (setq org-agenda-skip-scheduled-if-done t)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files
+        (list "~/org/gtd/inbox.org"
+              "~/org/gtd/gtd.org"
+              "~/org/gtd/work.org"
+              "~/org/gtd/some-day.org"
+              "~/org/gtd/tickler.org"
+              "~/org/gtd/events.org"
+              "~/org/bibliography/reading-list.org"
+              "~/org/blogging/blogging.org"
+              "~/org/phd/phd.org"
+              "~/org/phd/deloro/deloro.org"
+              "~/org/phd/edtlr/"
+              "~/org/phd/parlamint/"
+              "~/org/phd/innovation-labs"
+              "~/org/iasi.ai/iasi-ai.org")
+        org-agenda-span 'day)
+  ;; (setq org-agenda-repeating-timestamp-show-all nil)
+  ;; (setq org-agenda-skip-deadline-if-done t)
+  ;; (setq org-agenda-skip-scheduled-if-done t)
+#+END_SRC
 
 ** Define macro for displaying timestamps on workdays
 
-   The following macro will allocate time slots for meetings that are recurring on work days (Monday to Friday).
+The following macro will allocate time slots for meetings that are recurring on work days (Monday to Friday).
 
-   Usage example:
-   #+begin_quote
-   * Some meeting
-     <%%(rp/workdays-at "8:30-9:00")>
-   #+end_quote
+Usage example:
+#+begin_quote
+* Some meeting
+<%%(rp/workdays-at "8:30-9:00")>
+#+end_quote
 
-   #+begin_src emacs-lisp
-     (defmacro rp/on-days-at(days time-slot)
-       `(if (memq (calendar-day-of-week date) ,days)
-	    (format "%s %s"
-		    (org-format-time-string "%y-%m-%d" (org-today))
-		    ,time-slot)))
+#+begin_src emacs-lisp
+  (defmacro rp/on-days-at(days time-slot)
+    `(if (memq (calendar-day-of-week date) ,days)
+         (format "%s %s"
+                 (org-format-time-string "%y-%m-%d" (org-today))
+                 ,time-slot)))
 
-     (defmacro rp/workdays-at(time-slot)
-       `(rp/on-days-at '(1 2 3 4 5) ,time-slot))
-   #+end_src
+  (defmacro rp/workdays-at(time-slot)
+    `(rp/on-days-at '(1 2 3 4 5) ,time-slot))
+#+end_src
 
 ** Customize agenda view
 
-   #+begin_src emacs-lisp
-     (setq org-agenda-custom-commands
-	   '(("r" "Daily agenda with global todo list"
-	      ((agenda "")
-	       (alltodo ""
-			((org-agenda-skip-function
-			  '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
-   #+end_src
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        '(("r" "Daily agenda with global todo list"
+           ((agenda "")
+            (alltodo ""
+                     ((org-agenda-skip-function
+                       '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
+#+end_src
 ** Apply custom colors for specific agenda entries
 
-   Adapted from [[https://emacs.stackexchange.com/questions/23824/defining-different-fonts-color-per-file-in-org-agenda]].
-   #+begin_src emacs-lisp
-     (add-hook 'org-agenda-finalize-hook
-       (lambda ()
-	 (save-excursion
-	   (color-org-header "Zi de naștere:.+" "OrangeRed")
-	   (color-org-header "Aniversări:.+" "DeepPink"))))
+Adapted from [[https://emacs.stackexchange.com/questions/23824/defining-different-fonts-color-per-file-in-org-agenda]].
+#+begin_src emacs-lisp
+  (add-hook 'org-agenda-finalize-hook
+            (lambda ()
+              (save-excursion
+                (color-org-header "Zi de naștere:.+" "OrangeRed")
+                (color-org-header "Aniversări:.+" "DeepPink"))))
 
-     (defun color-org-header (pattern forecolor)
-       "Change the foreground of  org header that matches PATTERN to FORECOLOR."
-       (goto-char (point-min))
-       (while (re-search-forward pattern nil t)
-	 (add-text-properties (match-beginning 0) (match-end 0)
-			      `(face (:foreground, forecolor)))))
+  (defun color-org-header (pattern forecolor)
+    "Change the foreground of  org header that matches PATTERN to FORECOLOR."
+    (goto-char (point-min))
+    (while (re-search-forward pattern nil t)
+      (add-text-properties (match-beginning 0) (match-end 0)
+                           `(face (:foreground, forecolor)))))
 
 
-   #+end_src
+#+end_src
 
 * Effort estimates
-  Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for tasks. Adapted from [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]].
-  #+begin_src emacs-lisp
-    (setq org-global-properties
-	  '(("Effort_ALL" .
-	     "0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00 0:00")))
+Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for tasks. Adapted from [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]].
+#+begin_src emacs-lisp
+  (setq org-global-properties
+        '(("Effort_ALL" .
+           "0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00 0:00")))
 
 
-    (setq org-columns-default-format
-	  "%38ITEM(Details) %TAGS(Context) %7TODO(To Do) %5Effort(Time){:} %6CLOCKSUM{Total}")
-  #+end_src
+  (setq org-columns-default-format
+        "%38ITEM(Details) %TAGS(Context) %7TODO(To Do) %5Effort(Time){:} %6CLOCKSUM{Total}")
+#+end_src
 * Install =org-roam=
-  #+begin_src emacs-lisp
-    (use-package org-roam
-      :ensure t
-      :init
-      (setq org-roam-v2-ack t)
-      :custom
-      (org-roam-directory "~/org/roam")
-      :bind (("C-c n l" . org-roam-buffer-toggle)
-	     ("C-c n f" . org-roam-node-find)
-	     ("C-c n i" . org-roam-node-insert))
-      :config
-      (org-roam-setup))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/org/roam")
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
+#+end_src
 ** Install =org-roam-ui=
-   #+begin_src emacs-lisp
-     (use-package org-roam-ui
-       :after org-roam
-       :ensure t
-       :config
-       (setq org-roam-ui-sync-theme t
-	     org-roam-ui-follow t
-	     org-roam-ui-update-on-save t
-	     org-roam-ui-open-on-start nil))
-   #+end_src
+#+begin_src emacs-lisp
+  (use-package org-roam-ui
+    :after org-roam
+    :ensure t
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start nil))
+#+end_src
 
 * Prettify =org-mode=
 
 Taken from yet another [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][blog post]] about ricing Emacs.
 
 #+begin_src emacs-lisp
-   (custom-theme-set-faces
-     'user
-     '(org-block ((t (:inherit fixed-pitch))))
-     '(org-code ((t (:inherit (shadow fixed-pitch)))))
-     '(org-document-info ((t (:foreground "dark orange"))))
-     '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-     '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-     '(org-link ((t (:foreground "royal blue" :underline t))))
-     '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-property-value ((t (:inherit fixed-pitch))) t)
-     '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-     '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-     '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-     '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
+  (custom-theme-set-faces
+   'user
+   '(org-block ((t (:inherit fixed-pitch))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:foreground "royal blue" :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 #+end_src
