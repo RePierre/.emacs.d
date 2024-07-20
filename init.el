@@ -1,3 +1,7 @@
+;;; init --- Summary
+;;; Commentary:
+;;; Code:
+
 (require 'package)
 
 (package-initialize)
@@ -15,3 +19,5 @@
 (let ((file-name (expand-file-name "after-init.el" user-emacs-directory)))
   (if (file-exists-p file-name)
       (load-file file-name)))
+
+;;; init.el ends here
