@@ -411,6 +411,8 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
               "~/org/phd/innovation-labs"
               "~/org/iasi.ai/iasi-ai.org")
         org-agenda-span 'day)
+
+  (global-set-key (kbd "C-c a") 'org-agenda)
 #+end_src
 
 ** Define macro for displaying timestamps on workdays
