@@ -411,9 +411,6 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
               "~/org/phd/innovation-labs"
               "~/org/iasi.ai/iasi-ai.org")
         org-agenda-span 'day)
-  ;; (setq org-agenda-repeating-timestamp-show-all nil)
-  ;; (setq org-agenda-skip-deadline-if-done t)
-  ;; (setq org-agenda-skip-scheduled-if-done t)
 #+end_src
 
 ** Define macro for displaying timestamps on workdays
@@ -422,7 +419,7 @@ The following macro will allocate time slots for meetings that are recurring on 
 
 Usage example:
 #+begin_quote
-* Some meeting
+ * Some meeting
 <%%(rp/workdays-at "8:30-9:00")>
 #+end_quote
 
