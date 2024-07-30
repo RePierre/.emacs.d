@@ -382,13 +382,24 @@
        :ensure t)
    #+end_src
 * Git integration
+** Utility functions
+Define a function to change the spelcheck dictionary to English, and enable the =flyspell-mode= in order to avoid spelling mistakes in commits.
+#+begin_src emacs-lisp
+  (defun rp/git-commit-setup()
+    "Setup the git commit buffer."
+    (progn
+      (ispell-change-dictionary "en_US")
+      (flyspell-mode 1)))
+#+end_src
 ** Install =magit=
    #+BEGIN_SRC emacs-lisp
      (use-package magit
        :ensure t
        :defer t
-       :bind (("C-x g" . magit-status)))
+       :bind (("C-x g" . magit-status))
+       :hook (git-commit-setup . rp/git-commit-setup))
    #+END_SRC
+
 ** Install =forge=
    #+begin_src emacs-lisp
      (use-package forge
