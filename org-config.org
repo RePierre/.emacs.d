@@ -358,7 +358,14 @@ Templates related to work activities.
       (file+headline "~/org/gtd/work.org" "Interruptions")
       "* %? \n" :clock-in t)
 
-     ("wj" "Journal Entry"
+     ("wj" "Journal entry")
+
+     ("wja" "Annotation entry"
+      entry
+      (file+olp+datetree "~/org/gtd/work.org" "Journal")
+      "* %a \n%U\n\n%?")
+
+     ("wje" "Empty entry"
       entry
       (file+olp+datetree "~/org/gtd/work.org" "Journal")
       "* %? \n%U")))
