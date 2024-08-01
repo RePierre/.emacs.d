@@ -247,17 +247,17 @@ Templates that do not have a category, i.e. are accessible via a single key.
    '(("n" "Note [inbox]"
       entry
       (file+headline "~/org/gtd/inbox.org" "Inbox")
-      "* PENDING %i%? \n  %U")
+      "* PENDING %i%? \n%U")
 
      ("t" "Task [GTD]"
       entry
       (file+headline "~/org/gtd/gtd.org" "Tasks")
-      "* TODO %i%? \n  %U")
+      "* TODO %i%? \n%U")
 
      ("a" "Appointment"
       entry
       (file+headline "~/org/gtd/gtd.org" "Calendar")
-      "* APPT %? \n  %^{Slot}T")
+      "* APPT %? \n%^{Slot}T")
 
      ("k" "Org-cliplink capture [inbox]"
       entry
@@ -272,12 +272,12 @@ Templates that do not have a category, i.e. are accessible via a single key.
      ("b" "Blog article idea"
       entry
       (file+headline "~/org/blogging/blogging.org" "Blog articles")
-      "* IDEA %? \n %U")
+      "* IDEA %? \n%U")
 
      ("T" "Tickler"
       entry
       (file+headline "~/org/gtd/tickler.org" "Tickler")
-      "* %i%? \n %U")))
+      "* %i%? \n%U")))
 #+end_src
 
 *** PhD related templates
@@ -295,7 +295,7 @@ Templates related to my PhD activities.
      ("pm" "Meeting"
       entry
       (file+headline "~/org/phd/phd.org" "Calendar")
-      "* %? \n  %^{Slot}T")
+      "* %? \n%^{Slot}T")
 
      ("pi" "Interruption"
         entry
@@ -339,12 +339,12 @@ Templates related to work activities.
      ("wm" "Meeting"
       entry
       (file+headline "~/org/gtd/work.org" "Outlook")
-      "* %? %(org-set-tags \"work\") \n  %^{Slot}T")
+      "* %? %(org-set-tags \"work\") \n%^{Slot}T")
 
      ("wr" "Retrospective remark"
       entry
       (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
-      "* TODO %? \n %U")
+      "* TODO %? \n%U")
 
      ("wc" "Clock report"
       plain
@@ -361,7 +361,7 @@ Templates related to work activities.
      ("wj" "Journal Entry"
       entry
       (file+olp+datetree "~/org/gtd/work.org" "Journal")
-      "* %? \n %U")))
+      "* %? \n%U")))
 #+end_src
 
 ** Setup =org-refile-targets=
