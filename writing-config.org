@@ -16,7 +16,7 @@
 	(text-scale-set 0)))
 
     (use-package writeroom-mode
-      :ensure t
+      :defer t
       :bind (("C-c wr" . writeroom-mode))
       :init (progn
 	      (add-hook 'writeroom-mode-enable-hook 'on-writeroom-mode-start)
@@ -25,7 +25,7 @@
 * Install =writegood-mode=
   #+begin_src emacs-lisp
     (use-package writegood-mode
-      :ensure t
+      :defer t
       :bind (("C-c wg" . writegood-mode)))
   #+end_src
 * Install =AUCTeX=
@@ -73,7 +73,7 @@
 	  (expand-file-name "submodules/org-novelist/" user-emacs-directory))
     (when (file-directory-p rp/org-novelist-dir)
       (use-package org-novelist
-      :ensure nil
+      :defer t
       :load-path rp/org-novelist-dir
       :custom
 	(org-novelist-language-tag "ro-RO")

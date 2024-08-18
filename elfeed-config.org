@@ -8,50 +8,51 @@
 ** Install and configure =elfeed=
 
    #+begin_src emacs-lisp
-    (setq elfeed-db-directory "~/org/elfeed/elfeed-db")
+     (setq elfeed-db-directory "~/org/elfeed/elfeed-db")
 
-    (defun elfeed-mark-all-as-read ()
-      (interactive)
-      (mark-whole-buffer)
-      (elfeed-search-untag-all-unread))
+     (defun elfeed-mark-all-as-read ()
+       (interactive)
+       (mark-whole-buffer)
+       (elfeed-search-untag-all-unread))
 
-    (defun elfeed-load-db-and-open ()
-      "Wrapper to load the elfeed database from disk before opening."
-      (interactive)
-      (elfeed-db-load)
-      (elfeed)
-      (elfeed-search-update--force))
+     (defun elfeed-load-db-and-open ()
+       "Wrapper to load the elfeed database from disk before opening."
+       (interactive)
+       (elfeed-db-load)
+       (elfeed)
+       (elfeed-search-update--force))
 
-    (defun elfeed-save-db-and-bury ()
-      "Wrapper to save the elfeed database to disk before burying buffer."
-      (interactive)
-      (elfeed-db-save)
-      (quit-window))
+     (defun elfeed-save-db-and-bury ()
+       "Wrapper to save the elfeed database to disk before burying buffer."
+       (interactive)
+       (elfeed-db-save)
+       (quit-window))
 
-    (use-package elfeed
-      :ensure t
-      :bind (:map elfeed-search-mode-map
-		  ("q" . elfeed-save-db-and-bury)
-		  ("A" . elfeed-mark-all-as-read)))
+     (use-package elfeed-goodies
+       :defer t
+       :config
+       (elfeed-goodies/setup)
+       (setq elfeed-goodies/entry-pane-position :bottom))
 
-    (use-package elfeed-goodies
-      :ensure t
-      :config
-      (elfeed-goodies/setup)
-      (setq elfeed-goodies/entry-pane-position :bottom))
+     (use-package elfeed-org
+       :defer t
+       :config
+       (elfeed-org)
+       (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
 
-    (use-package elfeed-org
-      :ensure t
-      :config
-      (elfeed-org)
-      (setq rmh-elfeed-org-files (list "~/org/elfeed/elfeed.org")))
+     (use-package elfeed
+       :defer t
+       :bind (:map elfeed-search-mode-map
+                   ("q" . elfeed-save-db-and-bury)
+                   ("A" . elfeed-mark-all-as-read)))
+
    #+end_src
 
 ** Make the =elfeed= entry buffer look nicer using =olivetti=
 
    #+begin_src emacs-lisp
      (use-package olivetti
-       :ensure t
+       :defer t
        :config (progn
 		 (add-hook 'elfeed-show-mode-hook 'olivetti-mode t)))
    #+end_src

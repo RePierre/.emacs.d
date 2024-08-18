@@ -8,10 +8,6 @@
      (add-to-list 'package-archives
 		  '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
    #+END_SRC
-** Refresh package contents
-   #+BEGIN_SRC emacs-lisp
-     (package-refresh-contents)
-   #+END_SRC
 ** Install =use-package=
    #+BEGIN_SRC emacs-lisp
      (unless (package-installed-p 'use-package)
@@ -150,7 +146,7 @@
 ** Expand region around the cursor semantically
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
-       :ensure t
+       :defer t
        :bind ("C-=" . er/expand-region))
    #+END_SRC
 ** Unbind <C-z>
@@ -256,14 +252,14 @@
    For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
    #+BEGIN_SRC emacs-lisp
      (use-package smart-mode-line
-       :ensure t
+       :defer t
        :init
        (setq sml/no-confirm-load-theme t)
        (setq sml/theme 'respectful)
        (sml/setup)
        :config
        (use-package nyan-mode
-	 :ensure t
+	 :defer t
 	 :config
 	 (nyan-mode 1)))
    #+END_SRC
@@ -271,7 +267,7 @@
    From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
-       :ensure t
+       :defer t
        :defer t
        :init
        (progn
@@ -283,7 +279,7 @@
 ** Install =undo-tree=
    #+BEGIN_SRC emacs-lisp
      (use-package undo-tree
-       :ensure t
+       :defer t
        :defer t
        :init
        (progn
@@ -294,20 +290,20 @@
 ** Install =which-key=
    #+BEGIN_SRC emacs-lisp
      (use-package which-key
-       :ensure t
+       :defer t
        :config
        (which-key-mode))
    #+END_SRC
 ** Install =try= package
    #+BEGIN_SRC emacs-lisp
    (use-package try
-     :ensure t)
+     :defer t)
    #+END_SRC
 ** Install =beginend=
    #+BEGIN_SRC emacs-lisp
      (when (version<= "25.3" emacs-version)
        (use-package beginend
-	 :ensure t
+	 :defer t
 	 :defer t
 	 :init (beginend-global-mode)))
    #+END_SRC
@@ -315,7 +311,7 @@
    [[https://github.com/alpha22jp/atomic-chrome][Atomic chrome]] allows editing text from a text area within browser using Emacs. Since I use Firefox I [[https://github.com/GhostText/GhostText][GhostText extension]] needs to be installed in Firefox in order for this to work.
    #+begin_src emacs-lisp
      (use-package atomic-chrome
-       :ensure t
+       :defer t
        :when (display-graphic-p)
        :config
        (progn
@@ -330,7 +326,7 @@
      ;; A merge of configuration from Sacha Chua http://pages.sachachua.com/.emacs.d/Sacha.html and
      ;; other various sources
      (use-package helm
-       :ensure t
+       :defer t
        :diminish helm-mode
        :init
        (progn
@@ -366,7 +362,7 @@
    Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha Chua]].
    #+BEGIN_SRC emacs-lisp
      (use-package helm-swoop
-       :ensure t
+       :defer t
        :bind
        (("C-S-s" . helm-swoop)
 	("M-i" .  helm-swoop)
@@ -379,7 +375,7 @@
 ** Install =helm-xref=
    #+begin_src emacs-lisp
      (use-package helm-xref
-       :ensure t)
+       :defer t)
    #+end_src
 * Git integration
 ** Utility functions
@@ -394,7 +390,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 ** Install =magit=
    #+BEGIN_SRC emacs-lisp
      (use-package magit
-       :ensure t
+       :defer t
        :defer t
        :bind (("C-x g" . magit-status))
        :hook (git-commit-setup . rp/git-commit-setup))
@@ -403,7 +399,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 ** Install =forge=
    #+begin_src emacs-lisp
      (use-package forge
-       :ensure t
+       :defer t
        :defer t
        :after magit)
    #+end_src
@@ -414,7 +410,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 ** Install =git-gutter=
    #+BEGIN_SRC emacs-lisp
      (use-package git-gutter
-       :ensure t
+       :defer t
        :defer t
        :config
        (global-git-gutter-mode t)
@@ -425,7 +421,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
    From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
    #+BEGIN_SRC emacs-lisp
      (use-package company
-       :ensure t
+       :defer t
        :config
        (global-company-mode)
        (setq-default
@@ -438,7 +434,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 ** Install =company-quickhelp=
    #+begin_src emacs-lisp
      (use-package company-quickhelp
-       :ensure t
+       :defer t
        :defer t
        :init (with-eval-after-load 'company
 	       (company-quickhelp-mode)))
@@ -446,7 +442,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 * Install =csv-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package csv-mode
-      :ensure t
+      :defer t
       :defer t
       :init
       (progn
@@ -456,10 +452,10 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 * Install =yasnippet=
   #+begin_src emacs-lisp
     (use-package yasnippet
-      :ensure t
+      :defer t
       :config
       (progn
-	(use-package yasnippet-snippets :ensure t)
+	(use-package yasnippet-snippets :defer t)
 	(yas-global-mode 1)))
 
   #+end_src
@@ -479,7 +475,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
   When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
   #+BEGIN_SRC emacs-lisp
     (use-package projectile
-      :ensure t
+      :defer t
       :defer t
       :bind-keymap
       ("C-c p" . projectile-command-map)
@@ -493,13 +489,13 @@ Define a function to change the spelcheck dictionary to English, and enable the 
       (progn
 	(setq projectile-completion-system 'helm)
 	(use-package helm-projectile
-	  :ensure t
+	  :defer t
 	  :config (helm-projectile-on))))
   #+END_SRC
 * Install =eldoc=
   #+begin_src emacs-lisp
     (use-package eldoc
-      :ensure t
+      :defer t
       :defer t
       :hook ((emacs-lisp-mode . eldoc-mode)
 	     (eval-expression-minibuffer-setup . eldoc-mode)
@@ -513,7 +509,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
    As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
-       :ensure t
+       :defer t
        :defer t
        :commands (markdown-mode gfm-mode)
        :mode (("README\\.md\\'" . gfm-mode)
@@ -525,20 +521,20 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 ** Install =gh-md=
    #+BEGIN_SRC emacs-lisp
      (use-package gh-md
-       :ensure t
+       :defer t
        :defer t)
    #+END_SRC
 * Install =graphviz-dot-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package graphviz-dot-mode
-      :ensure t
+      :defer t
       :defer t)
   #+END_SRC
 * Install =pdf-tools=
   =use-package= example configuring =pdf-tools= found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
   #+BEGIN_SRC emacs-lisp
     (use-package pdf-tools
-      :ensure t
+      :defer t
       :config
       (pdf-tools-install)
       (setq-default pdf-view-display-size 'fit-page))
@@ -559,7 +555,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 *** Install and configure =ledger-mode=
     #+begin_src emacs-lisp
       (use-package ledger-mode
-	:ensure t
+	:defer t
 	:defer t
 	:config (progn
 		  (setq ledger-reconcile-default-commodity "RON")
@@ -569,7 +565,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 *** Install and configure =flycheck-ledger=
     #+begin_src emacs-lisp
       (use-package flycheck-ledger
-	:ensure t
+	:defer t
 	:defer t
 	:hook (ledger-mode . flycheck-mode))
     #+end_src

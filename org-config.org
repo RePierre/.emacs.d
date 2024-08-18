@@ -17,6 +17,7 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
 #+begin_src emacs-lisp
   (use-package org
     :ensure org-contrib
+    :defer t
     :config (progn
               (require 'ox-extra)
               (ox-extras-activate '(ignore-headlines))
@@ -58,7 +59,7 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
 As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
 #+begin_src emacs-lisp
   (use-package helm-bibtex
-    :ensure t
+    :defer t
     :init
     (setq bibtex-completion-bibliography '("~/org/bibliography/references.bib")
           bibtex-completion-library-path '("~/org/bibliography/bibtex-pdfs")
@@ -77,7 +78,7 @@ As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][o
             (call-process "open" nil 0 nil fpath))))
 
   (use-package org-ref
-    :ensure t
+    :defer t
     :init
     (require 'bibtex)
     (setq bibtex-autokey-year-length 4
@@ -97,7 +98,7 @@ As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][o
 
 
   (use-package org-ref-helm
-    :ensure nil
+    :defer t
     :load-path (lambda()(expand-file-name "elpa/org-ref" user-emacs-directory))
     :init (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
                 org-ref-insert-cite-function 'org-ref-cite-insert-helm
@@ -109,7 +110,7 @@ As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][o
 ** Setup =org-cliplink=
 #+begin_src emacs-lisp
   (use-package org-cliplink
-    :ensure t)
+    :defer t)
 #+end_src
 ** Automatically export to pdf
 #+begin_src emacs-lisp
@@ -185,7 +186,7 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
     (org-bullets-mode 1))
 
   (use-package org-bullets
-    :ensure t
+    :defer t
     :config
     (add-hook 'org-mode-hook 'rp/enable-org-bullets-mode))
 #+end_src
@@ -209,7 +210,7 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 
 #+begin_src emacs-lisp
   (use-package org-re-reveal
-    :ensure t
+    :defer t
     :defer t
     :config
     (progn
@@ -487,7 +488,7 @@ Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for
 * Install =org-roam=
 #+begin_src emacs-lisp
   (use-package org-roam
-    :ensure t
+    :defer t
     :init
     (setq org-roam-v2-ack t)
     :custom
@@ -502,7 +503,7 @@ Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for
 #+begin_src emacs-lisp
   (use-package org-roam-ui
     :after org-roam
-    :ensure t
+    :defer t
     :config
     (setq org-roam-ui-sync-theme t
           org-roam-ui-follow t

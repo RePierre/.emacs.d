@@ -8,7 +8,7 @@
          (lsp-headerline-breadcrumb-mode)))
 
      (use-package lsp-mode
-       :ensure t
+       :defer t
        :commands (lsp lsp-deferred)
        :hook ((prog-mode . lsp)
               (lsp-mode . rp/setup-lsp-mode))
@@ -16,7 +16,7 @@
        :config (lsp-enable-which-key-integration t))
 
      (use-package lsp-ui
-       :ensure t
+       :defer t
        :config
        (setq lsp-ui-doc-max-height 20
              lsp-ui-doc-max-width 50
@@ -25,27 +25,27 @@
        :commands lsp-ui-mode)
 
      (use-package helm-lsp
-       :ensure t
+       :defer t
        :commands helm-lsp-workspace-symbol)
    #+end_src
 ** Install =dap-mode=
    #+begin_src emacs-lisp
      (use-package dap-mode
-       :ensure t
+       :defer t
        :after lsp-mode
        :config (dap-auto-configure-mode))
    #+end_src
 ** Install =flycheck=
    #+begin_src emacs-lisp
      (use-package flycheck
-       :ensure t
+       :defer t
        :defer t
        :init (global-flycheck-mode))
    #+end_src
 ** Install =smartparens=
    #+begin_src emacs-lisp
      (use-package smartparens
-       :ensure t
+       :defer t
        :diminish smartparens-mode
        :config
        (add-hook 'prog-mode-hook 'smartparens-mode))
@@ -53,12 +53,12 @@
 ** Install =yaml-mode=
    #+begin_src emacs-lisp
      (use-package yaml-mode
-       :ensure t)
+       :defer t)
    #+end_src
 ** Install =rainbow-delimiters= for improved readability
    #+begin_src emacs-lisp
      (use-package rainbow-delimiters
-       :ensure t
+       :defer t
        :config
        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
    #+end_src
@@ -66,7 +66,7 @@
    =Treemacs= configuration copied from [[https://github.com/Alexander-Miller/treemacs#installation][=Installation=]] section of the package GitHub page.
    #+begin_src emacs-lisp
      (use-package treemacs
-       :ensure t
+       :defer t
        :defer t
        :config
        (progn
@@ -142,16 +142,16 @@
 
      (use-package treemacs-projectile
        :after (treemacs projectile)
-       :ensure t)
+       :defer t)
 
      (use-package treemacs-icons-dired
        :after (treemacs dired)
-       :ensure t
+       :defer t
        :config (treemacs-icons-dired-mode))
 
      (use-package treemacs-magit
        :after (treemacs magit)
-       :ensure t)
+       :defer t)
    #+end_src
 
 * Programming mode(s) tweaks
@@ -181,7 +181,7 @@
 
    #+begin_src emacs-lisp
      (use-package php-mode
-       :ensure t
+       :defer t
        :mode "\\.php\\'"
        :defer t)
    #+end_src
@@ -210,14 +210,14 @@
 
    #+begin_src emacs-lisp
      (use-package dockerfile-mode
-       :ensure t)
+       :defer t)
    #+end_src
 
 ** Install =docker-compose-mode=
 
    #+begin_src emacs-lisp
      (use-package docker-compose-mode
-       :ensure t)
+       :defer t)
    #+end_src
 
 * Python development
@@ -229,7 +229,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package pyvenv
        :defer t
-       :ensure t
+       :defer t
        :config (progn
 		 (add-hook 'pyvenv-post-activate-hooks 'pyvenv-restart-python)))
    #+END_SRC
@@ -238,7 +238,7 @@
 
    #+begin_src emacs-lisp
      (use-package py-yapf
-       :ensure t
+       :defer t
        :after (python-mode lsp-mode)
        :commands (py-yapf-buffer py-yapf-enable-on-save))
    #+end_src
@@ -265,14 +265,14 @@
 ** Install =rjsx-mode=
    #+begin_src emacs-lisp :results silent
      (use-package rjsx-mode
-       :ensure t
+       :defer t
        :mode "\\.js\\'")
    #+end_src
 ** Intall =prettier-js=
    Requires =sudo apt install prettier= or =npm install -g prettier=.
    #+begin_src emacs-lisp :results silent
      (use-package prettier-js
-       :ensure t
+       :defer t
        :after (rjsx-mode)
        :hook (rjsx-mode . prettier-js-mode))
    #+end_src
@@ -283,7 +283,7 @@
 
    #+begin_src emacs-lisp
      (use-package nxml-mode
-       :ensure nil
+       :defer t
        :hook (nxml-mode . lsp-deferred)
        :mode ("\\.\\(xml\\|xsd\\|wsdl\\)\\'"))
    #+end_src
@@ -309,7 +309,7 @@
 
    #+begin_src emacs-lisp
      (use-package sql-mode
-       :ensure nil
+       :defer t
        :mode "\\.sql\\'")
    #+end_src
 
@@ -324,5 +324,5 @@
 
   #+begin_src emacs-lisp
     (use-package powershell
-      :ensure t)
+      :defer t)
   #+end_src
