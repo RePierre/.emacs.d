@@ -230,21 +230,22 @@
    #+begin_src emacs-lisp
      (use-package circadian
        :ensure t
+       :after smart-mode-line
        :config
        (if (and
-	    (bound-and-true-p calendar-latitude)
-	    (bound-and-true-p calendar-longitude))
-	   (progn
-	     (message "Latitude and longitude are set; themes will change according to sunset and sunrise.")
-	     (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
-				      (:sunset . sanityinc-tomorrow-night))))
-	 (progn
-	   (message "Latitude and longitude not set; themes will change at 8:00 and 19:30.")
-	   (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
-				    ("19:30" . sanityinc-tomorrow-night)))))
+            (bound-and-true-p calendar-latitude)
+            (bound-and-true-p calendar-longitude))
+           (progn
+             (message "Latitude and longitude are set; themes will change according to sunset and sunrise.")
+             (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
+                                      (:sunset . sanityinc-tomorrow-night))))
+         (progn
+           (message "Latitude and longitude not set; themes will change at 8:00 and 19:30.")
+           (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
+                                    ("19:30" . sanityinc-tomorrow-night)))))
        (add-hook 'circadian-after-load-theme-hook
-		 #'(lambda (theme)
-		     (sml/apply-theme 'respectful)))
+                 #'(lambda (theme)
+                     (sml/apply-theme 'respectful)))
        (circadian-setup))
    #+end_src
 * Convenience packages
@@ -252,17 +253,21 @@
    For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
    #+BEGIN_SRC emacs-lisp
      (use-package smart-mode-line
-       :defer t
-       :init
+       :hook
+       (after-init . smart-mode-line-enable)
+       :config
        (setq sml/no-confirm-load-theme t)
        (setq sml/theme 'respectful)
-       (sml/setup)
-       :config
-       (use-package nyan-mode
-	 :defer t
-	 :config
-	 (nyan-mode 1)))
+       (sml/setup))
    #+END_SRC
+
+** Install =nyan-mode=
+#+begin_src emacs-lisp
+  (use-package nyan-mode
+    :after smart-mode-line
+    :config
+    (nyan-mode 1))
+#+end_src
 ** Install =ace-window=
    From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
    #+BEGIN_SRC emacs-lisp
