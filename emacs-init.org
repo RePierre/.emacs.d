@@ -36,186 +36,185 @@
    #+end_src
 * Basic customization
 ** Move generated UI code to a separate file
-   #+BEGIN_SRC emacs-lisp
-     (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (file-exists-p custom-file)
-       (load custom-file t))
-   #+END_SRC
+#+begin_src emacs-lisp
+  (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file t))
+#+end_src
 ** Hide the startup message
-   #+BEGIN_SRC emacs-lisp
-     (setq inhibit-startup-message t)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)
+#+end_src
 ** Hide the toolbar
-   #+BEGIN_SRC emacs-lisp
-     (tool-bar-mode -1)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+#+end_src
 ** Hide the scroll bar
-   #+BEGIN_SRC emacs-lisp
-     (scroll-bar-mode -1)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+#+end_src
 ** Change =yes or no= prompts to =y or n=
-   #+BEGIN_SRC emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
 ** Bind =F5= key to =revert-buffer=
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "<f5>") 'revert-buffer)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f5>") 'revert-buffer)
+#+end_src
 ** Wrap long lines
-   Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
-   #+BEGIN_SRC emacs-lisp
-     (global-visual-line-mode t)
-   #+END_SRC
+Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
+#+begin_src emacs-lisp
+  (global-visual-line-mode t)
+#+end_src
 ** Use =ibuffer= for buffer list
-   As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-x C-b") 'ibuffer)
-     (setq ibuffer-saved-filter-groups
-	   (quote (("default"
-		    ("dired" (mode . dired-mode))
-		    ("org" (name . "^.*org$"))
-		    ("web" (or (mode . web-mode)
-			       (mode . js2-mode)))
-		    ("shell" (or (mode . eshell-mode)
-				 (mode . shell-mode)))
-		    ("programming" (or (mode . python-mode)
-				       (mode . lisp-mode)
-				       (mode . csharp-mode)
-				       (mode . js2-mode)))
-		    ("doc-view" (mode . doc-view-mode))
-		    ("magit" (name . "^magit[:-].*"))
-		    ("latex" (or (mode . latex-mode)
-				 (mode . bibtex-mode)))
-		    ("emacs" (or (name . "^\\*scratch\\*$")
-				 (name . "^\\*Messages\\*$")))
-		    ("helm" (mode . helm-major-mode))
-		    ("powershell" (mode . powershell-mode))
-		    ("ledger" (mode . ledger-mode))
-		    ("pdf" (mode . pdf-view-mode))
-		    ("XML" (mode . nxml-mode))))))
-     (add-hook 'ibuffer-mode-hook
-	       (lambda ()
-		 (ibuffer-auto-mode 1)
-		 (ibuffer-switch-to-saved-filter-groups "default")))
+As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (setq ibuffer-saved-filter-groups
+        (quote (("default"
+            ("dired" (mode . dired-mode))
+            ("org" (name . "^.*org$"))
+            ("web" (or (mode . web-mode)
+                       (mode . js2-mode)))
+            ("shell" (or (mode . eshell-mode)
+                         (mode . shell-mode)))
+            ("programming" (or (mode . python-mode)
+                               (mode . lisp-mode)
+                               (mode . csharp-mode)
+                               (mode . js2-mode)))
+            ("doc-view" (mode . doc-view-mode))
+            ("magit" (name . "^magit[:-].*"))
+            ("latex" (or (mode . latex-mode)
+                         (mode . bibtex-mode)))
+            ("emacs" (or (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")))
+            ("helm" (mode . helm-major-mode))
+            ("powershell" (mode . powershell-mode))
+            ("ledger" (mode . ledger-mode))
+            ("pdf" (mode . pdf-view-mode))
+            ("XML" (mode . nxml-mode))))))
+  (add-hook 'ibuffer-mode-hook
+            (lambda ()
+         (ibuffer-auto-mode 1)
+         (ibuffer-switch-to-saved-filter-groups "default")))
 
-     ;; Don't show filter groups if there are no buffers in that group
-     (setq ibuffer-show-empty-filter-groups nil)
-   #+END_SRC
+  ;; Don't show filter groups if there are no buffers in that group
+  (setq ibuffer-show-empty-filter-groups nil)
+#+end_src
 ** Replace highlighted text
-   From [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Replacing-highlighted-text.html][Emacs manual]]:
-   #+BEGIN_SRC emacs-lisp
-     (delete-selection-mode 1)
-   #+END_SRC
+From [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Replacing-highlighted-text.html][Emacs manual]]:
+#+begin_src emacs-lisp
+  (delete-selection-mode 1)
+#+end_src
 ** Save contents of clipboard before killing text
-   From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clipboard/cpsbbmb/][Reddit comment]]:
-   #+BEGIN_SRC emacs-lisp
-     (setq save-interprogram-paste-before-kill t)
-   #+END_SRC
+From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clipboard/cpsbbmb/][Reddit comment]]:
+#+begin_src emacs-lisp
+  (setq save-interprogram-paste-before-kill t)
+#+end_src
 ** Remove scratch message
-   #+BEGIN_SRC emacs-lisp
-     (setq initial-scratch-message "")
-   #+END_SRC
+#+begin_src emacs-lisp
+  (setq initial-scratch-message "")
+#+end_src
 ** =dired= tweaks
 *** Set =dired-dwim-target=
-    #+BEGIN_SRC emacs-lisp
-      (setq dired-dwim-target t)
-    #+END_SRC
+ #+begin_src emacs-lisp
+   (setq dired-dwim-target t)
+ #+end_src
 *** Human readable file sizes
-    From [[http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/][Pragmatic Emacs]].
-    #+BEGIN_SRC emacs-lisp
-      (setq dired-listing-switches "-alh")
-    #+END_SRC
+ From [[http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/][Pragmatic Emacs]].
+ #+begin_src emacs-lisp
+   (setq dired-listing-switches "-alh")
+ #+end_src
 ** End sentences with single space
-   #+BEGIN_SRC emacs-lisp
-     (setq sentence-end-double-space nil)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (setq sentence-end-double-space nil)
+#+end_src
 ** Display date and time in mode line
-   #+BEGIN_SRC emacs-lisp
-     (setq display-time-day-and-date t
-           display-time-24hr-format t)
-     (display-time-mode 1)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (setq display-time-day-and-date t
+        display-time-24hr-format t)
+  (display-time-mode 1)
+#+end_src
 ** Turn off the error bell
-   #+BEGIN_SRC emacs-lisp
-     (setq ring-bell-function 'ignore)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+end_src
 ** Delete trailing whitespace on save
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'before-save-hook 'delete-trailing-whitespace)
-   #+END_SRC
+#+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+end_src
 ** Expand region around the cursor semantically
-   #+BEGIN_SRC emacs-lisp
-     (use-package expand-region
-       :defer t
-       :bind ("C-=" . er/expand-region))
-   #+END_SRC
-** Unbind <C-z>
-   #+BEGIN_SRC emacs-lisp
-     (global-unset-key (kbd "C-z"))
-   #+END_SRC
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :defer t
+    :bind ("C-=" . er/expand-region))
+#+end_src
+** Unbind =C-z=
+#+begin_src emacs-lisp
+  (global-unset-key (kbd "C-z"))
+#+end_src
 ** Change start day of the week
-   #+begin_src emacs-lisp
-     (setq calendar-week-start-day 1)
-   #+end_src
+#+begin_src emacs-lisp
+  (setq calendar-week-start-day 1)
+#+end_src
 ** Ask for confirmation before exiting Emacs
-   #+begin_src emacs-lisp
-     (unless (daemonp)
-       (setq confirm-kill-emacs 'y-or-n-p))
-   #+end_src
+#+begin_src emacs-lisp
+  (unless (daemonp)
+    (setq confirm-kill-emacs 'y-or-n-p))
+#+end_src
 ** Use =Firefox= as the default browser when running in =Windows Subsystem for Linux=
-   #+begin_src emacs-lisp
-     (defun rp/browse-url-firefox(url &rest ARGS)
-       "Browse URL using Firefox from Windows when running under WSL.
-     This function calls `shell-command' to pass
-     URL to the Firefox browser located at
-     `/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe'.
+#+begin_src emacs-lisp
+  (defun rp/browse-url-firefox(url &rest ARGS)
+    "Browse URL using Firefox from Windows when running under WSL.
+  This function calls `shell-command' to pass
+  URL to the Firefox browser located at
+  `/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe'.
 
-     The second argument ARGS is present to maintain compatibility."
-       (progn
-	 (message "Browsing URL [%s] using external Firefox." url)
-	 (shell-command
-	  (concat "/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe "
-		  url))))
+  The second argument ARGS is present to maintain compatibility."
+    (progn
+      (message "Browsing URL [%s] using external Firefox." url)
+      (shell-command
+       (concat "/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe "
+          url))))
 
-     (when (rp/running-on-wsl)
-       (progn
-	 (message "Running under WSL. The browse-url-browser-function will be overwritten.")
-	 (setq browse-url-browser-function 'rp/browse-url-firefox)))
-   #+end_src
+  (when (rp/running-on-wsl)
+    (progn
+      (message "Running under WSL. The browse-url-browser-function will be overwritten.")
+      (setq browse-url-browser-function 'rp/browse-url-firefox)))
+#+end_src
 ** Change the location of default bookmarks files
-   #+begin_src emacs-lisp
-     (setq bookmark-default-file "~/org/bookmarks"
-	   eww-bookmarks-directory "~/org/")
-   #+end_src
+#+begin_src emacs-lisp
+  (setq bookmark-default-file "~/org/bookmarks"
+        eww-bookmarks-directory "~/org/")
+#+end_src
 ** Hide the cursor in inactive windows
-   #+begin_src emacs-lisp
-     (setq-default cursor-in-non-selected-windows nil)
-   #+end_src
+#+begin_src emacs-lisp
+  (setq-default cursor-in-non-selected-windows nil)
+#+end_src
 ** Add a margin when scrolling vertically
-   #+begin_src emacs-lisp
-     (setq-default scroll-margin 2)
-   #+end_src
+#+begin_src emacs-lisp
+  (setq-default scroll-margin 2)
+#+end_src
 ** Set default encoding to =UTF-8=
-   #+begin_src emacs-lisp
-     (set-default-coding-systems 'utf-8)
-   #+end_src
+#+begin_src emacs-lisp
+  (set-default-coding-systems 'utf-8)
+#+end_src
 ** Store all backup and autosave files in the =/tmp= directories
 
-   Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto_save_files_when_quitting_emacs/iv3asi4/][reddit answer]].
+Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto_save_files_when_quitting_emacs/iv3asi4/][reddit answer]].
+#+begin_src emacs-lisp
+  (setq backup-directory-alist
+        `((".*" . ,temporary-file-directory)))
 
-   #+begin_src emacs-lisp
-     (setq backup-directory-alist
-	   `((".*" . ,temporary-file-directory)))
-
-     (setq auto-save-file-name-transforms
-	   `((".*" ,temporary-file-directory t)))
-   #+end_src
+  (setq auto-save-file-name-transforms
+        `((".*" ,temporary-file-directory t)))
+#+end_src
 
 ** Start Emacs maximized
-   #+begin_src emacs-lisp
-     (add-to-list 'initial-frame-alist
-		  '(fullscreen . maximized))
-   #+end_src
+#+begin_src emacs-lisp
+  (add-to-list 'initial-frame-alist
+          '(fullscreen . maximized))
+#+end_src
 * Themes
 ** Apply theme
    Use =sanityinc-tomorrow-night= when not running from console; otherwise fallback to =wombat=.
