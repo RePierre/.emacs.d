@@ -216,37 +216,54 @@ Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto
           '(fullscreen . maximized))
 #+end_src
 * Themes
-** Apply theme
-   Use =sanityinc-tomorrow-night= when not running from console; otherwise fallback to =wombat=.
-   #+BEGIN_SRC emacs-lisp
-     (use-package color-theme-sanityinc-tomorrow
-       :ensure t
-       :config (progn
-		 (load-theme 'sanityinc-tomorrow-night t)))
+** Use =SanityInc= themes
 
-   #+END_SRC
+#+begin_src emacs-lisp
+  (use-package color-theme-sanityinc-tomorrow
+    :defer t)
+#+end_src
+
+** Consider all custom themes to be safe
+
+#+begin_src emacs-lisp
+  (setq custom-safe-themes t)
+#+end_src
+
+Treating *all* custom themes as being safe seems to be risky. Ideally, I should be able to specify the list of custom themes like this:
+#+begin_example
+(setq custom-safe-themes
+      '("76ddb2e196c6ba8f380c23d169cf2c8f561fd2013ad54b987c516d3cabc00216" ;; sanityinc-tomorrow-day
+        "04aa1c3ccaee1cc2b93b246c6fbcd597f7e6832a97aaeac7e5891e6863236f9f" ;; sanityinc-tomorrow-night
+        "6fc9e40b4375d9d8d0d9521505849ab4d04220ed470db0b78b700230da0a86c1" ;; sanityinc-tomorrow-eighties
+        default))
+#+end_example
+
+However, for some reason I can't find right now, specifying the list of custom safe themes doesn't work --- when starting the daemon, I get a prompt whether to load and treat the theme as safe or not, which blocks the startup of the daemon.
+
 ** Use =circadian= to switch between dark and light themes
-   #+begin_src emacs-lisp
-     (use-package circadian
-       :ensure t
-       :after smart-mode-line
-       :config
-       (if (and
-            (bound-and-true-p calendar-latitude)
-            (bound-and-true-p calendar-longitude))
-           (progn
-             (message "Latitude and longitude are set; themes will change according to sunset and sunrise.")
-             (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
-                                      (:sunset . sanityinc-tomorrow-night))))
-         (progn
-           (message "Latitude and longitude not set; themes will change at 8:00 and 19:30.")
-           (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
-                                    ("19:30" . sanityinc-tomorrow-night)))))
-       (add-hook 'circadian-after-load-theme-hook
-                 #'(lambda (theme)
-                     (sml/apply-theme 'respectful)))
-       (circadian-setup))
-   #+end_src
+
+#+begin_src emacs-lisp
+  (use-package circadian
+    :ensure t
+    :after smart-mode-line
+    :config
+    (if (and
+         (bound-and-true-p calendar-latitude)
+         (bound-and-true-p calendar-longitude))
+        (progn
+          (message "Latitude and longitude are set; themes will change according to sunset and sunrise.")
+          (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
+                                   (:sunset . sanityinc-tomorrow-night))))
+      (progn
+        (message "Latitude and longitude not set; themes will change at 8:00 and 19:30.")
+        (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
+                                 ("19:30" . (sanityinc-tomorrow-night sanityinc-tomorrow-eighties))))))
+    (add-hook 'circadian-after-load-theme-hook
+              #'(lambda (theme)
+                  (sml/apply-theme 'respectful)))
+    (circadian-setup))
+#+end_src
+
 * Convenience packages
 ** Install =smart-mode-line=
    For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
