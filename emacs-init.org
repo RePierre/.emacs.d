@@ -422,8 +422,11 @@ However, for some reason I can't find right now, specifying the list of custom s
 	 (atomic-chrome-start-server)))
    #+end_src
 * Helm
+
 ** Install =helm=
+
 A merge of configuration from [[http://pages.sachachua.com/.emacs.d/Sacha.html][Sacha Chua]] and  other various sources.
+
 #+begin_src emacs-lisp
   (use-package helm
     :defer t
@@ -443,10 +446,10 @@ A merge of configuration from [[http://pages.sachachua.com/.emacs.d/Sacha.html][
             helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
             helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
             helm-scroll-amount 8)	; scroll 8 lines other window using M-<next>/M-<prior>
-      (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-      (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action))
+      )
     :hook (after-init . helm-mode)
-    :bind (("C-c h" . helm-mini)
+    :bind (:map global-map
+           ("C-c h" . helm-mini)
            ("C-h a" . helm-apropos)
            ("C-x b" . helm-buffers-list)
            ("M-y" . helm-show-kill-ring)
@@ -455,11 +458,15 @@ A merge of configuration from [[http://pages.sachachua.com/.emacs.d/Sacha.html][
            ("C-x c y" . helm-yas-complete)
            ("C-x c Y" . helm-yas-create-snippet-on-region)
            ("C-x c SPC" . helm-all-mark-rings)
-           ("C-x C-f" . helm-find-files)))
+           ("C-x C-f" . helm-find-files)
+           :map helm-map
+           ("TAB" . helm-execute-persistent-action)))
 #+end_src
 
 ** Install =helm-swoop=
+
 Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha Chua]].
+
 #+begin_src emacs-lisp
   (use-package helm-swoop
     :defer t
@@ -473,12 +480,15 @@ Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha
      ("C-c M-i" . helm-multi-swoop)
      ("C-c M-I" . helm-multi-swoop-all)))
 #+end_src
+
 ** Install =helm-xref=
+
 #+begin_src emacs-lisp
   (use-package helm-xref
     :defer t
     :after helm)
 #+end_src
+
 * Git integration
 ** Utility functions
 Define a function to change the spelcheck dictionary to English, and enable the =flyspell-mode= in order to avoid spelling mistakes in commits.
