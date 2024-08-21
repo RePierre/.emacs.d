@@ -28,21 +28,29 @@ Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][th
 #+end_src
 
 * Load custom libraries
-  #+BEGIN_SRC emacs-lisp
-    (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-    (add-to-list 'load-path (expand-file-name "org/lisp" "~"))
-  #+END_SRC
-** Add =Romanian standard= input method to Emacs
-   Emacs comes with two input methods for Romanian: =romanian-alt-prefix= and =romanian-prefix=. However, I'm more accustomed to Romanian standard keyboard layout so I created a =quail= package for it. This will be the default input method.
-   #+BEGIN_SRC emacs-lisp
-     (require 'quail-romanian-standard)
 
-     (setq default-input-method 'romanian-standard)
-   #+END_SRC
+** Append additional directories to =load-path=
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "org/lisp" gnus-home-directory))
+#+end_src
+
+** Add =Romanian standard= input method to Emacs
+
+Emacs comes with two input methods for Romanian: =romanian-alt-prefix= and =romanian-prefix=. However, I'm more accustomed to Romanian standard keyboard layout so I created a =quail= package for it. This will be the default input method.
+
+#+begin_src emacs-lisp
+  (require 'quail-romanian-standard)
+  (setq default-input-method 'romanian-standard)
+#+end_src
+
 ** Load utilities library
-   #+begin_src emacs-lisp
-     (require 'rp-utils)
-   #+end_src
+
+#+begin_src emacs-lisp
+  (require 'rp-utils)
+#+end_src
+
 * Basic customization
 ** Move generated UI code to a separate file
 #+begin_src emacs-lisp
