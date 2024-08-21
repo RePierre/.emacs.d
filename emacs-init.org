@@ -52,39 +52,57 @@ Emacs comes with two input methods for Romanian: =romanian-alt-prefix= and =roma
 #+end_src
 
 * Basic customization
+
 ** Move generated UI code to a separate file
+
 #+begin_src emacs-lisp
   (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
     (load custom-file t))
 #+end_src
+
 ** Hide the startup message
+
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)
 #+end_src
+
 ** Hide the toolbar
+
 #+begin_src emacs-lisp
   (tool-bar-mode -1)
 #+end_src
+
 ** Hide the scroll bar
+
 #+begin_src emacs-lisp
   (scroll-bar-mode -1)
 #+end_src
+
 ** Change =yes or no= prompts to =y or n=
+
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
+
 ** Bind =F5= key to =revert-buffer=
+
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f5>") 'revert-buffer)
 #+end_src
+
 ** Wrap long lines
+
 Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
+
 #+begin_src emacs-lisp
   (global-visual-line-mode t)
 #+end_src
+
 ** Use =ibuffer= for buffer list
+
 As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
+
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (setq ibuffer-saved-filter-groups
@@ -118,68 +136,100 @@ As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emme
   ;; Don't show filter groups if there are no buffers in that group
   (setq ibuffer-show-empty-filter-groups nil)
 #+end_src
+
 ** Replace highlighted text
+
 From [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Replacing-highlighted-text.html][Emacs manual]]:
+
 #+begin_src emacs-lisp
   (delete-selection-mode 1)
 #+end_src
+
 ** Save contents of clipboard before killing text
+
 From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clipboard/cpsbbmb/][Reddit comment]]:
+
 #+begin_src emacs-lisp
   (setq save-interprogram-paste-before-kill t)
 #+end_src
+
 ** Remove scratch message
+
 #+begin_src emacs-lisp
   (setq initial-scratch-message "")
 #+end_src
+
 ** =dired= tweaks
+
 *** Set =dired-dwim-target=
+
  #+begin_src emacs-lisp
    (setq dired-dwim-target t)
  #+end_src
+
 *** Human readable file sizes
+
  From [[http://pragmaticemacs.com/emacs/dired-human-readable-sizes-and-sort-by-size/][Pragmatic Emacs]].
+
  #+begin_src emacs-lisp
    (setq dired-listing-switches "-alh")
  #+end_src
+
 ** End sentences with single space
+
 #+begin_src emacs-lisp
   (setq sentence-end-double-space nil)
 #+end_src
+
 ** Display date and time in mode line
+
 #+begin_src emacs-lisp
   (setq display-time-day-and-date t
         display-time-24hr-format t)
   (display-time-mode 1)
 #+end_src
+
 ** Turn off the error bell
+
 #+begin_src emacs-lisp
   (setq ring-bell-function 'ignore)
 #+end_src
+
 ** Delete trailing whitespace on save
+
 #+begin_src emacs-lisp
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+end_src
+
 ** Expand region around the cursor semantically
+
 #+begin_src emacs-lisp
   (use-package expand-region
     :defer t
     :bind ("C-=" . er/expand-region))
 #+end_src
+
 ** Unbind =C-z=
+
 #+begin_src emacs-lisp
   (global-unset-key (kbd "C-z"))
 #+end_src
+
 ** Change start day of the week
+
 #+begin_src emacs-lisp
   (setq calendar-week-start-day 1)
 #+end_src
+
 ** Ask for confirmation before exiting Emacs
+
 #+begin_src emacs-lisp
   (unless (daemonp)
     (setq confirm-kill-emacs 'y-or-n-p))
 #+end_src
+
 ** Use =Firefox= as the default browser when running in =Windows Subsystem for Linux=
+
 #+begin_src emacs-lisp
   (defun rp/browse-url-firefox(url &rest ARGS)
     "Browse URL using Firefox from Windows when running under WSL.
@@ -199,26 +249,36 @@ From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clip
       (message "Running under WSL. The browse-url-browser-function will be overwritten.")
       (setq browse-url-browser-function 'rp/browse-url-firefox)))
 #+end_src
+
 ** Change the location of default bookmarks files
+
 #+begin_src emacs-lisp
   (setq bookmark-default-file "~/org/bookmarks"
         eww-bookmarks-directory "~/org/")
 #+end_src
+
 ** Hide the cursor in inactive windows
+
 #+begin_src emacs-lisp
   (setq-default cursor-in-non-selected-windows nil)
 #+end_src
+
 ** Add a margin when scrolling vertically
+
 #+begin_src emacs-lisp
   (setq-default scroll-margin 2)
 #+end_src
+
 ** Set default encoding to =UTF-8=
+
 #+begin_src emacs-lisp
   (set-default-coding-systems 'utf-8)
 #+end_src
+
 ** Store all backup and autosave files in the =/tmp= directories
 
 Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto_save_files_when_quitting_emacs/iv3asi4/][reddit answer]].
+
 #+begin_src emacs-lisp
   (setq backup-directory-alist
         `((".*" . ,temporary-file-directory)))
@@ -228,10 +288,12 @@ Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto
 #+end_src
 
 ** Start Emacs maximized
+
 #+begin_src emacs-lisp
   (add-to-list 'initial-frame-alist
           '(fullscreen . maximized))
 #+end_src
+
 * Themes
 ** Use =SanityInc= themes
 
