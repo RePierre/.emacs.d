@@ -33,7 +33,7 @@ Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][th
 
 #+begin_src emacs-lisp
   (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-  (add-to-list 'load-path (expand-file-name "org/lisp" gnus-home-directory))
+  (add-to-list 'load-path (expand-file-name "org/lisp" "~/"))
 #+end_src
 
 ** Add =Romanian standard= input method to Emacs
@@ -295,6 +295,7 @@ Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto
 #+end_src
 
 * Themes
+
 ** Use =SanityInc= themes
 
 #+begin_src emacs-lisp
