@@ -355,19 +355,22 @@ As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emme
     :bind ("C-=" . er/expand-region))
 #+end_src
 
-** Install =smart-mode-line=
-   For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
-   #+BEGIN_SRC emacs-lisp
-     (use-package smart-mode-line
-       :hook
-       (after-init . smart-mode-line-enable)
-       :config
-       (setq sml/no-confirm-load-theme t)
-       (setq sml/theme 'respectful)
-       (sml/setup))
-   #+END_SRC
+** Use =smart-mode-line= for improving the mode line
 
-** Install =nyan-mode=
+   For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
+
+#+begin_src emacs-lisp
+  (use-package smart-mode-line
+    :hook
+    (after-init . smart-mode-line-enable)
+    :config
+    (setq sml/no-confirm-load-theme t)
+    (setq sml/theme 'respectful)
+    (sml/setup))
+#+end_src
+
+** Use =nyan-mode= for displaying progress in buffer
+
 #+begin_src emacs-lisp
   (use-package nyan-mode
     :after smart-mode-line
@@ -392,50 +395,61 @@ From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-window
          ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 #+end_src
 
-** Install =undo-tree=
-   #+BEGIN_SRC emacs-lisp
-     (use-package undo-tree
-       :defer t
-       :defer t
-       :init
-       (progn
-	 (setq undo-tree-history-directory-alist
-	       `(("." . ,temporary-file-directory)))
-	 (global-undo-tree-mode)))
-   #+END_SRC
-** Install =which-key=
-   #+BEGIN_SRC emacs-lisp
-     (use-package which-key
-       :defer t
-       :config
-       (which-key-mode))
-   #+END_SRC
-** Install =try= package
-   #+BEGIN_SRC emacs-lisp
-   (use-package try
-     :defer t)
-   #+END_SRC
-** Install =beginend=
-   #+BEGIN_SRC emacs-lisp
-     (when (version<= "25.3" emacs-version)
-       (use-package beginend
-	 :defer t
-	 :defer t
-	 :init (beginend-global-mode)))
-   #+END_SRC
-** Install =atomic-chrome= to edit text areas in Emacs
-   [[https://github.com/alpha22jp/atomic-chrome][Atomic chrome]] allows editing text from a text area within browser using Emacs. Since I use Firefox I [[https://github.com/GhostText/GhostText][GhostText extension]] needs to be installed in Firefox in order for this to work.
-   #+begin_src emacs-lisp
-     (use-package atomic-chrome
-       :defer t
-       :when (display-graphic-p)
-       :config
-       (progn
-	 (setq atomic-chrome-buffer-open-style 'frame
-	     atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
-						  ("reddit\\.com" . markdown-mode)))
-	 (atomic-chrome-start-server)))
-   #+end_src
+** Use =undo-tree= for undo ring representation
+
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :defer t
+    :defer t
+    :init
+    (progn
+      (setq undo-tree-history-directory-alist
+            `(("." . ,temporary-file-directory)))
+      (global-undo-tree-mode)))
+#+end_src
+
+** Use =which-key= for displaying available key chords
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :defer t
+    :config
+    (which-key-mode))
+#+end_src
+
+** Use =try= package to try other packages
+
+#+begin_src emacs-lisp
+  (use-package try
+    :defer t)
+#+end_src
+
+** Use =beginend= for semantic navigation to beginning/end of buffers
+
+#+begin_src emacs-lisp
+  (when (version<= "25.3" emacs-version)
+    (use-package beginend
+      :defer t
+      :hook
+      (after-init . beginend-global-mode)))
+#+end_src
+
+** Use =atomic-chrome= to edit text areas in Emacs
+
+[[https://github.com/alpha22jp/atomic-chrome][Atomic chrome]] allows editing text from a text area within browser using Emacs. Since I use Firefox I [[https://github.com/GhostText/GhostText][GhostText extension]] needs to be installed in Firefox in order for this to work.
+
+#+begin_src emacs-lisp
+  (use-package atomic-chrome
+    :defer t
+    :when (display-graphic-p)
+    :config
+    (progn
+      (setq atomic-chrome-buffer-open-style 'frame
+            atomic-chrome-url-major-mode-alist '(("github\\.com" . gfm-mode)
+                                                 ("reddit\\.com" . markdown-mode)))
+      (atomic-chrome-start-server)))
+#+end_src
+
 * Helm
 
 ** Install =helm=
