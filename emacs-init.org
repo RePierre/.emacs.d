@@ -99,44 +99,6 @@ Found on a [[http://stackoverflow.com/a/3282132/844006][StackOverflow answer]].
   (global-visual-line-mode t)
 #+end_src
 
-** Use =ibuffer= for buffer list
-
-As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (setq ibuffer-saved-filter-groups
-        (quote (("default"
-            ("dired" (mode . dired-mode))
-            ("org" (name . "^.*org$"))
-            ("web" (or (mode . web-mode)
-                       (mode . js2-mode)))
-            ("shell" (or (mode . eshell-mode)
-                         (mode . shell-mode)))
-            ("programming" (or (mode . python-mode)
-                               (mode . lisp-mode)
-                               (mode . csharp-mode)
-                               (mode . js2-mode)))
-            ("doc-view" (mode . doc-view-mode))
-            ("magit" (name . "^magit[:-].*"))
-            ("latex" (or (mode . latex-mode)
-                         (mode . bibtex-mode)))
-            ("emacs" (or (name . "^\\*scratch\\*$")
-                         (name . "^\\*Messages\\*$")))
-            ("helm" (mode . helm-major-mode))
-            ("powershell" (mode . powershell-mode))
-            ("ledger" (mode . ledger-mode))
-            ("pdf" (mode . pdf-view-mode))
-            ("XML" (mode . nxml-mode))))))
-  (add-hook 'ibuffer-mode-hook
-            (lambda ()
-         (ibuffer-auto-mode 1)
-         (ibuffer-switch-to-saved-filter-groups "default")))
-
-  ;; Don't show filter groups if there are no buffers in that group
-  (setq ibuffer-show-empty-filter-groups nil)
-#+end_src
-
 ** Replace highlighted text
 
 From [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Replacing-highlighted-text.html][Emacs manual]]:
@@ -199,14 +161,6 @@ From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clip
 
 #+begin_src emacs-lisp
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-#+end_src
-
-** Expand region around the cursor semantically
-
-#+begin_src emacs-lisp
-  (use-package expand-region
-    :defer t
-    :bind ("C-=" . er/expand-region))
 #+end_src
 
 ** Unbind =C-z=
@@ -345,6 +299,62 @@ However, for some reason I can't find right now, specifying the list of custom s
 #+end_src
 
 * Convenience packages
+
+** Use =ibuffer= for buffer list
+
+As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet][blog post]] of  Mike Zamansky.
+
+#+begin_src emacs-lisp
+  (defun rp/setup-ibuffer ()
+    (progn
+      (message "Setting-up Ibuffer.")
+      (ibuffer-auto-mode 1)
+      (ibuffer-switch-to-saved-filter-groups "default")))
+
+  (use-package ibuffer
+    :defer t
+    :config
+    (progn
+      (setq ibuffer-saved-filter-groups
+            (quote (("default"
+                     ("dired" (mode . dired-mode))
+                     ("org" (name . "^.*org$"))
+                     ("web" (or (mode . web-mode)
+                                (mode . js2-mode)))
+                     ("shell" (or (mode . eshell-mode)
+                                  (mode . shell-mode)))
+                     ("programming" (or (mode . python-mode)
+                                        (mode . lisp-mode)
+                                        (mode . csharp-mode)
+                                        (mode . js2-mode)))
+                     ("doc-view" (mode . doc-view-mode))
+                     ("magit" (name . "^magit[:-].*"))
+                     ("latex" (or (mode . latex-mode)
+                                  (mode . bibtex-mode)))
+                     ("emacs" (or (name . "^\\*scratch\\*$")
+                                  (name . "^\\*Messages\\*$")))
+                     ("helm" (mode . helm-major-mode))
+                     ("powershell" (mode . powershell-mode))
+                     ("ledger" (mode . ledger-mode))
+                     ("pdf" (mode . pdf-view-mode))
+                     ("XML" (mode . nxml-mode))))))
+      ;; Don't show filter groups if there are no buffers in that group
+      (setq ibuffer-show-empty-filter-groups nil))
+      :bind
+      (:map global-map
+            ("C-x C-b" . ibuffer))
+      :hook
+      (ibuffer-mode . rp/setup-ibuffer))
+#+end_src
+
+** Use =expand-region= to expand region around the cursor semantically
+
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :defer t
+    :bind ("C-=" . er/expand-region))
+#+end_src
+
 ** Install =smart-mode-line=
    For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
    #+BEGIN_SRC emacs-lisp
