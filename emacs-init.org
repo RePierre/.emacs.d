@@ -374,19 +374,24 @@ As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emme
     :config
     (nyan-mode 1))
 #+end_src
-** Install =ace-window=
-   From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]
-   #+BEGIN_SRC emacs-lisp
-     (use-package ace-window
-       :defer t
-       :defer t
-       :init
-       (progn
-	 (global-set-key (kbd "C-x o") 'ace-window)
-	 (custom-set-faces
-	  '(aw-leading-char-face
-	    ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
-   #+END_SRC
+
+** Use =ace-window= for window switching
+
+From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-windows-for-easy-window-switching][ace-window for easy window switching]]:
+
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :defer t
+    :bind
+    (:map global-map
+          ("C-x o" . ace-window))
+    :config
+    (progn
+      (custom-set-faces
+       '(aw-leading-char-face
+         ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+#+end_src
+
 ** Install =undo-tree=
    #+BEGIN_SRC emacs-lisp
      (use-package undo-tree
