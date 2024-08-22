@@ -519,8 +519,11 @@ Bindings from [[http://pages.sachachua.com/.emacs.d/Sacha.html#orga9c79c3][Sacha
 #+end_src
 
 * Git integration
+
 ** Utility functions
+
 Define a function to change the spelcheck dictionary to English, and enable the =flyspell-mode= in order to avoid spelling mistakes in commits.
+
 #+begin_src emacs-lisp
   (defun rp/git-commit-setup()
     "Setup the git commit buffer."
@@ -528,35 +531,41 @@ Define a function to change the spelcheck dictionary to English, and enable the 
       (ispell-change-dictionary "en_US")
       (flyspell-mode 1)))
 #+end_src
+
 ** Install =magit=
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :defer t
-       :defer t
-       :bind (("C-x g" . magit-status))
-       :hook (git-commit-setup . rp/git-commit-setup))
-   #+END_SRC
+
+#+begin_src emacs-lisp
+  (use-package magit
+    :defer t
+    :bind (("C-x g" . magit-status))
+    :hook (git-commit-setup . rp/git-commit-setup))
+#+end_src
 
 ** Install =forge=
-   #+begin_src emacs-lisp
-     (use-package forge
-       :defer t
-       :defer t
-       :after magit)
-   #+end_src
+
+#+begin_src emacs-lisp
+  (use-package forge
+    :defer t
+    :after magit)
+#+end_src
+
    For some reason, =forge= is unable to generate the token when running under Cygwin. To avoid this issue, just create a =Personal Access Token= in GitHub settings page and store it in the =~/.authinfo= file like this:
+
    #+begin_example
    machine api.github.com login <username>^forge password <personal token>
    #+end_example
+
 ** Install =git-gutter=
-   #+BEGIN_SRC emacs-lisp
-     (use-package git-gutter
-       :defer t
-       :defer t
-       :config
-       (global-git-gutter-mode t)
-       :diminish git-gutter-mode)
-   #+END_SRC
+
+As found in [[https://ianyepan.github.io/posts/emacs-git-gutter/][Git Gutter in Emacs | Ian Y.E. Pan]]:
+
+#+begin_src emacs-lisp
+  (use-package git-gutter
+    :hook (prog-mode . git-gutter-mode)
+    :config
+    (setq git-gutter:update-interval 0.02))
+#+end_src
+
 * Completion configuration
 ** Install =company=
    From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
