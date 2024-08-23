@@ -581,6 +581,7 @@ From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs co
      company-minimum-prefix-length 1
      company-require-match nil
      company-tooltip-align-annotations t
+     company-show-numbers t
      company-show-quick-access t)
     :hook
     (after-init . global-company-mode))
