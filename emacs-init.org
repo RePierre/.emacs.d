@@ -599,71 +599,7 @@ From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs co
     :init (with-eval-after-load 'company
             (company-quickhelp-mode)))
 #+end_src
-* Install =csv-mode=
-  #+BEGIN_SRC emacs-lisp
-    (use-package csv-mode
-      :defer t
-      :defer t
-      :init
-      (progn
-	(add-hook 'csv-mode-hook 'display-line-numbers-mode)
-	(add-hook 'csv-mode-hook 'hl-line-mode)))
-  #+END_SRC
-* Install =yasnippet=
-  #+begin_src emacs-lisp
-    (use-package yasnippet
-      :defer t
-      :config
-      (progn
-	(use-package yasnippet-snippets :defer t)
-	(yas-global-mode 1)))
 
-  #+end_src
-* Install =projectile=
-  #+begin_src emacs-lisp
-    (defun rp/try-activate-virtual-environment()
-      "Try to activate the virtual environment.
-    The virtual environment is assumed to be located
-    in directory .venv under projectile root directory."
-      (let* ((project-dir (projectile-project-root))
-             (venv-dir (concat project-dir ".venv")))
-        (if (file-directory-p venv-dir)
-            (progn
-              (message (format "Activating virtual environment from %s." venv-dir))
-              (pyvenv-activate venv-dir)))))
-  #+end_src
-  When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
-  #+BEGIN_SRC emacs-lisp
-    (use-package projectile
-      :defer t
-      :defer t
-      :bind-keymap
-      ("C-c p" . projectile-command-map)
-      :init
-      (progn
-	(add-hook 'magit-mode-hook 'projectile-mode)
-	(when (eq system-type 'cygwin)
-	  (setq projectile-indexing-method 'native)))
-      :hook (projectile-mode . rp/try-activate-virtual-environment)
-      :config
-      (progn
-	(setq projectile-completion-system 'helm)
-	(use-package helm-projectile
-	  :defer t
-	  :config (helm-projectile-on))))
-  #+END_SRC
-* Install =eldoc=
-  #+begin_src emacs-lisp
-    (use-package eldoc
-      :defer t
-      :defer t
-      :hook ((emacs-lisp-mode . eldoc-mode)
-	     (eval-expression-minibuffer-setup . eldoc-mode)
-	     (lisp-mode-interactive-mode . eldoc-mode)
-	     (python-mode . eldoc-mode)
-	     (eshell-mode . eldoc-mode)
-	     (org-mode . eldoc-mode)))
-  #+end_src
 * Markdown related packages
 ** Install =markdown-mode=
    As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
@@ -684,48 +620,162 @@ From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs co
        :defer t
        :defer t)
    #+END_SRC
-* Install =graphviz-dot-mode=
-  #+BEGIN_SRC emacs-lisp
-    (use-package graphviz-dot-mode
-      :defer t
-      :defer t)
-  #+END_SRC
-* Install =pdf-tools=
-  =use-package= example configuring =pdf-tools= found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
-  #+BEGIN_SRC emacs-lisp
-    (use-package pdf-tools
-      :defer t
-      :config
-      (pdf-tools-install)
-      (setq-default pdf-view-display-size 'fit-page))
-  #+END_SRC
-* Install =ledger-mode=
-** Prerequisites
-   Requires =ledger= to be installed:
-   #+BEGIN_SRC shell
-     sudo apt-get install ledger
-   #+END_SRC
-** Setup =ledger-mode=
-*** Define function to clean buffer when buffer is in =ledger-mode=
-    #+begin_src emacs-lisp
-      (defun rp/clean-ledger-buffer()
-	(when (equal major-mode 'ledger-mode)
-	  (ledger-mode-clean-buffer)))
-    #+end_src
-*** Install and configure =ledger-mode=
-    #+begin_src emacs-lisp
-      (use-package ledger-mode
-	:defer t
-	:defer t
-	:config (progn
-		  (setq ledger-reconcile-default-commodity "RON")
-		  (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")
-		  (add-hook 'before-save-hook 'rp/clean-ledger-buffer)))
-    #+end_src
-*** Install and configure =flycheck-ledger=
-    #+begin_src emacs-lisp
-      (use-package flycheck-ledger
-	:defer t
-	:defer t
-	:hook (ledger-mode . flycheck-mode))
-    #+end_src
+* Various utility packages
+
+** Use =csv-mode= for CSV files
+
+*** Use an utility function to setup =csv-mode=
+
+#+begin_src emacs-lisp
+  (defun rp/setup-csv-mode()
+    (progn
+      (display-line-numbers-mode)
+      (hl-line-mode)))
+#+end_src
+
+*** Configure =csv-mode=
+
+#+begin_src emacs-lisp
+  (use-package csv-mode
+    :defer t
+    :config
+    (rp/setup-csv-mode))
+#+end_src
+
+** Use =yasnippet= for snippets
+
+*** Configure =yasnippet= package
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :defer t
+    :hook
+    (after-init . yas-global-mode))
+
+#+end_src
+
+*** Configure the =yasnippet-snippets= package
+
+#+begin_src emacs-lisp
+  (use-package yasnippet-snippets
+    :defer t
+    :after yasnippet)
+#+end_src
+
+** Use =projectile=
+
+*** Define an utility function which tries to activate a virtual environment if it exists
+
+#+begin_src emacs-lisp
+  (defun rp/try-activate-virtual-environment()
+    "Try to activate the virtual environment.
+  The virtual environment is assumed to be located
+  in directory .venv under projectile root directory."
+    (let* ((project-dir (projectile-project-root))
+           (venv-dir (concat project-dir ".venv")))
+      (if (file-directory-p venv-dir)
+          (progn
+            (message (format "Activating virtual environment from %s." venv-dir))
+            (pyvenv-activate venv-dir)))))
+#+end_src
+
+*** Configure =projectile= package
+
+When on =Cygwin= use =native= indexing for =projectile= as mentioned in this [[https://www.quora.com/How-do-I-use-helm-projectile-in-Emacs/answer/Chen-Bin-3][Quora answer]]. It's slower but it does the job.
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :defer t
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :config
+    (progn
+      (when (eq system-type 'cygwin)
+        (setq projectile-indexing-method 'native)))
+    :hook
+    ((magit-mode . projectile-mode)
+     (projectile-mode . rp/try-activate-virtual-environment)))
+#+end_src
+
+*** Use =helm= as the projectile completion system
+
+#+begin_src emacs-lisp
+  (use-package helm-projectile
+    :defer t
+    :hook
+    (projectile-mode . helm-projectile-on)
+    :config
+    (setq projectile-completion-system 'helm))
+#+end_src
+
+** Use =eldoc=
+
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :defer t
+    :hook ((emacs-lisp-mode . eldoc-mode)
+           (eval-expression-minibuffer-setup . eldoc-mode)
+           (lisp-mode-interactive-mode . eldoc-mode)
+           (python-mode . eldoc-mode)
+           (eshell-mode . eldoc-mode)
+           (org-mode . eldoc-mode)))
+#+end_src
+
+** Use =graphviz-dot-mode=
+
+#+begin_src emacs-lisp
+  (use-package graphviz-dot-mode
+    :defer t)
+#+end_src
+
+** Use =pdf-tools=
+
+The examle of using  =use-package= for configuring =pdf-tools= can be found [[https://github.com/abo-abo/hydra/wiki/PDF-Tools][here]].
+
+#+begin_src emacs-lisp
+  (use-package pdf-tools
+    :defer t
+    :config
+    (pdf-tools-install)
+    (setq-default pdf-view-display-size 'fit-page))
+#+end_src
+
+** Use =ledger-mode=
+
+*** Prerequisites
+
+Requires =ledger= to be installed:
+
+#+begin_src shell
+  sudo apt-get install ledger
+#+end_src
+
+*** Setup =ledger-mode=
+
+**** Define function to clean buffer when buffer is in =ledger-mode=
+
+#+begin_src emacs-lisp
+  (defun rp/clean-ledger-buffer()
+    (when (equal major-mode 'ledger-mode)
+      (ledger-mode-clean-buffer)))
+#+end_src
+
+**** Configure =ledger-mode=
+
+#+begin_src emacs-lisp
+  (use-package ledger-mode
+    :defer t
+    :config
+    (progn
+      (setq ledger-reconcile-default-commodity "RON")
+      (setq ledger-schedule-file "~/org/financial/ledger-schedule.ledger")
+      (add-hook 'before-save-hook 'rp/clean-ledger-buffer)))
+#+end_src
+
+**** Use and configure =flycheck-ledger=
+
+#+begin_src emacs-lisp
+  (use-package flycheck-ledger
+    :defer t
+    :hook (ledger-mode . flycheck-mode))
+#+end_src
