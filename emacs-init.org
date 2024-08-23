@@ -567,28 +567,37 @@ As found in [[https://ianyepan.github.io/posts/emacs-git-gutter/][Git Gutter in 
 #+end_src
 
 * Completion configuration
-** Install =company=
-   From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
-   #+BEGIN_SRC emacs-lisp
-     (use-package company
-       :defer t
-       :config
-       (global-company-mode)
-       (setq-default
-        company-idle-delay .2
-        company-minimum-prefix-length 1
-        company-require-match nil
-        company-tooltip-align-annotations t
-        company-show-quick-access t))
-   #+END_SRC
-** Install =company-quickhelp=
-   #+begin_src emacs-lisp
-     (use-package company-quickhelp
-       :defer t
-       :defer t
-       :init (with-eval-after-load 'company
-	       (company-quickhelp-mode)))
-   #+end_src
+
+** Use =company= for completion
+
+From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs configuration of angrybacon]].
+
+#+begin_src emacs-lisp
+  (use-package company
+    :defer t
+    :config
+    (setq-default
+     company-idle-delay .2
+     company-minimum-prefix-length 1
+     company-require-match nil
+     company-tooltip-align-annotations t
+     company-show-quick-access t)
+    :hook
+    (after-init . global-company-mode))
+#+end_src
+
+** Use =company-quickhelp= for displaying help in popup window
+
+#+begin_src emacs-lisp
+  (use-package company-quickhelp
+    :defer t
+    :after company
+    :bind
+    (:map company-active-map
+          ("C-c h" . company-quickhelp-manual-begin))
+    :init (with-eval-after-load 'company
+            (company-quickhelp-mode)))
+#+end_src
 * Install =csv-mode=
   #+BEGIN_SRC emacs-lisp
     (use-package csv-mode
