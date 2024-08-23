@@ -601,25 +601,30 @@ From [[https://github.com/angrybacon/dotemacs/blob/master/dotemacs.org][Emacs co
 #+end_src
 
 * Markdown related packages
-** Install =markdown-mode=
-   As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
-   #+BEGIN_SRC emacs-lisp
-     (use-package markdown-mode
-       :defer t
-       :defer t
-       :commands (markdown-mode gfm-mode)
-       :mode (("README\\.md\\'" . gfm-mode)
-	      ("\\.md\\'" . markdown-mode)
-	      ("LICENSE" . markdown-mode)
-	      ("\\.markdown\\'" . markdown-mode))
-       :init (setq markdown-command "multimarkdown"))
-   #+END_SRC
-** Install =gh-md=
-   #+BEGIN_SRC emacs-lisp
-     (use-package gh-md
-       :defer t
-       :defer t)
-   #+END_SRC
+
+** Use =markdown-mode= for editing markdown-formatted files
+
+As specified in the [[http://jblevins.org/projects/markdown-mode/][documentation]].
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :defer t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("LICENSE" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init
+    (setq markdown-command "multimarkdown"))
+#+end_src
+
+** Use =gh-md= to render markdown buffers using Github API
+
+#+begin_src emacs-lisp
+  (use-package gh-md
+    :defer t)
+#+end_src
+
 * Various utility packages
 
 ** Use =csv-mode= for CSV files
