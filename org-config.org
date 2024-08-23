@@ -3,9 +3,13 @@
   :PROPERTIES:
   :header-args:emacs-lisp: :results none
   :END:
+
 ** Define setup functions
+
 *** Configure =org-goto= to pick a headline via completion
+
 Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how to jump directly to an org-headline? - Emacs Stack Exchange]].
+
 #+begin_src emacs-lisp
   (defun rp/configure-org-goto()
     "Configure 'org-goto' function to pick a headline via completion."
@@ -13,34 +17,36 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
       (setq org-goto-interface 'outline-path-completion)
       (setq org-outline-path-complete-in-steps nil)))
 #+end_src
+
 ** Configure =org-mode=
+
 #+begin_src emacs-lisp
   (use-package org
     :ensure org-contrib
     :defer t
     :config (progn
-              (require 'ox-extra)
-              (ox-extras-activate '(ignore-headlines))
+	      (require 'ox-extra)
+	      (ox-extras-activate '(ignore-headlines))
 
-              (require 'org-habit)
-              (add-to-list 'org-modules 'org-habit)
-              (setq org-todo-keyword-faces
-                    '(("TODO" . (:foreground "GoldenRod" :weight bold))
-                      ("STARTED" . (:foreground "SteelBlue" :weight bold))
-                      ("READING" . (:foreground "SteelBlue" :weight bold))
-                      ("WAITING" . (:foreground "IndianRed1" :weight bold))
-                      ("DONE" . (:foreground "LimeGreen" :weight bold))))
-              (setq org-adapt-indentation t)
-              (setq org-enforce-todo-checkbox-dependencies t)
-              (setq org-enforce-todo-dependencies t)
-              ;; leave an empty line before a new heading but not before plain list item
-              (setq org-blank-before-new-entry (quote ((heading . t)
-                                                       (plain-list-item . nil))))
-              ;; C-a, and C-e will move the cursor to the start, and respectively
-              ;; end of the heading.
-              (setq org-special-ctrl-a/e t)
-              (setq org-auto-align-tags t)
-              (rp/configure-org-goto)))
+	      (require 'org-habit)
+	      (add-to-list 'org-modules 'org-habit)
+	      (setq org-todo-keyword-faces
+		    '(("TODO" . (:foreground "GoldenRod" :weight bold))
+		      ("STARTED" . (:foreground "SteelBlue" :weight bold))
+		      ("READING" . (:foreground "SteelBlue" :weight bold))
+		      ("WAITING" . (:foreground "IndianRed1" :weight bold))
+		      ("DONE" . (:foreground "LimeGreen" :weight bold))))
+	      (setq org-adapt-indentation t)
+	      (setq org-enforce-todo-checkbox-dependencies t)
+	      (setq org-enforce-todo-dependencies t)
+	      ;; leave an empty line before a new heading but not before plain list item
+	      (setq org-blank-before-new-entry (quote ((heading . t)
+						       (plain-list-item . nil))))
+	      ;; C-a, and C-e will move the cursor to the start, and respectively
+	      ;; end of the heading.
+	      (setq org-special-ctrl-a/e t)
+	      (setq org-auto-align-tags t)
+	      (rp/configure-org-goto)))
 #+end_src
 
 *** Enable =org-indent-mode= in all =org= buffers
@@ -56,7 +62,9 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
 #+end_src
 
 ** Setup =org-ref=
+
 As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][org-ref manual]].
+
 #+begin_src emacs-lisp
   (use-package helm-bibtex
     :defer t
@@ -107,12 +115,16 @@ As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][o
                 org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
 
 #+end_src
+
 ** Setup =org-cliplink=
+
 #+begin_src emacs-lisp
   (use-package org-cliplink
     :defer t)
 #+end_src
+
 ** Automatically export to pdf
+
 #+begin_src emacs-lisp
   (defun is-beamer-presentation()
     (save-excursion
@@ -140,7 +152,6 @@ As specified in [[https://github.com/jkitchin/org-ref/blob/master/org-ref.org][o
           (message "Disabled automatic export to pdf for current buffer."))
       (add-hook 'after-save-hook 'export-to-pdf-async t t)
       (message "Enabled automatic export to pdf for current buffer.")))
-
 #+end_src
 
 It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than the built-in =org-latex-export-to-pdf=; however, it's best to keep them both.
@@ -161,7 +172,9 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
       (add-hook 'after-save-hook 'rp/org-ref-export-to-pdf t t)
       (message "Enabled automatic export to pdf (via org-ref) for current buffer.")))
 #+end_src
+
 ** Automatically export to html
+
 #+begin_src emacs-lisp
   (defun rp/export-to-html-async()
     (when (equal major-mode 'org-mode)
@@ -181,14 +194,10 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 ** Setup =org-bullets=
 
 #+begin_src emacs-lisp
-  (defun rp/enable-org-bullets-mode()
-    "Enable 'org-bullets' mode."
-    (org-bullets-mode 1))
-
   (use-package org-bullets
     :defer t
-    :config
-    (add-hook 'org-mode-hook 'rp/enable-org-bullets-mode))
+    :after org
+    :hook (org-mode . org-bullets-mode))
 #+end_src
 
 ** Load =org-babel= languages
@@ -211,20 +220,23 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 #+begin_src emacs-lisp
   (use-package org-re-reveal
     :defer t
-    :defer t
     :config
     (progn
       (setq org-re-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")))
 #+end_src
+
 * Open GTD view
 :PROPERTIES:
 :header-args:emacs-lisp: :results none
 :END:
+
 ** Setup =org-capture=
+
 #+begin_src emacs-lisp
   (setq org-default-notes-file "~/org/notes.org")
   (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
+
 ** Setup =org-capture-templates=
 
 Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
@@ -373,6 +385,7 @@ Templates related to work activities.
 #+end_src
 
 ** Setup =org-refile-targets=
+
 #+begin_src emacs-lisp
   (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
                              ("~/org/gtd/some-day.org" :level . 1)
@@ -386,7 +399,9 @@ Templates related to work activities.
                              ("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
                              ("~/org/iasi.ai/iasi-ai.org" :level . 1)))
 #+end_src
+
 As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
+
 #+begin_src emacs-lisp
   (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
@@ -400,7 +415,9 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
 
   (global-set-key (kbd "C-c g") 'rp/gtd)
 #+end_src
+
 * Agenda
+
 ** Configure agenda
 #+begin_src emacs-lisp
   (setq org-agenda-files
@@ -454,9 +471,11 @@ Usage example:
                      ((org-agenda-skip-function
                        '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
 #+end_src
+
 ** Apply custom colors for specific agenda entries
 
 Adapted from [[https://emacs.stackexchange.com/questions/23824/defining-different-fonts-color-per-file-in-org-agenda]].
+
 #+begin_src emacs-lisp
   (add-hook 'org-agenda-finalize-hook
             (lambda ()
@@ -470,12 +489,12 @@ Adapted from [[https://emacs.stackexchange.com/questions/23824/defining-differen
     (while (re-search-forward pattern nil t)
       (add-text-properties (match-beginning 0) (match-end 0)
                            `(face (:foreground, forecolor)))))
-
-
 #+end_src
 
 * Effort estimates
+
 Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for tasks. Adapted from [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]].
+
 #+begin_src emacs-lisp
   (setq org-global-properties
         '(("Effort_ALL" .
@@ -485,7 +504,9 @@ Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for
   (setq org-columns-default-format
         "%38ITEM(Details) %TAGS(Context) %7TODO(To Do) %5Effort(Time){:} %6CLOCKSUM{Total}")
 #+end_src
+
 * Install =org-roam=
+
 #+begin_src emacs-lisp
   (use-package org-roam
     :defer t
@@ -499,7 +520,9 @@ Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for
     :config
     (org-roam-setup))
 #+end_src
+
 ** Install =org-roam-ui=
+
 #+begin_src emacs-lisp
   (use-package org-roam-ui
     :after org-roam
