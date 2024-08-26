@@ -1,83 +1,100 @@
 #+title: Configuration of packages for writing
 #+property: header-args :results silent
 
-* Install =writeroom-mode=
-  #+begin_src emacs-lisp
-    (defun on-writeroom-mode-start()
-      (progn
-	(message "Entering writeroom mode.")
-	(company-mode 0)
-	(text-scale-set 2)))
+* Use =writeroom-mode= to have a clutter-free writing environment
 
-    (defun on-writeroom-mode-end()
-      (progn
-	(message "Exiting writeroom mode.")
-	(company-mode 1)
-	(text-scale-set 0)))
+#+begin_src emacs-lisp
+  (defun on-writeroom-mode-start()
+    (progn
+      (message "Entering writeroom mode.")
+      (company-mode 0)
+      (text-scale-set 2)))
 
-    (use-package writeroom-mode
-      :defer t
-      :bind (("C-c wr" . writeroom-mode))
-      :init (progn
-	      (add-hook 'writeroom-mode-enable-hook 'on-writeroom-mode-start)
-	      (add-hook 'writeroom-mode-disable-hook 'on-writeroom-mode-end)))
-  #+end_src
-* Install =writegood-mode=
-  #+begin_src emacs-lisp
-    (use-package writegood-mode
-      :defer t
-      :bind (("C-c wg" . writegood-mode)))
-  #+end_src
-* Install =AUCTeX=
-  #+BEGIN_SRC emacs-lisp
-    ;; As described in https://github.com/jwiegley/use-package/issues/379
-    ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
-    (use-package tex-mode
-      :defer t
-      :ensure auctex
-      :init (progn
-	      (setq TeX-auto-save t)
-	      (setq TeX-parse-self t)
-	      (setq-default TeX-master nil)
-	      (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-		    TeX-source-correlate-start-server t)
-	      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-	      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-	      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-	      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-	      (setq reftex-plug-into-AUCTeX t)))
-  #+END_SRC
-** Install =company-auctex=
+  (defun on-writeroom-mode-end()
+    (progn
+      (message "Exiting writeroom mode.")
+      (company-mode 1)
+      (text-scale-set 0)))
+
+  (use-package writeroom-mode
+    :defer t
+    :bind (("C-c wr" . writeroom-mode))
+    :init (progn
+            (add-hook 'writeroom-mode-enable-hook 'on-writeroom-mode-start)
+            (add-hook 'writeroom-mode-disable-hook 'on-writeroom-mode-end)))
+#+end_src
+
+* Use =writegood-mode= to avoid clichees and weasel words
+
+#+begin_src emacs-lisp
+  (use-package writegood-mode
+    :defer t
+    :bind (("C-c wg" . writegood-mode)))
+#+end_src
+
+* Use =AUCTeX= for LaTeX editing
+
+#+begin_src emacs-lisp
+  ;; As described in https://github.com/jwiegley/use-package/issues/379
+  ;; and also as found in https://www.reddit.com/r/emacs/comments/7ux1qj/using_auctex_mode_to_sync_latex_documents_and/dto2z02/
+  (use-package tex-mode
+    :defer t
+    :ensure auctex
+    :init (progn
+            (setq TeX-auto-save t)
+            (setq TeX-parse-self t)
+            (setq-default TeX-master nil)
+            (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+            TeX-source-correlate-start-server t)
+            (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+            (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+            (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+            (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+            (setq reftex-plug-into-AUCTeX t)))
+#+end_src
+
+** Use =company-auctex=
+
+*** Configure =company-backends=
+
+#+begin_src emacs-lisp
+  (defun rp/setup-company-backends ()
+    (setq-local company-backends '((company-auctex-labels
+                                    company-auctex-bibs
+                                    company-auctex-macros
+                                    company-auctex-environments
+                                    company-auctex-symbols
+                                    company-capf))))
+#+end_src
+
+*** Configure =company-auctex=
+
    #+begin_src emacs-lisp
      (use-package company-auctex
        :commands (company-auctex
-		  company-auctext-labels
-		  company-auctest-bibs
-		  company-auctex-macros
-		  company-auctext-symbols
-		  company-auctext-environments)
+                  company-auctext-labels
+                  company-auctest-bibs
+                  company-auctex-macros
+                  company-auctext-symbols
+                  company-auctext-environments)
        :defer t
        :hook
-       (tex-mode . (lambda ()
-		     (setq-local company-backends '((company-auctex-labels
-						     company-auctex-bibs
-						     company-auctex-macros
-						     company-auctex-environments
-						     company-auctex-symbols
-						     company-capf))))))
+       (tex-mode . rp/setup-company-backends))
 
    #+end_src
-* Install =org-novelist=
+
+* Use =org-novelist= for writing longer prose
+
   #+begin_src emacs-lisp
-    (setq rp/org-novelist-dir
-	  (expand-file-name "submodules/org-novelist/" user-emacs-directory))
-    (when (file-directory-p rp/org-novelist-dir)
-      (use-package org-novelist
-      :defer t
-      :load-path rp/org-novelist-dir
-      :custom
-	(org-novelist-language-tag "ro-RO")
-	(org-novelist-author user-full-name)
-	(org-novelist-author-email user-mail-address)
-	(org-novelist-automatic-referencing-p nil)))
+    (let* ((rp/org-novelist-dir
+            (expand-file-name "submodules/org-novelist/" user-emacs-directory)))
+      (when (file-directory-p rp/org-novelist-dir)
+        (use-package org-novelist
+          :defer t
+          :load-path rp/org-novelist-dir
+          :custom
+          (org-novelist-language-tag "ro-RO")
+          (org-novelist-author user-full-name)
+          (org-novelist-author-email user-mail-address)
+          (org-novelist-automatic-referencing-p nil))))
   #+end_src
