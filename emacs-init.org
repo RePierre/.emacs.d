@@ -784,3 +784,18 @@ Requires =ledger= to be installed:
     :defer t
     :hook (ledger-mode . flycheck-mode))
 #+end_src
+
+** Use =newsticker= to read RSS/Atom feeds
+
+#+begin_src emacs-lisp
+  (use-package newst-treeview
+    :defer t
+    :init
+    (require 'rp-feeds-urls)
+    (setq newsticker-dir "~/org/newsticker/"
+          newsticker-frontend 'newsticker-treeview
+          newsticker-cache-filename "~/org/newsticker/.newsticker-cache"
+          newsticker-retrieval-interval -1
+          newsticker-download-logos nil
+          newsticker-url-list rp/newsticker-feeds))
+#+end_src
