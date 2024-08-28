@@ -25,28 +25,28 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
     :ensure org-contrib
     :defer t
     :config (progn
-	      (require 'ox-extra)
-	      (ox-extras-activate '(ignore-headlines))
+              (require 'ox-extra)
+              (ox-extras-activate '(ignore-headlines))
 
-	      (require 'org-habit)
-	      (add-to-list 'org-modules 'org-habit)
-	      (setq org-todo-keyword-faces
-		    '(("TODO" . (:foreground "GoldenRod" :weight bold))
-		      ("STARTED" . (:foreground "SteelBlue" :weight bold))
-		      ("READING" . (:foreground "SteelBlue" :weight bold))
-		      ("WAITING" . (:foreground "IndianRed1" :weight bold))
-		      ("DONE" . (:foreground "LimeGreen" :weight bold))))
-	      (setq org-adapt-indentation t)
-	      (setq org-enforce-todo-checkbox-dependencies t)
-	      (setq org-enforce-todo-dependencies t)
-	      ;; leave an empty line before a new heading but not before plain list item
-	      (setq org-blank-before-new-entry (quote ((heading . t)
-						       (plain-list-item . nil))))
-	      ;; C-a, and C-e will move the cursor to the start, and respectively
-	      ;; end of the heading.
-	      (setq org-special-ctrl-a/e t)
-	      (setq org-auto-align-tags t)
-	      (rp/configure-org-goto)))
+              (require 'org-habit)
+              (add-to-list 'org-modules 'org-habit)
+              (setq org-todo-keyword-faces
+                    '(("TODO" . (:foreground "GoldenRod" :weight bold))
+                      ("STARTED" . (:foreground "SteelBlue" :weight bold))
+                      ("READING" . (:foreground "SpringGreen4" :weight bold))
+                      ("WAITING" . (:foreground "IndianRed1" :weight bold))
+                      ("DONE" . (:foreground "LimeGreen" :weight bold))))
+              (setq org-adapt-indentation t)
+              (setq org-enforce-todo-checkbox-dependencies t)
+              (setq org-enforce-todo-dependencies t)
+              ;; leave an empty line before a new heading but not before plain list item
+              (setq org-blank-before-new-entry (quote ((heading . t)
+                                                       (plain-list-item . nil))))
+              ;; C-a, and C-e will move the cursor to the start, and respectively
+              ;; end of the heading.
+              (setq org-special-ctrl-a/e t)
+              (setq org-auto-align-tags t)
+              (rp/configure-org-goto)))
 #+end_src
 
 *** Enable =org-indent-mode= in all =org= buffers
