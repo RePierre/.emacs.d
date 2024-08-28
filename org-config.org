@@ -251,6 +251,16 @@ And to avoid duplicating the same code that appends new templates to existing on
 
 Now, all that's left to do is split templates into categories and add them using the function above.
 
+*** Setup the environment for capture templates which have long text
+
+#+begin_src emacs-lisp
+  (defun rp/setup-long-text-capture()
+    "Prepare an environment for capturing long texts."
+    (progn
+      (olivetti-mode)
+      (delete-other-windows)))
+#+end_src
+
 *** Uncategorized templates
 
 Templates that do not have a category, i.e. are accessible via a single key.
@@ -280,7 +290,8 @@ Templates that do not have a category, i.e. are accessible via a single key.
      ("j" "Journal Entry"
       entry
       (file+olp+datetree "~/org/journal.org")
-      "* %?")
+      "* %?"
+      :hook rp/setup-long-text-capture)
 
      ("b" "Blog article idea"
       entry
@@ -376,12 +387,14 @@ Templates related to work activities.
      ("wja" "Annotation entry"
       entry
       (file+olp+datetree "~/org/gtd/work.org" "Journal")
-      "* %a \n%U\n\n%?")
+      "* %a \n%U\n\n%?"
+      :hook rp/setup-long-text-capture)
 
      ("wje" "Empty entry"
       entry
       (file+olp+datetree "~/org/gtd/work.org" "Journal")
-      "* %? \n%U")))
+      "* %? \n%U"
+      :hook rp/setup-long-text-capture)))
 #+end_src
 
 ** Setup =org-refile-targets=
