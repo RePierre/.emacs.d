@@ -82,19 +82,3 @@
        (tex-mode . rp/setup-company-backends))
 
    #+end_src
-
-* Use =org-novelist= for writing longer prose
-
-  #+begin_src emacs-lisp
-    (let* ((rp/org-novelist-dir
-            (expand-file-name "submodules/org-novelist/" user-emacs-directory)))
-      (when (file-directory-p rp/org-novelist-dir)
-        (use-package org-novelist
-          :defer t
-          :load-path rp/org-novelist-dir
-          :custom
-          (org-novelist-language-tag "ro-RO")
-          (org-novelist-author user-full-name)
-          (org-novelist-author-email user-mail-address)
-          (org-novelist-automatic-referencing-p nil))))
-  #+end_src
