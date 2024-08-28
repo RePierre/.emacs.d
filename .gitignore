@@ -67,3 +67,4 @@ emacsql-sqlite.exe
 
 # Ignore elpa directory
 /elpa/
+/*.sqlite
