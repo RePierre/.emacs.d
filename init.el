@@ -8,8 +8,8 @@
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/emacs-init.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/programming-config.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/org-config.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/writing-config.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/org-config.org"))
 
 (let ((file-name (expand-file-name "after-init.el" user-emacs-directory)))
   (if (file-exists-p file-name)

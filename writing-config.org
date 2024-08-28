@@ -82,3 +82,10 @@
        (tex-mode . rp/setup-company-backends))
 
    #+end_src
+
+* Use =olivetti-mode= for a nice wrapping of the text in page
+
+#+begin_src emacs-lisp
+  (use-package olivetti
+    :defer t)
+#+end_src
