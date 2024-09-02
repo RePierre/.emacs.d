@@ -797,5 +797,6 @@ Requires =ledger= to be installed:
           newsticker-cache-filename "~/org/newsticker/.newsticker-cache"
           newsticker-retrieval-interval -1
           newsticker-download-logos nil
+          newsticker-treeview-treewindow-width 60
           newsticker-url-list rp/newsticker-feeds))
 #+end_src
