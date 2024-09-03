@@ -24,6 +24,9 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
   (use-package org
     :ensure org-contrib
     :defer t
+    :bind (:map global-map
+                ("C-c c" . org-capture)
+                ("C-c a" . org-agenda))
     :config (progn
               (require 'ox-extra)
               (ox-extras-activate '(ignore-headlines))
@@ -46,6 +49,7 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
               ;; end of the heading.
               (setq org-special-ctrl-a/e t)
               (setq org-auto-align-tags t)
+              (setq org-default-notes-file "~/org/notes.org")
               (rp/configure-org-goto)))
 #+end_src
 
@@ -229,13 +233,6 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 :PROPERTIES:
 :header-args:emacs-lisp: :results none
 :END:
-
-** Setup =org-capture=
-
-#+begin_src emacs-lisp
-  (setq org-default-notes-file "~/org/notes.org")
-  (global-set-key (kbd "C-c c") 'org-capture)
-#+end_src
 
 ** Setup =org-capture-templates=
 
@@ -449,8 +446,6 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
               "~/org/phd/innovation-labs"
               "~/org/iasi.ai/iasi-ai.org")
         org-agenda-span 'day)
-
-  (global-set-key (kbd "C-c a") 'org-agenda)
 #+end_src
 
 ** Define macro for displaying timestamps on workdays
