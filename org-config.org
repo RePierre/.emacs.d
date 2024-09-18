@@ -337,6 +337,17 @@ Templates related to work activities.
             (format-time-string "%Y-%m-%d")))
 #+end_src
 
+#+begin_src emacs-lisp
+  (defun rp/setup-work-journal-capture()
+    "Prepare an environment for capturing work journal entries."
+    (progn
+      (olivetti-mode)
+      (setq-local olivetti-body-width 120)
+      (ispell-change-dictionary "en_US")
+      (flyspell-mode 1)
+      (delete-other-windows)))
+#+end_src
+
 **** Capture templates
 
 #+begin_src emacs-lisp
@@ -385,13 +396,13 @@ Templates related to work activities.
       entry
       (file+olp+datetree "~/org/gtd/work.org" "Journal")
       "* %a \n%U\n\n%?"
-      :hook rp/setup-long-text-capture)
+      :hook rp/setup-work-journal-capture)
 
      ("wje" "Empty entry"
       entry
       (file+olp+datetree "~/org/gtd/work.org" "Journal")
       "* %? \n%U"
-      :hook rp/setup-long-text-capture)))
+      :hook rp/setup-work-journal-capture)))
 #+end_src
 
 ** Setup =org-refile-targets=
