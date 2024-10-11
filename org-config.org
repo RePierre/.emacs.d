@@ -319,82 +319,8 @@ Templates related to my PhD activities.
 *** Work related templates
 
 Templates related to work activities.
-
-**** Utility functions
-
 #+begin_src emacs-lisp
-  (defun rp/clock-report-template()
-    "Returns a string that can be used to capture clock report."
-    (format "#+BEGIN: clocktable :scope file :maxlevel 4 :block %s\n#+END:\n"
-            (format-time-string "%Y-%m-%d")))
-#+end_src
-
-#+begin_src emacs-lisp
-  (defun rp/setup-work-journal-capture()
-    "Prepare an environment for capturing work journal entries."
-    (progn
-      (olivetti-mode)
-      (setq-local olivetti-body-width 120)
-      (ispell-change-dictionary "en_US")
-      (flyspell-mode 1)
-      (delete-other-windows)))
-#+end_src
-
-**** Capture templates
-
-#+begin_src emacs-lisp
-  (rp/add-org-capture-templates
-   '(("w" "Work related items")
-     ("wa" "Work achievement"
-      entry
-      (file+olp+datetree "~/org/gtd/work.org" "Achievements")
-      "* %?")
-
-     ("wf" "Technical feedback for a colleague"
-      entry
-      (file+olp+datetree "~/org/gtd/work.org" "Technical feedback")
-      "* %?")
-
-     ("wt" "Todo item"
-      entry
-      (file+headline "~/org/gtd/work.org" "Work")
-      "* TODO %?")
-
-     ("wm" "Meeting"
-      entry
-      (file+headline "~/org/gtd/work.org" "Outlook")
-      "* %? %(org-set-tags \"work\") \n%^{Slot}T")
-
-     ("wr" "Retrospective remark"
-      entry
-      (file+headline "~/org/gtd/work.org" "Upcomming retrospective")
-      "* TODO %? \n%U")
-
-     ("wc" "Clock report"
-      plain
-      (file+olp+datetree "~/org/gtd/work.org" "Clock report")
-      "%(rp/clock-report-template)"
-      :jump-to-captured t
-      :immediate-finish t)
-
-     ("wi" "Interruption"
-      entry
-      (file+headline "~/org/gtd/work.org" "Interruptions")
-      "* %? \n" :clock-in t)
-
-     ("wj" "Journal entry")
-
-     ("wja" "Annotation entry"
-      entry
-      (file+olp+datetree "~/org/gtd/work.org" "Journal")
-      "* %a \n%U\n\n%?"
-      :hook rp/setup-work-journal-capture)
-
-     ("wje" "Empty entry"
-      entry
-      (file+olp+datetree "~/org/gtd/work.org" "Journal")
-      "* %? \n%U"
-      :hook rp/setup-work-journal-capture)))
+  (require 'work-capture-templates)
 #+end_src
 
 ** Setup =org-refile-targets=
