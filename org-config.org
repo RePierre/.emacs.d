@@ -234,6 +234,12 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 :header-args:emacs-lisp: :results none
 :END:
 
+** Import utilities for =org-capture=
+
+#+begin_src emacs-lisp
+  (require 'rp-capture-utils)
+#+end_src
+
 ** Setup =org-capture-templates=
 
 Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
@@ -279,6 +285,12 @@ Templates that do not have a category, i.e. are accessible via a single key.
       entry
       (file+headline "~/org/gtd/tickler.org" "Tickler")
       "* %i%? \n%U")))
+#+end_src
+
+*** Extra capture templates
+
+#+begin_src emacs-lisp
+  (require 'extra-capture-templates)
 #+end_src
 
 *** PhD related templates
