@@ -238,16 +238,6 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 
 Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
 
-And to avoid duplicating the same code that appends new templates to existing ones, it's better to put that code into a function that can be called multiple times:
-#+begin_src emacs-lisp
-  (defun rp/add-org-capture-templates(capture-templates)
-    (setq org-capture-templates
-          (append org-capture-templates
-                  capture-templates)))
-#+end_src
-
-Now, all that's left to do is split templates into categories and add them using the function above.
-
 *** Setup the environment for capture templates which have long text
 
 #+begin_src emacs-lisp

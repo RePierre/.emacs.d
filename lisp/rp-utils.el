@@ -10,6 +10,8 @@
 
 ;;; Code:
 
+(require 'org)
+
 (defun rp/running-on-wsl ()
   "Check if the current system is Windows Sunsystem for Linux."
   (if (and (eq system-type 'gnu/linux)
@@ -28,6 +30,16 @@ will be considered 0, and any value above 100 will be considered 100."
 		       (cond ((< 0 arg) 0)
 			     ((> 100 arg) 100)
 			     (t (- 100 arg)))))
+
+
+(defvar org-capture-templates)
+
+(defun rp/add-org-capture-templates(capture-templates)
+  "Add the CAPTURE-TEMPLATES to the variable `ORG-CAPTURE-TEMPLATES'.
+CAPTURE-TEMPLATES is a list of capture templates."
+  (setq org-capture-templates
+        (append org-capture-templates
+                capture-templates)))
 
 (provide 'rp-utils)
 ;;; rp-utils.el ends here
