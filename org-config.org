@@ -238,16 +238,6 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 
 Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
 
-*** Setup the environment for capture templates which have long text
-
-#+begin_src emacs-lisp
-  (defun rp/setup-long-text-capture()
-    "Prepare an environment for capturing long texts."
-    (progn
-      (olivetti-mode)
-      (delete-other-windows)))
-#+end_src
-
 *** Uncategorized templates
 
 Templates that do not have a category, i.e. are accessible via a single key.
