@@ -278,7 +278,7 @@ Templates that do not have a category, i.e. are accessible via a single key.
 
      ("b" "Blog article idea"
       entry
-      (file+headline "~/org/blogging/blogging.org" "Blog articles")
+      (file+headline "~/org/writing/blogging.org" "Blog articles")
       "* IDEA %? \n%U")
 
      ("T" "Tickler"
