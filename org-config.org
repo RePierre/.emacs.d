@@ -26,7 +26,11 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
     :defer t
     :bind (:map global-map
                 ("C-c c" . org-capture)
-                ("C-c a" . org-agenda))
+                ("C-c a" . org-agenda)
+           :map org-mode-map
+                ("C-c l" . org-store-link)
+           :map org-agenda-mode-map
+                ("C-c l" . org-store-link))
     :config (progn
               (require 'ox-extra)
               (ox-extras-activate '(ignore-headlines))
