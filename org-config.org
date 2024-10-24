@@ -329,7 +329,7 @@ Templates related to work activities.
   (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
                              ("~/org/gtd/some-day.org" :level . 1)
                              ("~/org/gtd/tickler.org" :maxlevel . 2)
-                             ("~/org/blogging/blogging.org" :level . 1)
+                             ("~/org/writing/blogging.org" :level . 1)
                              ("~/org/gtd/work.org" :maxlevel . 6)
                              ("~/org/bibliography/reading-list.org" :maxlevel . 2)
                              ("~/org/phd/phd.org" :maxlevel . 4)
@@ -367,7 +367,7 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
               "~/org/gtd/tickler.org"
               "~/org/gtd/events.org"
               "~/org/bibliography/reading-list.org"
-              "~/org/blogging/blogging.org"
+              "~/org/writing/blogging.org"
               "~/org/phd/phd.org"
               "~/org/phd/deloro/deloro.org"
               "~/org/phd/edtlr/"
