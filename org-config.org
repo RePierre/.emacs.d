@@ -337,6 +337,7 @@ Templates related to work activities.
                              ("~/org/gtd/work.org" :maxlevel . 6)
                              ("~/org/bibliography/reading-list.org" :maxlevel . 2)
                              ("~/org/phd/phd.org" :maxlevel . 4)
+                             ("~/org/iit/iit.org" :maxlevel . 4)
                              ("~/org/phd/edtlr/edtlr.org" :maxlevel . 4)
                              ("~/org/phd/deloro/deloro.org" :maxlevel . 4)
                              ("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
@@ -373,6 +374,7 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
               "~/org/bibliography/reading-list.org"
               "~/org/writing/blogging.org"
               "~/org/phd/phd.org"
+              "~/org/iit/"
               "~/org/phd/deloro/deloro.org"
               "~/org/phd/edtlr/"
               "~/org/phd/parlamint/"
