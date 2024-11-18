@@ -798,5 +798,9 @@ Requires =ledger= to be installed:
           newsticker-retrieval-interval -1
           newsticker-download-logos nil
           newsticker-treeview-treewindow-width 60
-          newsticker-url-list rp/newsticker-feeds))
+          newsticker-url-list rp/newsticker-feeds)
+    :config
+    (add-hook 'kill-emacs-hook (lambda ()
+                                 (if (fboundp 'newsticker-treeview-quit)
+                                     (newsticker-treeview-quit)))))
 #+end_src
