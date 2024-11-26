@@ -7,10 +7,11 @@ Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][th
 ** Initialize/update package sources
 
 #+begin_src emacs-lisp
+  (require 'package)
   (add-to-list 'package-archives
-     	  '("melpa" . "https://melpa.org/packages/") t)
+	  '("melpa" . "https://melpa.org/packages/") t)
   (add-to-list 'package-archives
-     	  '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+	  '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 #+end_src
 
 ** Install =use-package=
