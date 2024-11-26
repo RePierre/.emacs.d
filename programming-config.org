@@ -27,6 +27,9 @@
      (use-package helm-lsp
        :defer t
        :commands helm-lsp-workspace-symbol)
+
+     (use-package lsp-treemacs
+       :commands lsp-treemacs-errors-list)
    #+end_src
 ** Install =dap-mode=
    #+begin_src emacs-lisp
