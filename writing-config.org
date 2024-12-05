@@ -21,7 +21,9 @@
     :bind (("C-c wr" . writeroom-mode))
     :init (progn
             (add-hook 'writeroom-mode-enable-hook 'on-writeroom-mode-start)
-            (add-hook 'writeroom-mode-disable-hook 'on-writeroom-mode-end)))
+            (add-hook 'writeroom-mode-disable-hook 'on-writeroom-mode-end))
+    :config
+    (setq writeroom-width 70))
 #+end_src
 
 * Use =writegood-mode= to avoid clichees and weasel words
