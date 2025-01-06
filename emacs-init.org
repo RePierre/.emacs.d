@@ -743,7 +743,8 @@ The examle of using  =use-package= for configuring =pdf-tools= can be found [[ht
     :defer t
     :config
     (pdf-tools-install)
-    (setq-default pdf-view-display-size 'fit-page))
+    (setq-default pdf-view-display-size 'fit-page)
+    :mode (("\\.pdf" . pdf-view-mode)))
 #+end_src
 
 ** Use =ledger-mode=
