@@ -1,0 +1,130 @@
+#+title: Configuration of the agenda
+#+property: header-args :results silent
+
+* Setup agenda
+
+** Configure agenda
+
+#+begin_src emacs-lisp
+  (setq org-agenda-files
+        (list "~/org/gtd/inbox.org"
+              "~/org/gtd/gtd.org"
+              "~/org/gtd/work.org"
+              "~/org/gtd/some-day.org"
+              "~/org/gtd/tickler.org"
+              "~/org/gtd/events.org"
+              "~/org/bibliography/reading-list.org"
+              "~/org/writing/blogging.org"
+              "~/org/phd/phd.org"
+              "~/org/iit/"
+              "~/org/phd/deloro/deloro.org"
+              "~/org/phd/edtlr/"
+              "~/org/phd/parlamint/"
+              "~/org/phd/innovation-labs"
+              "~/org/iasi.ai/iasi-ai.org")
+        org-agenda-span 'day)
+#+end_src
+
+** Define macro for displaying timestamps on workdays
+
+The following macro will allocate time slots for meetings that are recurring on work days (Monday to Friday).
+
+Usage example:
+#+begin_quote
+ * Some meeting
+<%%(rp/workdays-at "8:30-9:00")>
+#+end_quote
+
+#+begin_src emacs-lisp
+  (defmacro rp/on-days-at(days time-slot)
+    `(if (memq (calendar-day-of-week date) ,days)
+         (format "%s %s"
+                 (org-format-time-string "%y-%m-%d" (org-today))
+                 ,time-slot)))
+
+  (defmacro rp/workdays-at(time-slot)
+    `(rp/on-days-at '(1 2 3 4 5) ,time-slot))
+#+end_src
+
+** Customize agenda view
+
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+        '(("r" "Daily agenda with global todo list"
+           ((agenda "")
+            (alltodo ""
+                     ((org-agenda-skip-function
+                       '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
+#+end_src
+
+** Setup =org-refile-targets=
+
+#+begin_src emacs-lisp
+  (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
+                             ("~/org/gtd/some-day.org" :level . 1)
+                             ("~/org/gtd/tickler.org" :maxlevel . 2)
+                             ("~/org/writing/blogging.org" :level . 1)
+                             ("~/org/gtd/work.org" :maxlevel . 6)
+                             ("~/org/bibliography/reading-list.org" :maxlevel . 2)
+                             ("~/org/phd/phd.org" :maxlevel . 4)
+                             ("~/org/iit/iit.org" :maxlevel . 4)
+                             ("~/org/phd/edtlr/edtlr.org" :maxlevel . 4)
+                             ("~/org/phd/deloro/deloro.org" :maxlevel . 4)
+                             ("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
+                             ("~/org/iasi.ai/iasi-ai.org" :level . 1)))
+#+end_src
+
+** Highlight current line in =org-agenda=
+
+#+begin_src emacs-lisp
+  (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+#+end_src
+
+** Setup the Getting Things Done view
+
+As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt][emacs init file]]. The full GTD workflow is explained int the [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][blog post]].
+
+#+begin_src emacs-lisp
+  (defun rp/gtd()
+    (interactive)
+    (progn
+      (org-agenda t "r")
+      (switch-to-buffer "*Org Agenda*")
+      (delete-other-windows)
+      (org-agenda-redo-all)))
+
+  (global-set-key (kbd "C-c g") 'rp/gtd)
+#+end_src
+
+** Apply custom colors for specific agenda entries
+
+Adapted from [[https://emacs.stackexchange.com/questions/23824/defining-different-fonts-color-per-file-in-org-agenda]].
+
+#+begin_src emacs-lisp
+  (add-hook 'org-agenda-finalize-hook
+            (lambda ()
+              (save-excursion
+                (color-org-header "Zi de naștere:.+" "OrangeRed")
+                (color-org-header "Aniversări:.+" "DeepPink"))))
+
+  (defun color-org-header (pattern forecolor)
+    "Change the foreground of  org header that matches PATTERN to FORECOLOR."
+    (goto-char (point-min))
+    (while (re-search-forward pattern nil t)
+      (add-text-properties (match-beginning 0) (match-end 0)
+                           `(face (:foreground, forecolor)))))
+#+end_src
+
+** Effort estimates
+
+Setup [[https://orgmode.org/manual/Effort-Estimates.html][effort estimates]] for tasks. Adapted from [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]].
+
+#+begin_src emacs-lisp
+  (setq org-global-properties
+        '(("Effort_ALL" .
+           "0:05 0:10 0:15 0:20 0:30 1:00 1:30 2:00 2:30 3:00 4:00 6:00 8:00 0:00")))
+
+
+  (setq org-columns-default-format
+        "%ITEM(Details) %7TODO(To Do) %5Effort(Time){:} %6CLOCKSUM{Total}")
+#+end_src

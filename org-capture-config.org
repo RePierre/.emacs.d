@@ -1,0 +1,105 @@
+#+title: Configuration of the capturing flow
+#+property: header-args :results silent
+
+* Important
+
+This file needs to be evaluated before configuring the agenda, =org-roam=, and =org-ref= because all of the abore rely on the capturing workflow.
+
+
+* Setup =org-capture=
+
+** Import utilities for =org-capture=
+
+#+begin_src emacs-lisp
+  (require 'rp-capture-utils)
+#+end_src
+
+** Setup =org-capture-templates=
+
+Having all capture templates in a single place can get messy and makes them hard to understand, so it's better to have them split into categories.
+
+*** Uncategorized templates
+
+Templates that do not have a category, i.e. are accessible via a single key.
+
+#+begin_src emacs-lisp
+  (rp/add-org-capture-templates
+   '(("n" "Note [inbox]"
+      entry
+      (file+headline "~/org/gtd/inbox.org" "Inbox")
+      "* PENDING %i%? \n%U")
+
+     ("t" "Task [GTD]"
+      entry
+      (file+headline "~/org/gtd/gtd.org" "Tasks")
+      "* TODO %i%? \n%U")
+
+     ("a" "Appointment"
+      entry
+      (file+headline "~/org/gtd/gtd.org" "Calendar")
+      "* APPT %? \n%^{Slot}T")
+
+     ("k" "Org-cliplink capture [inbox]"
+      entry
+      (file+headline "~/org/gtd/inbox.org" "Inbox")
+      "* %(org-cliplink-capture)")
+
+     ("j" "Journal Entry"
+      entry
+      (file+olp+datetree "~/org/journal.org")
+      "* %?"
+      :hook rp/setup-long-text-capture)
+
+     ("b" "Blog article idea"
+      entry
+      (file+headline "~/org/writing/blogging.org" "Blog articles")
+      "* IDEA %? \n%U")
+
+     ("T" "Tickler"
+      entry
+      (file+headline "~/org/gtd/tickler.org" "Tickler")
+      "* %i%? \n%U")))
+#+end_src
+
+*** Extra capture templates
+
+#+begin_src emacs-lisp
+  (require 'extra-capture-templates)
+#+end_src
+
+*** PhD related templates
+
+Templates related to my PhD activities.
+
+#+begin_src emacs-lisp
+  (rp/add-org-capture-templates
+   '(("p" "PhD related items")
+     ("pt" "Todo item"
+      entry
+      (file+headline "~/org/phd/phd.org" "PhD General")
+      "* TODO %?")
+
+     ("pm" "Meeting"
+      entry
+      (file+headline "~/org/phd/phd.org" "Calendar")
+      "* %? \n%^{Slot}T")
+
+     ("pi" "Interruption"
+        entry
+        (file+headline "~/org/phd/phd.org" "Întreruperi")
+        "* %? \n" :clock-in t)))
+#+end_src
+
+*** Work related templates
+
+Templates related to work activities.
+#+begin_src emacs-lisp
+  (require 'work-capture-templates)
+#+end_src
+
+** Setup =org-cliplink=
+
+#+begin_src emacs-lisp
+  (use-package org-cliplink
+    :defer t)
+#+end_src

@@ -7,14 +7,6 @@
 # Ignore auto-save-list folder
 auto-save-list
 
-# Ignore individual files
-/emacs-init.el
-/org-config.el
-/programming-config.el
-/elfeed-config.el
-/after-init.el
-/writing-config.el
-
 #Ignore backup files
 *~
 
@@ -68,3 +60,14 @@ emacsql-sqlite.exe
 # Ignore elpa directory
 /elpa/
 /*.sqlite
+
+# Ignore individual files
+/emacs-init.el
+/org-config.el
+/programming-config.el
+/elfeed-config.el
+/after-init.el
+/writing-config.el
+/org-agenda-config.el
+/org-capture-config.el
+/org-utilities-config.el
