@@ -52,6 +52,7 @@ emacsql-sqlite.exe
 /recentf
 /session.*
 /workspace/
+/eln-cache/
 
 # Ignore org-roam database file
 /org-roam.db
@@ -71,3 +72,4 @@ emacsql-sqlite.exe
 /org-agenda-config.el
 /org-capture-config.el
 /org-utilities-config.el
+/projects
