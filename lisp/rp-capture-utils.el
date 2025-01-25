@@ -9,10 +9,8 @@
 ;; This package provides utility functions for org-mode capture.
 
 ;;; Code:
-(require 'org)
+(require 'org-capture)
 (require 'olivetti)
-
-(defvar org-capture-templates)
 
 (defun rp/add-org-capture-templates(capture-templates)
   "Add the CAPTURE-TEMPLATES to the variable `ORG-CAPTURE-TEMPLATES'.
@@ -26,7 +24,6 @@ CAPTURE-TEMPLATES is a list of capture templates."
   (progn
     (olivetti-mode)
     (delete-other-windows)))
-
 
 (provide 'rp-capture-utils)
 ;;; rp-capture-utils.el ends here
