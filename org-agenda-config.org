@@ -3,25 +3,16 @@
 
 * Setup agenda
 
+** Load additional modules
+
+#+begin_src emacs-lisp
+  (require 'rp-agenda-utils)
+#+end_src
+
 ** Configure agenda
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files
-        (list "~/org/gtd/inbox.org"
-              "~/org/gtd/gtd.org"
-              "~/org/gtd/work.org"
-              "~/org/gtd/some-day.org"
-              "~/org/gtd/tickler.org"
-              "~/org/gtd/events.org"
-              "~/org/bibliography/reading-list.org"
-              "~/org/writing/blogging.org"
-              "~/org/phd/phd.org"
-              "~/org/iit/"
-              "~/org/phd/deloro/deloro.org"
-              "~/org/phd/edtlr/"
-              "~/org/phd/parlamint/"
-              "~/org/phd/innovation-labs"
-              "~/org/iasi.ai/iasi-ai.org")
+  (setq org-agenda-files rp/org-agenda-files
         org-agenda-span 'day)
 #+end_src
 
@@ -35,7 +26,7 @@ Usage example:
 <%%(rp/workdays-at "8:30-9:00")>
 #+end_quote
 
-#+begin_src emacs-lisp
+ #+begin_src emacs-lisp
   (defmacro rp/on-days-at(days time-slot)
     `(if (memq (calendar-day-of-week date) ,days)
          (format "%s %s"
@@ -60,18 +51,7 @@ Usage example:
 ** Setup =org-refile-targets=
 
 #+begin_src emacs-lisp
-  (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
-                             ("~/org/gtd/some-day.org" :level . 1)
-                             ("~/org/gtd/tickler.org" :maxlevel . 2)
-                             ("~/org/writing/blogging.org" :level . 1)
-                             ("~/org/gtd/work.org" :maxlevel . 6)
-                             ("~/org/bibliography/reading-list.org" :maxlevel . 2)
-                             ("~/org/phd/phd.org" :maxlevel . 4)
-                             ("~/org/iit/iit.org" :maxlevel . 4)
-                             ("~/org/phd/edtlr/edtlr.org" :maxlevel . 4)
-                             ("~/org/phd/deloro/deloro.org" :maxlevel . 4)
-                             ("~/org/phd/parlamint/parlamint.org" :maxlevel . 4)
-                             ("~/org/iasi.ai/iasi-ai.org" :level . 1)))
+  (setq org-refile-targets rp/org-refile-targets)
 #+end_src
 
 ** Highlight current line in =org-agenda=
