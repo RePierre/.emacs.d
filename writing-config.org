@@ -7,14 +7,12 @@
   (defun on-writeroom-mode-start()
     (progn
       (message "Entering writeroom mode.")
-      (company-mode 0)
-      (text-scale-set 2)))
+      (company-mode 0)))
 
   (defun on-writeroom-mode-end()
     (progn
       (message "Exiting writeroom mode.")
-      (company-mode 1)
-      (text-scale-set 0)))
+      (company-mode 1)))
 
   (use-package writeroom-mode
     :defer t
