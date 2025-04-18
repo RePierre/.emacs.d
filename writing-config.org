@@ -21,7 +21,7 @@
             (add-hook 'writeroom-mode-enable-hook 'on-writeroom-mode-start)
             (add-hook 'writeroom-mode-disable-hook 'on-writeroom-mode-end))
     :config
-    (setq writeroom-width 70))
+    (setq writeroom-width 50))
 #+end_src
 
 * Use =writegood-mode= to avoid clichees and weasel words
