@@ -321,13 +321,23 @@
 
 ** Install =lsp-python-ms=
 
+First, create a function to start =lsp-python-ms=:
+
+#+begin_src emacs-lisp
+  (defun rp/start-lsp-python-ms()
+    (progn
+      (require 'lsp-python-ms)
+      (lsp-deferred)))
+#+end_src
+
+Then, hook =lsp-python-ms= to both =python-mode=, and =python-ts-mode=:
+
    #+begin_src emacs-lisp
      (use-package lsp-python-ms
        :disabled t
        :init (setq lsp-python-ms-auto-install-server t)
-       :hook (python-mode . (lambda ()
-			      (require 'lsp-python-ms)
-			      (lsp))))  ; or lsp-deferred
+       :hook ((python-mode . rp/start-lsp-python-ms)
+     	 (python-ts-mode . rp/start-lsp-python-ms)))
    #+end_src
 
 ** Format python buffers on save
@@ -335,6 +345,7 @@
    For some weird reason =py-yapf-enable-on-save= doesn't get attached to =python-mode-hook= when adding a hook through =use-package= so it has to be explicitly set.
    #+begin_src emacs-lisp
      (add-hook 'python-mode-hook 'py-yapf-enable-on-save)
+     (add-hook 'python-ts-mode-hook 'py-yapf-enable-on-save)
    #+end_src
 
 * JavaScript development
