@@ -183,26 +183,26 @@ From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clip
     (setq confirm-kill-emacs 'y-or-n-p))
 #+end_src
 
-** Use =Firefox= as the default browser when running in =Windows Subsystem for Linux=
+** Use =Zen= as the default browser when running in =Windows Subsystem for Linux=
 
 #+begin_src emacs-lisp
-  (defun rp/browse-url-firefox(url &rest ARGS)
-    "Browse URL using Firefox from Windows when running under WSL.
+  (defun rp/browse-url-zen-browser(url &rest ARGS)
+    "Browse URL using Zen browser from Windows when running under WSL.
   This function calls `shell-command' to pass
   URL to the Firefox browser located at
-  `/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe'.
+  `/mnt/c/Program\\ Files/Zen\\ Browser/zen.exe'.
 
   The second argument ARGS is present to maintain compatibility."
     (progn
-      (message "Browsing URL [%s] using external Firefox." url)
+      (message "Browsing URL [%s] using Zen browser." url)
       (shell-command
-       (concat "/mnt/c/Program\\ Files/Mozilla\\ Firefox/firefox.exe "
+       (concat "/mnt/c/Program\\ Files/Zen\\ Browser/zen.exe "
           url))))
 
   (when (rp/running-on-wsl)
     (progn
       (message "Running under WSL. The browse-url-browser-function will be overwritten.")
-      (setq browse-url-browser-function 'rp/browse-url-firefox)))
+      (setq browse-url-browser-function 'rp/browse-url-zen-browser)))
 #+end_src
 
 ** Change the location of default bookmarks files
