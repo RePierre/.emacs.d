@@ -144,7 +144,7 @@ It seems that =org-ref-export-to-pdf= does a better job of exporting to PDF than
 #+begin_src emacs-lisp
   (defun rp/export-to-html-async()
     (when (equal major-mode 'org-mode)
-      (org-html-export-to-html t)))
+      (org-html-export-to-html)))
 
   (defun rp/toggle-export-to-html-async()
     (interactive)
