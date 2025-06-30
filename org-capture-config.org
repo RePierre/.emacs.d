@@ -53,7 +53,8 @@ Templates that do not have a category, i.e. are accessible via a single key.
      ("b" "Blog article idea"
       entry
       (file+headline "~/org/writing/blogging.org" "Blog articles")
-      "* IDEA %? \n%U")
+      "* IDEA %? \n%U"
+      :hook rp/setup-long-text-capture)
 
      ("T" "Tickler"
       entry
