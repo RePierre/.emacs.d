@@ -69,6 +69,46 @@ Extracted from [[https://emacs.stackexchange.com/a/32625/14110][org mode - how t
   (add-hook 'org-mode-hook 'variable-pitch-mode)
 #+end_src
 
+** Configure =org-clock=
+
+The configuration for =org-clock= is inspired by the configuration of [[https://hugocisneros.com/org-config/#org-clock][Hugo Cisneros]].
+
+*** Resume clocking task when Emacs is restarted
+
+#+begin_src emacs-lisp
+  (org-clock-persistence-insinuate)
+#+end_src
+
+*** Resume clocking task on clock-in if the clock is open
+
+#+begin_src emacs-lisp
+  (setq org-clock-in-resume t)
+#+end_src
+
+*** Remove tasks with 0:00 duration
+
+#+begin_src emacs-lisp
+  (setq org-clock-out-remove-zero-time-clocks t)
+#+end_src
+
+*** Clock-out when marking a task as DONE
+
+#+begin_src emacs-lisp
+  (setq org-clock-out-when-done t)
+#+end_src
+
+*** Persist clock history
+
+#+begin_src emacs-lisp
+  (setq org-clock-persist t)
+#+end_src
+
+*** Include current task in clock reports
+
+#+begin_src emacs-lisp
+  (setq org-clock-report-include-clocking-task t)
+#+end_src
+
 ** Prettify =org-mode=
 
 Taken from yet another [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][blog post]] about ricing Emacs.
