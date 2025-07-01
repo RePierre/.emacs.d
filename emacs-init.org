@@ -170,10 +170,18 @@ From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clip
   (global-unset-key (kbd "C-z"))
 #+end_src
 
-** Change start day of the week
+** Customize the calendar
+
+*** Change start day of the week
 
 #+begin_src emacs-lisp
   (setq calendar-week-start-day 1)
+#+end_src
+
+*** Change the date style
+
+#+begin_src emacs-lisp
+  (setq calendar-date-style 'european)
 #+end_src
 
 ** Ask for confirmation before exiting Emacs
