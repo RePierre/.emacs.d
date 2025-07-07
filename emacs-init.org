@@ -800,6 +800,7 @@ Requires =ledger= to be installed:
 #+begin_src emacs-lisp
   (use-package newst-treeview
     :defer t
+    :ensure nil
     :init
     (require 'rp-feeds-urls)
     (setq newsticker-dir "~/org/newsticker/"
