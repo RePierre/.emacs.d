@@ -309,6 +309,7 @@ Then, hook =lsp-python-ms= to both =python-mode=, and =python-ts-mode=:
    #+begin_src emacs-lisp
      (use-package nxml-mode
        :defer t
+       :ensure nil
        :hook (nxml-mode . lsp-deferred)
        :mode ("\\.\\(xml\\|xsd\\|wsdl\\)\\'"))
    #+end_src
@@ -335,6 +336,7 @@ Then, hook =lsp-python-ms= to both =python-mode=, and =python-ts-mode=:
    #+begin_src emacs-lisp
      (use-package sql-mode
        :defer t
+       :ensure nil
        :mode "\\.sql\\'")
    #+end_src
 
