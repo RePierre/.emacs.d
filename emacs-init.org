@@ -802,14 +802,14 @@ Requires =ledger= to be installed:
     :defer t
     :ensure nil
     :init
-    (require 'rp-feeds-urls)
+    (require 'rp-rss-utils)
     (setq newsticker-dir "~/org/newsticker/"
           newsticker-frontend 'newsticker-treeview
           newsticker-cache-filename "~/org/newsticker/.newsticker-cache"
           newsticker-retrieval-interval -1
           newsticker-download-logos nil
           newsticker-treeview-treewindow-width 60
-          newsticker-url-list rp/newsticker-feeds)
+          newsticker-url-list (rp/load-newsticker-feeds))
     :config
     (add-hook 'kill-emacs-hook (lambda ()
                                  (if (fboundp 'newsticker-treeview-quit)
