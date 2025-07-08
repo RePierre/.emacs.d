@@ -3,23 +3,35 @@
 
 * Read Web feeds using =elfeed=
 
-** Transform the list of existing feeds into the format accepted by =elfeed=
-
-#+begin_src emacs-lisp
-  (require 'rp-feeds-urls)
-
-  (defun rp/load-elfeed-urls()
-    "Load the URLs for elfeed."
-    (mapcar (lambda(x)
-  	    (car (cdr x)))
-  	  rp/newsticker-feeds))
-#+end_src
-
 ** Setup =elfeed=
 
 #+begin_src emacs-lisp
   (use-package elfed
     :defer t
+    :init
+    (require 'rp-rss-utils)
+    (setq elfeed-feeds (rp/load-elfeed-feeds)
+  	elfeed-db-directory "~/org/elfeed/elfeed-db/")
+    :bind
+    (:map global-map
+  	("C-x w" . elfeed))
+    :hook ((kill-emacs . (lambda ()
+  			(if (featurep 'elfeed)
+  			    (elfeed-search-quit-window))))
+  	 (elfeed-show-mode . (lambda ()
+  			       (if (featurep 'olivetti)
+  				   (olivetti-mode 1))))))
+#+end_src
+
+** Setup =elfeed-goodies=
+
+#+begin_src emacs-lisp
+  (use-package elfeed-goodies
+    :defer t
+    :after (elfeed)
     :config
-    (setq elfeed-feeds (rp/load-elfeed-urls)))
+    (progn
+      (elfeed-goodies/setup)
+      (setq elfeed-goodies/entry-pane-position :bottom))
+    :hook (elfeed-search-mode . elfeed-goodies/setup))
 #+end_src
