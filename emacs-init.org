@@ -459,6 +459,24 @@ From [[https://github.com/zamansky/using-emacs/blob/master/myinit.org#ace-window
       (atomic-chrome-start-server)))
 #+end_src
 
+** Use =gptel= to interact with =GPT= models
+
+#+begin_src emacs-lisp
+  (use-package gptel
+    :defer t
+    :custom
+    (gptel-model 'mistral-small)
+    (gptel-backend
+     (gptel-make-openai "Mistral LeChat"
+       :host "api.mistral.ai"
+       :endpoint "/v1/chat/completions"
+       :protocol "https"
+       :key (auth-source-pick-first-password :host "api.mistral.ai")
+       :models '("mistral-small"
+                 "mistral-medium"
+                 "mistral-large"
+                 "mistral-xlarge"))))
+#+end_src
 * Helm
 
 ** Install =helm=
