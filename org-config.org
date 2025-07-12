@@ -85,12 +85,6 @@ The configuration for =org-clock= is inspired by the configuration of [[https://
   (setq org-clock-in-resume t)
 #+end_src
 
-*** Remove tasks with 0:00 duration
-
-#+begin_src emacs-lisp
-  (setq org-clock-out-remove-zero-time-clocks t)
-#+end_src
-
 *** Clock-out when marking a task as DONE
 
 #+begin_src emacs-lisp
