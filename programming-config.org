@@ -13,7 +13,10 @@
        :hook ((prog-mode . lsp)
               (lsp-mode . rp/setup-lsp-mode))
        :init (setq lsp-keymap-prefix "C-c l")
-       :config (lsp-enable-which-key-integration t))
+       :config
+       (lsp-enable-which-key-integration t)
+       (add-to-list 'lsp-language-id-configuration
+     	       '(makefile-gmake-mode . "makefile")))
 
      (use-package lsp-ui
        :defer t
