@@ -296,13 +296,15 @@ Then, hook =lsp-python-ms= to both =python-mode=, and =python-ts-mode=:
        :defer t
        :mode "\\.js\\'")
    #+end_src
+
 ** Intall =prettier-js=
    Requires =sudo apt install prettier= or =npm install -g prettier=.
    #+begin_src emacs-lisp :results silent
      (use-package prettier-js
        :defer t
-       :after (rjsx-mode)
-       :hook (rjsx-mode . prettier-js-mode))
+       :after (:any rjsx-mode typescript-ts-mode)
+       :hook '((rjsx-mode . prettier-js-mode)
+     	  (typescript-ts-mode . prettier-js-mode)))
    #+end_src
 * XML
 ** Configure =nxml-mode=
