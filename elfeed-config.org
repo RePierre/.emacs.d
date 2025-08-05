@@ -3,24 +3,43 @@
 
 * Read Web feeds using =elfeed=
 
+** Utility functions
+
+#+begin_src emacs-lisp
+  (defun rp/elfeed-start()
+    "Start `elfeed' and call `elfeed-search-update' to bootstrap `elfeed-goodies'."
+    (interactive)
+    (progn
+      (elfeed)
+      (elfeed-search-update--force)))
+
+  (defun rp/elfeed-stop()
+    "Stop `elfeed' if it was started previously."
+    (interactive)
+    (if (featurep 'elfeed)
+        (elfeed-search-quit-window)))
+
+  (defun rp/elfeed-show-item()
+    "Display an `elfeed' item using `olivetti-mode'."
+    (if (featurep 'olivetti)
+        (olivetti-mode 1)))
+#+end_src
+
 ** Setup =elfeed=
 
 #+begin_src emacs-lisp
-  (use-package elfed
+  (use-package elfeed
     :defer t
     :init
     (require 'rp-rss-utils)
     (setq elfeed-feeds (rp/load-elfeed-feeds)
   	elfeed-db-directory "~/org/elfeed/elfeed-db/")
-    :bind
-    (:map global-map
-  	("C-x w" . elfeed))
-    :hook ((kill-emacs . (lambda ()
-  			(if (featurep 'elfeed)
-  			    (elfeed-search-quit-window))))
-  	 (elfeed-show-mode . (lambda ()
-  			       (if (featurep 'olivetti)
-  				   (olivetti-mode 1))))))
+    :bind (:map global-map
+  	      ("C-x w" . rp/elfeed-start)
+  	 :map elfeed-search-mode-map
+  	      ("/" . elfeed-search-set-filter))
+    :hook ((kill-emacs . rp/elfeed-stop)
+  	 (elfeed-show-mode . rp/elfeed-show-item)))
 #+end_src
 
 ** Setup =elfeed-goodies=
