@@ -11,7 +11,8 @@
     (interactive)
     (progn
       (elfeed)
-      (elfeed-search-update--force)))
+      (elfeed-search-update--force)
+      (elfeed-search-fetch nil)))
 
   (defun rp/elfeed-stop()
     "Stop `elfeed' if it was started previously."
