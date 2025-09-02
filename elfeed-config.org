@@ -36,7 +36,7 @@
     (setq elfeed-feeds (rp/load-elfeed-feeds)
   	elfeed-db-directory "~/org/elfeed/elfeed-db/")
     :bind (:map global-map
-  	      ("C-c w" . rp/elfeed-start)
+  	      ("C-c rn" . rp/elfeed-start)
   	 :map elfeed-search-mode-map
   	      ("/" . elfeed-search-set-filter))
     :hook ((kill-emacs . rp/elfeed-stop)
