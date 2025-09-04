@@ -358,3 +358,14 @@ Then, hook =lsp-python-ms= to both =python-mode=, and =python-ts-mode=:
     (use-package powershell
       :defer t)
   #+end_src
+
+* Translation files
+
+To enable =po-mode= the following package needs to be installed:
+- on systems based on Debian --- =gettext-el=
+- on systems based on Red Hat --- =emacs-gettext=.
+
+#+begin_src emacs-lisp
+  (use-package po-mode
+    :mode ("\\.po\\'\\|\\.po\\." . po-mode))
+#+end_src
