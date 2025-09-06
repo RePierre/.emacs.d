@@ -123,6 +123,14 @@ Taken from yet another [[https://zzamboni.org/post/beautifying-org-mode-in-emacs
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 #+end_src
+
+*** Use =org-table-highlight= in =org-mode= tables
+
+#+begin_src emacs-lisp
+  (use-package org-table-highlight
+    :hook (org-mode . org-table-highlight-mode))
+#+end_src
+
 ** Automatically export to pdf
 
 #+begin_src emacs-lisp
