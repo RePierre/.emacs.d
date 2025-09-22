@@ -66,6 +66,7 @@ Templates that do not have a category, i.e. are accessible via a single key.
 
 #+begin_src emacs-lisp
   (require 'extra-capture-templates)
+  (require 'daily-routine-capture-templates)
 #+end_src
 
 *** PhD related templates
