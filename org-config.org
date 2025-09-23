@@ -150,7 +150,7 @@ Taken from yet another [[https://zzamboni.org/post/beautifying-org-mode-in-emacs
     (when (equal major-mode 'org-mode)
       (progn
         (message "Automatic export will use org-latex-export-to-pdf.")
-        (org-latex-export-to-pdf t))))
+        (org-latex-export-to-pdf))))
 
   (defun rp/toggle-export-to-pdf-async ()
     (interactive)
