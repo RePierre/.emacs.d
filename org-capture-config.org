@@ -32,7 +32,7 @@ Templates that do not have a category, i.e. are accessible via a single key.
      ("t" "Task [GTD]"
       entry
       (file+headline "~/org/gtd/gtd.org" "Tasks")
-      "* TODO %i%? \n%U")
+      "* TODO %i%? \nSCHEDULED: %t\n%U")
 
      ("a" "Appointment"
       entry
