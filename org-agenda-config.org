@@ -79,7 +79,7 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
   (defun rp/gtd()
     (interactive)
     (progn
-      (org-agenda t "r")
+      (org-agenda t "pi")
       (switch-to-buffer "*Org Agenda*")
       (delete-other-windows)
       (org-agenda-redo-all)))
