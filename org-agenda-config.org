@@ -42,7 +42,17 @@ Usage example:
 
 #+begin_src emacs-lisp
   (setq org-agenda-custom-commands
-        '(("r" "Daily agenda with global todo list"
+        '(("p" . "Daily agenda perspectives")
+  	("pi" "Daily agenda with inbox"
+           ((agenda "")
+  	  (todo "PENDING")))
+  	("pr" "Daily agenda with research items"
+           ((agenda "")
+  	  (tags-todo "+PhD")))
+  	("pw" "Daily agenda with Work category"
+           ((agenda "")
+  	  (tags-todo "+work")))
+  	("r" "Daily agenda with global todo list"
            ((agenda "")
             (alltodo ""
                      ((org-agenda-skip-function
