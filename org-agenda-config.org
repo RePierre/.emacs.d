@@ -48,7 +48,7 @@ Usage example:
   	  (todo "PENDING")))
   	("pr" "Daily agenda with research items"
            ((agenda "")
-  	  (tags-todo "+PhD")))
+  	  (tags-todo "+PhD-ulterior")))
   	("pw" "Daily agenda with Work category"
            ((agenda "")
   	  (tags-todo "+work")))
