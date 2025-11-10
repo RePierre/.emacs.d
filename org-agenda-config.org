@@ -7,7 +7,10 @@
 
 #+begin_src emacs-lisp
   (require 'rp-agenda-utils)
-  (require 'rp-org-gcal)
+  ;; Require Google calendar integration library when not running on WSL
+  (unless (rp/running-on-wsl)
+    (require 'rp-org-gcal))
+
 #+end_src
 
 ** Configure agenda
