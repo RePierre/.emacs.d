@@ -15,6 +15,7 @@
        :init (setq lsp-keymap-prefix "C-c l")
        :config
        (lsp-enable-which-key-integration t)
+       (setq-default indent-tabs-mode nil)
        (add-to-list 'lsp-language-id-configuration
      	       '(makefile-gmake-mode . "makefile")))
 
