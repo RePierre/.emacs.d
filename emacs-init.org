@@ -583,7 +583,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
    machine api.github.com login <username>^forge password <personal token>
    #+end_example
 
-** Install =git-gutter=
+** Install =git-gutter= and =git-gutter-fringe=
 
 As found in [[https://ianyepan.github.io/posts/emacs-git-gutter/][Git Gutter in Emacs | Ian Y.E. Pan]]:
 
@@ -592,6 +592,14 @@ As found in [[https://ianyepan.github.io/posts/emacs-git-gutter/][Git Gutter in 
     :hook (prog-mode . git-gutter-mode)
     :config
     (setq git-gutter:update-interval 0.02))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package git-gutter-fringe
+    :config
+    (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 #+end_src
 
 * Completion configuration
