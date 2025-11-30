@@ -18,7 +18,8 @@ Inspired by [[https://github.com/rememberYou/.emacs.d/blob/master/config.org][th
 
 #+begin_src emacs-lisp
   (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
+    (package-install 'use-package)
+    (setq use-package-always-ensure t))
 #+end_src
 
 ** Install =use-package-ensure-system-package=
