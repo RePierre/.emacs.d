@@ -50,11 +50,7 @@ Templates that do not have a category, i.e. are accessible via a single key.
       "* %?"
       :hook rp/setup-long-text-capture)
 
-     ("b" "Blog article idea"
-      entry
-      (file+headline "~/org/writing/blogging.org" "Blog articles")
-      "* IDEA %? \n%U"
-      :hook rp/setup-long-text-capture)
+     ("i" "Idea")
 
      ("T" "Tickler"
       entry
@@ -67,29 +63,6 @@ Templates that do not have a category, i.e. are accessible via a single key.
 #+begin_src emacs-lisp
   (require 'extra-capture-templates)
   (require 'daily-routine-capture-templates)
-#+end_src
-
-*** PhD related templates
-
-Templates related to my PhD activities.
-
-#+begin_src emacs-lisp
-  (rp/add-org-capture-templates
-   '(("p" "PhD related items")
-     ("pt" "Todo item"
-      entry
-      (file+headline "~/org/phd/phd.org" "PhD General")
-      "* TODO %?")
-
-     ("pm" "Meeting"
-      entry
-      (file+headline "~/org/phd/phd.org" "Calendar")
-      "* %? \n%^{Slot}T")
-
-     ("pi" "Interruption"
-        entry
-        (file+headline "~/org/phd/phd.org" "Întreruperi")
-        "* %? \n" :clock-in t)))
 #+end_src
 
 *** Work related templates
