@@ -1,4 +1,4 @@
-;;; rp-capture-utils.el --- Utility functions for org-mode capture -*-coding: utf-8;-*-
+;;; rp-capture-utils.el --- Utility functions for org-mode capture -*-coding: utf-8; lexical-binding: t;-*-
 
 ;; Keywords: Emacs, org-mode, org-capture, utility functions
 
