@@ -9,10 +9,17 @@
   (defun rp/elfeed-start()
     "Start `elfeed' and call `elfeed-search-update' to bootstrap `elfeed-goodies'."
     (interactive)
-    (progn
+    (let ((bookmarks-file "~/org/bookmarks")
+            (temp-bookmarks-file "~/org/__bookmarks"))
+      (when (file-exists-p bookmarks-file)
+        (message "Moving the bookmarks file to void elfeed issues.")
+        (rename-file bookmarks-file temp-bookmarks-file))
       (elfeed)
       (elfeed-search-update--force)
-      (elfeed-search-fetch nil)))
+      (elfeed-search-fetch nil)
+      (when (file-exists-p temp-bookmarks-file)
+        (message "Restoring the bookmarks file.")
+        (rename-file temp-bookmarks-file bookmarks-file))))
 
   (defun rp/elfeed-stop()
     "Stop `elfeed' if it was started previously."
