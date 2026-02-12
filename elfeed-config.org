@@ -12,7 +12,7 @@
     (let ((bookmarks-file "~/org/bookmarks")
             (temp-bookmarks-file "~/org/__bookmarks"))
       (when (file-exists-p bookmarks-file)
-        (message "Moving the bookmarks file to void elfeed issues.")
+        (message "Moving the bookmarks file to avoid elfeed issues.")
         (rename-file bookmarks-file temp-bookmarks-file))
       (elfeed)
       (elfeed-search-update--force)
