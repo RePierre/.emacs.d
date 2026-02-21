@@ -374,8 +374,12 @@ As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emme
     :hook
     (after-init . smart-mode-line-enable)
     :config
-    (setq sml/no-confirm-load-theme t)
-    (setq sml/theme 'respectful)
+    (setq sml/no-confirm-load-theme t
+          sml/theme 'respectful
+          sml/shorten-directory t
+          sml/shorten-modes t
+          sml/name-wihdth 40
+          sml/mode-width 120)
     (sml/setup))
 #+end_src
 
