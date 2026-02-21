@@ -289,7 +289,6 @@ However, for some reason I can't find right now, specifying the list of custom s
 #+begin_src emacs-lisp
   (use-package circadian
     :ensure t
-    :after smart-mode-line
     :config
     (if (and
          (bound-and-true-p calendar-latitude)
@@ -297,7 +296,7 @@ However, for some reason I can't find right now, specifying the list of custom s
         (progn
           (message "Latitude and longitude are set; themes will change according to sunset and sunrise.")
           (setq circadian-themes '((:sunrise . sanityinc-tomorrow-day)
-                                   (:sunset . sanityinc-tomorrow-night))))
+                                   (:sunset . (sanityinc-tomorrow-night sanityinc-tomorrow-eighties)))))
       (progn
         (message "Latitude and longitude not set; themes will change at 8:00 and 19:30.")
         (setq circadian-themes '(("8:00" . sanityinc-tomorrow-day)
@@ -365,29 +364,10 @@ As specified in the [[http://cestlaz.github.io/posts/using-emacs-34-ibuffer-emme
     :bind ("C-=" . er/expand-region))
 #+end_src
 
-** Use =smart-mode-line= for improving the mode line
-
-   For some reason =smart-mode-line= needs to be loaded before =circadian= to avoid a mess in the mode-line.
-
-#+begin_src emacs-lisp
-  (use-package smart-mode-line
-    :hook
-    (after-init . smart-mode-line-enable)
-    :config
-    (setq sml/no-confirm-load-theme t
-          sml/theme 'respectful
-          sml/shorten-directory t
-          sml/shorten-modes t
-          sml/name-wihdth 40
-          sml/mode-width 120)
-    (sml/setup))
-#+end_src
-
 ** Use =nyan-mode= for displaying progress in buffer
 
 #+begin_src emacs-lisp
   (use-package nyan-mode
-    :after smart-mode-line
     :config
     (nyan-mode 1))
 #+end_src
