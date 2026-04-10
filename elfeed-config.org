@@ -53,6 +53,13 @@
 ** Setup =elfeed-goodies=
 
 #+begin_src emacs-lisp
+  (defun rp/setup-elfeed-goodies()
+    (progn
+      (elfeed-goodies/setup)
+      (when (and (daemonp) (not (rp/running-on-wsl)))
+        (with-current-buffer "*elfeed-search*"
+          (setq-local browse-url-browser-function 'eww-browse-url)))))
+
   (use-package elfeed-goodies
     :defer t
     :after (elfeed)
@@ -60,5 +67,5 @@
     (progn
       (elfeed-goodies/setup)
       (setq elfeed-goodies/entry-pane-position :bottom))
-    :hook (elfeed-search-mode . elfeed-goodies/setup))
+    :hook (elfeed-search-mode . rp/setup-elfeed-goodies))
 #+end_src
