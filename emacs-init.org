@@ -300,6 +300,21 @@ Found in [[https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-c
   (setq redisplay-skip-fontification-on-input t)
 #+end_src
 
+** Increase process output buffer
+
+Found in [[https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/#increase-process-output-buffer-for-lsp-doom-purcell-centaur][Stealing from the Best Emacs Configs | Emacs Redux]]. The help message for the variable =read-process-output-max= says that
+#+begin_quote
+On GNU/Linux systems, the value should not exceed /proc/sys/fs/pipe-max-size.
+#+end_quote
+So, instead of setting the variable =read-process-output-max= to some random value, let's set it to =pipe-max-size=.
+#+begin_src emacs-lisp
+  (let ((max-pipe-size
+         (string-to-number (shell-command-to-string "cat /proc/sys/fs/pipe-max-size"))))
+    (unless (zerop max-pipe-size)
+      (message "Setting `read-process-output-max' to %d bytes" max-pipe-size)
+      (setq read-process-output-max max-pipe-size)))
+#+end_src
+
 * Themes
 
 ** Use =SanityInc= themes
