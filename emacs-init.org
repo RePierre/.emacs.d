@@ -266,6 +266,14 @@ Taken from a [[https://old.reddit.com/r/emacs/comments/ym3t77/how_to_delete_auto
           '(fullscreen . maximized))
 #+end_src
 
+** Resize window combinations proportionally
+
+Found in [[https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/#proportional-window-resizing-purcell-prot][Stealing from the Best Emacs Configs | Emacs Redux]].
+
+#+begin_src emacs-lisp
+  (setq window-combination-resize t)
+#+end_src
+
 * Themes
 
 ** Use =SanityInc= themes
