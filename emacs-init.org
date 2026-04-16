@@ -227,6 +227,14 @@ From [[https://www.reddit.com/r/emacs/comments/30g5wo/the_kill_ring_and_the_clip
   (setq-default cursor-in-non-selected-windows nil)
 #+end_src
 
+** Show match numbers in the search prompt (=isearch=)
+
+As mentioned in [[https://emacsredux.com/blog/2026/03/15/isearch-lazy-count/][isearch-lazy-count: Built-in Search Match Counting]].
+
+#+begin_src emacs-lisp
+  (setopt isearch-lazy-count t)
+#+end_src
+
 ** Add a margin when scrolling vertically
 
 #+begin_src emacs-lisp
