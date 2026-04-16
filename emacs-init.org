@@ -284,6 +284,14 @@ Found in [[https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-c
   (setq bidi-inhibit-bpa t)
 #+end_src
 
+** Skip sintax highlighting during input
+
+Found in [[https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/#skip-fontification-during-input-doom-emacs][Stealing from the Best Emacs Configs | Emacs Redux]].
+
+#+begin_src emacs-lisp
+  (setq redisplay-skip-fontification-on-input t)
+#+end_src
+
 * Themes
 
 ** Use =SanityInc= themes
