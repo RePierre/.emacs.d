@@ -606,7 +606,7 @@ Define a function to change the spelcheck dictionary to English, and enable the 
 #+begin_src emacs-lisp
   (use-package magit
     :defer t
-    :bind (("C-x g" . magit-status))
+    :bind (("C-c g" . magit-status))
     :hook (git-commit-setup . rp/git-commit-setup))
 #+end_src
 

@@ -86,8 +86,6 @@ As found in this [[http://members.optusnet.com.au/~charles57/GTD/mydotemacs.txt]
       (switch-to-buffer "*Org Agenda*")
       (delete-other-windows)
       (org-agenda-redo-all)))
-
-  (global-set-key (kbd "C-c g") 'rp/gtd)
 #+end_src
 
 ** Apply custom colors for specific agenda entries
