@@ -44,22 +44,7 @@ Usage example:
 ** Customize agenda view
 
 #+begin_src emacs-lisp
-  (setq org-agenda-custom-commands
-        '(("p" . "Daily agenda perspectives")
-  	("pi" "Daily agenda with inbox"
-           ((agenda "")
-  	  (todo "PENDING")))
-  	("pr" "Daily agenda with research items"
-           ((agenda "")
-  	  (tags-todo "+Research")))
-  	("pw" "Daily agenda with Work category"
-           ((agenda "")
-  	  (tags-todo "+work")))
-  	("r" "Daily agenda with global todo list"
-           ((agenda "")
-            (alltodo ""
-                     ((org-agenda-skip-function
-                       '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
+  (setq org-agenda-custom-commands rp/org-agenda-custom-commands)
 #+end_src
 
 ** Setup =org-refile-targets=
