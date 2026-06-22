@@ -9,6 +9,8 @@
 ;; This package provides utility functions for my Emacs configuration.
 
 ;;; Code:
+(require 'gnus)
+
 (defun rp/running-on-wsl ()
   "Check if the current system is Windows Sunsystem for Linux."
   (if (and (eq system-type 'gnu/linux)
@@ -27,6 +29,8 @@ will be considered 0, and any value above 100 will be considered 100."
 		       (cond ((< 0 arg) 0)
 			     ((> 100 arg) 100)
 			     (t (- 100 arg)))))
+
+(add-to-list 'load-path (expand-file-name "org/lisp" gnus-home-directory))
 
 (provide 'rp-utils)
 ;;; rp-utils.el ends here

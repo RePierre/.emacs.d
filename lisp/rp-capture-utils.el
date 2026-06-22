@@ -10,7 +10,9 @@
 
 ;;; Code:
 (require 'org-capture)
-(require 'olivetti)
+
+(use-package olivetti
+  :defer t)
 
 (defun rp/add-org-capture-templates(capture-templates)
   "Add the CAPTURE-TEMPLATES to the variable `ORG-CAPTURE-TEMPLATES'.
@@ -22,6 +24,7 @@ CAPTURE-TEMPLATES is a list of capture templates."
 (defun rp/setup-long-text-capture()
   "Prepare an environment for capturing long texts."
   (progn
+    (require 'olivetti)
     (olivetti-mode)
     (delete-other-windows)))
 
