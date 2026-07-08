@@ -4,7 +4,9 @@
 (use-package wttrin
   :defer t
   :config
-  (setq wttrin-geolocation-enabled t))
+  (setq wttrin-geolocation-enabled t
+	wttrin-default-languages
+	'("Accept-Language" . "ro-RO,ro;q=0.8,en-US,en;q=0.6")))
 
 (provide 'init-wttrin)
 
