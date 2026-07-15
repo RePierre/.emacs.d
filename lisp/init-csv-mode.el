@@ -3,14 +3,17 @@
 ;;; Code:
 
 (defun rp/setup-csv-mode()
+  "Setup `csv-mode'.
+
+When entering `csv-mode' display line numbers and highlight current
+line."
   (progn
-    (display-line-numbers-mode)
+    (display-line-numbers-mode 1)
     (hl-line-mode)))
 
 (use-package csv-mode
   :defer t
-  :config
-  (rp/setup-csv-mode))
+  :hook (csv-mode . rp/setup-csv-mode))
 
 (provide 'init-csv-mode)
 
