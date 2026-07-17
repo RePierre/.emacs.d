@@ -9,6 +9,7 @@
 
 (require 'init-use-package)
 (require 'init-emacs-tweaks)
+(require 'init-user-info)
 (require 'init-dired)
 (require 'init-calendar)
 (require 'init-default-input-method)
