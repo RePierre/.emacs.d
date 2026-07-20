@@ -91,6 +91,9 @@
     (message "Setting `read-process-output-max' to %d bytes" max-pipe-size)
     (setq read-process-output-max max-pipe-size)))
 
+;; Set Garbage Collector threshold to a high value to avoid frequent collections.
+(setq gc-cons-threshold (* 128 1024 1024))
+
 ;; Ask for confirmation before exiting Emacs
 (unless (daemonp)
   (setq confirm-kill-emacs 'y-or-n-p))
