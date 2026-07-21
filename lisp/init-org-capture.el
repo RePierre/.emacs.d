@@ -27,7 +27,7 @@
 
    ("t" "Task [GTD]"
     entry
-    (file+headline "~/org/gtd/gtd.org" "Tasks")
+    (file+headline "~/org/gtd/gtd.org" "Sarcini")
     "* TODO %i%? \nSCHEDULED: %t\n%U")
 
    ("a" "Appointment"
