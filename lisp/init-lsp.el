@@ -14,6 +14,7 @@
   :config
   (lsp-enable-which-key-integration t)
   (setq-default indent-tabs-mode nil)
+  (setq read-process-output-max (* 8 1024 1024))
   (add-to-list 'lsp-language-id-configuration
      	  '(makefile-gmake-mode . "makefile")))
 
