@@ -34,6 +34,7 @@ in directory .venv under projectile root directory."
 (add-hook 'python-ts-mode-hook 'lsp-deferred)
 
 (add-hook 'projectile-mode-hook 'rp/try-activate-virtual-environment)
+(add-hook 'projectile-after-switch-project-hook 'rp/try-activate-virtual-environment)
 
 
 (provide 'init-python)
