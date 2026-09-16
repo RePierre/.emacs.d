@@ -19,6 +19,7 @@
 
 (use-package lsp-ui
   :defer t
+  :disabled
   :config
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 50
