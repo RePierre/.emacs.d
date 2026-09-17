@@ -3,8 +3,7 @@
 ;;; Code:
 (use-package which-key
   :defer t
-  :config
-  (which-key-mode))
+  :hook (emacs-startup-hook . which-key-mode))
 
 (provide 'init-which-key)
 
