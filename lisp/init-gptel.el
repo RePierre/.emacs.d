@@ -3,10 +3,12 @@
 ;;; Code:
 (use-package gptel
   :defer t
-  :custom
-  (gptel-model 'mistral-small)
-  (gptel-backend
-   (gptel-make-openai "Mistral LeChat"
+  :bind (("C-c m c" . gptel)
+	 ("C-c m m" . gptel-menu)
+	 ("C-c m s" . gptel-send))
+  :config
+  (setq gptel-model 'mistral-medium
+	gptel-backend (gptel-make-openai "Mistral LeChat"
 		      :host "api.mistral.ai"
 		      :endpoint "/v1/chat/completions"
 		      :protocol "https"
