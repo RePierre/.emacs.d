@@ -66,7 +66,8 @@ Extracted from https://emacs.stackexchange.com/a/32625/14110."
               ("C-c l" . org-store-link)
               :map org-agenda-mode-map
               ("C-c l" . org-store-link))
-  :hook (org-mode . org-indent-mode)
+  :hook ((org-mode . org-indent-mode)
+	 (org-mode . auto-fill-mode))
   :config (progn
             (require 'ox-extra)
             (ox-extras-activate '(ignore-headlines))
