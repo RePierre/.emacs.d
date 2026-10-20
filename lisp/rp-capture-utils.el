@@ -26,6 +26,7 @@ CAPTURE-TEMPLATES is a list of capture templates."
   (progn
     (require 'olivetti)
     (olivetti-mode)
+    (olivetti-set-width 80)
     (delete-other-windows)))
 
 (provide 'rp-capture-utils)
